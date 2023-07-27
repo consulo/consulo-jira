@@ -8,6 +8,7 @@ import com.intellij.openapi.Disposable;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.ui.SimpleToolWindowPanel;
 import com.intellij.openapi.util.Disposer;
+import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -88,6 +89,18 @@ public class JiraIssueDetailsPanel extends SimpleToolWindowPanel implements Disp
         myJiraIssueLinksPanel.setToolbarHeightReferent(referent);
         myJiraIssueCommentsPanel.setToolbarHeightReferent(referent);
         myJiraIssueWorkLogsPanel.setToolbarHeightReferent(referent);
+    }
+
+    @Override
+    public @Nullable Object getData(@NotNull @NonNls String dataId) {
+        if (myJiraIssuePreviewPanel != null) {
+            var data = myJiraIssuePreviewPanel.getData(dataId);
+            if (data != null) {
+                return data;
+            }
+        }
+
+        return super.getData(dataId);
     }
 
     @Override
