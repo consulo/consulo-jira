@@ -75,6 +75,8 @@
 
         <action class="com.intellij.jira.actions.OpenNewIssuesTabAction" id="Jira.Issues.New.Tab"/>
 
+        <action class="com.intellij.jira.actions.OpenIssueTaskAction" id="Jira.Issue.OpenTask"/>
+
 
         <action id="Jira.Issues.Hide.Searchers" class="com.intellij.jira.actions.HideSearchersAction"
                 icon="AllIcons.Actions.ArrowCollapse" text="Hide Searchers"/>
