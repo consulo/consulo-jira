@@ -6,6 +6,7 @@ import com.intellij.jira.actions.ChangelistActionGroup;
 import com.intellij.jira.actions.JiraIssueActionGroup;
 import com.intellij.jira.actions.JiraIssueAssigneePopupAction;
 import com.intellij.jira.actions.JiraIssuePrioritiesPopupAction;
+import com.intellij.jira.actions.OpenIssueTaskAction;
 import com.intellij.jira.actions.OpenNewJiraTabAction;
 import com.intellij.jira.actions.TransitIssueDialogAction;
 import com.intellij.jira.rest.model.JiraIssue;
@@ -56,6 +57,7 @@ class JiraIssuePreviewPanel extends AbstractJiraToolWindowPanel {
         group.add(new JiraIssuePrioritiesPopupAction());
         group.add(new ChangelistActionGroup());
         group.add(new BranchActionGroup());
+        group.add(new OpenIssueTaskAction());
         group.addSeparator();
         group.add(new OpenNewJiraTabAction());
 
