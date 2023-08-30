@@ -32,13 +32,13 @@ intellij {
     version = ideaVersion
     println "Building for IntelliJ version: ${version}"
 
-    plugins = ['tasks']
+    plugins = ['tasks', 'Git4Idea']
 }
 
 patchPluginXml {
     changeNotes = """
       Version ${pluginVersion}<br>
       <ul>
-        <li>Bug fixes</li>
+        <li>New feature: create branch button</li>
       </ul>"""
 }

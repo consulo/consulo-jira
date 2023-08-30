@@ -1,6 +1,7 @@
 package com.intellij.jira.ui.panels;
 
 import com.intellij.jira.JiraDataKeys;
+import com.intellij.jira.actions.BranchActionGroup;
 import com.intellij.jira.actions.ChangelistActionGroup;
 import com.intellij.jira.actions.JiraIssueActionGroup;
 import com.intellij.jira.actions.JiraIssueAssigneePopupAction;
@@ -54,6 +55,7 @@ class JiraIssuePreviewPanel extends AbstractJiraToolWindowPanel {
         group.add(new JiraIssueAssigneePopupAction());
         group.add(new JiraIssuePrioritiesPopupAction());
         group.add(new ChangelistActionGroup());
+        group.add(new BranchActionGroup());
         group.addSeparator();
         group.add(new OpenNewJiraTabAction());
 
