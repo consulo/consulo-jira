@@ -65,10 +65,10 @@ import static java.util.Objects.isNull;
  */
 public class UpdateFieldEditorFactory implements FieldEditorFactory {
 
-    protected static final Set<String> TEXT_AREA_FIELDS = ContainerUtil.immutableSet(DESCRIPTION, ENVIRONMENT);
-    protected static final Set<String> TEXT_FIELDS = ContainerUtil.immutableSet(SUMMARY);
-    protected static final Set<String> DATE_FIELDS = ContainerUtil.immutableSet(DUEDATE);
-    protected static final Set<String> USER_PICKER_FIELDS = ContainerUtil.immutableSet(ASSIGNEE, REPORTER);
+    protected static final Set<String> TEXT_AREA_FIELDS = Set.of(DESCRIPTION, ENVIRONMENT);
+    protected static final Set<String> TEXT_FIELDS = Set.of(SUMMARY);
+    protected static final Set<String> DATE_FIELDS = Set.of(DUEDATE);
+    protected static final Set<String> USER_PICKER_FIELDS = Set.of(ASSIGNEE, REPORTER);
 
     private final JiraIssue myIssue;
 
