@@ -39,6 +39,6 @@ patchPluginXml {
     changeNotes = """
       Version ${pluginVersion}<br>
       <ul>
-        <li>New feature: create branch button</li>
+        <li>Support 2023.2+</li>
       </ul>"""
 }
