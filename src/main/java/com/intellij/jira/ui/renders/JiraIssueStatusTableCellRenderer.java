@@ -1,9 +1,9 @@
 package com.intellij.jira.ui.renders;
 
 import com.intellij.jira.rest.model.JiraIssueStatus;
-import com.intellij.jira.ui.labels.JiraStatusDarkLabel;
 import com.intellij.jira.ui.panels.JiraPanel;
 import com.intellij.jira.util.JiraBorders;
+import com.intellij.jira.util.JiraLabelUtil;
 import com.intellij.ui.components.JBLabel;
 
 import javax.swing.JTable;
@@ -26,7 +26,7 @@ public class JiraIssueStatusTableCellRenderer extends JiraIssueTableCellRenderer
         super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
 
         JiraPanel panel = new JiraPanel(new BorderLayout()).withBackground(getBackground());
-        JBLabel jiraStatusLabel = new JiraStatusDarkLabel(jiraIssueStatus);
+        JBLabel jiraStatusLabel = JiraLabelUtil.createStatusLabel(jiraIssueStatus);
 
         panel.setBorder(JiraBorders.empty(4, 3));
         panel.add(jiraStatusLabel, LINE_START);

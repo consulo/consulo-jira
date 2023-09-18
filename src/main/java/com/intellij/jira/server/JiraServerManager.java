@@ -1,11 +1,9 @@
 package com.intellij.jira.server;
 
+import com.intellij.jira.rest.client.JiraRestTemplate;
 import com.intellij.jira.util.SimpleSelectableList;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.project.Project;
-import com.intellij.openapi.util.text.StringUtil;
-import com.intellij.tasks.jira.JiraRepository;
-import com.intellij.tasks.jira.JiraRepositoryType;
 import com.intellij.util.messages.Topic;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -13,7 +11,6 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static com.intellij.jira.util.JiraLabelUtil.EMPTY_TEXT;
 import static java.util.Objects.isNull;
 
 public class JiraServerManager  {
@@ -80,12 +77,7 @@ public class JiraServerManager  {
             return null;
         }
 
-        JiraRepository repository = new JiraRepositoryType().createRepository();
-        repository.setUrl(StringUtil.defaultIfEmpty(jiraServer.getUrl(), EMPTY_TEXT));
-        repository.setUsername(StringUtil.defaultIfEmpty(jiraServer.getUsername(), EMPTY_TEXT));
-        repository.setPassword(StringUtil.defaultIfEmpty(jiraServer.getPassword(), EMPTY_TEXT));
-
-        return new JiraRestApi(repository);
+        return new JiraRestApi(new JiraRestTemplate(jiraServer));
     }
 
     public SimpleSelectableList<JiraServer> getAllServers(@NotNull Project project) {

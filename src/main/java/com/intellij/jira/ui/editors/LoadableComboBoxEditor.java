@@ -51,6 +51,10 @@ public class LoadableComboBoxEditor<T> extends LoadableFieldEditor<T> {
         return (T) myComboBox.getSelectedItem();
     }
 
+    public boolean hasSelectedValue() {
+        return Objects.nonNull(getSelectedValue());
+    }
+
     public void addActionListener(ActionListener listener) {
         myComboBox.addActionListener(listener);
     }
@@ -92,6 +96,6 @@ public class LoadableComboBoxEditor<T> extends LoadableFieldEditor<T> {
 
     @NotNull
     public String getSelectedValueAsString(){
-        return nonNull(getSelectedValue()) ? getSelectedValue().toString() : "";
+        return hasSelectedValue() ? getSelectedValue().toString() : "";
     }
 }

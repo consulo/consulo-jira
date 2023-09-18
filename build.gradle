@@ -39,6 +39,6 @@ patchPluginXml {
     changeNotes = """
       Version ${pluginVersion}<br>
       <ul>
-        <li>Support 2023.2+</li>
+        <li>New feature: connect Jira server with personal access token</li>
       </ul>"""
 }

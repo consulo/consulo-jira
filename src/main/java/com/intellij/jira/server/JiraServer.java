@@ -54,6 +54,15 @@ public class JiraServer {
         setShared(shared);
     }
 
+
+    public void withAccessToken(String url, String accessToken, boolean shared) {
+        setUrl(url);
+        setUsername(null);
+        setPassword(accessToken);
+        setType(AuthType.ACCESS_TOKEN);
+        setShared(shared);
+    }
+
     @Attribute("url")
     public String getUrl() {
         return url;
@@ -102,6 +111,16 @@ public class JiraServer {
     @Transient
     public boolean hasUserAndPassAuth() {
         return AuthType.USER_PASS == getType();
+    }
+
+    @Transient
+    public boolean hasApiTokenAuth() {
+        return AuthType.API_TOKEN == getType();
+    }
+
+    @Transient
+    public boolean hasAccessTokenAuth() {
+        return AuthType.ACCESS_TOKEN == getType();
     }
 
     @Transient

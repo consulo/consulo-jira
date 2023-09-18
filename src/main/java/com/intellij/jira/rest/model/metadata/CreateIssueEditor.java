@@ -98,7 +98,7 @@ public class CreateIssueEditor implements Editor {
     }
 
     public String getProjectKey() {
-        return myProjectCombo.getSelectedValue().getKey();
+        return myProjectCombo.hasSelectedValue() ? myProjectCombo.getSelectedValue().getKey() : null;
     }
 
     public Map<String, TransitionFieldHelper.FieldEditorInfo> getCreateIssueFields() {
