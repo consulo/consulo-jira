@@ -14,13 +14,11 @@ import static java.util.Objects.isNull;
 
 public class JiraServerManager  {
 
-    @Topic.AppLevel
-    public static final Class<JiraServerListener> JIRA_SERVER_CHANGED = Topic.create("Jira Server Changes", JiraServerListener.class);
-    @Topic.AppLevel
-    public static final Topic<JiraServerNotConfiguredServer> JIRA_SERVER_REMOVED_ALL = Topic.create("Jira Server Changes", JiraServerNotConfiguredServer.class);
+    public static final Class<JiraServerListener> JIRA_SERVER_CHANGED = JiraServerListener.class;
+    public static final Class<JiraServerNotConfiguredServer> JIRA_SERVER_REMOVED_ALL = JiraServerNotConfiguredServer.class;
 
     public static JiraServerManager getInstance() {
-        return ApplicationManager.getApplication().getService(JiraServerManager.class);
+        return ApplicationManager.getApplication().getInstance(JiraServerManager.class);
     }
 
     public int getSelectedServerIndex(@NotNull Project project){
@@ -105,22 +103,10 @@ public class JiraServerManager  {
     }
 
     private JiraServerApplicationManager getJiraServerApplicationManager() {
-        return ApplicationManager.getApplication().getService(JiraServerApplicationManager.class);
+        return ApplicationManager.getApplication().getInstance(JiraServerApplicationManager.class);
     }
 
     private JiraServerProjectManager getJiraServerProjectManager(@NotNull Project project) {
-        return project.getService(JiraServerProjectManager.class);
+        return project.getInstance(JiraServerProjectManager.class);
     }
-
-    public interface JiraServerListener {
-
-        void onChangeSelectedServer();
-
-    }
-
-    public interface JiraServerNotConfiguredServer {
-
-        void notConfiguredServer();
-    }
-
 }

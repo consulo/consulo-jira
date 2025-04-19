@@ -1,7 +1,7 @@
 package com.intellij.jira.ui.table.column;
 
 import com.intellij.jira.ui.JiraIssueUiProperties;
-import com.intellij.openapi.application.ApplicationManager;
+import consulo.application.ApplicationManager;
 
 import java.util.List;
 import java.util.stream.Collectors;

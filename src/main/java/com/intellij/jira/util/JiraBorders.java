@@ -1,6 +1,6 @@
 package com.intellij.jira.util;
 
-import com.intellij.util.ui.JBUI;
+import consulo.ui.ex.awt.JBUI;
 
 import javax.swing.border.Border;
 

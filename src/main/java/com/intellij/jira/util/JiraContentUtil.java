@@ -2,15 +2,15 @@ package com.intellij.jira.util;
 
 import com.intellij.jira.ui.JiraUi;
 import com.intellij.jira.ui.panels.JiraTabPanel;
-import com.intellij.ui.content.Content;
-import com.intellij.ui.content.ContentManager;
-import com.intellij.ui.content.TabbedContent;
-import com.intellij.util.containers.ContainerUtil;
+import consulo.ui.ex.content.Content;
+import consulo.ui.ex.content.ContentManager;
+import consulo.ui.ex.content.TabbedContent;
+import consulo.util.collection.ContainerUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import javax.swing.JComponent;
-import java.awt.Component;
+import javax.swing.*;
+import java.awt.*;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;

@@ -13,11 +13,10 @@ import static java.util.Objects.isNull;
 
 public class JQLSearcherManager {
 
-    @Topic.AppLevel
-    public static final Topic<SearcherListener> JQL_SEARCHERS_CHANGE = Topic.create("Searcher add/change/remove event", SearcherListener.class);
+    public static final Class<SearcherListener> JQL_SEARCHERS_CHANGE = SearcherListener.class;
 
     public static JQLSearcherManager getInstance(){
-        return ApplicationManager.getApplication().getService(JQLSearcherManager.class);
+        return ApplicationManager.getApplication().getInstance(JQLSearcherManager.class);
     }
 
     public JQLSearcher getSelectedSearcher(Project project){

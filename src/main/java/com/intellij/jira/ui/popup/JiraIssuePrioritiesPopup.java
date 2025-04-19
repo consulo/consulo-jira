@@ -1,13 +1,11 @@
 package com.intellij.jira.ui.popup;
 
-import com.intellij.openapi.actionSystem.ActionGroup;
-import com.intellij.openapi.actionSystem.CommonDataKeys;
-import com.intellij.openapi.actionSystem.PlatformDataKeys;
-import com.intellij.openapi.actionSystem.impl.SimpleDataContext;
-import com.intellij.openapi.project.Project;
-import com.intellij.openapi.util.Conditions;
-import com.intellij.openapi.wm.IdeFocusManager;
-import com.intellij.ui.popup.PopupFactoryImpl;
+import consulo.application.ui.wm.IdeFocusManager;
+import consulo.language.editor.CommonDataKeys;
+import consulo.language.editor.PlatformDataKeys;
+import consulo.project.Project;
+import consulo.ui.ex.action.ActionGroup;
+import consulo.util.lang.function.Conditions;
 import org.jetbrains.annotations.NotNull;
 
 public class JiraIssuePrioritiesPopup extends PopupFactoryImpl.ActionGroupPopup{

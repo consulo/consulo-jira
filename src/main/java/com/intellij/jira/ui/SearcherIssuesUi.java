@@ -8,23 +8,22 @@ import com.intellij.jira.listener.SearcherListener;
 import com.intellij.jira.rest.model.jql.JQLSearcher;
 import com.intellij.jira.ui.table.column.JiraIssueApplicationSettings;
 import com.intellij.jira.ui.tree.SearcherTree;
-import consulo.application.AllIcons;
 import consulo.application.ApplicationManager;
-import consulo.application.ui.UISettings;
-import consulo.ui.ex.Gray;
+import consulo.dataContext.DataProvider;
+import consulo.platform.base.icon.PlatformIconGroup;
 import consulo.ui.ex.JBColor;
 import consulo.ui.ex.action.ActionManager;
 import consulo.ui.ex.action.ActionToolbar;
 import consulo.ui.ex.action.AnAction;
 import consulo.ui.ex.action.DefaultActionGroup;
 import consulo.ui.ex.awt.*;
+import consulo.ui.ex.awtUnsafe.TargetAWT;
+import consulo.util.dataholder.Key;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
-import javax.swing.plaf.basic.BasicButtonUI;
-import javax.swing.plaf.basic.BasicGraphicsUtils;
 import java.awt.*;
 
 import static consulo.ui.ex.awt.IdeBorderFactory.createBorder;
@@ -49,7 +48,7 @@ public class SearcherIssuesUi extends DefaultIssuesUi {
     public SearcherIssuesUi(JiraIssuesData issuesData) {
         super(issuesData);
 
-        myAppSettings = ApplicationManager.getApplication().getInjectingContainer(JiraIssueApplicationSettings.class);
+        myAppSettings = ApplicationManager.getApplication().getInstance(JiraIssueApplicationSettings.class);
         myShowSearchersListener = new MyPropertyChangeListener();
         myAppSettings.addChangeListener(myShowSearchersListener);
 
@@ -78,7 +77,7 @@ public class SearcherIssuesUi extends DefaultIssuesUi {
         ActionToolbar toolbar = actionManager.createActionToolbar("Jira.Issues.Searchers", group, false);
         toolbar.setTargetComponent(mySearcherPanel);
 
-        mySearchersButton = new MySearchersButton("Searchers",  AllIcons.Actions.ArrowExpand);
+        mySearchersButton = new MySearchersButton("Searchers", TargetAWT.to(PlatformIconGroup.generalArrowright()));
 
         myExpandablePanelController = new MyExpandablePanelController(toolbar.getComponent(), mySearchersButton, mySearcherPanel);
 
@@ -134,7 +133,7 @@ public class SearcherIssuesUi extends DefaultIssuesUi {
         }
 
         @Override
-        public @Nullable Object getData(@NotNull @NonNls String dataId) {
+        public @Nullable Object getData(@NotNull @NonNls Key dataId) {
             if (JiraUiDataKeys.SEARCHER_TREE_NODE.is(dataId)) {
                 return myTree.getSelectedNode();
             } else if (JiraUiDataKeys.JIRA_UI_PROPERTIES.is(dataId)) {
@@ -166,96 +165,10 @@ public class SearcherIssuesUi extends DefaultIssuesUi {
 
         @Override
         public void updateUI() {
-            setUI(new MyButtonUI());
+            super.updateUI();
             setOpaque(false);
             setFont(UIUtil.getLabelFont(UIUtil.FontSize.SMALL));
         }
-
-
-        private class MyButtonUI extends BasicButtonUI {
-            private Color HOVER_BACKGROUND_COLOR =
-                    JBColor.namedColor("ToolWindow.Button.hoverBackground", new JBColor(Gray.x55.withAlpha(40), Gray.x0F.withAlpha(40)));
-
-            private Rectangle myIconRect = new Rectangle();
-            private Rectangle myTextRect = new Rectangle();
-            private Rectangle myViewRect = new Rectangle();
-            private Insets ourViewInsets = JBUI.emptyInsets();
-
-            public Dimension getMinimumSize(JComponent c) { return getPreferredSize(c);}
-            public Dimension getMaximumSize(JComponent c) { return getPreferredSize(c);}
-            public Dimension getPreferredSize(JComponent c) { return ActionToolbar.DEFAULT_MINIMUM_BUTTON_SIZE; }
-
-            public void update(Graphics g, JComponent c) {
-                var button = (MySearchersButton) c;
-                var text = button.getText();
-                var icon = (button.isEnabled()) ? button.getIcon() : button.getDisabledIcon();
-                if (icon == null && text == null) {
-                    return;
-                }
-
-                var fm = button.getFontMetrics(button.getFont());
-                ourViewInsets = c.getInsets(ourViewInsets);
-                myViewRect.x = ourViewInsets.left;
-                myViewRect.y = ourViewInsets.top;
-
-                // Use inverted height & width
-                myViewRect.height = c.getWidth() - (ourViewInsets.left + ourViewInsets.right);
-                myViewRect.width = c.getHeight() - (ourViewInsets.top + ourViewInsets.bottom);
-
-                myIconRect.height = 0;
-                myIconRect.width = myIconRect.height;
-                myIconRect.y = myIconRect.width;
-                myIconRect.x = myIconRect.y;
-                myTextRect.height = 0;
-                myTextRect.width = myTextRect.height;
-                myTextRect.y = myTextRect.width;
-                myTextRect.x = myTextRect.y;
-
-                var clippedText = SwingUtilities.layoutCompoundLabel(
-                        c, fm, text, icon,
-                        SwingConstants.CENTER, SwingConstants.RIGHT, SwingConstants.CENTER, SwingConstants.TRAILING,
-                        myViewRect, myIconRect, myTextRect,
-                text == null ? 0 : button.getIconTextGap());
-
-                // Paint button's background
-                var g2 = (Graphics2D) g.create();
-                try {
-                    g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-                    g2.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
-                    var model = button.model;
-                    myIconRect.x -= JBUIScale.scale(2);
-                    myTextRect.x -= JBUIScale.scale(2);
-
-                    g2.setColor((model.isRollover() || model.isPressed()) ? HOVER_BACKGROUND_COLOR : c.getBackground());
-                    g2.fillRect(0, 0, c.getWidth(), c.getHeight());
-
-                    if (icon != null) {
-                        icon.paintIcon(c, g2, myIconRect.y, JBUIScale.scale(2 * button.getIconTextGap()));
-                    }
-
-                    g2.rotate(-Math.PI / 2);
-                    g2.translate(-c.getHeight() - 2 * myIconRect.width, 0);
-
-                    // paint text
-                    UISettings.setupAntialiasing(g2);
-                    if (text != null) {
-                        if (model.isEnabled()) {
-                            /* paint the text normally */
-                            g2.setColor(c.getForeground());
-                        }
-                        else {
-                            /* paint the text disabled ***/
-                            g2.setColor(UIManager.getColor("Button.disabledText"));
-                        }
-                        BasicGraphicsUtils.drawString(g2, clippedText, 0, myTextRect.x, myTextRect.y + fm.getAscent());
-                    }
-                }
-                finally {
-                    g2.dispose();
-                }
-            }
-        }
-
     }
 
     private class MyExpandablePanelController {

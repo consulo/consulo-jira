@@ -2,8 +2,8 @@ package com.intellij.jira.util;
 
 import com.intellij.jira.rest.model.JiraIssue;
 import com.intellij.jira.rest.model.JiraIssueUser;
-import com.intellij.openapi.util.text.StringUtil;
-import com.intellij.util.text.DateFormatUtil;
+import consulo.application.util.DateFormatUtil;
+import consulo.util.lang.StringUtil;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Date;

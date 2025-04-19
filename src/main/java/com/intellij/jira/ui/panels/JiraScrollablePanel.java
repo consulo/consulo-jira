@@ -1,6 +1,7 @@
 package com.intellij.jira.ui.panels;
 
 import com.intellij.jira.util.JiraBorders;
+import consulo.jira.impl.ui.ScrollablePanel;
 import consulo.ui.ex.awt.VerticalFlowLayout;
 
 import java.awt.*;
