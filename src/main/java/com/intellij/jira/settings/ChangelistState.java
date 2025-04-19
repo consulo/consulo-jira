@@ -1,7 +1,7 @@
 package com.intellij.jira.settings;
 
 import com.intellij.jira.util.Separator;
-import com.intellij.util.xmlb.annotations.OptionTag;
+import consulo.util.xml.serializer.annotation.OptionTag;
 
 import java.util.Collections;
 import java.util.List;

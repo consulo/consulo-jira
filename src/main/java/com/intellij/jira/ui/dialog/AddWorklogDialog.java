@@ -3,11 +3,11 @@ package com.intellij.jira.ui.dialog;
 import com.intellij.jira.rest.model.JiraIssueTimeTracking;
 import com.intellij.jira.rest.model.JiraIssueWorklog;
 import com.intellij.jira.tasks.AddWorklogTask;
-import com.intellij.openapi.project.Project;
+import consulo.project.Project;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import javax.swing.Action;
+import javax.swing.*;
 import java.util.List;
 
 import static java.util.Objects.nonNull;

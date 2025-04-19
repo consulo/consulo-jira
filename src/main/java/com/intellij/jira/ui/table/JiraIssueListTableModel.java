@@ -4,9 +4,9 @@ import com.intellij.jira.rest.model.JiraIssue;
 import com.intellij.jira.ui.table.column.JiraIssueColumn;
 import com.intellij.jira.ui.table.column.JiraIssueColumnManager;
 import com.intellij.jira.ui.table.column.JiraIssueColumnUtils;
-import com.intellij.openapi.util.text.StringUtil;
-import com.intellij.util.ui.ColumnInfo;
-import com.intellij.util.ui.ListTableModel;
+import consulo.ui.ex.awt.ColumnInfo;
+import consulo.ui.ex.awt.table.ListTableModel;
+import consulo.util.lang.StringUtil;
 
 import java.util.ArrayList;
 import java.util.List;

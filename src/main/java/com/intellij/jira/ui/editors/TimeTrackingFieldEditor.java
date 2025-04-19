@@ -3,20 +3,18 @@ package com.intellij.jira.ui.editors;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonNull;
 import com.google.gson.JsonObject;
-import com.intellij.icons.AllIcons;
-import com.intellij.openapi.ui.ValidationInfo;
-import com.intellij.util.ui.FormBuilder;
+import consulo.application.AllIcons;
+import consulo.ui.ex.awt.FormBuilder;
+import consulo.ui.ex.awt.ValidationInfo;
+import consulo.ui.ex.awtUnsafe.TargetAWT;
 import org.jetbrains.annotations.Nullable;
 
-import javax.swing.JComponent;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
+import javax.swing.*;
 import java.util.regex.Pattern;
 
 import static com.intellij.jira.util.JiraGsonUtil.createPrimitive;
-import static com.intellij.openapi.util.text.StringUtil.isEmpty;
-import static com.intellij.openapi.util.text.StringUtil.isNotEmpty;
+import static consulo.util.lang.StringUtil.isEmpty;
+import static consulo.util.lang.StringUtil.isNotEmpty;
 import static java.util.Objects.nonNull;
 
 public class TimeTrackingFieldEditor extends AbstractFieldEditor {
@@ -43,10 +41,10 @@ public class TimeTrackingFieldEditor extends AbstractFieldEditor {
     @Override
     public JComponent createPanel() {
         myFirstInfoLabel.setToolTipText(INFO_MESSAGE);
-        myFirstInfoLabel.setIcon(AllIcons.Actions.Help);
+        myFirstInfoLabel.setIcon(TargetAWT.to(AllIcons.Actions.Help));
 
         mySecondInfoLabel.setToolTipText(INFO_MESSAGE);
-        mySecondInfoLabel.setIcon(AllIcons.Actions.Help);
+        mySecondInfoLabel.setIcon(TargetAWT.to(AllIcons.Actions.Help));
 
         return FormBuilder.createFormBuilder()
                 .addComponent(myLabel)

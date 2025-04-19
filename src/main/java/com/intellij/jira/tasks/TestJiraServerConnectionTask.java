@@ -3,12 +3,12 @@ package com.intellij.jira.tasks;
 import com.intellij.jira.server.JiraRestApi;
 import com.intellij.jira.server.JiraServer;
 import com.intellij.jira.server.JiraServerManager;
-import com.intellij.openapi.application.ApplicationManager;
-import com.intellij.openapi.progress.ProcessCanceledException;
-import com.intellij.openapi.progress.ProgressIndicator;
-import com.intellij.openapi.progress.Task;
-import com.intellij.openapi.project.Project;
-import com.intellij.tasks.TaskRepository;
+import consulo.application.ApplicationManager;
+import consulo.application.progress.ProgressIndicator;
+import consulo.application.progress.Task;
+import consulo.component.ProcessCanceledException;
+import consulo.project.Project;
+import consulo.task.TaskRepository;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 

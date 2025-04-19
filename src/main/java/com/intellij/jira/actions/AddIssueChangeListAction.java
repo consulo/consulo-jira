@@ -6,12 +6,12 @@ import com.intellij.jira.rest.model.JiraIssue;
 import com.intellij.jira.settings.ChangelistSettings;
 import com.intellij.jira.settings.ChangelistState;
 import com.intellij.jira.util.ChangelistUtil;
-import com.intellij.notification.Notifications;
-import com.intellij.openapi.actionSystem.AnAction;
-import com.intellij.openapi.actionSystem.AnActionEvent;
-import com.intellij.openapi.project.Project;
-import com.intellij.openapi.vcs.changes.ChangeListManager;
-import com.intellij.openapi.vcs.changes.LocalChangeList;
+import consulo.project.Project;
+import consulo.project.ui.notification.Notifications;
+import consulo.ui.ex.action.AnAction;
+import consulo.ui.ex.action.AnActionEvent;
+import consulo.versionControlSystem.change.ChangeListManager;
+import consulo.versionControlSystem.change.LocalChangeList;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Objects;

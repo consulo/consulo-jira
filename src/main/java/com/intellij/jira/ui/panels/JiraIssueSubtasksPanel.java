@@ -3,12 +3,12 @@ package com.intellij.jira.ui.panels;
 import com.intellij.jira.rest.model.JiraIssue;
 import com.intellij.jira.ui.model.JiraIssueSubtaskListModel;
 import com.intellij.jira.ui.renders.JiraIssueSubtaskListCellRender;
-import com.intellij.openapi.ui.SimpleToolWindowPanel;
-import com.intellij.ui.ScrollPaneFactory;
-import com.intellij.ui.components.JBList;
+import consulo.ui.ex.awt.JBList;
+import consulo.ui.ex.awt.ScrollPaneFactory;
+import consulo.ui.ex.awt.SimpleToolWindowPanel;
 
-import javax.swing.JPanel;
-import java.awt.BorderLayout;
+import javax.swing.*;
+import java.awt.*;
 import java.util.List;
 
 import static java.awt.BorderLayout.CENTER;

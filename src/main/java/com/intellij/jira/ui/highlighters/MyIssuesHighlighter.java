@@ -5,7 +5,7 @@ import com.intellij.jira.data.JiraIssuesData;
 import com.intellij.jira.rest.model.JiraIssue;
 import com.intellij.jira.rest.model.JiraIssueUser;
 import com.intellij.jira.ui.JiraIssueStyleFactory;
-import com.intellij.openapi.project.Project;
+import consulo.project.Project;
 import org.jetbrains.annotations.NotNull;
 
 public class MyIssuesHighlighter implements JiraIssueHighlighter {

@@ -2,8 +2,8 @@ package com.intellij.jira.settings.editor;
 
 import com.intellij.jira.settings.ChangelistSettings;
 import com.intellij.jira.settings.ChangelistState;
-import com.intellij.ui.components.JBRadioButton;
-import com.intellij.util.ui.FormBuilder;
+import consulo.ui.ex.awt.FormBuilder;
+import consulo.ui.ex.awt.JBRadioButton;
 
 import javax.swing.*;
 

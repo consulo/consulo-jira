@@ -4,11 +4,11 @@ import com.intellij.jira.data.JiraIssuesData;
 import com.intellij.jira.listener.IssueChangeListener;
 import com.intellij.jira.rest.model.JiraIssue;
 import com.intellij.jira.ui.JiraTabbedPane;
-import com.intellij.openapi.application.ApplicationManager;
-import com.intellij.util.messages.MessageBusConnection;
+import consulo.application.ApplicationManager;
+import consulo.component.messagebus.MessageBusConnection;
 import org.jetbrains.annotations.NotNull;
 
-import javax.swing.JTabbedPane;
+import javax.swing.*;
 
 public class JiraIssueActivityPanel extends JiraTabbedPane {
 

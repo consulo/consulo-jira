@@ -2,22 +2,17 @@ package com.intellij.jira.ui.editors;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonNull;
-import com.intellij.openapi.ui.ValidationInfo;
-import com.intellij.ui.JBColor;
-import com.intellij.util.ui.FormBuilder;
+import consulo.ui.ex.JBColor;
+import consulo.ui.ex.awt.FormBuilder;
+import consulo.ui.ex.awt.ValidationInfo;
 import org.jetbrains.annotations.Nullable;
 
-import javax.swing.BorderFactory;
-import javax.swing.JComponent;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JTextArea;
-
+import javax.swing.*;
 import java.util.Objects;
 
 import static com.intellij.jira.util.JiraGsonUtil.createPrimitive;
-import static com.intellij.openapi.util.text.StringUtil.isEmpty;
-import static com.intellij.openapi.util.text.StringUtil.trim;
+import static consulo.util.lang.StringUtil.isEmpty;
+import static consulo.util.lang.StringUtil.trim;
 
 public class TextAreaFieldEditor extends AbstractFieldEditor<String> {
 

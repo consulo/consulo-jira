@@ -1,8 +1,6 @@
 package com.intellij.jira.util.provider;
 
-import com.intellij.jira.ui.highlighters.JiraIssueHighlighterFactory;
-import com.intellij.jira.util.provider.impl.IssueKeyProvider;
-import com.intellij.openapi.extensions.ExtensionPointName;
+import consulo.component.extension.ExtensionPointName;
 
 import java.util.HashMap;
 import java.util.Map;

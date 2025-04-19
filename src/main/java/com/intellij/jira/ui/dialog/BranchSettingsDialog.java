@@ -2,14 +2,14 @@ package com.intellij.jira.ui.dialog;
 
 import com.intellij.jira.settings.branch.BranchSettings;
 import com.intellij.jira.settings.branch.editor.BranchSettingsEditor;
-import com.intellij.openapi.project.Project;
-import com.intellij.openapi.ui.DialogWrapper;
-import com.intellij.openapi.ui.ValidationInfo;
-import com.intellij.util.ui.FormBuilder;
+import consulo.project.Project;
+import consulo.ui.ex.awt.DialogWrapper;
+import consulo.ui.ex.awt.FormBuilder;
+import consulo.ui.ex.awt.ValidationInfo;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import javax.swing.JComponent;
+import javax.swing.*;
 
 public class BranchSettingsDialog extends DialogWrapper {
 

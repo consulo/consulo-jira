@@ -1,32 +1,24 @@
 package com.intellij.jira.ui.panels;
 
 import com.intellij.jira.JiraDataKeys;
-import com.intellij.jira.actions.BranchActionGroup;
-import com.intellij.jira.actions.ChangelistActionGroup;
-import com.intellij.jira.actions.JiraIssueActionGroup;
-import com.intellij.jira.actions.JiraIssueAssigneePopupAction;
-import com.intellij.jira.actions.JiraIssuePrioritiesPopupAction;
-import com.intellij.jira.actions.OpenIssueTaskAction;
-import com.intellij.jira.actions.OpenNewJiraTabAction;
-import com.intellij.jira.actions.TransitIssueDialogAction;
+import com.intellij.jira.actions.*;
 import com.intellij.jira.rest.model.JiraIssue;
 import com.intellij.jira.ui.JiraTextPane;
 import com.intellij.jira.util.JiraLabelUtil;
 import com.intellij.jira.util.JiraPanelUtil;
-import com.intellij.openapi.actionSystem.ActionGroup;
-import com.intellij.openapi.project.Project;
-import com.intellij.openapi.util.text.StringUtil;
-import com.intellij.ui.JBColor;
-import com.intellij.ui.ScrollPaneFactory;
-import com.intellij.ui.components.JBLabel;
-import com.intellij.util.ui.UIUtil;
+import consulo.project.Project;
+import consulo.ui.ex.JBColor;
+import consulo.ui.ex.action.ActionGroup;
+import consulo.ui.ex.awt.JBLabel;
+import consulo.ui.ex.awt.ScrollPaneFactory;
+import consulo.ui.ex.awt.UIUtil;
+import consulo.util.dataholder.Key;
+import consulo.util.lang.StringUtil;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
+import javax.swing.*;
 
 import static com.intellij.jira.util.JiraLabelUtil.DACULA_DEFAULT_COLOR;
 import static com.intellij.jira.util.JiraLabelUtil.WHITE;
@@ -65,7 +57,7 @@ class JiraIssuePreviewPanel extends AbstractJiraToolWindowPanel {
     }
 
     @Override
-    public @Nullable Object getData(@NotNull @NonNls String dataId) {
+    public @Nullable Object getData(@NotNull @NonNls Key dataId) {
         if (JiraDataKeys.ISSUE.is(dataId)) {
             return issue;
         }

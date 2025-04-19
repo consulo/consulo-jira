@@ -1,15 +1,15 @@
 package com.intellij.jira.rest.model.jql;
 
-import com.intellij.openapi.util.text.StringUtil;
-import com.intellij.util.xmlb.annotations.Attribute;
-import com.intellij.util.xmlb.annotations.Tag;
+import consulo.util.lang.StringUtil;
+import consulo.util.xml.serializer.annotation.Attribute;
+import consulo.util.xml.serializer.annotation.Tag;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Objects;
 import java.util.UUID;
 
-import static com.intellij.openapi.util.text.StringUtil.trim;
+import static consulo.util.lang.StringUtil.trim;
 
 @Tag("JQLSearcher")
 public class JQLSearcher {

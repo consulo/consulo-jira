@@ -6,30 +6,16 @@ import com.intellij.jira.server.editor.JiraServerEditor;
 import com.intellij.jira.ui.panels.JiraPanel;
 import com.intellij.jira.util.JiraPanelUtil;
 import com.intellij.jira.util.SimpleSelectableList;
-import com.intellij.openapi.application.ApplicationManager;
-import com.intellij.openapi.project.Project;
-import com.intellij.openapi.ui.DialogWrapper;
-import com.intellij.openapi.ui.Messages;
-import com.intellij.openapi.ui.Splitter;
-import com.intellij.openapi.ui.ValidationInfo;
-import com.intellij.ui.CollectionListModel;
-import com.intellij.ui.ColoredListCellRenderer;
-import com.intellij.ui.JBSplitter;
-import com.intellij.ui.SimpleTextAttributes;
-import com.intellij.ui.ToolbarDecorator;
-import com.intellij.ui.components.JBList;
-import com.intellij.util.containers.ConcurrentFactoryMap;
-import com.intellij.util.ui.JBUI;
-import icons.TasksCoreIcons;
+import consulo.application.ApplicationManager;
+import consulo.application.util.ConcurrentFactoryMap;
+import consulo.project.Project;
+import consulo.ui.ex.SimpleTextAttributes;
+import consulo.ui.ex.awt.*;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import javax.swing.JComponent;
-import javax.swing.JList;
-import javax.swing.JPanel;
-import javax.swing.ListSelectionModel;
-import java.awt.BorderLayout;
-import java.awt.CardLayout;
+import javax.swing.*;
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -64,7 +50,7 @@ public class ConfigureJiraServersDialog extends DialogWrapper {
     public ConfigureJiraServersDialog(@NotNull Project project) {
         super(project, false);
         this.myProject = project;
-        this.myManager = ApplicationManager.getApplication().getService(JiraServerManager.class);
+        this.myManager = ApplicationManager.getApplication().getInstance(JiraServerManager.class);
         init();
     }
 

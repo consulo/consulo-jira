@@ -3,18 +3,18 @@ package com.intellij.jira.filter.assignee;
 import com.intellij.jira.data.Issues;
 import com.intellij.jira.filter.FilterModel;
 import com.intellij.jira.filter.IssueFilterCollection;
-import com.intellij.openapi.util.Computable;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Supplier;
 
 import static com.intellij.jira.filter.IssueFilterCollectionImpl.ISSUE_ASSIGNEE_FILTER;
 
 public class AssigneeFilterModel extends FilterModel<AssigneeFilter> {
 
-    public AssigneeFilterModel(Computable<Issues> issuesGetter, IssueFilterCollection filters) {
+    public AssigneeFilterModel(Supplier<Issues> issuesGetter, IssueFilterCollection filters) {
         super(issuesGetter);
         myFilter = filters.get(ISSUE_ASSIGNEE_FILTER);
     }

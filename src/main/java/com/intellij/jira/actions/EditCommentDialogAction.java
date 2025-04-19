@@ -1,21 +1,19 @@
 package com.intellij.jira.actions;
 
-import com.intellij.icons.AllIcons;
 import com.intellij.jira.JiraDataKeys;
 import com.intellij.jira.exceptions.InvalidPermissionException;
 import com.intellij.jira.rest.model.JiraIssueComment;
 import com.intellij.jira.server.JiraRestApi;
 import com.intellij.jira.ui.dialog.EditCommentDialog;
-import com.intellij.openapi.actionSystem.AnActionEvent;
-import com.intellij.openapi.project.Project;
+import consulo.application.AllIcons;
+import consulo.project.Project;
+import consulo.ui.ex.action.AnActionEvent;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 import java.util.Objects;
 
-import static com.intellij.jira.rest.model.JiraPermissionType.BROWSE_PROJECTS;
-import static com.intellij.jira.rest.model.JiraPermissionType.EDIT_ALL_COMMENTS;
-import static com.intellij.jira.rest.model.JiraPermissionType.EDIT_OWN_COMMENTS;
+import static com.intellij.jira.rest.model.JiraPermissionType.*;
 import static java.util.Objects.nonNull;
 
 public class EditCommentDialogAction extends JiraIssueDialogAction {

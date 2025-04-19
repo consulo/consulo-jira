@@ -1,9 +1,8 @@
 package com.intellij.jira.actions;
 
-import com.intellij.openapi.actionSystem.CustomShortcutSet;
+import consulo.ui.ex.action.CustomShortcutSet;
+import consulo.ui.image.Image;
 import org.jetbrains.annotations.Nullable;
-
-import javax.swing.*;
 
 import static java.util.Objects.isNull;
 
@@ -11,26 +10,26 @@ public class ActionProperties {
 
     private String text;
     private String description;
-    private Icon icon;
+    private Image icon;
     private CustomShortcutSet shortcut;
 
     public static ActionProperties of(String text){
         return new ActionProperties(text, null, null, null);
     }
 
-    public static ActionProperties of(String text, Icon icon){
+    public static ActionProperties of(String text, Image icon){
         return new ActionProperties(text, null, icon, null);
     }
 
-    public static ActionProperties of(String text, String description, Icon icon){
+    public static ActionProperties of(String text, String description, Image icon){
         return new ActionProperties(text, description, icon, null);
     }
 
-    public static ActionProperties of(String text, Icon icon, String shortcut){
+    public static ActionProperties of(String text, Image icon, String shortcut){
         return new ActionProperties(text, null, icon, shortcut);
     }
 
-    private ActionProperties(@Nullable String text, @Nullable String description, @Nullable Icon icon, @Nullable String shortcut) {
+    private ActionProperties(@Nullable String text, @Nullable String description, @Nullable Image icon, @Nullable String shortcut) {
         this.text = text;
         this.description = description;
         this.icon = icon;
@@ -46,7 +45,7 @@ public class ActionProperties {
         return description;
     }
 
-    public Icon getIcon() {
+    public Image getIcon() {
         return icon;
     }
 

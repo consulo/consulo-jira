@@ -1,14 +1,14 @@
 package com.intellij.jira.actions;
 
-import com.intellij.icons.AllIcons;
 import com.intellij.jira.JiraDataKeys;
 import com.intellij.jira.exceptions.InvalidPermissionException;
 import com.intellij.jira.rest.model.JiraIssue;
 import com.intellij.jira.rest.model.JiraIssueLinkType;
 import com.intellij.jira.server.JiraRestApi;
 import com.intellij.jira.ui.dialog.AddIssueLinkDialog;
-import com.intellij.openapi.actionSystem.AnActionEvent;
-import com.intellij.openapi.project.Project;
+import consulo.application.AllIcons;
+import consulo.project.Project;
+import consulo.ui.ex.action.AnActionEvent;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;

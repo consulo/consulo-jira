@@ -1,8 +1,8 @@
 package com.intellij.jira.ui.panels;
 
-import com.intellij.ui.components.JBPanel;
+import consulo.ui.ex.awt.JBPanel;
 
-import java.awt.LayoutManager;
+import java.awt.*;
 
 public class JiraPanel extends JBPanel<JiraPanel> {
 

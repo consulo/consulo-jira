@@ -5,18 +5,14 @@ import com.intellij.jira.settings.ChangelistSettings;
 import com.intellij.jira.tasks.AddChangelistTask;
 import com.intellij.jira.ui.editors.Editor;
 import com.intellij.jira.util.ChangelistUtil;
-import com.intellij.openapi.project.Project;
-import com.intellij.openapi.ui.ValidationInfo;
-import com.intellij.tasks.TaskBundle;
-import com.intellij.ui.SeparatorFactory;
-import com.intellij.util.ui.FormBuilder;
+import consulo.project.Project;
+import consulo.task.TaskBundle;
+import consulo.ui.ex.awt.FormBuilder;
+import consulo.ui.ex.awt.SeparatorFactory;
+import consulo.ui.ex.awt.ValidationInfo;
 import org.jetbrains.annotations.Nullable;
 
-import javax.swing.JCheckBox;
-import javax.swing.JComponent;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
+import javax.swing.*;
 import java.util.Objects;
 
 public class JiraTransitionTaskEditor implements Editor {

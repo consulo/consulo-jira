@@ -13,28 +13,17 @@ import com.intellij.jira.ui.panels.JiraTransitionTaskEditor;
 import com.intellij.jira.ui.renders.JiraIssueTransitionListCellRenderer;
 import com.intellij.jira.util.JiraLabelUtil;
 import com.intellij.jira.util.JiraPanelUtil;
-import com.intellij.openapi.actionSystem.DataProvider;
-import com.intellij.openapi.application.ApplicationManager;
-import com.intellij.openapi.project.Project;
-import com.intellij.openapi.ui.DialogWrapper;
-import com.intellij.openapi.ui.ValidationInfo;
-import com.intellij.tasks.jira.JiraRepository;
-import com.intellij.ui.JBColor;
-import com.intellij.ui.ScrollPaneFactory;
-import com.intellij.ui.components.JBLabel;
-import com.intellij.ui.components.JBList;
-import com.intellij.util.ui.FormBuilder;
-import com.intellij.util.ui.JBDimension;
-import com.intellij.util.ui.JBUI;
+import consulo.application.ApplicationManager;
+import consulo.dataContext.DataProvider;
+import consulo.project.Project;
+import consulo.ui.ex.JBColor;
+import consulo.ui.ex.awt.*;
+import consulo.util.dataholder.Key;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import javax.swing.BorderFactory;
-import javax.swing.JComponent;
-import javax.swing.JPanel;
-import java.awt.BorderLayout;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
+import javax.swing.*;
+import java.awt.*;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -125,7 +114,7 @@ public class IssueTransitionDialog extends DialogWrapper implements DataProvider
     }
 
     @Override
-    public @Nullable Object getData(@NotNull String dataId) {
+    public @Nullable Object getData(@NotNull Key dataId) {
         if (JiraDataKeys.ISSUE_KEY.is(dataId)) {
             return myIssue.getKey();
         } else if (JiraDataKeys.PROJECT_KEY.is(dataId)) {

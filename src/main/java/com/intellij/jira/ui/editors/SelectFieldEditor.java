@@ -1,31 +1,22 @@
 package com.intellij.jira.ui.editors;
 
-import com.intellij.ide.DataManager;
 import com.intellij.jira.server.JiraRestApi;
 import com.intellij.jira.server.JiraServerManager;
 import com.intellij.jira.ui.panels.JiraPanel;
-import com.intellij.openapi.actionSystem.ActionPlaces;
-import com.intellij.openapi.actionSystem.AnAction;
-import com.intellij.openapi.actionSystem.AnActionEvent;
-import com.intellij.openapi.application.ApplicationManager;
-import com.intellij.openapi.project.Project;
-import com.intellij.openapi.ui.DialogWrapper;
-import com.intellij.openapi.ui.ValidationInfo;
-import com.intellij.openapi.util.text.StringUtil;
-import com.intellij.ui.ScrollPaneFactory;
-import com.intellij.ui.components.JBList;
-import com.intellij.util.ui.FormBuilder;
-import com.intellij.util.ui.JBUI;
+import consulo.application.ApplicationManager;
+import consulo.dataContext.DataManager;
+import consulo.project.Project;
+import consulo.ui.ex.action.ActionPlaces;
+import consulo.ui.ex.action.AnAction;
+import consulo.ui.ex.action.AnActionEvent;
+import consulo.ui.ex.awt.*;
+import consulo.util.lang.StringUtil;
 import it.unimi.dsi.fastutil.ints.IntArrayList;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import javax.swing.JButton;
-import javax.swing.JComponent;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
-import java.awt.BorderLayout;
-import java.awt.Dimension;
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.InputEvent;
 import java.util.List;
 import java.util.Objects;
@@ -72,7 +63,7 @@ public abstract class SelectFieldEditor<T> extends AbstractFieldEditor<T> {
         return null;
     }
 
-    abstract class PickerDialogAction extends AnAction{
+    abstract class PickerDialogAction extends AnAction {
 
         protected JiraRestApi myJiraRestApi;
         protected Project myProject;

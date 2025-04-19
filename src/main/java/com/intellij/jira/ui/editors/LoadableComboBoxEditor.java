@@ -2,24 +2,20 @@ package com.intellij.jira.ui.editors;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonNull;
-import com.intellij.openapi.ui.ComboBox;
-import com.intellij.openapi.ui.ValidationInfo;
-import com.intellij.util.containers.ContainerUtil;
-import com.intellij.util.ui.FormBuilder;
+import consulo.ui.ex.awt.ComboBox;
+import consulo.ui.ex.awt.FormBuilder;
+import consulo.util.collection.ContainerUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import javax.swing.JComboBox;
-import javax.swing.JComponent;
-import javax.swing.JPanel;
-import java.awt.FlowLayout;
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionListener;
 import java.util.Objects;
 import java.util.Set;
 
 import static com.intellij.jira.util.JiraGsonUtil.createNameObject;
 import static java.util.Objects.isNull;
-import static java.util.Objects.nonNull;
 
 public class LoadableComboBoxEditor<T> extends LoadableFieldEditor<T> {
 

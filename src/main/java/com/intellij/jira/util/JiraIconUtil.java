@@ -1,11 +1,10 @@
 package com.intellij.jira.util;
 
-import com.intellij.openapi.util.text.StringUtil;
+import consulo.util.lang.StringUtil;
 import org.jetbrains.annotations.Nullable;
 
-import javax.swing.Icon;
-import javax.swing.ImageIcon;
-import java.awt.Image;
+import javax.swing.*;
+import java.awt.*;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Map;
@@ -24,7 +23,7 @@ public class JiraIconUtil {
 
     private JiraIconUtil() { }
 
-    public static Icon getIcon(@Nullable String iconUrl){
+    public static consulo.ui.image.Image getIcon(@Nullable String iconUrl){
         if(StringUtil.isEmpty(iconUrl)){
             return null;
         }

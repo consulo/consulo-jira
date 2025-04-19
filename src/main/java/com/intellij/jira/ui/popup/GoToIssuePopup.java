@@ -1,16 +1,13 @@
 package com.intellij.jira.ui.popup;
 
-import com.intellij.openapi.application.ApplicationManager;
-import com.intellij.openapi.project.Project;
-import com.intellij.openapi.ui.popup.JBPopup;
-import com.intellij.openapi.ui.popup.JBPopupFactory;
-import com.intellij.ui.TextFieldWithAutoCompletion;
-import com.intellij.ui.components.JBLabel;
-import com.intellij.util.Function;
-import com.intellij.util.textCompletion.TextCompletionProvider;
-import com.intellij.util.textCompletion.TextFieldWithCompletion;
-import com.intellij.util.ui.JBUI;
-import com.intellij.util.ui.UIUtil;
+import consulo.application.ApplicationManager;
+import consulo.language.editor.ui.awt.TextFieldWithAutoCompletion;
+import consulo.project.Project;
+import consulo.ui.ex.awt.JBLabel;
+import consulo.ui.ex.awt.JBUI;
+import consulo.ui.ex.awt.UIUtil;
+import consulo.ui.ex.popup.JBPopup;
+import consulo.ui.ex.popup.JBPopupFactory;
 import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;
@@ -18,6 +15,7 @@ import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.util.Collection;
 import java.util.concurrent.Future;
+import java.util.function.Function;
 
 public class GoToIssuePopup {
 

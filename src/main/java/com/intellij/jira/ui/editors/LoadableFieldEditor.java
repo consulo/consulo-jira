@@ -1,6 +1,6 @@
 package com.intellij.jira.ui.editors;
 
-import com.intellij.util.ui.AsyncProcessIcon;
+import consulo.ui.ex.awt.AsyncProcessIcon;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 

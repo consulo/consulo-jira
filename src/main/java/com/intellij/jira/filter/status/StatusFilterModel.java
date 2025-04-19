@@ -3,18 +3,18 @@ package com.intellij.jira.filter.status;
 import com.intellij.jira.data.Issues;
 import com.intellij.jira.filter.FilterModel;
 import com.intellij.jira.filter.IssueFilterCollection;
-import com.intellij.openapi.util.Computable;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Supplier;
 
 import static com.intellij.jira.filter.IssueFilterCollectionImpl.ISSUE_STATUS_FILTER;
 
 public class StatusFilterModel extends FilterModel<StatusFilter> {
 
-    public StatusFilterModel(Computable<Issues> issuesGetter, IssueFilterCollection filters) {
+    public StatusFilterModel(Supplier<Issues> issuesGetter, IssueFilterCollection filters) {
         super(issuesGetter);
         myFilter = filters.get(ISSUE_STATUS_FILTER);
     }

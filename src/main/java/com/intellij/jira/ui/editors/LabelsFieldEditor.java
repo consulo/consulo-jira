@@ -2,20 +2,20 @@ package com.intellij.jira.ui.editors;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonNull;
-import com.intellij.codeInsight.completion.CompletionParameters;
 import com.intellij.jira.server.JiraRestApi;
 import com.intellij.jira.server.JiraServerManager;
 import com.intellij.jira.util.JiraGsonUtil;
-import com.intellij.openapi.application.ApplicationManager;
-import com.intellij.openapi.project.Project;
-import com.intellij.openapi.ui.ValidationInfo;
-import com.intellij.openapi.util.text.StringUtil;
-import com.intellij.ui.TextFieldWithAutoCompletion;
-import com.intellij.util.ui.FormBuilder;
+import consulo.application.ApplicationManager;
+import consulo.language.editor.completion.CompletionParameters;
+import consulo.language.editor.ui.awt.TextFieldWithAutoCompletion;
+import consulo.project.Project;
+import consulo.ui.ex.awt.FormBuilder;
+import consulo.ui.ex.awt.ValidationInfo;
+import consulo.util.lang.StringUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import javax.swing.JComponent;
+import javax.swing.*;
 import java.util.Arrays;
 import java.util.Collection;
 
@@ -68,7 +68,7 @@ public class LabelsFieldEditor extends AbstractFieldEditor<String> {
 
         @Override
         public @NotNull Collection<String> getItems(String prefix, boolean cached, CompletionParameters parameters) {
-            JiraServerManager manager = ApplicationManager.getApplication().getService(JiraServerManager.class);
+            JiraServerManager manager = ApplicationManager.getApplication().getInstance(JiraServerManager.class);
             JiraRestApi jiraRestApi = manager.getJiraRestApi(myProject);
 
             return jiraRestApi.findLabels(prefix, myAutoCompleteUrl);

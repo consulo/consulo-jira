@@ -1,8 +1,9 @@
 package com.intellij.jira.ui;
 
-import com.intellij.openapi.Disposable;
+import consulo.disposer.Disposable;
 import org.jetbrains.annotations.NotNull;
-import javax.swing.JComponent;
+
+import javax.swing.*;
 
 /**
  * Represents a Tab in Jira Window

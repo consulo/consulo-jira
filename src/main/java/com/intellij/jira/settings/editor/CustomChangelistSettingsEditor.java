@@ -1,31 +1,18 @@
 package com.intellij.jira.settings.editor;
 
-import com.intellij.ide.DataManager;
 import com.intellij.jira.settings.ChangelistSettings;
 import com.intellij.jira.settings.ChangelistState;
 import com.intellij.jira.util.Separator;
-import com.intellij.openapi.actionSystem.AnActionEvent;
-import com.intellij.openapi.actionSystem.DefaultActionGroup;
-import com.intellij.openapi.project.DumbAware;
-import com.intellij.openapi.roots.ui.configuration.actions.IconWithTextAction;
-import com.intellij.openapi.ui.ComboBox;
-import com.intellij.openapi.ui.ValidationInfo;
-import com.intellij.openapi.ui.popup.JBPopupFactory;
-import com.intellij.openapi.util.text.StringUtil;
-import com.intellij.ui.CollectionListModel;
-import com.intellij.ui.ToolbarDecorator;
-import com.intellij.ui.components.JBLabel;
-import com.intellij.ui.components.JBList;
-import com.intellij.ui.components.JBRadioButton;
-import com.intellij.util.ui.FormBuilder;
-import com.intellij.util.ui.JBUI;
+import consulo.dataContext.DataManager;
+import consulo.ui.ex.action.AnActionEvent;
+import consulo.ui.ex.action.DefaultActionGroup;
+import consulo.ui.ex.awt.*;
+import consulo.ui.ex.popup.JBPopupFactory;
+import consulo.util.lang.StringUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import javax.swing.JCheckBox;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JRadioButton;
+import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
 

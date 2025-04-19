@@ -2,19 +2,19 @@ package com.intellij.jira.ui.editors;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonNull;
-import com.intellij.openapi.ui.ComboBox;
-import com.intellij.openapi.ui.ValidationInfo;
-import com.intellij.ui.CollectionComboBoxModel;
-import com.intellij.util.ui.FormBuilder;
+import consulo.ui.ex.awt.CollectionComboBoxModel;
+import consulo.ui.ex.awt.ComboBox;
+import consulo.ui.ex.awt.FormBuilder;
+import consulo.ui.ex.awt.ValidationInfo;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import javax.swing.JComponent;
+import javax.swing.*;
 import java.awt.event.ActionListener;
 import java.util.List;
 
 import static com.intellij.jira.util.JiraGsonUtil.createNameObject;
-import static com.intellij.openapi.util.text.StringUtil.isEmpty;
+import static consulo.util.lang.StringUtil.isEmpty;
 import static java.util.Objects.isNull;
 import static java.util.Objects.nonNull;
 

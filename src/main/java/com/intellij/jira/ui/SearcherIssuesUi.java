@@ -1,60 +1,33 @@
 package com.intellij.jira.ui;
 
-import com.intellij.icons.AllIcons;
-import com.intellij.ide.ui.UISettings;
 import com.intellij.jira.JiraUiDataKeys;
-import com.intellij.jira.actions.AddSearcherAction;
-import com.intellij.jira.actions.DeleteSearcherAction;
-import com.intellij.jira.actions.EditSearcherAction;
-import com.intellij.jira.actions.MakeSearcherGlobalAction;
-import com.intellij.jira.actions.MakeSearcherProjectAction;
-import com.intellij.jira.actions.OpenNewIssuesTabAction;
+import com.intellij.jira.actions.*;
 import com.intellij.jira.data.JiraIssuesData;
 import com.intellij.jira.jql.JQLSearcherManager;
 import com.intellij.jira.listener.SearcherListener;
 import com.intellij.jira.rest.model.jql.JQLSearcher;
 import com.intellij.jira.ui.table.column.JiraIssueApplicationSettings;
 import com.intellij.jira.ui.tree.SearcherTree;
-import com.intellij.openapi.actionSystem.ActionManager;
-import com.intellij.openapi.actionSystem.ActionToolbar;
-import com.intellij.openapi.actionSystem.AnAction;
-import com.intellij.openapi.actionSystem.DataProvider;
-import com.intellij.openapi.actionSystem.DefaultActionGroup;
-import com.intellij.openapi.application.ApplicationManager;
-import com.intellij.ui.Gray;
-import com.intellij.ui.JBColor;
-import com.intellij.ui.OnePixelSplitter;
-import com.intellij.ui.ScrollPaneFactory;
-import com.intellij.ui.SideBorder;
-import com.intellij.ui.components.panels.Wrapper;
-import com.intellij.ui.scale.JBUIScale;
-import com.intellij.util.ui.JBUI;
-import com.intellij.util.ui.UIUtil;
-import com.intellij.util.ui.components.BorderLayoutPanel;
+import consulo.application.AllIcons;
+import consulo.application.ApplicationManager;
+import consulo.application.ui.UISettings;
+import consulo.ui.ex.Gray;
+import consulo.ui.ex.JBColor;
+import consulo.ui.ex.action.ActionManager;
+import consulo.ui.ex.action.ActionToolbar;
+import consulo.ui.ex.action.AnAction;
+import consulo.ui.ex.action.DefaultActionGroup;
+import consulo.ui.ex.awt.*;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import javax.swing.Icon;
-import javax.swing.JButton;
-import javax.swing.JComponent;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.SwingConstants;
-import javax.swing.SwingUtilities;
-import javax.swing.UIManager;
+import javax.swing.*;
 import javax.swing.plaf.basic.BasicButtonUI;
 import javax.swing.plaf.basic.BasicGraphicsUtils;
-import java.awt.CardLayout;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.Insets;
-import java.awt.Rectangle;
-import java.awt.RenderingHints;
+import java.awt.*;
 
-import static com.intellij.ui.IdeBorderFactory.createBorder;
+import static consulo.ui.ex.awt.IdeBorderFactory.createBorder;
 
 public class SearcherIssuesUi extends DefaultIssuesUi {
 
@@ -76,7 +49,7 @@ public class SearcherIssuesUi extends DefaultIssuesUi {
     public SearcherIssuesUi(JiraIssuesData issuesData) {
         super(issuesData);
 
-        myAppSettings = ApplicationManager.getApplication().getService(JiraIssueApplicationSettings.class);
+        myAppSettings = ApplicationManager.getApplication().getInjectingContainer(JiraIssueApplicationSettings.class);
         myShowSearchersListener = new MyPropertyChangeListener();
         myAppSettings.addChangeListener(myShowSearchersListener);
 

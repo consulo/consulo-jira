@@ -13,25 +13,15 @@ import com.intellij.jira.filter.status.StatusFilterComponent;
 import com.intellij.jira.filter.status.StatusFilterModel;
 import com.intellij.jira.filter.type.TypeFilterComponent;
 import com.intellij.jira.filter.type.TypeFilterModel;
-import com.intellij.openapi.actionSystem.ActionGroup;
-import com.intellij.openapi.actionSystem.AnActionEvent;
-import com.intellij.openapi.actionSystem.DefaultActionGroup;
-import com.intellij.openapi.actionSystem.Presentation;
-import com.intellij.openapi.actionSystem.ex.CustomComponentAction;
-import com.intellij.openapi.project.DumbAwareAction;
-import com.intellij.openapi.util.Computable;
-import com.intellij.openapi.util.NlsActions;
-import com.intellij.openapi.util.NotNullComputable;
-import com.intellij.ui.ClientProperty;
-import com.intellij.util.EventDispatcher;
-import com.intellij.util.ui.UIUtil;
-import com.intellij.vcs.log.ui.MainVcsLogUi;
-import com.intellij.vcs.log.ui.VcsLogInternalDataKeys;
-import org.jetbrains.annotations.Nls;
+import consulo.proxy.EventDispatcher;
+import consulo.ui.ex.action.*;
+import consulo.ui.ex.awt.ClientProperty;
+import consulo.ui.ex.awt.UIUtil;
+import consulo.ui.ex.awt.action.CustomComponentAction;
 import org.jetbrains.annotations.NotNull;
 
-import javax.swing.JComponent;
-import java.awt.Component;
+import javax.swing.*;
+import java.awt.*;
 import java.util.List;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
@@ -50,14 +40,14 @@ public class IssuesFilterUiImpl implements IssuesFilterUi {
     public IssuesFilterUiImpl(Consumer<IssueFilterCollection> filterConsumer, IssueFilterCollection filters) {
         myIssues = Issues.EMPTY;
 
-        NotNullComputable<Issues> issuesGetter = () -> myIssues;
+        Supplier<Issues> issuesGetter = () -> myIssues;
         myIssueTypeFilterModel = new TypeFilterModel(issuesGetter, filters);
         myStatusFilterModel = new StatusFilterModel(issuesGetter, filters);
         myPriorityFilterModel = new PriorityFilterModel(issuesGetter, filters);
         myAssigneeFilterModel = new AssigneeFilterModel(issuesGetter, filters);
 
         FilterModel[] models = {myIssueTypeFilterModel, myPriorityFilterModel, myAssigneeFilterModel, myStatusFilterModel};
-        for(FilterModel model : models) {
+        for (FilterModel model : models) {
             model.addSetFilterListener(() -> {
                 filterConsumer.accept(getFilters());
                 myFilterListenerDispatcher.getMulticaster().onFiltersChanged();
@@ -69,9 +59,9 @@ public class IssuesFilterUiImpl implements IssuesFilterUi {
     @Override
     public IssueFilterCollection getFilters() {
         return new IssueFilterCollectionImpl(List.of(myIssueTypeFilterModel.getIssueTypeFilter(),
-                                                    myPriorityFilterModel.getPriorityFilter(),
-                                                    myAssigneeFilterModel.getAssigneeFilter(),
-                                                    myStatusFilterModel.getIssueTypeFilter()));
+            myPriorityFilterModel.getPriorityFilter(),
+            myAssigneeFilterModel.getAssigneeFilter(),
+            myStatusFilterModel.getIssueTypeFilter()));
     }
 
     @NotNull
@@ -105,31 +95,32 @@ public class IssuesFilterUiImpl implements IssuesFilterUi {
     }
 
     protected FilterActionComponent createIssueTypeComponent() {
-        return new FilterActionComponent(() -> "Filter by Issue Type",
-                () -> new TypeFilterComponent(myIssueTypeFilterModel).initUi());
+        return new FilterActionComponent("Filter by Issue Type",
+            () -> new TypeFilterComponent(myIssueTypeFilterModel).initUi());
     }
 
     private FilterActionComponent createPriorityComponent() {
-        return new FilterActionComponent(() -> "Filter by Issue Priority",
-                () -> new PriorityFilterComponent(myPriorityFilterModel).initUi());
+        return new FilterActionComponent("Filter by Issue Priority",
+            () -> new PriorityFilterComponent(myPriorityFilterModel).initUi());
     }
 
     private FilterActionComponent createAssgineeComponent() {
-        return new FilterActionComponent(() -> "Filter by Issue Priority",
-                () -> new AssigneeFilterComponent(myAssigneeFilterModel).initUi());
+        return new FilterActionComponent("Filter by Issue Priority",
+            () -> new AssigneeFilterComponent(myAssigneeFilterModel).initUi());
     }
 
     private FilterActionComponent createIssueStatusComponent() {
-        return new FilterActionComponent(() -> "Filter by Status",
-                () -> new StatusFilterComponent(myStatusFilterModel).initUi());
+        return new FilterActionComponent("Filter by Status",
+            () -> new StatusFilterComponent(myStatusFilterModel).initUi());
     }
 
     protected static class FilterActionComponent extends DumbAwareAction implements CustomComponentAction {
 
-        @NotNull private final Computable<? extends JComponent> myComponentCreator;
+        @NotNull
+        private final Supplier<? extends JComponent> myComponentCreator;
 
-        public FilterActionComponent(@NotNull Supplier<@Nls @NlsActions.ActionText String> dynamicText,
-                                     @NotNull Computable<? extends JComponent> componentCreator) {
+        public FilterActionComponent(@NotNull String dynamicText,
+                                     @NotNull Supplier<? extends JComponent> componentCreator) {
             super(dynamicText);
             myComponentCreator = componentCreator;
         }
@@ -137,20 +128,22 @@ public class IssuesFilterUiImpl implements IssuesFilterUi {
         @NotNull
         @Override
         public JComponent createCustomComponent(@NotNull Presentation presentation, @NotNull String place) {
-            return myComponentCreator.compute();
+            return myComponentCreator.get();
         }
 
         @Override
         public void actionPerformed(@NotNull AnActionEvent e) {
             MainVcsLogUi vcsLogUi = e.getData(VcsLogInternalDataKeys.MAIN_UI);
-            if (vcsLogUi == null) return;
+            if (vcsLogUi == null) {
+                return;
+            }
 
             Component actionComponent = UIUtil.uiTraverser(vcsLogUi.getToolbar()).traverse().find(component ->
-                    ClientProperty.get(component, ACTION_KEY) == this
+                ClientProperty.get(component, ACTION_KEY) == this
             );
 
             if (actionComponent instanceof IssueFilterComponent) {
-                ((IssueFilterComponent)actionComponent).showPopupMenu();
+                ((IssueFilterComponent) actionComponent).showPopupMenu();
             }
         }
     }

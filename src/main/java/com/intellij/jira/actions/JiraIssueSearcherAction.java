@@ -3,7 +3,7 @@ package com.intellij.jira.actions;
 import com.intellij.jira.JiraUiDataKeys;
 import com.intellij.jira.rest.model.jql.JQLSearcher;
 import com.intellij.jira.ui.tree.SearcherTreeNode;
-import com.intellij.openapi.actionSystem.AnActionEvent;
+import consulo.ui.ex.action.AnActionEvent;
 import org.jetbrains.annotations.NotNull;
 
 import static java.util.Objects.nonNull;

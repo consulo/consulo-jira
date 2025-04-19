@@ -9,14 +9,15 @@ import com.intellij.jira.data.JiraIssuesData;
 import com.intellij.jira.listener.IssueChangeListener;
 import com.intellij.jira.rest.model.JiraIssue;
 import com.intellij.jira.util.JiraPanelUtil;
-import com.intellij.openapi.actionSystem.ActionGroup;
-import com.intellij.ui.JBColor;
-import com.intellij.util.messages.MessageBusConnection;
+import consulo.component.messagebus.MessageBusConnection;
+import consulo.ui.ex.JBColor;
+import consulo.ui.ex.action.ActionGroup;
+import consulo.util.dataholder.Key;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import javax.swing.JPanel;
+import javax.swing.*;
 
 public class JiraIssueStatusPanel extends AbstractJiraToolWindowPanel {
 
@@ -43,7 +44,7 @@ public class JiraIssueStatusPanel extends AbstractJiraToolWindowPanel {
     }
 
     @Override
-    public @Nullable Object getData(@NotNull @NonNls String dataId) {
+    public @Nullable Object getData(@NotNull @NonNls Key dataId) {
         if (JiraDataKeys.ISSUE.is(dataId)) {
             return myIssue;
         }

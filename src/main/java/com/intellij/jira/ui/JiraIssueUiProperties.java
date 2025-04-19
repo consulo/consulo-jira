@@ -1,7 +1,6 @@
 package com.intellij.jira.ui;
 
-import com.intellij.openapi.util.ValueKey;
-import com.intellij.util.concurrency.annotations.RequiresEdt;
+import consulo.ui.annotation.RequiredUIAccess;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 
@@ -16,10 +15,10 @@ public interface JiraIssueUiProperties {
 
     <T> boolean exists(@NotNull JiraIssueUiProperties.JiraIssueUiProperty<T> property);
 
-    @RequiresEdt
+    @RequiredUIAccess
     void addChangeListener(@NotNull JiraIssueUiProperties.PropertyChangeListener listener);
 
-    @RequiresEdt
+    @RequiredUIAccess
     void removeChangeListener(@NotNull JiraIssueUiProperties.PropertyChangeListener listener);
 
     class JiraIssueUiProperty<T> implements ValueKey<T> {

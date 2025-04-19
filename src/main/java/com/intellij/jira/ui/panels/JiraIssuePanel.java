@@ -4,14 +4,14 @@ import com.intellij.jira.data.JiraIssuesData;
 import com.intellij.jira.listener.RefreshIssuesListener;
 import com.intellij.jira.rest.model.JiraIssue;
 import com.intellij.jira.util.JiraPanelUtil;
-import com.intellij.openapi.Disposable;
-import com.intellij.openapi.util.Disposer;
-import com.intellij.ui.JBSplitter;
-import com.intellij.ui.OnePixelSplitter;
+import consulo.disposer.Disposable;
+import consulo.disposer.Disposer;
+import consulo.ui.ex.awt.JBSplitter;
+import consulo.ui.ex.awt.OnePixelSplitter;
 import org.jetbrains.annotations.NotNull;
 
-import javax.swing.JPanel;
-import java.awt.BorderLayout;
+import javax.swing.*;
+import java.awt.*;
 
 public class JiraIssuePanel extends JiraPanel implements Disposable {
 

@@ -1,12 +1,12 @@
 package com.intellij.jira.tasks;
 
 import com.intellij.jira.components.JiraNotificationManager;
-import com.intellij.notification.Notifications;
-import com.intellij.openapi.progress.ProgressIndicator;
-import com.intellij.openapi.progress.Task;
-import com.intellij.openapi.project.Project;
-import com.intellij.openapi.vcs.changes.ChangeListManager;
-import com.intellij.openapi.vcs.changes.LocalChangeList;
+import consulo.application.progress.ProgressIndicator;
+import consulo.application.progress.Task;
+import consulo.project.Project;
+import consulo.project.ui.notification.Notifications;
+import consulo.versionControlSystem.change.ChangeListManager;
+import consulo.versionControlSystem.change.LocalChangeList;
 import org.jetbrains.annotations.NotNull;
 
 public class AddChangelistTask extends Task.Backgroundable {
@@ -22,7 +22,7 @@ public class AddChangelistTask extends Task.Backgroundable {
 
     @Override
     public void run(@NotNull ProgressIndicator indicator) {
-        ChangeListManager changeListManager = ChangeListManager.getInstance(myProject);
+        ChangeListManager changeListManager = ChangeListManager.getInstance((Project) myProject);
         LocalChangeList localChangeList = changeListManager.addChangeList(changelistName, null);
         if (isDefault) {
             changeListManager.setDefaultChangeList(localChangeList);

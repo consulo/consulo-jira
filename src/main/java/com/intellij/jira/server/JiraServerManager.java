@@ -2,9 +2,8 @@ package com.intellij.jira.server;
 
 import com.intellij.jira.rest.client.JiraRestTemplate;
 import com.intellij.jira.util.SimpleSelectableList;
-import com.intellij.openapi.application.ApplicationManager;
-import com.intellij.openapi.project.Project;
-import com.intellij.util.messages.Topic;
+import consulo.application.ApplicationManager;
+import consulo.project.Project;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 

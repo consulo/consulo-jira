@@ -1,7 +1,7 @@
 package com.intellij.jira.ui.renders;
 
-import com.intellij.ui.JBColor;
-import com.intellij.util.ui.JBUI;
+import consulo.ui.ex.JBColor;
+import consulo.ui.ex.awt.JBUI;
 
 import javax.swing.*;
 import javax.swing.border.Border;

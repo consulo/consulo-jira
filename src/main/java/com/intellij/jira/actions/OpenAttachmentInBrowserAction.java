@@ -1,11 +1,11 @@
 package com.intellij.jira.actions;
 
-import com.intellij.icons.AllIcons;
-import com.intellij.ide.BrowserUtil;
 import com.intellij.jira.JiraDataKeys;
 import com.intellij.jira.rest.model.JiraIssueAttachment;
-import com.intellij.openapi.actionSystem.AnAction;
-import com.intellij.openapi.actionSystem.AnActionEvent;
+import consulo.platform.base.icon.PlatformIconGroup;
+import consulo.ui.ex.action.AnAction;
+import consulo.ui.ex.action.AnActionEvent;
+import consulo.webBrowser.BrowserUtil;
 import org.jetbrains.annotations.NotNull;
 
 import static java.util.Objects.nonNull;
@@ -13,7 +13,7 @@ import static java.util.Objects.nonNull;
 public class OpenAttachmentInBrowserAction extends AnAction {
 
     public OpenAttachmentInBrowserAction() {
-        super("Open in Browser", "", AllIcons.General.Web);
+        super("Open in Browser", "", PlatformIconGroup.nodesPpweb());
     }
 
     @Override

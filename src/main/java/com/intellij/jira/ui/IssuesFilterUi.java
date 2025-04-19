@@ -2,7 +2,7 @@ package com.intellij.jira.ui;
 
 import com.intellij.jira.data.Issues;
 import com.intellij.jira.filter.IssueFilterCollection;
-import com.intellij.openapi.actionSystem.ActionGroup;
+import consulo.ui.ex.action.ActionGroup;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.EventListener;

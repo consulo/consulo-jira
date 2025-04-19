@@ -1,11 +1,11 @@
 package com.intellij.jira.actions;
 
-import com.intellij.icons.AllIcons;
 import com.intellij.jira.server.JiraRestApi;
 import com.intellij.jira.settings.branch.BranchSettings;
 import com.intellij.jira.ui.dialog.BranchSettingsDialog;
-import com.intellij.openapi.actionSystem.AnActionEvent;
-import com.intellij.openapi.project.Project;
+import consulo.application.AllIcons;
+import consulo.project.Project;
+import consulo.ui.ex.action.AnActionEvent;
 import org.jetbrains.annotations.NotNull;
 
 public class BranchSettingsDialogAction extends JiraIssueDialogAction {

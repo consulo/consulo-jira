@@ -4,11 +4,10 @@ import com.intellij.jira.rest.model.JiraIssueStatus;
 import com.intellij.jira.ui.panels.JiraPanel;
 import com.intellij.jira.util.JiraBorders;
 import com.intellij.jira.util.JiraLabelUtil;
-import com.intellij.ui.components.JBLabel;
+import consulo.ui.ex.awt.JBLabel;
 
-import javax.swing.JTable;
-import java.awt.BorderLayout;
-import java.awt.Component;
+import javax.swing.*;
+import java.awt.*;
 
 import static java.awt.BorderLayout.LINE_START;
 

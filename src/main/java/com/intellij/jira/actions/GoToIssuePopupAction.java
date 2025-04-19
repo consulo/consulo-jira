@@ -1,14 +1,14 @@
 package com.intellij.jira.actions;
 
-import com.intellij.icons.AllIcons;
 import com.intellij.jira.JiraUiDataKeys;
 import com.intellij.jira.rest.model.JiraIssue;
 import com.intellij.jira.server.JiraServerManager;
 import com.intellij.jira.ui.panels.JiraIssuesPanel;
 import com.intellij.jira.ui.popup.GoToIssuePopup;
-import com.intellij.openapi.actionSystem.AnActionEvent;
-import com.intellij.openapi.application.ApplicationManager;
-import com.intellij.openapi.project.Project;
+import consulo.application.AllIcons;
+import consulo.application.ApplicationManager;
+import consulo.project.Project;
+import consulo.ui.ex.action.AnActionEvent;
 
 import java.util.List;
 
@@ -24,7 +24,7 @@ public class GoToIssuePopupAction extends JiraIssueAction {
 
     @Override
     public void actionPerformed(AnActionEvent e) {
-        Project project = e.getProject();
+        Project project = e.getData(Project.KEY);
         if(isNull(project)){
             return;
         }
@@ -37,16 +37,13 @@ public class GoToIssuePopupAction extends JiraIssueAction {
     }
 
     @Override
-    public void update(AnActionEvent event) {
-        Project project = event.getProject();
+    public void update(AnActionEvent e) {
+        Project project = e.getData(Project.KEY);
         if (isNull(project)|| !project.isInitialized() || project.isDisposed()) {
-            event.getPresentation().setEnabled(false);
+            e.getPresentation().setEnabled(false);
         } else {
-            JiraServerManager manager = ApplicationManager.getApplication().getService(JiraServerManager.class);
-            event.getPresentation().setEnabled(manager.hasJiraServerConfigured(project));
+            JiraServerManager manager = ApplicationManager.getApplication().getInstance(JiraServerManager.class);
+            e.getPresentation().setEnabled(manager.hasJiraServerConfigured(project));
         }
     }
-
-
-
 }

@@ -3,18 +3,18 @@ package com.intellij.jira.filter.type;
 import com.intellij.jira.data.Issues;
 import com.intellij.jira.filter.FilterModel;
 import com.intellij.jira.filter.IssueFilterCollection;
-import com.intellij.openapi.util.Computable;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Supplier;
 
 import static com.intellij.jira.filter.IssueFilterCollectionImpl.ISSUE_TYPE_FILTER;
 
 public class TypeFilterModel extends FilterModel<TypeFilter> {
 
-    public TypeFilterModel(Computable<Issues> issuesGetter, IssueFilterCollection filters) {
+    public TypeFilterModel(Supplier<Issues> issuesGetter, IssueFilterCollection filters) {
         super(issuesGetter);
         myFilter = filters.get(ISSUE_TYPE_FILTER);
     }

@@ -1,10 +1,10 @@
 package com.intellij.jira.filter.type;
 
 import com.intellij.jira.filter.IssueFilterComponent;
-import com.intellij.openapi.actionSystem.ActionGroup;
-import com.intellij.openapi.actionSystem.AnActionEvent;
-import com.intellij.openapi.actionSystem.DefaultActionGroup;
-import com.intellij.openapi.project.DumbAwareAction;
+import consulo.ui.ex.action.ActionGroup;
+import consulo.ui.ex.action.AnActionEvent;
+import consulo.ui.ex.action.DefaultActionGroup;
+import consulo.ui.ex.action.DumbAwareAction;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;

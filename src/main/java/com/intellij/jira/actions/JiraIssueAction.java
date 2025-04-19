@@ -1,7 +1,7 @@
 package com.intellij.jira.actions;
 
-import com.intellij.openapi.actionSystem.AnAction;
-import com.intellij.openapi.project.DumbAware;
+import consulo.application.dumb.DumbAware;
+import consulo.ui.ex.action.AnAction;
 import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;

@@ -2,11 +2,12 @@ package com.intellij.jira.ui.panels;
 
 import com.intellij.jira.JiraDataKeys;
 import com.intellij.jira.rest.model.JiraIssue;
-import com.intellij.openapi.actionSystem.ActionGroup;
-import com.intellij.openapi.actionSystem.ActionManager;
-import com.intellij.openapi.actionSystem.ActionToolbar;
-import com.intellij.openapi.ui.SimpleToolWindowPanel;
-import com.intellij.ui.components.panels.Wrapper;
+import consulo.ui.ex.action.ActionGroup;
+import consulo.ui.ex.action.ActionManager;
+import consulo.ui.ex.action.ActionToolbar;
+import consulo.ui.ex.awt.SimpleToolWindowPanel;
+import consulo.ui.ex.awt.Wrapper;
+import consulo.util.dataholder.Key;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -42,10 +43,10 @@ public abstract class AbstractJiraToolWindowPanel extends SimpleToolWindowPanel 
     }
 
     @Override
-    public @Nullable Object getData(@NotNull @NonNls String dataId) {
-        if (JiraDataKeys.ISSUE_KEY.is(dataId)) {
+    public @Nullable Object getData(@NotNull @NonNls Key dataId) {
+        if (JiraDataKeys.ISSUE_KEY == dataId) {
             return issueKey;
-        } else if (JiraDataKeys.PROJECT_KEY.is(dataId)) {
+        } else if (JiraDataKeys.PROJECT_KEY == dataId) {
             return projectKey;
         }
 

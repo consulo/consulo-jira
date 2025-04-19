@@ -7,10 +7,10 @@ import com.intellij.jira.rest.model.JiraIssue;
 import com.intellij.jira.server.JiraRestApi;
 import com.intellij.jira.server.JiraServerManager;
 import com.intellij.jira.util.result.Result;
-import com.intellij.notification.Notifications;
-import com.intellij.openapi.application.ApplicationManager;
-import com.intellij.openapi.progress.Task;
-import com.intellij.openapi.project.Project;
+import consulo.application.ApplicationManager;
+import consulo.application.progress.Task;
+import consulo.project.Project;
+import consulo.project.ui.notification.Notifications;
 import org.jetbrains.annotations.NotNull;
 
 import static java.util.Objects.isNull;
@@ -24,12 +24,12 @@ public abstract class AbstractBackgroundableTask extends Task.Backgroundable {
     public AbstractBackgroundableTask(@NotNull Project project, @NotNull String title, String issueIdOrKey) {
         super(project, title, false, ALWAYS_BACKGROUND);
         this.issueIdOrKey = issueIdOrKey;
-        this.jiraServerManager = ApplicationManager.getApplication().getService(JiraServerManager.class);
+        this.jiraServerManager = ApplicationManager.getApplication().getInstance(JiraServerManager.class);
     }
 
     @NotNull
     public JiraRestApi getJiraRestApi() throws JiraServerConfigurationNotFoundException{
-        JiraRestApi jiraRestApi = jiraServerManager.getJiraRestApi(myProject);
+        JiraRestApi jiraRestApi = jiraServerManager.getJiraRestApi((Project) myProject);
         if(isNull(jiraRestApi)) {
             throw new JiraServerConfigurationNotFoundException();
         }

@@ -2,7 +2,7 @@ package com.intellij.jira.filter.assignee;
 
 import com.intellij.jira.rest.model.JiraIssue;
 import com.intellij.jira.util.JiraIssueUtil;
-import com.intellij.openapi.util.text.StringUtil;
+import consulo.util.lang.StringUtil;
 
 import java.util.ArrayList;
 import java.util.Collection;

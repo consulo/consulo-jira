@@ -3,13 +3,12 @@ package com.intellij.jira.ui.dialog;
 import com.intellij.jira.jql.JQLSearcherManager;
 import com.intellij.jira.rest.model.jql.JQLSearcher;
 import com.intellij.jira.rest.model.jql.SearcherEditor;
-import com.intellij.openapi.project.Project;
-import com.intellij.openapi.ui.DialogWrapper;
-import com.intellij.openapi.ui.ValidationInfo;
+import consulo.project.Project;
+import consulo.ui.ex.awt.DialogWrapper;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import javax.swing.JComponent;
+import javax.swing.*;
 
 import static java.util.Objects.nonNull;
 

@@ -2,7 +2,7 @@ package com.intellij.jira.ui.panels;
 
 import com.intellij.jira.data.JiraIssuesData;
 import com.intellij.jira.rest.model.JiraIssue;
-import com.intellij.ui.OnePixelSplitter;
+import consulo.ui.ex.awt.OnePixelSplitter;
 import org.jetbrains.annotations.NotNull;
 
 public class JiraIssueStatusActivityPanel extends OnePixelSplitter {

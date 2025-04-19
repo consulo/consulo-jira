@@ -1,15 +1,16 @@
 package com.intellij.jira.actions;
 
-import com.intellij.icons.AllIcons;
 import com.intellij.jira.jql.JQLSearcherManager;
 import com.intellij.jira.rest.model.jql.JQLSearcher;
 import com.intellij.jira.ui.tree.SearcherTreeNode;
-import com.intellij.openapi.actionSystem.AnActionEvent;
+import consulo.platform.base.icon.PlatformIconGroup;
+import consulo.project.Project;
+import consulo.ui.ex.action.AnActionEvent;
 import org.jetbrains.annotations.NotNull;
 
 public class MakeSearcherGlobalAction extends JiraIssueSearcherAction {
 
-    private static final ActionProperties properties = ActionProperties.of("Make Global", AllIcons.ToolbarDecorator.Export);
+    private static final ActionProperties properties = ActionProperties.of("Make Global", PlatformIconGroup.actionsExport());
 
     public MakeSearcherGlobalAction() {
         super(properties);
@@ -20,7 +21,7 @@ public class MakeSearcherGlobalAction extends JiraIssueSearcherAction {
         JQLSearcher searcher = getSearcher(e);
         searcher.setShared(true);
 
-        JQLSearcherManager.getInstance().moveToGlobal(e.getProject(), searcher);
+        JQLSearcherManager.getInstance().moveToGlobal(e.getData(Project.KEY), searcher);
     }
 
     @Override

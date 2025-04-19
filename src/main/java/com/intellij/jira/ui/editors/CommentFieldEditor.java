@@ -6,8 +6,8 @@ import com.google.gson.JsonNull;
 import com.google.gson.JsonObject;
 
 import static com.intellij.jira.util.JiraGsonUtil.createObject;
-import static com.intellij.openapi.util.text.StringUtil.isEmpty;
-import static com.intellij.openapi.util.text.StringUtil.trim;
+import static consulo.util.lang.StringUtil.isEmpty;
+import static consulo.util.lang.StringUtil.trim;
 
 public class CommentFieldEditor extends TextAreaFieldEditor {
 
@@ -19,7 +19,7 @@ public class CommentFieldEditor extends TextAreaFieldEditor {
 
     @Override
     public JsonElement getJsonValue() {
-        if(isEmpty(trim(myTextArea.getText()))){
+        if (isEmpty(trim(myTextArea.getText()))) {
             return JsonNull.INSTANCE;
         }
 

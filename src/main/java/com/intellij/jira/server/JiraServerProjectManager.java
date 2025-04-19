@@ -1,16 +1,15 @@
 package com.intellij.jira.server;
 
-import com.intellij.credentialStore.CredentialAttributes;
-import com.intellij.credentialStore.Credentials;
-import com.intellij.ide.passwordSafe.PasswordSafe;
-import com.intellij.openapi.components.PersistentStateComponent;
-import com.intellij.openapi.components.State;
-import com.intellij.openapi.components.Storage;
-import com.intellij.openapi.components.StoragePathMacros;
-import com.intellij.openapi.project.Project;
-import com.intellij.util.xmlb.XmlSerializerUtil;
-import com.intellij.util.xmlb.annotations.Tag;
-import com.intellij.util.xmlb.annotations.XCollection;
+import consulo.component.persist.PersistentStateComponent;
+import consulo.component.persist.State;
+import consulo.component.persist.Storage;
+import consulo.component.persist.StoragePathMacros;
+import consulo.credentialStorage.CredentialAttributes;
+import consulo.credentialStorage.Credentials;
+import consulo.credentialStorage.PasswordSafe;
+import consulo.project.Project;
+import consulo.util.xml.serializer.XmlSerializerUtil;
+import consulo.util.xml.serializer.annotation.Tag;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -19,7 +18,7 @@ import java.util.List;
 import java.util.Objects;
 
 @State(name = "JiraServerManager", storages = @Storage(StoragePathMacros.WORKSPACE_FILE))
-public class JiraServerProjectManager implements PersistentStateComponent<JiraServerProjectManager.State>  {
+public class JiraServerProjectManager implements PersistentStateComponent<JiraServerProjectManager.State> {
 
 
     private List<JiraServer> myServers = new ArrayList<>();
@@ -28,7 +27,7 @@ public class JiraServerProjectManager implements PersistentStateComponent<JiraSe
     private State myState = new State();
 
     public static JiraServerManager getInstance(@NotNull Project project) {
-        return project.getService(JiraServerManager.class);
+        return project.getInstance(JiraServerManager.class);
     }
 
     @Nullable

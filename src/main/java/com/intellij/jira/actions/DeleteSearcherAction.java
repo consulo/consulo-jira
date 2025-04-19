@@ -1,9 +1,10 @@
 package com.intellij.jira.actions;
 
-import com.intellij.icons.AllIcons;
 import com.intellij.jira.jql.JQLSearcherManager;
 import com.intellij.jira.rest.model.jql.JQLSearcher;
-import com.intellij.openapi.actionSystem.AnActionEvent;
+import consulo.application.AllIcons;
+import consulo.project.Project;
+import consulo.ui.ex.action.AnActionEvent;
 import org.jetbrains.annotations.NotNull;
 
 public class DeleteSearcherAction extends JiraIssueSearcherAction {
@@ -18,7 +19,7 @@ public class DeleteSearcherAction extends JiraIssueSearcherAction {
     public void actionPerformed(@NotNull AnActionEvent e) {
         JQLSearcher searcher = getSearcher(e);
 
-        JQLSearcherManager.getInstance().remove(e.getProject(), searcher.getId(), searcher);
+        JQLSearcherManager.getInstance().remove(e.getData(Project.KEY), searcher.getId(), searcher);
     }
 
 }

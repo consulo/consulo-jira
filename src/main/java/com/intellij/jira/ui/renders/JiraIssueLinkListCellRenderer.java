@@ -5,25 +5,17 @@ import com.intellij.jira.rest.model.JiraIssueLink;
 import com.intellij.jira.rest.model.JiraIssueStatus;
 import com.intellij.jira.util.JiraBorders;
 import com.intellij.jira.util.JiraLabelUtil;
-import com.intellij.ui.JBColor;
-import com.intellij.ui.components.JBLabel;
-import com.intellij.util.ui.JBUI;
-import com.intellij.util.ui.UIUtil;
-import com.intellij.util.ui.components.BorderLayoutPanel;
+import consulo.ui.ex.JBColor;
+import consulo.ui.ex.awt.BorderLayoutPanel;
+import consulo.ui.ex.awt.JBLabel;
+import consulo.ui.ex.awt.JBUI;
+import consulo.ui.ex.awt.UIUtil;
 
-import javax.swing.JList;
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Component;
+import javax.swing.*;
+import java.awt.*;
 
-import static com.intellij.jira.util.JiraLabelUtil.BOLD;
-import static com.intellij.jira.util.JiraLabelUtil.DARCULA_ISSUE_LINK_COLOR;
-import static com.intellij.jira.util.JiraLabelUtil.DARK_DARCULA_ISSUE_LINK_COLOR;
-import static com.intellij.jira.util.JiraLabelUtil.DARK_ISSUE_LINK_COLOR;
-import static com.intellij.jira.util.JiraLabelUtil.IN_PROGRESS_TEXT_COLOR;
-import static com.intellij.jira.util.JiraLabelUtil.ISSUE_LINK_COLOR;
-import static com.intellij.jira.util.JiraLabelUtil.getFgRowColor;
-import static com.intellij.openapi.util.text.StringUtil.toUpperCase;
+import static com.intellij.jira.util.JiraLabelUtil.*;
+import static consulo.util.lang.StringUtil.toUpperCase;
 import static java.util.Objects.nonNull;
 
 public class JiraIssueLinkListCellRenderer extends DefaultJiraListCellRender  {

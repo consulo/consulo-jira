@@ -1,6 +1,6 @@
 package com.intellij.jira.actions;
 
-import com.intellij.openapi.actionSystem.DefaultActionGroup;
+import consulo.ui.ex.action.DefaultActionGroup;
 
 public class JiraIssueToolbarPopupActionGroup extends DefaultActionGroup {
 

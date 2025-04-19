@@ -1,8 +1,8 @@
 package com.intellij.jira.ui.editors;
 
-import com.intellij.ui.components.JBLabel;
+import consulo.ui.ex.awt.JBLabel;
 
-import javax.swing.JLabel;
+import javax.swing.*;
 
 public abstract class AbstractFieldEditor<T> implements FieldEditor {
 

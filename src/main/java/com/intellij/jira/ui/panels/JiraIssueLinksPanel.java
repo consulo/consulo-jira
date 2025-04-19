@@ -8,15 +8,16 @@ import com.intellij.jira.rest.model.JiraIssue;
 import com.intellij.jira.rest.model.JiraIssueLink;
 import com.intellij.jira.ui.model.JiraIssueLinkListModel;
 import com.intellij.jira.ui.renders.JiraIssueLinkListCellRenderer;
-import com.intellij.openapi.actionSystem.ActionGroup;
-import com.intellij.openapi.application.ApplicationManager;
-import com.intellij.ui.ScrollPaneFactory;
-import com.intellij.ui.components.JBList;
+import consulo.application.ApplicationManager;
+import consulo.ui.ex.action.ActionGroup;
+import consulo.ui.ex.awt.JBList;
+import consulo.ui.ex.awt.ScrollPaneFactory;
+import consulo.util.dataholder.Key;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import javax.swing.JPanel;
-import java.awt.BorderLayout;
+import javax.swing.*;
+import java.awt.*;
 import java.util.List;
 import java.util.Objects;
 
@@ -45,7 +46,7 @@ class JiraIssueLinksPanel extends AbstractJiraToolWindowPanel {
     }
 
     @Override
-    public @Nullable Object getData(@NotNull String dataId) {
+    public @Nullable Object getData(@NotNull Key dataId) {
         if (JiraDataKeys.ISSUE_LINK.is(dataId)
             && Objects.nonNull(issueLinkList.getSelectedValue())) {
             return issueLink;

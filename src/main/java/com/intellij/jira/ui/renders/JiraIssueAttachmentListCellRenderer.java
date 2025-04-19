@@ -3,23 +3,17 @@ package com.intellij.jira.ui.renders;
 import com.intellij.jira.rest.model.JiraIssueAttachment;
 import com.intellij.jira.ui.panels.JiraPanel;
 import com.intellij.jira.util.JiraLabelUtil;
-import com.intellij.openapi.fileTypes.FileType;
-import com.intellij.openapi.fileTypes.FileTypeManager;
-import com.intellij.ui.components.JBLabel;
-import com.intellij.util.ui.JBUI;
-import com.intellij.util.ui.UIUtil;
+import consulo.language.file.FileTypeManager;
+import consulo.ui.ex.awt.JBLabel;
+import consulo.ui.ex.awt.JBUI;
+import consulo.ui.ex.awt.UIUtil;
+import consulo.virtualFileSystem.fileType.FileType;
 
-import javax.swing.JList;
-import javax.swing.JPanel;
-import java.awt.BorderLayout;
-import java.awt.Component;
-import java.awt.FlowLayout;
+import javax.swing.*;
+import java.awt.*;
 
 import static com.intellij.jira.util.JiraIssueUtil.getPrettyDateTime;
-import static com.intellij.jira.util.JiraLabelUtil.BOLD;
-import static com.intellij.jira.util.JiraLabelUtil.DARK_ISSUE_ATTACHMENT_COLOR;
-import static com.intellij.jira.util.JiraLabelUtil.ISSUE_ATTACHMENT_COLOR;
-import static com.intellij.jira.util.JiraLabelUtil.ITALIC;
+import static com.intellij.jira.util.JiraLabelUtil.*;
 
 public class JiraIssueAttachmentListCellRenderer extends DefaultJiraListCellRender {
 

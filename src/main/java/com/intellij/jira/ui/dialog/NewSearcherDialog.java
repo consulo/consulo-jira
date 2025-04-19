@@ -2,8 +2,7 @@ package com.intellij.jira.ui.dialog;
 
 import com.intellij.jira.jql.JQLSearcherManager;
 import com.intellij.jira.rest.model.jql.JQLSearcher;
-import com.intellij.openapi.project.Project;
-import com.intellij.openapi.ui.ValidationInfo;
+import consulo.project.Project;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 

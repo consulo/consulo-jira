@@ -1,8 +1,8 @@
 package com.intellij.jira.ui.panels;
 
 import com.intellij.jira.ui.dialog.ConfigureJiraServersDialog;
-import com.intellij.openapi.project.Project;
-import com.intellij.ui.SimpleTextAttributes;
+import consulo.project.Project;
+import consulo.ui.ex.SimpleTextAttributes;
 import org.jetbrains.annotations.NotNull;
 
 public class JiraServerNotConfiguredPanel extends JiraPanelWithEmptyText {

@@ -6,7 +6,7 @@ import org.jetbrains.annotations.NotNull;
 
 public interface IssueChangeListener {
 
-    Topic<IssueChangeListener> TOPIC = Topic.create("Issue has changed", IssueChangeListener.class);
+    Class<IssueChangeListener> TOPIC = Topic.create("Issue has changed", IssueChangeListener.class);
 
     void onChange(@NotNull JiraIssue issue);
 

@@ -1,18 +1,16 @@
 package com.intellij.jira.actions;
 
-import com.intellij.icons.AllIcons;
 import com.intellij.jira.JiraDataKeys;
 import com.intellij.jira.exceptions.InvalidPermissionException;
 import com.intellij.jira.rest.model.JiraIssueComment;
 import com.intellij.jira.server.JiraRestApi;
 import com.intellij.jira.ui.dialog.DeleteCommentDialog;
-import com.intellij.openapi.actionSystem.AnActionEvent;
-import com.intellij.openapi.project.Project;
+import consulo.application.AllIcons;
+import consulo.project.Project;
+import consulo.ui.ex.action.AnActionEvent;
 import org.jetbrains.annotations.NotNull;
 
-import static com.intellij.jira.rest.model.JiraPermissionType.BROWSE_PROJECTS;
-import static com.intellij.jira.rest.model.JiraPermissionType.DELETE_ALL_COMMENTS;
-import static com.intellij.jira.rest.model.JiraPermissionType.DELETE_OWN_COMMENTS;
+import static com.intellij.jira.rest.model.JiraPermissionType.*;
 import static java.util.Objects.nonNull;
 
 public class DeleteCommentDialogAction extends JiraIssueDialogAction {

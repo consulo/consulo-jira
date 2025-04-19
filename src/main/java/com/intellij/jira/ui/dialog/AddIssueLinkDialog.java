@@ -5,14 +5,14 @@ import com.intellij.jira.rest.model.JiraIssueLinkTypeInfo;
 import com.intellij.jira.tasks.AddIssueLinkTask;
 import com.intellij.jira.ui.model.JiraIssueLinkTypeInfoListModel;
 import com.intellij.jira.util.JiraLabelUtil;
-import com.intellij.openapi.project.Project;
-import com.intellij.openapi.ui.ComboBox;
-import com.intellij.openapi.ui.DialogWrapper;
-import com.intellij.ui.CollectionComboBoxModel;
-import com.intellij.util.ui.FormBuilder;
+import consulo.project.Project;
+import consulo.ui.ex.awt.CollectionComboBoxModel;
+import consulo.ui.ex.awt.ComboBox;
+import consulo.ui.ex.awt.DialogWrapper;
+import consulo.ui.ex.awt.FormBuilder;
 import org.jetbrains.annotations.Nullable;
 
-import javax.swing.JComponent;
+import javax.swing.*;
 import java.util.List;
 
 import static java.util.Objects.nonNull;

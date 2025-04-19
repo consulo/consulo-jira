@@ -2,23 +2,16 @@ package com.intellij.jira.actions;
 
 import com.intellij.jira.server.JiraServerManager;
 import com.intellij.jira.ui.table.column.JiraIssueColumn;
-import com.intellij.openapi.actionSystem.AnAction;
-import com.intellij.openapi.actionSystem.AnActionEvent;
-import com.intellij.openapi.actionSystem.DefaultActionGroup;
-import com.intellij.openapi.actionSystem.Separator;
-import com.intellij.openapi.actionSystem.ToggleAction;
-import com.intellij.openapi.application.ApplicationManager;
-import com.intellij.openapi.project.Project;
+import consulo.application.ApplicationManager;
+import consulo.project.Project;
+import consulo.ui.ex.action.*;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.intellij.jira.ui.table.column.JiraIssueColumnUtils.addColumn;
-import static com.intellij.jira.ui.table.column.JiraIssueColumnUtils.getHideableColumns;
-import static com.intellij.jira.ui.table.column.JiraIssueColumnUtils.isVisible;
-import static com.intellij.jira.ui.table.column.JiraIssueColumnUtils.removeColumn;
+import static com.intellij.jira.ui.table.column.JiraIssueColumnUtils.*;
 import static java.util.Objects.isNull;
 
 
@@ -32,7 +25,7 @@ public class ToggleIssueColumnActionGroup extends DefaultActionGroup {
     public AnAction @NotNull [] getChildren(@Nullable AnActionEvent e) {
         List<AnAction> actions = new ArrayList<>();
         if (e != null) {
-            actions.add(Separator.create("Show Columns"));
+            actions.add(AnSeparator.create("Show Columns"));
         }
 
         getHideableColumns().forEach(column ->
@@ -44,11 +37,11 @@ public class ToggleIssueColumnActionGroup extends DefaultActionGroup {
 
     @Override
     public void update(@NotNull AnActionEvent e) {
-        Project project = e.getProject();
+        Project project = e.getData(Project.KEY);
         if (isNull(project)|| !project.isInitialized() || project.isDisposed()) {
             e.getPresentation().setVisible(false);
         } else {
-            JiraServerManager manager = ApplicationManager.getApplication().getService(JiraServerManager.class);
+            JiraServerManager manager = ApplicationManager.getApplication().getInstance(JiraServerManager.class);
             e.getPresentation().setVisible(manager.hasJiraServerConfigured(project));
         }
     }
@@ -57,7 +50,7 @@ public class ToggleIssueColumnActionGroup extends DefaultActionGroup {
         private final JiraIssueColumn<?, ?> myColumn;
 
         private ToggleColumnAction(@NotNull JiraIssueColumn<?, ?> column) {
-            super(() -> column.getName());
+            super(column.getName());
             myColumn = column;
         }
 

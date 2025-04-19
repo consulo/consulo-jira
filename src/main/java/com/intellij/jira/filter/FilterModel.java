@@ -1,13 +1,13 @@
 package com.intellij.jira.filter;
 
 import com.intellij.jira.data.Issues;
-import com.intellij.openapi.util.Computable;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.function.Supplier;
 
 public abstract class FilterModel<T> {
 
@@ -17,14 +17,14 @@ public abstract class FilterModel<T> {
     @Nullable
     protected T myFilter;
 
-    protected final Computable<Issues> myIssuesGetter;
+    protected final Supplier<Issues> myIssuesGetter;
 
-    public FilterModel(Computable<Issues> issuesGetter) {
+    public FilterModel(Supplier<Issues> issuesGetter) {
         myIssuesGetter = issuesGetter;
     }
 
     public Issues getIssues() {
-        return myIssuesGetter.compute();
+        return myIssuesGetter.get();
     }
 
     public void setFilter(@Nullable T filter) {

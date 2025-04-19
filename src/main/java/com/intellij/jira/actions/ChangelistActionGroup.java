@@ -1,8 +1,8 @@
 package com.intellij.jira.actions;
 
-import com.intellij.icons.AllIcons;
-import com.intellij.openapi.actionSystem.DefaultActionGroup;
-import com.intellij.openapi.actionSystem.Separator;
+import consulo.application.AllIcons;
+import consulo.ui.ex.action.AnSeparator;
+import consulo.ui.ex.action.DefaultActionGroup;
 
 public class ChangelistActionGroup extends DefaultActionGroup {
 
@@ -10,7 +10,7 @@ public class ChangelistActionGroup extends DefaultActionGroup {
         super("Changelist", true);
         getTemplatePresentation().setIcon(AllIcons.Vcs.Changelist);
         add(new AddIssueChangeListAction());
-        add(new Separator());
+        add(new AnSeparator());
         add(new ChangelistSettingsDialogAction());
     }
 

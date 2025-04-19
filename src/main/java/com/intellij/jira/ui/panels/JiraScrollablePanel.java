@@ -1,10 +1,9 @@
 package com.intellij.jira.ui.panels;
 
 import com.intellij.jira.util.JiraBorders;
-import com.intellij.openapi.roots.ui.componentsList.components.ScrollablePanel;
-import com.intellij.openapi.ui.VerticalFlowLayout;
+import consulo.ui.ex.awt.VerticalFlowLayout;
 
-import java.awt.Color;
+import java.awt.*;
 
 import static com.intellij.jira.util.JiraLabelUtil.WHITE;
 

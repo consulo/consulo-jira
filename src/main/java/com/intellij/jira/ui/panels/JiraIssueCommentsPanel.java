@@ -10,17 +10,17 @@ import com.intellij.jira.rest.model.JiraIssue;
 import com.intellij.jira.rest.model.JiraIssueComment;
 import com.intellij.jira.ui.model.JiraIssueCommentListModel;
 import com.intellij.jira.ui.renders.JiraIssueCommentListCellRenderer;
-import com.intellij.openapi.actionSystem.ActionGroup;
-import com.intellij.openapi.application.ApplicationManager;
-import com.intellij.ui.ScrollPaneFactory;
-import com.intellij.ui.components.JBList;
-import com.intellij.util.ui.JBUI;
+import consulo.application.ApplicationManager;
+import consulo.ui.ex.action.ActionGroup;
+import consulo.ui.ex.awt.JBList;
+import consulo.ui.ex.awt.JBUI;
+import consulo.ui.ex.awt.ScrollPaneFactory;
+import consulo.util.dataholder.Key;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import java.awt.BorderLayout;
+import javax.swing.*;
+import java.awt.*;
 import java.util.Objects;
 
 import static java.awt.BorderLayout.CENTER;
@@ -49,7 +49,7 @@ class JiraIssueCommentsPanel extends AbstractJiraToolWindowPanel {
     }
 
     @Override
-    public @Nullable Object getData(@NotNull String dataId) {
+    public @Nullable Object getData(@NotNull Key dataId) {
         if (JiraDataKeys.ISSUE_COMMENT.is(dataId) && Objects.nonNull(issueCommentList.getSelectedValue())) {
             return comment;
         }

@@ -1,9 +1,9 @@
 package com.intellij.jira.settings;
 
-import com.intellij.openapi.application.ApplicationManager;
-import com.intellij.openapi.components.PersistentStateComponent;
-import com.intellij.openapi.components.State;
-import com.intellij.openapi.components.Storage;
+import consulo.application.ApplicationManager;
+import consulo.component.persist.PersistentStateComponent;
+import consulo.component.persist.State;
+import consulo.component.persist.Storage;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -16,7 +16,7 @@ public class ChangelistSettings implements PersistentStateComponent<ChangelistSt
     private ChangelistState myState = ChangelistState.getDefault();
 
     public static ChangelistSettings getInstance() {
-        return ApplicationManager.getApplication().getService(ChangelistSettings.class);
+        return ApplicationManager.getApplication().getInstance(ChangelistSettings.class);
     }
 
     @Nullable

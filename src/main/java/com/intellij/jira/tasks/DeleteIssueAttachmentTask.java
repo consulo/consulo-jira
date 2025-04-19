@@ -3,8 +3,8 @@ package com.intellij.jira.tasks;
 import com.intellij.jira.exceptions.InvalidResultException;
 import com.intellij.jira.server.JiraRestApi;
 import com.intellij.jira.util.result.Result;
-import com.intellij.openapi.progress.ProgressIndicator;
-import com.intellij.openapi.project.Project;
+import consulo.application.progress.ProgressIndicator;
+import consulo.project.Project;
 import org.jetbrains.annotations.NotNull;
 
 public class DeleteIssueAttachmentTask extends AbstractBackgroundableTask {

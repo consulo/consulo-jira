@@ -3,8 +3,8 @@ package com.intellij.jira.components;
 import com.intellij.jira.rest.model.JiraIssueUser;
 import com.intellij.jira.server.JiraServerManager;
 import com.intellij.jira.util.result.Result;
-import com.intellij.openapi.application.ApplicationManager;
-import com.intellij.openapi.project.Project;
+import consulo.application.ApplicationManager;
+import consulo.project.Project;
 
 import static com.intellij.jira.server.JiraServerManager.JIRA_SERVER_CHANGED;
 
@@ -38,7 +38,7 @@ public class JiraUserProvider {
     }
 
     public static JiraUserProvider getInstance(Project project) {
-        return project.getService(JiraUserProvider.class);
+        return project.getInstance(JiraUserProvider.class);
     }
 
 }

@@ -2,25 +2,16 @@ package com.intellij.jira.server.editor;
 
 import com.intellij.jira.server.JiraServer;
 import com.intellij.jira.ui.editors.Editor;
-import com.intellij.openapi.project.Project;
-import com.intellij.openapi.ui.ValidationInfo;
-import com.intellij.ui.components.JBLabel;
-import com.intellij.ui.components.JBRadioButton;
-import com.intellij.ui.components.JBTextField;
-import com.intellij.util.ui.FormBuilder;
-import com.intellij.util.ui.JBUI;
+import consulo.project.Project;
+import consulo.ui.ex.awt.*;
 import org.jetbrains.annotations.Nullable;
 
-import javax.swing.JComponent;
-import javax.swing.JLabel;
-import javax.swing.JPasswordField;
-import javax.swing.JRadioButton;
-import javax.swing.JTextField;
+import javax.swing.*;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 
-import static com.intellij.openapi.util.text.StringUtil.isEmpty;
-import static com.intellij.openapi.util.text.StringUtil.trim;
+import static consulo.util.lang.StringUtil.isEmpty;
+import static consulo.util.lang.StringUtil.trim;
 import static java.lang.String.valueOf;
 
 public class DefaultJiraServerAuthEditor extends JiraServerAuthEditor {

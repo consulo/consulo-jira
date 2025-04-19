@@ -1,16 +1,13 @@
 package com.intellij.jira.server.editor;
 
 import com.intellij.jira.server.JiraServer;
-import com.intellij.jira.server.auth.AuthType;
-import com.intellij.jira.ui.JiraTabbedPane;
 import com.intellij.jira.ui.editors.Editor;
-import com.intellij.openapi.project.Project;
-import com.intellij.openapi.ui.ValidationInfo;
-import com.intellij.util.ui.FormBuilder;
+import consulo.project.Project;
+import consulo.ui.ex.awt.FormBuilder;
+import consulo.ui.ex.awt.ValidationInfo;
 import org.jetbrains.annotations.Nullable;
 
-import javax.swing.JComponent;
-import javax.swing.JTabbedPane;
+import javax.swing.*;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 

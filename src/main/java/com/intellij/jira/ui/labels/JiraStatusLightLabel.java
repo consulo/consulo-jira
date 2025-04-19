@@ -2,14 +2,14 @@ package com.intellij.jira.ui.labels;
 
 import com.intellij.jira.rest.model.JiraIssueStatus;
 import com.intellij.jira.util.JiraBorders;
-import com.intellij.openapi.util.text.StringUtil;
-import com.intellij.ui.components.JBLabel;
-import com.intellij.util.ui.JBFont;
-import com.intellij.util.ui.JBUI;
+import consulo.ui.ex.awt.JBFont;
+import consulo.ui.ex.awt.JBLabel;
+import consulo.ui.ex.awt.JBUI;
+import consulo.util.lang.StringUtil;
 import org.jetbrains.annotations.NotNull;
 
 import javax.swing.border.Border;
-import java.awt.Font;
+import java.awt.*;
 
 public class JiraStatusLightLabel extends JBLabel {
 

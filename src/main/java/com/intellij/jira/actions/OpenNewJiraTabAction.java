@@ -1,11 +1,11 @@
 package com.intellij.jira.actions;
 
-import com.intellij.icons.AllIcons;
 import com.intellij.jira.JiraDataKeys;
 import com.intellij.jira.JiraTabsManager;
 import com.intellij.jira.rest.model.JiraIssue;
-import com.intellij.openapi.actionSystem.AnActionEvent;
-import com.intellij.openapi.project.Project;
+import consulo.application.AllIcons;
+import consulo.project.Project;
+import consulo.ui.ex.action.AnActionEvent;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Objects;
@@ -22,7 +22,7 @@ public class OpenNewJiraTabAction extends JiraIssueAction {
 
     @Override
     public void actionPerformed(@NotNull AnActionEvent e) {
-        Project project = e.getProject();
+        Project project = e.getData(Project.KEY);
         if (Objects.nonNull(project)) {
             JiraIssue issue = e.getRequiredData(JiraDataKeys.ISSUE);
             JiraTabsManager.getInstance(project).openDetailsIssueTab(issue.getKey());

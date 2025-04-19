@@ -5,18 +5,15 @@ import com.intellij.jira.rest.model.JiraIssueStatus;
 import com.intellij.jira.ui.labels.JiraLinkLabel;
 import com.intellij.jira.ui.labels.JiraStatusDarkLabel;
 import com.intellij.jira.ui.labels.JiraStatusLightLabel;
-import com.intellij.ui.JBColor;
-import com.intellij.ui.components.JBLabel;
-import com.intellij.util.ui.JBFont;
-import com.intellij.util.ui.JBUI;
-import com.intellij.util.ui.StartupUiUtil;
-import com.intellij.util.ui.UIUtil;
+import consulo.ui.ex.JBColor;
+import consulo.ui.ex.awt.JBFont;
+import consulo.ui.ex.awt.JBLabel;
+import consulo.ui.ex.awt.JBUI;
+import consulo.ui.ex.awt.UIUtil;
+import consulo.ui.image.Image;
 
-import javax.swing.Icon;
-import javax.swing.JLabel;
-import java.awt.Color;
-import java.awt.Cursor;
-import java.awt.Font;
+import javax.swing.*;
+import java.awt.*;
 
 import static java.util.Objects.nonNull;
 import static javax.swing.SwingConstants.LEFT;
@@ -83,7 +80,7 @@ public class JiraLabelUtil {
         return label;
     }
 
-    public static JBLabel createIconLabel(Icon icon, String text){
+    public static JBLabel createIconLabel(Image icon, String text){
        return new JBLabel(text, icon, LEFT);
     }
 

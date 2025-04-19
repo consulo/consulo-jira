@@ -75,7 +75,7 @@ public final class JiraIssueStyleFactory {
         }
 
         @Override
-        public JiraIssueHighlighter.@Nullable TextStyle getTextStyle() {
+        public JiraIssueHighlighter.TextStyle getTextStyle() {
             return myTextStyle;
         }
     }

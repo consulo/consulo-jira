@@ -4,8 +4,8 @@ import com.intellij.jira.JiraUiDataKeys;
 import com.intellij.jira.ui.JiraIssueUiProperties;
 import com.intellij.jira.ui.highlighters.JiraIssueHighlighterFactory;
 import com.intellij.jira.ui.highlighters.JiraIssueHighlighterProperty;
-import com.intellij.openapi.actionSystem.*;
-import com.intellij.openapi.extensions.ExtensionPointName;
+import consulo.component.extension.ExtensionPointName;
+import consulo.ui.ex.action.*;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -15,14 +15,14 @@ import java.util.List;
 public class HighlightersActionGroup extends ActionGroup {
 
     public static final ExtensionPointName<JiraIssueHighlighterFactory> JIRA_ISSUE_HIGHLIGHTER_FACTORY_EP =
-            ExtensionPointName.create("com.intellij.jira.issueHighlighterFactory");
+            ExtensionPointName.create(JiraIssueHighlighterFactory.class);
 
     @Override
     public AnAction @NotNull [] getChildren(@Nullable AnActionEvent e) {
         List<AnAction> actions = new ArrayList<>();
 
         if (e != null) {
-            actions.add(new Separator("Highlight"));
+            actions.add(new AnSeparator("Highlight"));
             for (JiraIssueHighlighterFactory factory : JIRA_ISSUE_HIGHLIGHTER_FACTORY_EP.getExtensionList()) {
                 actions.add(new EnableHighlighterAction(factory));
             }

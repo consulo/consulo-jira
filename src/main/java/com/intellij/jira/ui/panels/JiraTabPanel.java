@@ -1,9 +1,9 @@
 package com.intellij.jira.ui.panels;
 
 import com.intellij.jira.ui.JiraUi;
-import com.intellij.ui.components.JBPanel;
+import consulo.ui.ex.awt.JBPanel;
 
-import java.awt.BorderLayout;
+import java.awt.*;
 
 import static java.awt.BorderLayout.CENTER;
 

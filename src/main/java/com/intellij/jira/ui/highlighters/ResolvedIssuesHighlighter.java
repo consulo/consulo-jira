@@ -6,7 +6,7 @@ import com.intellij.jira.rest.model.JiraIssueStatus;
 import com.intellij.jira.ui.JiraIssueStyleFactory;
 import org.jetbrains.annotations.NotNull;
 
-import static com.intellij.vcs.log.ui.highlighters.MergeCommitsHighlighter.MERGE_COMMIT_FOREGROUND;
+import static MergeCommitsHighlighter.MERGE_COMMIT_FOREGROUND;
 
 public class ResolvedIssuesHighlighter implements JiraIssueHighlighter {
 

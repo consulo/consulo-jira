@@ -1,62 +1,18 @@
 package com.intellij.jira.ui.editors.factory;
 
 import com.google.gson.JsonArray;
-import com.intellij.jira.rest.model.JiraCustomFieldOption;
-import com.intellij.jira.rest.model.JiraIssue;
-import com.intellij.jira.rest.model.JiraIssueFieldProperties;
-import com.intellij.jira.rest.model.JiraIssuePriority;
-import com.intellij.jira.rest.model.JiraIssueResolution;
-import com.intellij.jira.rest.model.JiraProject;
-import com.intellij.jira.rest.model.JiraProjectComponent;
-import com.intellij.jira.rest.model.JiraProjectVersion;
-import com.intellij.jira.ui.editors.AttachmentFieldEditor;
-import com.intellij.jira.ui.editors.ComboBoxFieldEditor;
-import com.intellij.jira.ui.editors.DateFieldEditor;
-import com.intellij.jira.ui.editors.DateTimeFieldEditor;
-import com.intellij.jira.ui.editors.FieldEditor;
-import com.intellij.jira.ui.editors.GroupSelectFieldEditor;
-import com.intellij.jira.ui.editors.LabelFieldEditor;
-import com.intellij.jira.ui.editors.LabelsFieldEditor;
-import com.intellij.jira.ui.editors.LinkedIssueFieldEditor;
-import com.intellij.jira.ui.editors.LogWorkFieldEditor;
-import com.intellij.jira.ui.editors.MultiSelectFieldEditor;
-import com.intellij.jira.ui.editors.NumberFieldEditor;
-import com.intellij.jira.ui.editors.OptionSelectFieldEditor;
-import com.intellij.jira.ui.editors.ProjectSelectFieldEditor;
-import com.intellij.jira.ui.editors.TextAreaFieldEditor;
-import com.intellij.jira.ui.editors.TextFieldEditor;
-import com.intellij.jira.ui.editors.TimeTrackingFieldEditor;
-import com.intellij.jira.ui.editors.UserSelectFieldEditor;
-import com.intellij.jira.ui.editors.VersionSelectFieldEditor;
+import com.intellij.jira.rest.model.*;
+import com.intellij.jira.ui.editors.*;
 import com.intellij.jira.util.JiraGsonUtil;
-import com.intellij.openapi.project.Project;
-import com.intellij.openapi.util.text.StringUtil;
-import com.intellij.util.containers.ContainerUtil;
+import consulo.project.Project;
+import consulo.util.lang.StringUtil;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
 import static com.intellij.jira.util.JiraGsonUtil.isEmpty;
-import static com.intellij.jira.util.JiraIssueField.ASSIGNEE;
-import static com.intellij.jira.util.JiraIssueField.ATTACHMENT;
-import static com.intellij.jira.util.JiraIssueField.COMPONENT;
-import static com.intellij.jira.util.JiraIssueField.DESCRIPTION;
-import static com.intellij.jira.util.JiraIssueField.DUEDATE;
-import static com.intellij.jira.util.JiraIssueField.ENVIRONMENT;
-import static com.intellij.jira.util.JiraIssueField.FIX_VERSIONS;
-import static com.intellij.jira.util.JiraIssueField.ISSUE_LINKS;
-import static com.intellij.jira.util.JiraIssueField.ISSUE_TYPE;
-import static com.intellij.jira.util.JiraIssueField.LABELS;
-import static com.intellij.jira.util.JiraIssueField.PRIORITY;
-import static com.intellij.jira.util.JiraIssueField.PROJECT;
-import static com.intellij.jira.util.JiraIssueField.REPORTER;
-import static com.intellij.jira.util.JiraIssueField.RESOLUTION;
-import static com.intellij.jira.util.JiraIssueField.SUMMARY;
-import static com.intellij.jira.util.JiraIssueField.TIME_TRACKING;
-import static com.intellij.jira.util.JiraIssueField.VERSION;
-import static com.intellij.jira.util.JiraIssueField.VERSIONS;
-import static com.intellij.jira.util.JiraIssueField.WORKLOG;
+import static com.intellij.jira.util.JiraIssueField.*;
 import static java.util.Objects.isNull;
 
 /**

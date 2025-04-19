@@ -1,15 +1,15 @@
 package com.intellij.jira.jql;
 
-import com.intellij.configurationStore.XmlSerializer;
 import com.intellij.jira.rest.model.jql.JQLSearcher;
-import com.intellij.openapi.application.ApplicationManager;
-import com.intellij.openapi.components.PersistentStateComponent;
-import com.intellij.openapi.components.State;
-import com.intellij.openapi.components.Storage;
-import com.intellij.openapi.components.StoragePathMacros;
-import com.intellij.util.xmlb.XmlSerializationException;
-import com.intellij.util.xmlb.XmlSerializerUtil;
-import com.intellij.util.xmlb.annotations.Tag;
+import consulo.application.ApplicationManager;
+import consulo.component.persist.PersistentStateComponent;
+import consulo.component.persist.State;
+import consulo.component.persist.Storage;
+import consulo.component.persist.StoragePathMacros;
+import consulo.util.xml.serializer.XmlSerializationException;
+import consulo.util.xml.serializer.XmlSerializer;
+import consulo.util.xml.serializer.XmlSerializerUtil;
+import consulo.util.xml.serializer.annotation.Tag;
 import org.jdom.Element;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -89,7 +89,7 @@ public class JQLSearcherApplicationManager implements PersistentStateComponent<J
     }
 
     public static JQLSearcherApplicationManager getInstance() {
-        return ApplicationManager.getApplication().getService(JQLSearcherApplicationManager.class);
+        return ApplicationManager.getApplication().getInstance(JQLSearcherApplicationManager.class);
     }
 
     public static class Config{

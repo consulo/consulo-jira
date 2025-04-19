@@ -1,8 +1,7 @@
 package com.intellij.jira.util;
 
-import com.intellij.openapi.util.Condition;
-
 import java.util.List;
+import java.util.function.Predicate;
 
 public interface DividedList<E> {
 
@@ -22,7 +21,7 @@ public interface DividedList<E> {
 
     boolean isSelected(E e);
 
-    void add(E e, Condition<E> condition);
+    void add(E e, Predicate<E> condition);
 
     void moveToFirst(E e);
 

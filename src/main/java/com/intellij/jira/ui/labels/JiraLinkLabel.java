@@ -1,12 +1,11 @@
 package com.intellij.jira.ui.labels;
 
-
-import com.intellij.ide.BrowserUtil;
 import com.intellij.jira.util.JiraLabelUtil;
-import com.intellij.openapi.application.ApplicationManager;
-import com.intellij.ui.components.JBLabel;
+import consulo.application.ApplicationManager;
+import consulo.ui.ex.awt.JBLabel;
+import consulo.webBrowser.BrowserUtil;
 
-import javax.swing.SwingUtilities;
+import javax.swing.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 

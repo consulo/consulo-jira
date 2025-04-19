@@ -5,15 +5,11 @@ import com.intellij.jira.rest.model.metadata.CreateIssueEditor;
 import com.intellij.jira.rest.model.metadata.JiraIssueTypeIssueCreateMetadata;
 import com.intellij.jira.rest.model.metadata.JiraProjectIssueCreateMetadata;
 import com.intellij.jira.server.JiraRestApi;
-import com.intellij.openapi.application.ApplicationManager;
-import com.intellij.util.ui.UIUtil;
+import consulo.application.ApplicationManager;
+import consulo.ui.ex.awt.UIUtil;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class CreateIssueMetaProvider {

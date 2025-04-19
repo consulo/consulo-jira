@@ -2,15 +2,13 @@ package com.intellij.jira.ui.editors;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonNull;
-import com.intellij.openapi.ui.ValidationInfo;
+import consulo.ui.ex.awt.ValidationInfo;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.regex.Pattern;
 
 import static com.intellij.jira.util.JiraGsonUtil.createPrimitive;
-import static com.intellij.openapi.util.text.StringUtil.isEmpty;
-import static com.intellij.openapi.util.text.StringUtil.isNotEmpty;
-import static com.intellij.openapi.util.text.StringUtil.trim;
+import static StringUtil.*;
 
 public class NumberFieldEditor extends TextFieldEditor {
 

@@ -5,13 +5,12 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonNull;
 import com.google.gson.JsonObject;
 import com.intellij.jira.rest.model.JiraIssueTimeTracking;
-import com.intellij.openapi.ui.ValidationInfo;
-import com.intellij.openapi.util.text.StringUtil;
-import com.intellij.util.ui.FormBuilder;
+import consulo.ui.ex.awt.FormBuilder;
+import consulo.ui.ex.awt.ValidationInfo;
+import consulo.util.lang.StringUtil;
 import org.jetbrains.annotations.Nullable;
 
-import javax.swing.JComponent;
-import javax.swing.JPanel;
+import javax.swing.*;
 import java.util.Objects;
 
 public class LogWorkFieldEditor extends AbstractFieldEditor<String> {

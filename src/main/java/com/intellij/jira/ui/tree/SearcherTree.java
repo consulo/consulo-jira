@@ -1,18 +1,17 @@
 package com.intellij.jira.ui.tree;
 
-import com.intellij.icons.AllIcons;
 import com.intellij.jira.jql.JQLSearcherManager;
 import com.intellij.jira.rest.model.jql.JQLSearcher;
-import com.intellij.openapi.project.Project;
-import com.intellij.ui.ColoredTreeCellRenderer;
-import com.intellij.ui.DoubleClickListener;
-import com.intellij.ui.SimpleTextAttributes;
-import com.intellij.ui.hover.TreeHoverListener;
-import com.intellij.ui.treeStructure.Tree;
+import consulo.application.AllIcons;
+import consulo.project.Project;
+import consulo.ui.ex.SimpleTextAttributes;
+import consulo.ui.ex.awt.event.DoubleClickListener;
+import consulo.ui.ex.awt.tree.ColoredTreeCellRenderer;
+import consulo.ui.ex.awt.tree.Tree;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import javax.swing.JTree;
+import javax.swing.*;
 import javax.swing.tree.TreePath;
 import javax.swing.tree.TreeSelectionModel;
 import java.awt.event.MouseEvent;

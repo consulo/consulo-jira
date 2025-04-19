@@ -1,9 +1,8 @@
 package com.intellij.jira.util;
 
-import com.intellij.openapi.util.Condition;
-
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Predicate;
 
 public class DividedListImpl<E> implements DividedList<E> {
 
@@ -86,8 +85,8 @@ public class DividedListImpl<E> implements DividedList<E> {
     }
 
     @Override
-    public void add(E e, Condition<E> condition) {
-        if (condition.value(e)) {
+    public void add(E e, Predicate<E> condition) {
+        if (condition.test(e)) {
             if (mySelectedIndex >= myGlobalItems.size()) {
                 mySelectedIndex++;
             }

@@ -1,29 +1,24 @@
 package com.intellij.jira.actions;
 
-import com.intellij.ide.ui.laf.darcula.ui.DarculaButtonPainter;
 import com.intellij.jira.exceptions.InvalidPermissionException;
 import com.intellij.jira.server.JiraRestApi;
 import com.intellij.jira.server.JiraServerManager;
 import com.intellij.jira.ui.JiraIssueActionPlaces;
 import com.intellij.jira.ui.dialog.CreateIssueDialog;
-import com.intellij.openapi.actionSystem.ActionToolbar;
-import com.intellij.openapi.actionSystem.AnActionEvent;
-import com.intellij.openapi.actionSystem.DataContext;
-import com.intellij.openapi.actionSystem.Presentation;
-import com.intellij.openapi.actionSystem.ex.CustomComponentAction;
-import com.intellij.openapi.application.ApplicationManager;
-import com.intellij.openapi.project.Project;
-import com.intellij.ui.AnActionButton;
-import com.intellij.util.ui.JBUI;
-import com.intellij.util.ui.components.BorderLayoutPanel;
+import consulo.application.ApplicationManager;
+import consulo.dataContext.DataContext;
+import consulo.project.Project;
+import consulo.ui.ex.action.ActionToolbar;
+import consulo.ui.ex.action.AnActionEvent;
+import consulo.ui.ex.action.Presentation;
+import consulo.ui.ex.awt.AnActionButton;
+import consulo.ui.ex.awt.BorderLayoutPanel;
+import consulo.ui.ex.awt.JBUI;
+import consulo.ui.ex.awt.action.CustomComponentAction;
 import org.jetbrains.annotations.NotNull;
 
-import javax.swing.JButton;
-import javax.swing.JComponent;
-import javax.swing.JPanel;
-import java.awt.Component;
-import java.awt.Dimension;
-import java.awt.Insets;
+import javax.swing.*;
+import java.awt.*;
 
 import static com.intellij.jira.rest.model.JiraPermissionType.BROWSE_PROJECTS;
 import static com.intellij.jira.rest.model.JiraPermissionType.CREATE_ISSUES;
@@ -42,7 +37,7 @@ public class CreateIssueButtonAction extends AnActionButton implements CustomCom
             return;
         }
 
-        JiraServerManager manager = ApplicationManager.getApplication().getService(JiraServerManager.class);
+        JiraServerManager manager = ApplicationManager.getApplication().getInstance(JiraServerManager.class);
         JiraRestApi jiraRestApi = manager.getJiraRestApi(project);
         if(isNull(jiraRestApi)) {
             return;

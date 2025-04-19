@@ -1,8 +1,8 @@
 package com.intellij.jira.actions;
 
 import com.intellij.jira.tasks.AssignUserTask;
-import com.intellij.openapi.actionSystem.AnActionEvent;
-import com.intellij.openapi.project.Project;
+import consulo.project.Project;
+import consulo.ui.ex.action.AnActionEvent;
 
 import static java.util.Objects.nonNull;
 
@@ -30,7 +30,7 @@ public class JiraIssueAssignmentExecuteAction extends JiraIssueAction {
 
     @Override
     public void actionPerformed(AnActionEvent e) {
-        Project project = e.getProject();
+        Project project = e.getData(Project.KEY);
         if(nonNull(project)) {
             new AssignUserTask(project, accoundId, username, issueKey).queue();
         }

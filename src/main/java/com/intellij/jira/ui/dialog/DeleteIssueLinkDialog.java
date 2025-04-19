@@ -2,16 +2,14 @@ package com.intellij.jira.ui.dialog;
 
 import com.intellij.jira.tasks.DeleteIssueLinkTask;
 import com.intellij.jira.ui.panels.JiraPanel;
-import com.intellij.openapi.project.Project;
-import com.intellij.openapi.ui.DialogWrapper;
-import com.intellij.ui.components.JBLabel;
+import consulo.project.Project;
+import consulo.ui.ex.awt.DialogWrapper;
+import consulo.ui.ex.awt.JBLabel;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import javax.swing.Action;
-import javax.swing.JComponent;
-import javax.swing.JPanel;
-import java.awt.BorderLayout;
+import javax.swing.*;
+import java.awt.*;
 
 import static java.util.Objects.nonNull;
 

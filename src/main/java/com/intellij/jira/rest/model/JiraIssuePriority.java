@@ -1,8 +1,6 @@
 package com.intellij.jira.rest.model;
 
-import com.intellij.openapi.util.text.StringUtil;
-
-public class JiraIssuePriority {
+import consulo.util.lang.StringUtil;public class JiraIssuePriority {
 
     private static final String SVG_SUFFIX = ".svg";
     private static final String PNG_SUFFIX = ".png";

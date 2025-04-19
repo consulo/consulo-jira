@@ -1,9 +1,9 @@
 package com.intellij.jira.ui.editors;
 
-import com.intellij.openapi.ui.ValidationInfo;
+import consulo.ui.ex.awt.ValidationInfo;
 import org.jetbrains.annotations.Nullable;
 
-import javax.swing.JComponent;
+import javax.swing.*;
 
 public interface Editor {
 

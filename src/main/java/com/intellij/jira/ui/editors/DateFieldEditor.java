@@ -2,15 +2,13 @@ package com.intellij.jira.ui.editors;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonNull;
-import com.intellij.icons.AllIcons;
-import com.intellij.openapi.ui.ValidationInfo;
-import com.intellij.util.ui.FormBuilder;
+import consulo.application.AllIcons;
+import consulo.ui.ex.awt.FormBuilder;
+import consulo.ui.ex.awt.ValidationInfo;
+import consulo.ui.ex.awtUnsafe.TargetAWT;
 import org.jetbrains.annotations.Nullable;
 
-import javax.swing.JComponent;
-import javax.swing.JFormattedTextField;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
+import javax.swing.*;
 import javax.swing.text.DateFormatter;
 import javax.swing.text.DefaultFormatterFactory;
 import java.text.ParseException;
@@ -22,9 +20,7 @@ import java.util.Date;
 import java.util.Objects;
 
 import static com.intellij.jira.util.JiraGsonUtil.createPrimitive;
-import static com.intellij.openapi.util.text.StringUtil.isEmpty;
-import static com.intellij.openapi.util.text.StringUtil.isNotEmpty;
-import static com.intellij.openapi.util.text.StringUtil.trim;
+import static consulo.util.lang.StringUtil.*;
 import static java.util.Objects.nonNull;
 
 public class DateFieldEditor extends AbstractFieldEditor<String> {
@@ -54,7 +50,7 @@ public class DateFieldEditor extends AbstractFieldEditor<String> {
         myFormattedTextField.setText(getFieldValue());
 
         myInfoLabel.setToolTipText(getToolTipMessage());
-        myInfoLabel.setIcon(AllIcons.Actions.Help);
+        myInfoLabel.setIcon(TargetAWT.to(AllIcons.Actions.Help));
 
         return FormBuilder.createFormBuilder()
                 .addComponent(myLabel)

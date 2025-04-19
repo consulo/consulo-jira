@@ -2,15 +2,15 @@ package com.intellij.jira.ui.editors;
 
 import com.google.gson.JsonElement;
 import com.intellij.jira.util.JiraGsonUtil;
-import com.intellij.openapi.ui.ValidationInfo;
+import consulo.ui.ex.awt.ValidationInfo;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import static com.intellij.openapi.util.text.StringUtil.isNotEmpty;
-import static com.intellij.openapi.util.text.StringUtil.trim;
+import static consulo.util.lang.StringUtil.isNotEmpty;
+import static consulo.util.lang.StringUtil.trim;
 
 public class TimeSpentEditor extends TextFieldEditor {
 

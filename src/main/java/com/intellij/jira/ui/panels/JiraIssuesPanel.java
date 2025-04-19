@@ -11,35 +11,28 @@ import com.intellij.jira.ui.JiraIssueActionPlaces;
 import com.intellij.jira.ui.table.JiraIssueListTableModel;
 import com.intellij.jira.ui.table.JiraIssueTable;
 import com.intellij.jira.ui.table.column.JiraIssueApplicationSettings;
-import com.intellij.openapi.Disposable;
-import com.intellij.openapi.actionSystem.ActionManager;
-import com.intellij.openapi.actionSystem.ActionToolbar;
-import com.intellij.openapi.actionSystem.DataProvider;
-import com.intellij.openapi.actionSystem.DefaultActionGroup;
-import com.intellij.openapi.actionSystem.ex.ActionUtil;
-import com.intellij.openapi.application.ApplicationManager;
-import com.intellij.openapi.ui.Splitter;
-import com.intellij.openapi.util.Disposer;
-import com.intellij.ui.OnePixelSplitter;
-import com.intellij.ui.ScrollPaneFactory;
-import com.intellij.vcs.log.ui.frame.ProgressStripe;
+import consulo.application.ApplicationManager;
+import consulo.dataContext.DataProvider;
+import consulo.disposer.Disposable;
+import consulo.disposer.Disposer;
+import consulo.ui.ex.action.ActionManager;
+import consulo.ui.ex.action.ActionToolbar;
+import consulo.ui.ex.action.DefaultActionGroup;
+import consulo.ui.ex.action.util.ActionUtil;
+import consulo.ui.ex.awt.OnePixelSplitter;
+import consulo.ui.ex.awt.ScrollPaneFactory;
+import consulo.ui.ex.awt.Splitter;
+import consulo.util.dataholder.Key;
 import net.miginfocom.swing.MigLayout;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import javax.swing.JComponent;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
+import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
-import java.awt.BorderLayout;
-import java.awt.Component;
-import java.awt.event.InputEvent;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import java.awt.*;
+import java.awt.event.*;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -125,11 +118,11 @@ public class JiraIssuesPanel extends JiraPanel implements DataProvider, Disposab
     }
 
     @Override
-    public @Nullable Object getData(@NotNull @NonNls String dataId) {
+    public @Nullable Object getData(@NotNull @NonNls Key dataId) {
         if (JiraUiDataKeys.ISSUES_PANEL.is(dataId)) {
             return this;
         } else if (JiraUiDataKeys.JIRA_UI_PROPERTIES.is(dataId)) {
-            return ApplicationManager.getApplication().getService(JiraIssueApplicationSettings.class);
+            return ApplicationManager.getApplication().getInstance(JiraIssueApplicationSettings.class);
         } else if (JiraUiDataKeys.ISSUES_UI.is(dataId)) {
             return myUi;
         }

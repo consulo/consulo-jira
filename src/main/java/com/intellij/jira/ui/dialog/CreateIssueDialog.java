@@ -5,15 +5,16 @@ import com.intellij.jira.helper.TransitionFieldHelper;
 import com.intellij.jira.rest.model.metadata.CreateIssueEditor;
 import com.intellij.jira.server.JiraRestApi;
 import com.intellij.jira.tasks.CreateIssueTask;
-import com.intellij.openapi.actionSystem.DataProvider;
-import com.intellij.openapi.project.Project;
-import com.intellij.openapi.ui.DialogWrapper;
-import com.intellij.openapi.ui.ValidationInfo;
+import consulo.dataContext.DataProvider;
+import consulo.project.Project;
+import consulo.ui.ex.awt.DialogWrapper;
+import consulo.ui.ex.awt.ValidationInfo;
+import consulo.util.dataholder.Key;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import javax.swing.JComponent;
+import javax.swing.*;
 import java.util.Map;
 
 public class CreateIssueDialog extends DialogWrapper implements DataProvider {
@@ -49,7 +50,7 @@ public class CreateIssueDialog extends DialogWrapper implements DataProvider {
     }
 
     @Override
-    public @Nullable Object getData(@NotNull @NonNls String dataId) {
+    public @Nullable Object getData(@NotNull @NonNls Key dataId) {
         if (JiraDataKeys.PROJECT_KEY.is(dataId)) {
             return myCreateIssueEditor.getProjectKey();
         }

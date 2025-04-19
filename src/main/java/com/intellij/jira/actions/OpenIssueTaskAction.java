@@ -1,23 +1,17 @@
 package com.intellij.jira.actions;
 
-import com.intellij.codeInsight.documentation.DocumentationManager;
-import com.intellij.icons.AllIcons;
-import com.intellij.ide.util.gotoByName.ChooseByNamePopup;
-import com.intellij.ide.util.gotoByName.DefaultChooseByNameItemProvider;
-import com.intellij.ide.util.gotoByName.ListChooseByNameModel;
 import com.intellij.jira.JiraDataKeys;
 import com.intellij.jira.components.JiraNotificationManager;
-import com.intellij.notification.Notifications;
-import com.intellij.openapi.actionSystem.ActionManager;
-import com.intellij.openapi.actionSystem.AnAction;
-import com.intellij.openapi.actionSystem.AnActionEvent;
-import com.intellij.openapi.application.ApplicationManager;
-import com.intellij.openapi.project.Project;
-import com.intellij.openapi.ui.popup.JBPopup;
-import com.intellij.tasks.Task;
-import com.intellij.tasks.TaskManager;
-import com.intellij.tasks.actions.GotoTaskAction;
-import com.intellij.tasks.actions.OpenTaskDialog;
+import consulo.application.AllIcons;
+import consulo.application.ApplicationManager;
+import consulo.language.editor.documentation.DocumentationManager;
+import consulo.project.Project;
+import consulo.project.ui.notification.Notifications;
+import consulo.task.TaskManager;
+import consulo.ui.ex.action.ActionManager;
+import consulo.ui.ex.action.AnAction;
+import consulo.ui.ex.action.AnActionEvent;
+import consulo.ui.ex.popup.JBPopup;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
@@ -31,7 +25,7 @@ public class OpenIssueTaskAction extends AnAction {
 
     @Override
     public void actionPerformed(@NotNull AnActionEvent e) {
-        var project = e.getProject();
+        var project = e.getData(Project.KEY);
 
         if (project == null) {
             return;

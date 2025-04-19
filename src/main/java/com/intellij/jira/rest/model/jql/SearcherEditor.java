@@ -1,23 +1,20 @@
 package com.intellij.jira.rest.model.jql;
 
 import com.intellij.jira.ui.editors.Editor;
-import com.intellij.openapi.project.Project;
-import com.intellij.openapi.ui.ValidationInfo;
 import com.intellij.tasks.jira.jql.JqlLanguage;
-import com.intellij.ui.EditorTextField;
-import com.intellij.ui.LanguageTextField;
-import com.intellij.ui.components.JBLabel;
-import com.intellij.ui.components.JBTextField;
-import com.intellij.util.ui.FormBuilder;
-import com.intellij.util.ui.JBUI;
+import consulo.language.editor.ui.awt.EditorTextField;
+import consulo.language.editor.ui.awt.LanguageTextField;
+import consulo.project.Project;
+import consulo.ui.ex.awt.FormBuilder;
+import consulo.ui.ex.awt.JBLabel;
+import consulo.ui.ex.awt.JBTextField;
+import consulo.ui.ex.awt.JBUI;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import javax.swing.JCheckBox;
-import javax.swing.JComponent;
+import javax.swing.*;
 
-import static com.intellij.openapi.util.text.StringUtil.isEmpty;
-import static com.intellij.openapi.util.text.StringUtil.trim;
+import static consulo.util.lang.StringUtil.trim;
 
 public class SearcherEditor implements Editor {
 

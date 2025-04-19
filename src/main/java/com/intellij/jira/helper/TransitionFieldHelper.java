@@ -6,10 +6,10 @@ import com.intellij.jira.rest.model.JiraIssueFieldProperties;
 import com.intellij.jira.ui.editors.CommentFieldEditor;
 import com.intellij.jira.ui.editors.FieldEditor;
 import com.intellij.jira.ui.editors.factory.UpdateFieldEditorFactory;
-import com.intellij.openapi.project.Project;
-import com.intellij.openapi.ui.ValidationInfo;
+import consulo.project.Project;
+import consulo.ui.ex.awt.ValidationInfo;
 
-import javax.swing.JComponent;
+import javax.swing.*;
 
 import static com.intellij.jira.util.JiraIssueField.COMMENT;
 

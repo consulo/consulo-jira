@@ -1,16 +1,12 @@
 package com.intellij.jira.ui.editors;
 
 import com.google.gson.JsonElement;
-import com.intellij.openapi.ui.ValidationInfo;
-import com.intellij.openapi.util.text.StringUtil;
-import com.intellij.util.ui.FormBuilder;
+import consulo.ui.ex.awt.FormBuilder;
+import consulo.ui.ex.awt.ValidationInfo;
+import consulo.util.lang.StringUtil;
 import org.jetbrains.annotations.Nullable;
 
-import javax.swing.JButton;
-import javax.swing.JComponent;
-import javax.swing.JFileChooser;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
+import javax.swing.*;
 import java.io.File;
 
 public class FileChooserFieldEditor extends AbstractFieldEditor<String> {

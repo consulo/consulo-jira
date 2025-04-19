@@ -1,6 +1,5 @@
 package com.intellij.jira.actions;
 
-import com.intellij.icons.AllIcons;
 import com.intellij.jira.JiraDataKeys;
 import com.intellij.jira.components.JiraNotificationManager;
 import com.intellij.jira.rest.model.JiraIssue;
@@ -8,15 +7,14 @@ import com.intellij.jira.settings.branch.BranchSettings;
 import com.intellij.jira.settings.branch.BranchSettingsState;
 import com.intellij.jira.util.provider.ProviderFactory;
 import com.intellij.jira.util.provider.ProviderFactoryImpl;
-import com.intellij.notification.Notifications;
-import com.intellij.openapi.actionSystem.AnAction;
-import com.intellij.openapi.actionSystem.AnActionEvent;
-import com.intellij.openapi.actionSystem.DefaultActionGroup;
-import com.intellij.openapi.actionSystem.Separator;
-import com.intellij.openapi.application.ApplicationManager;
-import com.intellij.openapi.project.Project;
-import com.intellij.openapi.util.NlsActions;
-import git4idea.actions.branch.GitNewBranchAction;
+import consulo.application.AllIcons;
+import consulo.application.ApplicationManager;
+import consulo.project.Project;
+import consulo.project.ui.notification.Notifications;
+import consulo.ui.ex.action.AnAction;
+import consulo.ui.ex.action.AnActionEvent;
+import consulo.ui.ex.action.AnSeparator;
+import consulo.ui.ex.action.DefaultActionGroup;
 import git4idea.branch.GitBranchUtil;
 import git4idea.branch.GitBrancher;
 import git4idea.repo.GitRepository;
@@ -69,7 +67,7 @@ public class BranchActionGroup extends DefaultActionGroup {
                 actions.add(newBranchActions);
             }
 
-            actions.add(new Separator());
+            actions.add(new AnSeparator());
             actions.add(new BranchSettingsDialogAction());
 
         }
@@ -87,7 +85,7 @@ public class BranchActionGroup extends DefaultActionGroup {
 
         private final String myBranchName;
 
-        private NewBranchAction(@Nullable @NlsActions.ActionText String text) {
+        private NewBranchAction(@Nullable  String text) {
             super(text);
             myBranchName = text;
         }
@@ -98,7 +96,7 @@ public class BranchActionGroup extends DefaultActionGroup {
 
         @Override
         public void actionPerformed(@NotNull AnActionEvent e) {
-            Project project = e.getProject();
+            Project project = e.getData(Project.KEY);
             if (Objects.isNull(project)) {
                 return;
             }

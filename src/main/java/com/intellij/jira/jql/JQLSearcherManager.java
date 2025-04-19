@@ -2,9 +2,8 @@ package com.intellij.jira.jql;
 
 import com.intellij.jira.listener.SearcherListener;
 import com.intellij.jira.rest.model.jql.JQLSearcher;
-import com.intellij.openapi.application.ApplicationManager;
-import com.intellij.openapi.project.Project;
-import com.intellij.util.messages.Topic;
+import consulo.application.ApplicationManager;
+import consulo.project.Project;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;

@@ -1,36 +1,17 @@
 package com.intellij.jira.ui.editors.factory;
 
 import com.google.gson.JsonArray;
-import com.intellij.jira.rest.model.JiraIssueFieldProperties;
-import com.intellij.jira.rest.model.JiraIssuePriority;
-import com.intellij.jira.rest.model.JiraIssueResolution;
-import com.intellij.jira.rest.model.JiraProject;
-import com.intellij.jira.rest.model.JiraProjectComponent;
-import com.intellij.jira.rest.model.JiraProjectVersion;
-import com.intellij.jira.ui.editors.ComboBoxFieldEditor;
-import com.intellij.jira.ui.editors.DateFieldEditor;
-import com.intellij.jira.ui.editors.FieldEditor;
-import com.intellij.jira.ui.editors.LabelFieldEditor;
-import com.intellij.jira.ui.editors.LabelsFieldEditor;
-import com.intellij.jira.ui.editors.LogWorkFieldEditor;
-import com.intellij.jira.ui.editors.MultiSelectFieldEditor;
-import com.intellij.jira.ui.editors.ProjectSelectFieldEditor;
-import com.intellij.jira.ui.editors.TextAreaFieldEditor;
-import com.intellij.jira.ui.editors.TextFieldEditor;
-import com.intellij.jira.ui.editors.UserSelectFieldEditor;
-import com.intellij.jira.ui.editors.VersionSelectFieldEditor;
+import com.intellij.jira.rest.model.*;
+import com.intellij.jira.ui.editors.*;
 import com.intellij.jira.util.JiraGsonUtil;
-import com.intellij.openapi.project.Project;
-import com.intellij.openapi.util.text.StringUtil;
+import consulo.project.Project;
+import consulo.util.lang.StringUtil;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import static com.intellij.jira.util.JiraGsonUtil.isEmpty;
-import static com.intellij.jira.util.JiraIssueField.COMPONENT;
-import static com.intellij.jira.util.JiraIssueField.PRIORITY;
-import static com.intellij.jira.util.JiraIssueField.RESOLUTION;
-import static com.intellij.jira.util.JiraIssueField.VERSION;
+import static com.intellij.jira.util.JiraIssueField.*;
 import static java.util.Objects.isNull;
 
 /**

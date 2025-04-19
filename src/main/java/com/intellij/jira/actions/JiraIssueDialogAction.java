@@ -3,11 +3,11 @@ package com.intellij.jira.actions;
 import com.intellij.jira.components.JiraNotificationManager;
 import com.intellij.jira.server.JiraRestApi;
 import com.intellij.jira.server.JiraServerManager;
-import com.intellij.notification.Notifications;
-import com.intellij.openapi.actionSystem.AnAction;
-import com.intellij.openapi.actionSystem.AnActionEvent;
-import com.intellij.openapi.application.ApplicationManager;
-import com.intellij.openapi.project.Project;
+import consulo.application.ApplicationManager;
+import consulo.project.Project;
+import consulo.project.ui.notification.Notifications;
+import consulo.ui.ex.action.AnAction;
+import consulo.ui.ex.action.AnActionEvent;
 import org.jetbrains.annotations.NotNull;
 
 import static java.util.Objects.isNull;
@@ -22,12 +22,12 @@ public abstract class JiraIssueDialogAction extends AnAction {
     @Override
     public void actionPerformed(@NotNull AnActionEvent event) {
         try{
-            Project project = event.getProject();
+            Project project = event.getData(Project.KEY);
             if(isNull(project)){
                 return;
             }
 
-            JiraServerManager manager = ApplicationManager.getApplication().getService(JiraServerManager.class);
+            JiraServerManager manager = ApplicationManager.getApplication().getInstance(JiraServerManager.class);
             JiraRestApi jiraRestApi = manager.getJiraRestApi(project);
             if(isNull(jiraRestApi)) {
                 return;

@@ -2,7 +2,7 @@ package com.intellij.jira.ui.dialog;
 
 import com.intellij.jira.rest.model.JiraIssueComment;
 import com.intellij.jira.tasks.AddCommentTask;
-import com.intellij.openapi.project.Project;
+import consulo.project.Project;
 import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;

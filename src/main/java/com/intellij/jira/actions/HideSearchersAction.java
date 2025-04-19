@@ -2,8 +2,8 @@ package com.intellij.jira.actions;
 
 import com.intellij.jira.JiraUiDataKeys;
 import com.intellij.jira.ui.JiraIssueUiProperties;
-import com.intellij.openapi.actionSystem.AnAction;
-import com.intellij.openapi.actionSystem.AnActionEvent;
+import consulo.ui.ex.action.AnAction;
+import consulo.ui.ex.action.AnActionEvent;
 import org.jetbrains.annotations.NotNull;
 
 import static com.intellij.jira.ui.SearcherIssuesUi.SHOW_SEARCHERS_PROPERTY;

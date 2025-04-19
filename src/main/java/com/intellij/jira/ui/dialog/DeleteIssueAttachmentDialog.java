@@ -1,11 +1,10 @@
 package com.intellij.jira.ui.dialog;
 
-import com.intellij.jira.tasks.DeleteCommentTask;
 import com.intellij.jira.tasks.DeleteIssueAttachmentTask;
-import com.intellij.openapi.project.Project;
-import com.intellij.openapi.ui.DialogWrapper;
-import com.intellij.ui.components.JBLabel;
-import com.intellij.util.ui.FormBuilder;
+import consulo.project.Project;
+import consulo.ui.ex.awt.DialogWrapper;
+import consulo.ui.ex.awt.FormBuilder;
+import consulo.ui.ex.awt.JBLabel;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 

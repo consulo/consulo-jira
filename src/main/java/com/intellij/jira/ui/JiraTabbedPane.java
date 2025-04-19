@@ -1,7 +1,7 @@
 package com.intellij.jira.ui;
 
-import com.intellij.ui.components.JBTabbedPane;
-import com.intellij.util.ui.JBUI;
+import consulo.ui.ex.awt.JBTabbedPane;
+import consulo.ui.ex.awt.JBUI;
 
 public class JiraTabbedPane extends JBTabbedPane {
 

@@ -1,31 +1,25 @@
 package com.intellij.jira;
 
-import com.intellij.jira.rest.model.JiraIssue;
-import com.intellij.jira.rest.model.JiraIssueAttachment;
-import com.intellij.jira.rest.model.JiraIssueComment;
-import com.intellij.jira.rest.model.JiraIssueLink;
-import com.intellij.jira.rest.model.JiraIssueTimeTracking;
-import com.intellij.jira.rest.model.JiraIssueWorklog;
-import com.intellij.openapi.actionSystem.DataKey;
+import com.intellij.jira.rest.model.*;
+import consulo.util.dataholder.Key;
 
 public class JiraDataKeys {
 
     private JiraDataKeys() { }
 
-    public static final DataKey<JiraIssue> ISSUE = DataKey.create("issue");
+    public static final Key<JiraIssue> ISSUE = Key.create("issue");
 
-    public static final DataKey<String> ISSUE_KEY = DataKey.create("issue.key");
+    public static final Key<String> ISSUE_KEY = Key.create("issue.key");
 
-    public static final DataKey<String> PROJECT_KEY = DataKey.create("project.key");
+    public static final Key<String> PROJECT_KEY = Key.create("project.key");
 
-    public static final DataKey<JiraIssueComment> ISSUE_COMMENT = DataKey.create("issue.comment");
+    public static final Key<JiraIssueComment> ISSUE_COMMENT = Key.create("issue.comment");
 
-    public static final DataKey<JiraIssueAttachment> ISSUE_ATTACHMENT = DataKey.create("issue.attachment");
+    public static final Key<JiraIssueAttachment> ISSUE_ATTACHMENT = Key.create("issue.attachment");
 
-    public static final DataKey<JiraIssueLink> ISSUE_LINK = DataKey.create("issue.link");
+    public static final Key<JiraIssueLink> ISSUE_LINK = Key.create("issue.link");
 
-    public static final DataKey<JiraIssueWorklog> ISSUE_WORKLOG = DataKey.create("issue.worklog");
+    public static final Key<JiraIssueWorklog> ISSUE_WORKLOG = Key.create("issue.worklog");
 
-    public static final DataKey<JiraIssueTimeTracking> ISSUE_TIME_TRACKING = DataKey.create("issue.timetracking");
-
+    public static final Key<JiraIssueTimeTracking> ISSUE_TIME_TRACKING = Key.create("issue.timetracking");
 }

@@ -7,8 +7,8 @@ import com.intellij.jira.rest.model.JiraIssue;
 import com.intellij.jira.rest.model.JiraIssueTransition;
 import com.intellij.jira.server.JiraRestApi;
 import com.intellij.jira.ui.dialog.IssueTransitionDialog;
-import com.intellij.openapi.actionSystem.AnActionEvent;
-import com.intellij.openapi.project.Project;
+import consulo.project.Project;
+import consulo.ui.ex.action.AnActionEvent;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;

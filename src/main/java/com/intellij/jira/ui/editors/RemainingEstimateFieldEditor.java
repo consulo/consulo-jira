@@ -3,14 +3,12 @@ package com.intellij.jira.ui.editors;
 import com.google.gson.JsonElement;
 import com.intellij.jira.rest.model.JiraIssueTimeTracking;
 import com.intellij.jira.util.JiraGsonUtil;
-import com.intellij.openapi.ui.ValidationInfo;
-import com.intellij.ui.components.JBTextField;
-import com.intellij.util.ui.FormBuilder;
+import consulo.ui.ex.awt.FormBuilder;
+import consulo.ui.ex.awt.JBTextField;
+import consulo.ui.ex.awt.ValidationInfo;
 import org.jetbrains.annotations.Nullable;
 
-import javax.swing.JComponent;
-import javax.swing.JPanel;
-import javax.swing.JRadioButton;
+import javax.swing.*;
 import java.util.Objects;
 
 public class RemainingEstimateFieldEditor extends AbstractFieldEditor<String> {
