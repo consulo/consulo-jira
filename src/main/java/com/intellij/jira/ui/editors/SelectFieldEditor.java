@@ -74,10 +74,10 @@ public abstract class SelectFieldEditor<T> extends AbstractFieldEditor<T> {
 
         @Override
         public void actionPerformed(AnActionEvent e) {
-            Project project = e.getProject();
+            Project project = e.getData(Project.KEY);
             if(nonNull(project)){
                 myProject = project;
-                myJiraRestApi = ApplicationManager.getApplication().getService(JiraServerManager.class).getJiraRestApi(project);
+                myJiraRestApi = ApplicationManager.getApplication().getInstance(JiraServerManager.class).getJiraRestApi(project);
             }
         }
     }

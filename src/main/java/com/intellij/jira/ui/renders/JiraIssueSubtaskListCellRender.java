@@ -4,18 +4,14 @@ import com.intellij.jira.rest.model.JiraIssue;
 import com.intellij.jira.rest.model.JiraIssueStatus;
 import com.intellij.jira.ui.panels.JiraPanel;
 import com.intellij.jira.util.JiraLabelUtil;
-import com.intellij.ui.components.JBLabel;
-import com.intellij.util.ui.JBUI;
+import consulo.ui.ex.awt.JBLabel;
+import consulo.ui.ex.awt.JBUI;
 
-import javax.swing.JList;
-import javax.swing.JPanel;
-import java.awt.BorderLayout;
-import java.awt.Component;
+import javax.swing.*;
+import java.awt.*;
 
-import static com.intellij.jira.util.JiraLabelUtil.BOLD;
-import static com.intellij.jira.util.JiraLabelUtil.DARCULA_TEXT_COLOR;
-import static com.intellij.jira.util.JiraLabelUtil.IN_PROGRESS_TEXT_COLOR;
-import static com.intellij.openapi.util.text.StringUtil.toUpperCase;
+import static com.intellij.jira.util.JiraLabelUtil.*;
+import static consulo.util.lang.StringUtil.toUpperCase;
 
 public class JiraIssueSubtaskListCellRender extends DefaultJiraListCellRender {
 

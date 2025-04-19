@@ -47,7 +47,7 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <configuration>
                     <compilerArguments>
-                        <Xmaxerrs>10000</Xmaxerrs>
+                        <Xmaxerrs>1000</Xmaxerrs>
                     </compilerArguments>
                 </configuration>
             </plugin>
@@ -87,6 +87,12 @@
             <groupId>commons-httpclient</groupId>
             <artifactId>commons-httpclient</artifactId>
             <version>3.1</version>
+        </dependency>
+
+        <dependency>
+            <groupId>it.unimi.dsi</groupId>
+            <artifactId>fastutil</artifactId>
+            <scope>provided</scope>
         </dependency>
 
         <dependency>
