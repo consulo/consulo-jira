@@ -1,0 +1,3 @@
+Fork of https://gitlab.com/fan-tom/jira-intellij-plugin
+
+Initial code https://gitlab.com/adrielsr/jira-intellij-plugin
