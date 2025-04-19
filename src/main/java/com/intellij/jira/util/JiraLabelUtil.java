@@ -4,10 +4,12 @@ import com.intellij.jira.rest.model.JiraIssuePriority;
 import com.intellij.jira.rest.model.JiraIssueStatus;
 import com.intellij.jira.ui.labels.JiraLinkLabel;
 import com.intellij.jira.ui.labels.JiraStatusDarkLabel;
+import com.intellij.jira.ui.labels.JiraStatusLightLabel;
 import com.intellij.ui.JBColor;
 import com.intellij.ui.components.JBLabel;
 import com.intellij.util.ui.JBFont;
 import com.intellij.util.ui.JBUI;
+import com.intellij.util.ui.StartupUiUtil;
 import com.intellij.util.ui.UIUtil;
 
 import javax.swing.Icon;
@@ -36,8 +38,8 @@ public class JiraLabelUtil {
 
     public static final Color DEFAULT_ISSUE_COLOR = new Color(211, 232, 240  );
     public static final Color DEFAULT_SELECTED_ISSUE_COLOR = new Color(26, 125, 196  );
-    public static final Color DARCULA_ISSUE_COLOR = new Color(66, 85, 93);
-    public static final Color DARCULA_SELECTED_ISSUE_COLOR = new Color(36, 59, 68);
+    public static final Color DARCULA_ISSUE_COLOR = new Color(69, 72, 74);
+    public static final Color DARCULA_SELECTED_ISSUE_COLOR = new Color(72, 81, 83);
 
     // Links
     public static final Color ISSUE_LINK_COLOR = new Color(240, 216, 226);
@@ -102,7 +104,7 @@ public class JiraLabelUtil {
     }
 
     public static JBLabel createStatusLabel(JiraIssueStatus status){
-        return new JiraStatusDarkLabel(status);
+        return StartupUiUtil.isUnderDarcula() ? new JiraStatusLightLabel(status) : new JiraStatusDarkLabel(status);
     }
 
     public static JBLabel createEmptyStatusLabel(){

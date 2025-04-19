@@ -2,7 +2,8 @@ package com.intellij.jira.server;
 
 import com.intellij.jira.helper.TransitionFieldHelper;
 import com.intellij.jira.helper.TransitionFieldHelper.FieldEditorInfo;
-import com.intellij.jira.rest.JiraRestClient;
+import com.intellij.jira.rest.client.JiraRestClient;
+import com.intellij.jira.rest.client.JiraRestTemplate;
 import com.intellij.jira.rest.model.JiraCreatedIssue;
 import com.intellij.jira.rest.model.JiraGroup;
 import com.intellij.jira.rest.model.JiraIssue;
@@ -18,7 +19,6 @@ import com.intellij.jira.rest.model.metadata.JiraIssueCreateMetadata;
 import com.intellij.jira.util.result.BodyResult;
 import com.intellij.jira.util.result.EmptyResult;
 import com.intellij.jira.util.result.Result;
-import com.intellij.tasks.jira.JiraRepository;
 import org.apache.commons.httpclient.NameValuePair;
 import org.jetbrains.annotations.Nullable;
 import org.slf4j.Logger;
@@ -37,16 +37,16 @@ public class JiraRestApi {
 
     private static final Logger log = LoggerFactory.getLogger(JiraRestApi.class);
 
-    private JiraRestClient jiraRestClient;
+    private final JiraRestClient myJiraRestClient;
 
-    public JiraRestApi(JiraRepository jiraRepository) {
-        this.jiraRestClient = new JiraRestClient(jiraRepository);
+    public JiraRestApi(JiraRestTemplate jiraRestTemplate) {
+        myJiraRestClient = new JiraRestClient(jiraRestTemplate);
     }
 
 
     public Result getIssue(String issueIdOrKey){
         try {
-            JiraIssue issue = this.jiraRestClient.getIssue(issueIdOrKey);
+            JiraIssue issue = myJiraRestClient.getIssue(issueIdOrKey);
             return BodyResult.ok(issue);
         } catch (Exception e) {
             log.error(String.format("Issue %s not found", issueIdOrKey));
@@ -57,7 +57,7 @@ public class JiraRestApi {
 
     public Result<JiraCreatedIssue> createIssue(Map<String, TransitionFieldHelper.FieldEditorInfo> createIssueFields) {
         try {
-            JiraCreatedIssue issue = this.jiraRestClient.createIssue(createIssueFields);
+            JiraCreatedIssue issue = myJiraRestClient.createIssue(createIssueFields);
             return BodyResult.ok(issue);
         } catch (Exception e) {
             log.error("Cannot create issue");
@@ -68,7 +68,7 @@ public class JiraRestApi {
 
     public List<JiraIssue> getIssues(String searchQuery) {
         try {
-            return this.jiraRestClient.findIssues(searchQuery);
+            return myJiraRestClient.findIssues(searchQuery);
         } catch (Exception e) {
             log.error("No issues found");
             return new ArrayList<>();
@@ -77,7 +77,7 @@ public class JiraRestApi {
 
     public List<JiraIssueTransition> getTransitions(String issueId){
         try {
-            return jiraRestClient.getTransitions(issueId);
+            return myJiraRestClient.getTransitions(issueId);
         } catch (Exception e) {
             log.error(String.format("No transitions was found for issue '%s'", issueId));
             return new ArrayList<>();
@@ -87,7 +87,7 @@ public class JiraRestApi {
 
     public Result transitIssue(String issueId, String transitionId, Map<String, FieldEditorInfo> fields){
         try {
-            String response = jiraRestClient.transitIssue(issueId, transitionId, fields);
+            String response = myJiraRestClient.transitIssue(issueId, transitionId, fields);
             return EmptyResult.create(response);
         } catch (Exception e) {
             log.error(String.format("Error executing transition '%s' in issue '%s'", transitionId, issueId));
@@ -97,7 +97,7 @@ public class JiraRestApi {
 
     public List<JiraIssueUser> getIssueAssignableUsers(String issueKey){
         try {
-            return jiraRestClient.getIssueAssignableUsers(issueKey);
+            return myJiraRestClient.getIssueAssignableUsers(issueKey);
         } catch (Exception e) {
             log.error("Error fetching users to assign");
             return new ArrayList<>();
@@ -106,7 +106,7 @@ public class JiraRestApi {
 
     public List<JiraIssueUser> getProjectAssignableUsers(String projectKey) {
         try {
-            return jiraRestClient.getProjectAssignableUsers(projectKey);
+            return myJiraRestClient.getProjectAssignableUsers(projectKey);
         } catch (Exception e) {
             log.error("Error fetching users to assign");
             return new ArrayList<>();
@@ -116,7 +116,7 @@ public class JiraRestApi {
 
     public Result assignUserToIssue(String accountId,  String username, String issueKey){
         try {
-            String response = jiraRestClient.assignUserToIssue(accountId, username, issueKey);
+            String response = myJiraRestClient.assignUserToIssue(accountId, username, issueKey);
             return EmptyResult.create(response);
         } catch (Exception e) {
             log.error(String.format("Error assigning user with accoundId = '%s' to issue '%s'", accountId, issueKey));
@@ -128,7 +128,7 @@ public class JiraRestApi {
     public JiraIssueComment getComment(String issueKey, String commentId) {
         JiraIssueComment comment = null;
         try {
-            comment = jiraRestClient.getComment(issueKey, commentId);
+            comment = myJiraRestClient.getComment(issueKey, commentId);
         } catch (Exception e) {
             log.error(String.format("Comment with id = %s doesn't exists", commentId));
         }
@@ -138,7 +138,7 @@ public class JiraRestApi {
 
     public Result addIssueComment(String body, String issueKey, String viewableBy){
         try {
-            JiraIssueComment comment = jiraRestClient.addCommentToIssue(body, issueKey, viewableBy);
+            JiraIssueComment comment = myJiraRestClient.addCommentToIssue(body, issueKey, viewableBy);
             return BodyResult.ok(comment);
         } catch (Exception e) {
             log.error(String.format("Error creating comment in issue '%s'", issueKey));
@@ -148,7 +148,7 @@ public class JiraRestApi {
 
     public Result editIssueComment(String issueKey, String commentId, String body, String viewableBy){
         try {
-            JiraIssueComment comment = jiraRestClient.editIssueComment(issueKey, commentId, body, viewableBy);
+            JiraIssueComment comment = myJiraRestClient.editIssueComment(issueKey, commentId, body, viewableBy);
             return BodyResult.ok(comment);
         } catch (Exception e) {
             log.error(String.format("Error editing comment in issue '%s'", issueKey));
@@ -159,7 +159,7 @@ public class JiraRestApi {
 
     public Result deleteIssueComment(String issueKey, String commentId) {
         try {
-            String response = jiraRestClient.deleteCommentToIssue(issueKey, commentId);
+            String response = myJiraRestClient.deleteCommentToIssue(issueKey, commentId);
             return EmptyResult.create(response);
         } catch (Exception e) {
             log.error(String.format("Error deleting comment in issue '%s'", issueKey));
@@ -170,7 +170,7 @@ public class JiraRestApi {
 
     public List<JiraIssuePriority> getIssuePriorities() {
         try {
-            return jiraRestClient.getIssuePriorities();
+            return myJiraRestClient.getIssuePriorities();
         } catch (Exception e) {
             e.printStackTrace();
             return new ArrayList<>();
@@ -179,7 +179,7 @@ public class JiraRestApi {
 
     public Result changeIssuePriority(String priorityName, String issueIdOrKey) {
         try {
-            String response = jiraRestClient.changeIssuePriority(priorityName, issueIdOrKey);
+            String response = myJiraRestClient.changeIssuePriority(priorityName, issueIdOrKey);
             return EmptyResult.create(response);
         } catch (Exception e) {
             e.printStackTrace();
@@ -195,7 +195,7 @@ public class JiraRestApi {
                     .map(JiraPermissionType::toString)
                     .collect(Collectors.joining(","));
 
-            permissions = jiraRestClient.findUserPermissions(new NameValuePair("permissions", permissionList));
+            permissions = myJiraRestClient.findUserPermissions(new NameValuePair("permissions", permissionList));
         } catch (Exception e) {
             log.error("Current user has not permission to do this action");
         }
@@ -206,7 +206,7 @@ public class JiraRestApi {
     public boolean userHasPermissionOnIssue(String issueKey, JiraPermissionType... permissionTypes){
         LinkedHashMap<String, JiraPermission> permissions = new LinkedHashMap<>();
         try {
-            permissions = jiraRestClient.findUserPermissionsOnIssue(issueKey, permissionTypes);
+            permissions = myJiraRestClient.findUserPermissionsOnIssue(issueKey, permissionTypes);
         } catch (Exception e) {
             log.error("Current user has not permission to do this action");
         }
@@ -233,7 +233,7 @@ public class JiraRestApi {
 
     public List<JiraIssueLinkType> getIssueLinkTypes(){
         try {
-            return jiraRestClient.getIssueLinkTypes();
+            return myJiraRestClient.getIssueLinkTypes();
         } catch (Exception e) {
             e.printStackTrace();
             return new ArrayList<>();
@@ -242,7 +242,7 @@ public class JiraRestApi {
 
     public List<JiraGroup> getGroups(){
         try {
-            return jiraRestClient.getGroups();
+            return myJiraRestClient.getGroups();
         } catch (Exception e) {
             e.printStackTrace();
             return new ArrayList<>();
@@ -252,7 +252,7 @@ public class JiraRestApi {
     public JiraIssueWorklog getWorklog(String issueKey, String worklogId){
         JiraIssueWorklog worklog = null;
         try {
-            worklog = jiraRestClient.getWorklog(issueKey, worklogId);
+            worklog = myJiraRestClient.getWorklog(issueKey, worklogId);
         } catch (Exception e) {
             log.error(String.format("WorkLog with id = %s doesn't exists", worklogId));
         }
@@ -266,7 +266,7 @@ public class JiraRestApi {
 
     public List<String> getProjectRoles(String projectKey) {
         try {
-            return jiraRestClient.getProjectRoles(projectKey);
+            return myJiraRestClient.getProjectRoles(projectKey);
         } catch (Exception e) {
             e.printStackTrace();
             return new ArrayList<>();
@@ -275,7 +275,7 @@ public class JiraRestApi {
 
     public Result addIssueLink(String linkType, String inIssueKey, String outIssueKey) {
         try {
-            Integer statusCode = jiraRestClient.addIssueLink(linkType, inIssueKey, outIssueKey);
+            Integer statusCode = myJiraRestClient.addIssueLink(linkType, inIssueKey, outIssueKey);
             return statusCode == 201 ? BodyResult.ok(statusCode) :  BodyResult.error();
         } catch (Exception e) {
             log.error("Error creating issue link");
@@ -285,7 +285,7 @@ public class JiraRestApi {
 
     public Result deleteIssueLink(String issueLinkId) {
         try {
-            Integer statusCode = jiraRestClient.deleteIssueLink(issueLinkId);
+            Integer statusCode = myJiraRestClient.deleteIssueLink(issueLinkId);
             return statusCode == 204 ? BodyResult.ok(statusCode) :  BodyResult.error();
         } catch (Exception e) {
             log.error("Error deleting issue link");
@@ -294,12 +294,12 @@ public class JiraRestApi {
     }
 
     public String getUsername(){
-        return jiraRestClient.getUsername();
+        return myJiraRestClient.getUsername();
     }
 
     public Result addIssueWorklog(String issueKey, List<FieldEditorInfo> worklogFields, String remainingEstimate) {
         try {
-            JiraIssueWorklog worklog = jiraRestClient.addIssueWorklog(issueKey, worklogFields, remainingEstimate);
+            JiraIssueWorklog worklog = myJiraRestClient.addIssueWorklog(issueKey, worklogFields, remainingEstimate);
             return BodyResult.ok(worklog);
         } catch (Exception e) {
             log.error(String.format("Error creating worklog in issue '%s'", issueKey));
@@ -309,7 +309,7 @@ public class JiraRestApi {
 
     public Result editIssueWorklog(String issueKey, String workLogId, List<FieldEditorInfo> worklogFields, String remainingEstimate) {
         try {
-            JiraIssueWorklog worklog = jiraRestClient.updateIssueWorklog(issueKey, workLogId, worklogFields, remainingEstimate);
+            JiraIssueWorklog worklog = myJiraRestClient.updateIssueWorklog(issueKey, workLogId, worklogFields, remainingEstimate);
             return BodyResult.ok(worklog);
         } catch (Exception e) {
             log.error(String.format("Error editing worklog in issue '%s'", issueKey));
@@ -319,7 +319,7 @@ public class JiraRestApi {
 
     public Result deleteIssueWorklog(String issueKey, String worklogId, String remainingEstimate) {
         try {
-            Integer statusCode = jiraRestClient.deleteIssueWorklog(issueKey, worklogId, remainingEstimate);
+            Integer statusCode = myJiraRestClient.deleteIssueWorklog(issueKey, worklogId, remainingEstimate);
             return statusCode == 204 ? BodyResult.ok(statusCode) :  BodyResult.error();
         } catch (Exception e) {
             log.error("Error deleting issue link");
@@ -329,7 +329,7 @@ public class JiraRestApi {
 
     public Result watchIssue(String issueKey) {
         try {
-            Integer statusCode = jiraRestClient.watchIssue(issueKey);
+            Integer statusCode = myJiraRestClient.watchIssue(issueKey);
             return statusCode == 204 ? BodyResult.ok(statusCode) :  BodyResult.error();
         } catch (Exception e) {
             log.error("Error watching issue");
@@ -339,7 +339,7 @@ public class JiraRestApi {
 
     public Result unwatchIssue(String issueKey, String accountId, String username) {
         try {
-            Integer statusCode = jiraRestClient.unwatchIssue(issueKey, accountId, username);
+            Integer statusCode = myJiraRestClient.unwatchIssue(issueKey, accountId, username);
             return statusCode == 204 ? BodyResult.ok(statusCode) :  BodyResult.error();
         } catch (Exception e) {
             log.error("Error watching issue");
@@ -358,7 +358,7 @@ public class JiraRestApi {
 
     public Result addIssueAttachment(String issueKey, File attachment) {
         try {
-            return BodyResult.ok(jiraRestClient.addIssueAttachment(issueKey, attachment));
+            return BodyResult.ok(myJiraRestClient.addIssueAttachment(issueKey, attachment));
         } catch (Exception e) {
             log.error("Error attaching on issue " + issueKey);
             return BodyResult.error();
@@ -367,7 +367,7 @@ public class JiraRestApi {
 
     public Result deleteIssueAttachment(String attachmentId) {
         try {
-            Integer statusCode = jiraRestClient.deleteIssueAttachment(attachmentId);
+            Integer statusCode = myJiraRestClient.deleteIssueAttachment(attachmentId);
             return statusCode == 204 ? BodyResult.ok(statusCode) : BodyResult.error();
         } catch (Exception e) {
             log.error("Error deleting attachment");
@@ -377,7 +377,7 @@ public class JiraRestApi {
 
     public JiraIssueCreateMetadata getIssueCreateMeta() {
         try {
-            return jiraRestClient.getIssueCreateMeta();
+            return myJiraRestClient.getIssueCreateMeta();
         } catch (Exception e) {
             return new JiraIssueCreateMetadata();
         }
@@ -386,13 +386,13 @@ public class JiraRestApi {
 
     public List<String> findLabels(String prefix, String autoCompleteUrl) {
         try {
-            return jiraRestClient.findLabels(prefix, autoCompleteUrl);
+            return myJiraRestClient.findLabels(prefix, autoCompleteUrl);
         } catch (Exception e) {
             return new ArrayList<>();
         }
     }
 
     private JiraIssueUser findCurrentUser() throws Exception {
-        return jiraRestClient.getCurrentUser();
+        return myJiraRestClient.getCurrentUser();
     }
 }

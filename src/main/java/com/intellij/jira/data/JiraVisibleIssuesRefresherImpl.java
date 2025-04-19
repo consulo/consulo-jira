@@ -37,12 +37,12 @@ public class JiraVisibleIssuesRefresherImpl implements JiraVisibleIssuesRefreshe
         myIssues = initialIssues;
         myFilteredIssues = Issues.EMPTY;
 
-        mySingleTaskController = new SingleTaskController<>("visible", issues -> {
+        mySingleTaskController = new SingleTaskController<>("visible", this, issues -> {
             myFilteredIssues = issues;
             for (VisibleIssueChangeListener listener : myVisibleIssueChangeListeners) {
                 listener.onChange(issues);
             }
-        }, this) {
+        }) {
             @Override
             protected @NotNull SingleTask startNewBackgroundTask() {
                 ProgressIndicator indicator = progress.createProgressIndicator();

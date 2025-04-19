@@ -1,8 +1,10 @@
 package com.intellij.jira.ui.panels;
 
 import com.intellij.jira.JiraDataKeys;
+import com.intellij.jira.actions.BranchActionGroup;
 import com.intellij.jira.actions.ChangelistActionGroup;
 import com.intellij.jira.actions.JiraIssueActionGroup;
+import com.intellij.jira.actions.OpenIssueTaskAction;
 import com.intellij.jira.data.JiraIssuesData;
 import com.intellij.jira.listener.IssueChangeListener;
 import com.intellij.jira.rest.model.JiraIssue;
@@ -50,6 +52,8 @@ public class JiraIssueDescriptionPanel extends AbstractJiraToolWindowPanel {
     public ActionGroup getActionGroup() {
         JiraIssueActionGroup group = new JiraIssueActionGroup(this);
         group.add(new ChangelistActionGroup());
+        group.add(new BranchActionGroup());
+        group.add(new OpenIssueTaskAction());
 
         return group;
     }

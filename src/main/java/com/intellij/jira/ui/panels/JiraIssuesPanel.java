@@ -2,6 +2,7 @@ package com.intellij.jira.ui.panels;
 
 import com.google.common.util.concurrent.SettableFuture;
 import com.intellij.jira.JiraUiDataKeys;
+import com.intellij.jira.actions.OpenIssueTaskAction;
 import com.intellij.jira.data.JiraIssuesData;
 import com.intellij.jira.data.JiraProgress;
 import com.intellij.jira.rest.model.JiraIssue;
@@ -15,6 +16,7 @@ import com.intellij.openapi.actionSystem.ActionManager;
 import com.intellij.openapi.actionSystem.ActionToolbar;
 import com.intellij.openapi.actionSystem.DataProvider;
 import com.intellij.openapi.actionSystem.DefaultActionGroup;
+import com.intellij.openapi.actionSystem.ex.ActionUtil;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.ui.Splitter;
 import com.intellij.openapi.util.Disposer;
@@ -32,6 +34,12 @@ import javax.swing.JScrollPane;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import java.awt.BorderLayout;
+import java.awt.Component;
+import java.awt.event.InputEvent;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -55,8 +63,34 @@ public class JiraIssuesPanel extends JiraPanel implements DataProvider, Disposab
         myUi = issuesUi;
         myToolbar = getToolbar();
 
-        myJiraIssueTable = new JiraIssueTable(issuesData, parent);
         myJiraIssueDetailsPanel = new JiraIssueDetailsPanel(issuesData, parent);
+
+        myJiraIssueTable = new JiraIssueTable(issuesData, parent);
+
+        // setup handlers
+        myJiraIssueTable.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                if (e.getClickCount() == 2 // double click
+                        && e.getButton() == MouseEvent.BUTTON1 // by left mouse button
+                        && myJiraIssueTable.getSelectedRow() != -1 // on some row
+                ) {
+                    invokeOpenTaskAction(e, myJiraIssueDetailsPanel);
+                }
+            }
+        });
+
+        myJiraIssueTable.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+                if (e.getKeyChar() == KeyEvent.VK_ENTER // enter pressed
+                        && myJiraIssueTable.getSelectedRow() != -1 // on some row
+                ) {
+                    invokeOpenTaskAction(e, myJiraIssueDetailsPanel);
+                }
+            }
+        });
+
 
         myJiraIssueTable.getSelectionModel().addListSelectionListener(new MyListSelectionListener());
 
@@ -74,6 +108,11 @@ public class JiraIssuesPanel extends JiraPanel implements DataProvider, Disposab
         myUi.getProgress().addProgressListener(new MyProgressListener(), this);
 
         add(myIssuesBrowserSplitter);
+    }
+
+    private static void invokeOpenTaskAction(@NotNull InputEvent e, @NotNull Component component) {
+        var action = ActionManager.getInstance().getAction(OpenIssueTaskAction.ID);
+        ActionUtil.invokeAction(action, component, "JiraIssuesTable", e, null);
     }
 
     @NotNull

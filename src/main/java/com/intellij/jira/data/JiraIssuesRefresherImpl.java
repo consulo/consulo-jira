@@ -30,10 +30,10 @@ public class JiraIssuesRefresherImpl implements JiraIssuesRefresher, Disposable 
         myProject = project;
         myProgress = progress;
 
-        mySingleTaskController = new SingleTaskController<>("refresh", issues -> {
+        mySingleTaskController = new SingleTaskController<>("refresh", this, issues -> {
             myIssues = issues;
             issuesUpdateHandler.accept(issues);
-        }, this) {
+        }) {
             @Override
             protected @NotNull SingleTask startNewBackgroundTask() {
                 return JiraIssuesRefresherImpl.this.startNewBackgroundTask(new MyRefreshTask());

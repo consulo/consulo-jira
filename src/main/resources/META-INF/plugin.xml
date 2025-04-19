@@ -18,7 +18,7 @@
     </description>
 
     <!-- Compatible with Idea platform 2022.1 - 2022.3 -->
-    <idea-version since-build="231.8109" until-build="231.*"/>
+    <idea-version since-build="232.8660" until-build="232.*"/>
 
     <depends>com.intellij.modules.platform</depends>
     <depends>com.intellij.modules.lang</depends>
@@ -27,6 +27,7 @@
 
     <extensionPoints>
         <extensionPoint name="issueHighlighterFactory" interface="com.intellij.jira.ui.highlighters.JiraIssueHighlighterFactory" dynamic="true"/>
+        <extensionPoint name="valueProvider" interface="com.intellij.jira.util.provider.Provider" dynamic="true"/>
     </extensionPoints>
 
     <extensions defaultExtensionNs="com.intellij">
@@ -35,10 +36,12 @@
         <applicationService serviceImplementation="com.intellij.jira.components.JiraNotificationManager"/>
         <applicationService serviceImplementation="com.intellij.jira.jql.JQLSearcherApplicationManager"/>
         <applicationService serviceImplementation="com.intellij.jira.jql.JQLSearcherManager"/>
+        <applicationService serviceImplementation="com.intellij.jira.settings.branch.BranchSettings"/>
         <applicationService serviceImplementation="com.intellij.jira.settings.ChangelistSettings"/>
         <applicationService serviceImplementation="com.intellij.jira.ui.table.column.JiraIssueApplicationSettings"/>
         <applicationService serviceImplementation="com.intellij.jira.server.JiraServerManager"/>
         <applicationService serviceImplementation="com.intellij.jira.server.JiraServerApplicationManager"/>
+        <applicationService serviceImplementation="com.intellij.jira.util.provider.ProviderFactoryImpl"/>
 
         <projectService serviceImplementation="com.intellij.jira.server.JiraServerProjectManager"/>
         <projectService serviceImplementation="com.intellij.jira.jql.JQLSearcherProjectManager"/>
@@ -50,6 +53,10 @@
 
         <jira.issueHighlighterFactory implementation="com.intellij.jira.ui.highlighters.MyIssuesHighlighter$Factory"/>
         <jira.issueHighlighterFactory implementation="com.intellij.jira.ui.highlighters.ResolvedIssuesHighlighter$Factory"/>
+
+        <jira.valueProvider implementation="com.intellij.jira.util.provider.impl.IssueKeyProvider"/>
+        <jira.valueProvider implementation="com.intellij.jira.util.provider.impl.IssueSummaryProvider"/>
+        <jira.valueProvider implementation="com.intellij.jira.util.provider.impl.ProjectKeyProvider"/>
 
     </extensions>
 
@@ -67,6 +74,8 @@
         <action class="com.intellij.jira.actions.ConfigureJiraServersAction" id="Jira.Issue.Server.Configure"/>
 
         <action class="com.intellij.jira.actions.OpenNewIssuesTabAction" id="Jira.Issues.New.Tab"/>
+
+        <action class="com.intellij.jira.actions.OpenIssueTaskAction" id="Jira.Issue.OpenTask"/>
 
 
         <action id="Jira.Issues.Hide.Searchers" class="com.intellij.jira.actions.HideSearchersAction"
