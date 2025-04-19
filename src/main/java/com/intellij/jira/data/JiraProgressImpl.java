@@ -1,10 +1,9 @@
 package com.intellij.jira.data;
 
-import com.intellij.openapi.Disposable;
-import com.intellij.openapi.application.ApplicationManager;
-import com.intellij.openapi.progress.ProgressIndicator;
-import com.intellij.openapi.progress.util.AbstractProgressIndicatorBase;
-import com.intellij.openapi.util.Disposer;
+import consulo.application.ApplicationManager;
+import consulo.application.progress.ProgressIndicator;
+import consulo.disposer.Disposable;
+import consulo.disposer.Disposer;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;

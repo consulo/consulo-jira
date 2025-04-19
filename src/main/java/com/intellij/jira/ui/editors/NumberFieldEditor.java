@@ -8,7 +8,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.regex.Pattern;
 
 import static com.intellij.jira.util.JiraGsonUtil.createPrimitive;
-import static StringUtil.*;
+import static consulo.util.lang.StringUtil.*;
 
 public class NumberFieldEditor extends TextFieldEditor {
 

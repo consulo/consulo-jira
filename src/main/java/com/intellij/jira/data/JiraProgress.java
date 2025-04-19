@@ -1,7 +1,7 @@
 package com.intellij.jira.data;
 
-import com.intellij.openapi.Disposable;
-import com.intellij.openapi.progress.ProgressIndicator;
+import consulo.application.progress.ProgressIndicator;
+import consulo.disposer.Disposable;
 import org.jetbrains.annotations.NotNull;
 
 public interface JiraProgress {

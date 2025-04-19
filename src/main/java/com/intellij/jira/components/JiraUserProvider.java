@@ -30,7 +30,7 @@ public class JiraUserProvider {
     }
 
     private JiraServerManager getJiraServerManager() {
-        return ApplicationManager.getApplication().getService(JiraServerManager.class);
+        return ApplicationManager.getApplication().getInstance(JiraServerManager.class);
     }
 
     public void clearCurrentUser() {

@@ -1,6 +1,6 @@
 package com.intellij.jira.ui;
 
-import com.intellij.util.ui.UIUtil;
+import consulo.ui.ex.awt.UIUtil;
 
 import javax.swing.*;
 import javax.swing.text.html.HTMLEditorKit;

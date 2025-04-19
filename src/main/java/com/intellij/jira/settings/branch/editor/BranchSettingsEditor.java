@@ -5,8 +5,10 @@ import com.intellij.jira.settings.branch.BranchSettingsState;
 import com.intellij.jira.ui.editors.Editor;
 import com.intellij.jira.util.JiraIssueField;
 import com.intellij.jira.util.Separator;
+import consulo.application.dumb.DumbAware;
 import consulo.dataContext.DataManager;
 import consulo.project.Project;
+import consulo.ui.ex.action.AnAction;
 import consulo.ui.ex.action.AnActionEvent;
 import consulo.ui.ex.action.DefaultActionGroup;
 import consulo.ui.ex.awt.*;
@@ -170,13 +172,18 @@ public class BranchSettingsEditor implements Editor {
     }
 
 
-    private class AddFieldAction extends IconWithTextAction implements DumbAware {
+    private class AddFieldAction extends AnAction implements DumbAware {
 
         private final String field;
 
         private AddFieldAction(String field) {
             super(field);
             this.field = field;
+        }
+
+        @Override
+        public boolean displayTextInToolbar() {
+            return true;
         }
 
         @Override

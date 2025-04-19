@@ -7,8 +7,8 @@ import com.google.gson.JsonPrimitive;
 
 import java.util.*;
 
-import static com.intellij.openapi.util.text.StringUtil.trim;
-import static com.intellij.tasks.jira.JiraRepository.GSON;
+import static com.intellij.tasks.jira.JiraUtil.GSON;
+import static consulo.util.lang.StringUtil.trim;
 import static java.util.Objects.isNull;
 import static java.util.Objects.nonNull;
 

@@ -1,28 +1,22 @@
 package com.intellij.jira.ui;
 
-import com.intellij.jira.data.Issues;
-import com.intellij.jira.data.JiraIssuesData;
-import com.intellij.jira.data.JiraIssuesRefresherImpl;
-import com.intellij.jira.data.JiraProgress;
-import com.intellij.jira.data.JiraProgressImpl;
-import com.intellij.jira.listener.IssueCreatedListener;
-import com.intellij.jira.data.JiraVisibleIssuesRefresher;
-import com.intellij.jira.data.JiraVisibleIssuesRefresherImpl;
+import com.google.common.collect.Lists;
+import com.intellij.jira.data.*;
 import com.intellij.jira.filter.IssueFilter;
 import com.intellij.jira.filter.IssueFilterCollection;
 import com.intellij.jira.filter.IssueFilterCollectionImpl;
 import com.intellij.jira.filter.IssueFilterer;
 import com.intellij.jira.filter.status.StatusFilterImpl;
 import com.intellij.jira.filter.type.TypeFilterImpl;
+import com.intellij.jira.listener.IssueCreatedListener;
 import com.intellij.jira.rest.model.jql.JQLSearcher;
 import com.intellij.jira.ui.highlighters.JiraIssueHighlighter;
 import com.intellij.jira.ui.highlighters.JiraIssueHighlighterFactory;
 import com.intellij.jira.ui.highlighters.JiraIssueHighlighterProperty;
 import com.intellij.jira.ui.table.column.JiraIssueApplicationSettings;
 import com.intellij.jira.ui.table.column.JiraIssueColumnProperties;
-import com.intellij.openapi.application.ApplicationManager;
-import com.intellij.openapi.util.Disposer;
-import com.intellij.util.containers.ContainerUtil;
+import consulo.application.ApplicationManager;
+import consulo.disposer.Disposer;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
@@ -40,7 +34,7 @@ public abstract class AbstractIssuesUi implements IssuesUi {
     private final MyIssuesChangeListener myIssuesChangeListener;
 
     private final JiraIssuesRefresherImpl myRefresher;
-    @NotNull private final List<JiraIssuesData.IssuesChangeListener> myIssuesChangeListeners = ContainerUtil.createLockFreeCopyOnWriteList();
+    @NotNull private final List<JiraIssuesData.IssuesChangeListener> myIssuesChangeListeners = Lists.newCopyOnWriteArrayList();
 
     private JiraVisibleIssuesRefresher myVisibleIssuesRefresher;
     private JiraVisibleIssuesRefresher.VisibleIssueChangeListener myVisibleIssueChangeListener;
@@ -86,7 +80,7 @@ public abstract class AbstractIssuesUi implements IssuesUi {
 
         Disposer.register(this, myVisibleIssuesRefresher);
 
-        ApplicationManager.getApplication().getService(JiraIssueApplicationSettings.class)
+        ApplicationManager.getApplication().getInstance(JiraIssueApplicationSettings.class)
                 .addChangeListener(new MyPropertyChangeListener());
     }
 
@@ -159,7 +153,7 @@ public abstract class AbstractIssuesUi implements IssuesUi {
         myHighlighters.clear();
 
         for (JiraIssueHighlighterFactory factory : JIRA_ISSUE_HIGHLIGHTER_FACTORY_EP.getExtensionList()) {
-            JiraIssueApplicationSettings properties = ApplicationManager.getApplication().getService(JiraIssueApplicationSettings.class);
+            JiraIssueApplicationSettings properties = ApplicationManager.getApplication().getInstance(JiraIssueApplicationSettings.class);
             JiraIssueHighlighterProperty highlighterProperty = JiraIssueHighlighterProperty.get(factory.getId());
             if (properties.get(highlighterProperty)) {
                 JiraIssueHighlighter highlighter = factory.createHighlighter(myIssuesData);

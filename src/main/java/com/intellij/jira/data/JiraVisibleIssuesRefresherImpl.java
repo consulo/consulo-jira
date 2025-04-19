@@ -2,14 +2,12 @@ package com.intellij.jira.data;
 
 import com.intellij.jira.filter.IssueFilterCollection;
 import com.intellij.jira.filter.IssueFilterer;
-import com.intellij.openapi.progress.ProcessCanceledException;
-import com.intellij.openapi.progress.ProgressIndicator;
-import com.intellij.openapi.progress.ProgressManager;
-import com.intellij.openapi.progress.Task;
-import com.intellij.openapi.progress.impl.CoreProgressManager;
-import com.intellij.openapi.project.Project;
-import com.intellij.util.containers.ContainerUtil;
-import com.intellij.vcs.log.data.SingleTaskController;
+import consulo.application.progress.ProgressIndicator;
+import consulo.application.progress.ProgressManager;
+import consulo.application.progress.Task;
+import consulo.component.ProcessCanceledException;
+import consulo.project.Project;
+import consulo.util.collection.ContainerUtil;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;

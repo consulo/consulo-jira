@@ -1,4 +1,4 @@
-<idea-plugin>
+<consulo-plugin url="https://github.com/consulo/consulo">
     <id>com.intellij.jira</id>
     <name>Jira Integration</name>
     <vendor email="adrielsr3@gmail.com" url="https://gitlab.com/adrielsr/jira-intellij-plugin">Adriel Saa Romano</vendor>
@@ -16,14 +16,6 @@
 
         ]]>
     </description>
-
-    <!-- Compatible with Idea platform 2022.1 - 2022.3 -->
-    <idea-version since-build="232.8660" until-build="232.*"/>
-
-    <depends>com.intellij.modules.platform</depends>
-    <depends>com.intellij.modules.lang</depends>
-
-    <depends>com.intellij.tasks</depends>
 
     <extensionPoints>
         <extensionPoint name="issueHighlighterFactory" interface="com.intellij.jira.ui.highlighters.JiraIssueHighlighterFactory" dynamic="true"/>
@@ -108,4 +100,4 @@
         </group>
 
     </actions>
-</idea-plugin>
+</consulo-plugin>

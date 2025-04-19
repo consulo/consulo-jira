@@ -1,10 +1,10 @@
 package com.intellij.jira.ui;
 
 import com.intellij.jira.JiraTabsManager;
-import com.intellij.openapi.project.Project;
-import com.intellij.openapi.wm.ToolWindow;
-import com.intellij.openapi.wm.ToolWindowFactory;
-import com.intellij.openapi.wm.ToolWindowType;
+import consulo.project.Project;
+import consulo.project.ui.wm.ToolWindowFactory;
+import consulo.ui.ex.toolWindow.ToolWindow;
+import consulo.ui.ex.toolWindow.ToolWindowType;
 import org.jetbrains.annotations.NotNull;
 
 public class JiraToolWindowFactory implements ToolWindowFactory {

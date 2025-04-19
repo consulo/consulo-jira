@@ -15,7 +15,7 @@ import static java.util.Objects.isNull;
 public class JiraServerManager  {
 
     @Topic.AppLevel
-    public static final Topic<JiraServerListener> JIRA_SERVER_CHANGED = Topic.create("Jira Server Changes", JiraServerListener.class);
+    public static final Class<JiraServerListener> JIRA_SERVER_CHANGED = Topic.create("Jira Server Changes", JiraServerListener.class);
     @Topic.AppLevel
     public static final Topic<JiraServerNotConfiguredServer> JIRA_SERVER_REMOVED_ALL = Topic.create("Jira Server Changes", JiraServerNotConfiguredServer.class);
 

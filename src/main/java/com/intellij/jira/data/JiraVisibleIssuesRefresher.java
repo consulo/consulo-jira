@@ -1,7 +1,7 @@
 package com.intellij.jira.data;
 
 import com.intellij.jira.filter.IssueFilterCollection;
-import com.intellij.openapi.Disposable;
+import consulo.disposer.Disposable;
 
 public interface JiraVisibleIssuesRefresher extends Disposable {
 

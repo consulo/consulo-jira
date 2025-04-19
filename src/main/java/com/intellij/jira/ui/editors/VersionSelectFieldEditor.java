@@ -16,7 +16,7 @@ import java.util.Objects;
 import static com.intellij.jira.util.JiraGsonUtil.createArrayObject;
 import static com.intellij.jira.util.JiraGsonUtil.createObject;
 import static com.intellij.jira.util.JiraIssueField.KEY;
-import static com.intellij.tasks.jira.JiraRepository.GSON;
+import static com.intellij.tasks.jira.JiraUtil.GSON;
 import static consulo.util.collection.ContainerUtil.getFirstItem;
 import static consulo.util.lang.StringUtil.isEmpty;
 import static consulo.util.lang.StringUtil.trim;

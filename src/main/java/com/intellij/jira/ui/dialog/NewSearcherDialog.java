@@ -3,6 +3,7 @@ package com.intellij.jira.ui.dialog;
 import com.intellij.jira.jql.JQLSearcherManager;
 import com.intellij.jira.rest.model.jql.JQLSearcher;
 import consulo.project.Project;
+import consulo.ui.ex.awt.ValidationInfo;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 

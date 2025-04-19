@@ -1,7 +1,7 @@
 package com.intellij.jira.data;
 
-import com.github.benmanes.caffeine.cache.Cache;
-import com.github.benmanes.caffeine.cache.Caffeine;
+import com.google.common.cache.Cache;
+import com.google.common.cache.CacheBuilder;
 import com.intellij.jira.rest.model.JiraIssue;
 import com.intellij.jira.server.JiraServerManager;
 import consulo.project.Project;
@@ -19,7 +19,7 @@ public class IssuesGetter implements Getter<JiraIssue> {
 
     public IssuesGetter(@NotNull Project project) {
         myProject = project;
-        myCache = Caffeine.newBuilder().maximumSize(500).expireAfterWrite(1, TimeUnit.MINUTES).build();
+        myCache = CacheBuilder.newBuilder().maximumSize(500).expireAfterWrite(1, TimeUnit.MINUTES).build();
     }
 
     @Override

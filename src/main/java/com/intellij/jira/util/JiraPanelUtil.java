@@ -1,6 +1,5 @@
 package com.intellij.jira.util;
 
-import com.intellij.execution.ui.TagButton;
 import com.intellij.jira.rest.model.JiraIssue;
 import com.intellij.jira.rest.model.JiraIssueComponent;
 import com.intellij.jira.rest.model.JiraProjectVersion;

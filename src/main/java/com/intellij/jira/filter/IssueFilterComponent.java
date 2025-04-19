@@ -30,25 +30,25 @@ import java.util.function.Supplier;
 
 public abstract class IssueFilterComponent<Filter extends IssueFilter, Model extends FilterModel<Filter>> extends JPanel {
 
-    protected static final Supplier<@Nls String> ALL = VcsLogBundle.messagePointer("vcs.log.filter.all");
+    protected static final String ALL = VcsLogBundle.messagePointer("vcs.log.filter.all");
 
     private static final int GAP_BEFORE_ARROW = 2;
     protected static final int BORDER_SIZE = 2;
 
     private final PopupState<JBPopup> myPopupState = PopupState.forPopup();
-    @NotNull private final Supplier<@NlsContexts.Label String> myDisplayName;
+    @NotNull private final String myDisplayName;
     private JLabel myNameLabel;
     private JLabel myValueLabel;
 
     @NotNull protected final Model myFilterModel;
 
-    protected IssueFilterComponent(@NotNull Supplier<@NlsContexts.Label String> displayName, @NotNull Model filterModel) {
+    protected IssueFilterComponent(@NotNull String displayName, @NotNull Model filterModel) {
         myDisplayName = displayName;
         myFilterModel = filterModel;
     }
 
     public JComponent initUi() {
-        myNameLabel = new DynamicLabel(() -> myDisplayName.get() + ": ");
+        myNameLabel = new DynamicLabel(myDisplayName + ": ");
         myValueLabel = new DynamicLabel(this::getCurrentText);
 
         setDefaultForeground();
@@ -155,16 +155,16 @@ public abstract class IssueFilterComponent<Filter extends IssueFilter, Model ext
 
     private void setDefaultForeground() {
         if (myNameLabel != null) {
-            myNameLabel.setForeground(StartupUiUtil.isUnderDarcula() ? UIUtil.getLabelForeground() : UIUtil.getInactiveTextColor());
+            myNameLabel.setForeground(UIUtil.isUnderDarcula() ? UIUtil.getLabelForeground() : UIUtil.getInactiveTextColor());
         }
         myValueLabel.setForeground(getDefaultSelectorForeground());
     }
 
     private void setOnHoverForeground() {
         if (myNameLabel != null) {
-            myNameLabel.setForeground(StartupUiUtil.isUnderDarcula() ? UIUtil.getLabelForeground() : UIUtil.getTextAreaForeground());
+            myNameLabel.setForeground(UIUtil.isUnderDarcula() ? UIUtil.getLabelForeground() : UIUtil.getTextAreaForeground());
         }
-        myValueLabel.setForeground(StartupUiUtil.isUnderDarcula() ? UIUtil.getLabelForeground() : UIUtil.getTextFieldForeground());
+        myValueLabel.setForeground(UIUtil.isUnderDarcula() ? UIUtil.getLabelForeground() : UIUtil.getTextFieldForeground());
     }
 
     public void showPopupMenu() {
@@ -190,15 +190,14 @@ public abstract class IssueFilterComponent<Filter extends IssueFilter, Model ext
     }
 
     private static final class DynamicLabel extends JLabel {
-        private final Supplier<@NlsContexts.Label String> myText;
+        private final String myText;
 
-        private DynamicLabel(@NotNull Supplier<@NlsContexts.Label String> text) {myText = text;}
+        private DynamicLabel(@NotNull String text) {myText = text;}
 
         @Override
-        @NlsContexts.Label
         public String getText() {
             if (myText == null) return "";
-            return myText.get();
+            return myText;
         }
     }
 

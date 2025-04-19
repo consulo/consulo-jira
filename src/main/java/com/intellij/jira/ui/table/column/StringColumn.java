@@ -2,7 +2,7 @@ package com.intellij.jira.ui.table.column;
 
 import com.intellij.jira.ui.renders.JiraIssueStringCellRenderer;
 import com.intellij.jira.ui.renders.JiraIssueTableCellRenderer;
-import com.intellij.util.ui.UIUtil;
+import consulo.ui.ex.awt.UIUtil;
 
 import javax.swing.table.TableCellRenderer;
 

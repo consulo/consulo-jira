@@ -1,12 +1,12 @@
 package com.intellij.jira.ui.renders;
 
 import com.intellij.jira.ui.table.JiraIssueTable;
-import com.intellij.ui.ColoredTableCellRenderer;
-import com.intellij.ui.TableCellState;
+import consulo.ui.ex.awt.ColoredTableCellRenderer;
+import consulo.ui.ex.awt.TableCellState;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import javax.swing.JTable;
+import javax.swing.*;
 import javax.swing.border.Border;
 import java.util.Objects;
 
@@ -27,10 +27,7 @@ public class JiraIssueStringCellRenderer extends ColoredTableCellRenderer {
     }
 
     public static class BorderlessTableCellState extends TableCellState {
-        @Override
-        protected @Nullable Border getBorder(boolean isSelected, boolean hasFocus) {
-            return null;
-        }
+
     }
 
 }

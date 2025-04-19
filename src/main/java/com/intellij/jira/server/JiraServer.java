@@ -1,15 +1,15 @@
 package com.intellij.jira.server;
 
 import com.intellij.jira.server.auth.AuthType;
-import com.intellij.openapi.util.text.StringUtil;
-import com.intellij.util.xmlb.annotations.Attribute;
-import com.intellij.util.xmlb.annotations.Tag;
-import com.intellij.util.xmlb.annotations.Transient;
+import consulo.util.lang.StringUtil;
+import consulo.util.xml.serializer.annotation.Attribute;
+import consulo.util.xml.serializer.annotation.Tag;
+import consulo.util.xml.serializer.annotation.Transient;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Objects;
 
-import static com.intellij.openapi.util.text.StringUtil.trim;
+import static consulo.util.lang.StringUtil.trim;
 
 @Tag("JiraServer")
 public class JiraServer {

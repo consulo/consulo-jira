@@ -1,8 +1,9 @@
 package com.intellij.jira.ui.renders;
 
 import com.intellij.jira.util.JiraIconUtil;
-import com.intellij.openapi.util.text.StringUtil;
-import com.intellij.util.ui.table.IconTableCellRenderer;
+import consulo.ui.ex.awt.table.IconTableCellRenderer;
+import consulo.ui.image.Image;
+import consulo.util.lang.StringUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -30,7 +31,7 @@ public class JiraIconAndTextTableCellRenderer extends IconTableCellRenderer {
 
     @Nullable
     @Override
-    protected Icon getIcon(@NotNull Object value, JTable table, int row) {
+    protected Image getIcon(@NotNull Object value, JTable table, int row) {
         return JiraIconUtil.getIcon(iconUrl);
     }
 

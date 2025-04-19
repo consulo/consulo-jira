@@ -5,15 +5,13 @@ import com.intellij.tasks.jira.jql.JqlLanguage;
 import consulo.language.editor.ui.awt.EditorTextField;
 import consulo.language.editor.ui.awt.LanguageTextField;
 import consulo.project.Project;
-import consulo.ui.ex.awt.FormBuilder;
-import consulo.ui.ex.awt.JBLabel;
-import consulo.ui.ex.awt.JBTextField;
-import consulo.ui.ex.awt.JBUI;
+import consulo.ui.ex.awt.*;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
 
+import static consulo.util.lang.StringUtil.isEmpty;
 import static consulo.util.lang.StringUtil.trim;
 
 public class SearcherEditor implements Editor {

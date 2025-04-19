@@ -3,7 +3,7 @@ package com.intellij.jira.filter.priority;
 import com.intellij.jira.filter.IssueFilter;
 import com.intellij.jira.filter.IssueFilterCollection;
 import com.intellij.jira.rest.model.JiraIssuePriority;
-import com.intellij.openapi.util.text.StringUtil;
+import consulo.util.lang.StringUtil;
 
 import java.util.Collection;
 

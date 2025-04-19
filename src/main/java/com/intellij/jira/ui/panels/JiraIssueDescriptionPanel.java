@@ -18,6 +18,7 @@ import consulo.ui.ex.awt.JBLabel;
 import consulo.ui.ex.awt.JBUI;
 import consulo.ui.ex.awt.ScrollPaneFactory;
 import consulo.ui.ex.awt.UIUtil;
+import consulo.util.dataholder.Key;
 import consulo.util.lang.StringUtil;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
@@ -57,7 +58,7 @@ public class JiraIssueDescriptionPanel extends AbstractJiraToolWindowPanel {
     }
 
     @Override
-    public @Nullable Object getData(@NotNull @NonNls String dataId) {
+    public @Nullable Object getData(@NotNull @NonNls Key dataId) {
         if (JiraDataKeys.ISSUE.is(dataId)) {
             return myIssue;
         }
