@@ -2,7 +2,7 @@ package com.intellij.jira.ui.renders;
 
 import com.intellij.jira.rest.model.JiraIssueTransition;
 import com.intellij.jira.util.JiraLabelUtil;
-import com.intellij.util.ui.JBUI;
+import consulo.ui.ex.awt.JBUI;
 
 import javax.swing.*;
 import java.awt.*;

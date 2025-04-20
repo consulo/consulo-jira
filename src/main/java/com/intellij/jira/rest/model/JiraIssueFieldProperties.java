@@ -5,7 +5,7 @@ import com.google.gson.JsonArray;
 import java.util.Arrays;
 import java.util.List;
 
-import static com.intellij.openapi.util.text.StringUtil.isNotEmpty;
+import static consulo.util.lang.StringUtil.isNotEmpty;
 import static java.util.Objects.isNull;
 
 public class JiraIssueFieldProperties {

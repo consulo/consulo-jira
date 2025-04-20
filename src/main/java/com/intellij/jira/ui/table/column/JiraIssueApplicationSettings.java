@@ -3,10 +3,10 @@ package com.intellij.jira.ui.table.column;
 import com.intellij.jira.ui.JiraIssueUiProperties;
 import com.intellij.jira.ui.SearcherIssuesUi;
 import com.intellij.jira.ui.highlighters.JiraIssueHighlighterProperty;
-import com.intellij.openapi.components.PersistentStateComponent;
-import com.intellij.openapi.components.State;
-import com.intellij.openapi.components.Storage;
-import com.intellij.util.EventDispatcher;
+import consulo.component.persist.PersistentStateComponent;
+import consulo.component.persist.State;
+import consulo.component.persist.Storage;
+import consulo.proxy.EventDispatcher;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.HashMap;

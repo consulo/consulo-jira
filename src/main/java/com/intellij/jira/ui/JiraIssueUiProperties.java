@@ -1,5 +1,6 @@
 package com.intellij.jira.ui;
 
+import consulo.jira.impl.ui.ValueKey;
 import consulo.ui.annotation.RequiredUIAccess;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;

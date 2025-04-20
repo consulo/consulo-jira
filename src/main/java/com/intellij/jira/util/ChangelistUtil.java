@@ -3,7 +3,7 @@ package com.intellij.jira.util;
 import com.intellij.jira.rest.model.JiraIssue;
 import com.intellij.jira.settings.ChangelistSettings;
 import com.intellij.jira.settings.ChangelistState;
-import com.intellij.openapi.util.text.StringUtil;
+import consulo.util.lang.StringUtil;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -9,6 +9,7 @@ import com.intellij.jira.util.provider.ProviderFactory;
 import com.intellij.jira.util.provider.ProviderFactoryImpl;
 import consulo.application.AllIcons;
 import consulo.application.ApplicationManager;
+import consulo.platform.base.icon.PlatformIconGroup;
 import consulo.project.Project;
 import consulo.project.ui.notification.Notifications;
 import consulo.ui.ex.action.AnAction;
@@ -34,7 +35,7 @@ public class BranchActionGroup extends DefaultActionGroup {
 
     public BranchActionGroup() {
         super("Branch", true);
-        getTemplatePresentation().setIcon(AllIcons.Vcs.Branch);
+        getTemplatePresentation().setIcon(PlatformIconGroup.vcsBranch());
     }
 
 
@@ -77,7 +78,7 @@ public class BranchActionGroup extends DefaultActionGroup {
 
 
     private String resolveFieldName(JiraIssue issue, String fieldName) {
-        ProviderFactory providerFactory = ApplicationManager.getApplication().getService(ProviderFactoryImpl.class);
+        ProviderFactory providerFactory = ApplicationManager.getApplication().getInstance(ProviderFactoryImpl.class);
         return providerFactory.get(fieldName).getValue(issue);
     }
 

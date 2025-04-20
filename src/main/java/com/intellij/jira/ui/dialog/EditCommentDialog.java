@@ -16,8 +16,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.List;
 
-import static coStringUtil.trim;
 import static com.intellij.jira.util.JiraIssueUtil.escapeComment;
+import static consulo.util.lang.StringUtil.isEmpty;
+import static consulo.util.lang.StringUtil.trim;
 import static java.util.Objects.nonNull;
 import static javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER;
 import static javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED;

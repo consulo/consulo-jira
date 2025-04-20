@@ -2,7 +2,7 @@ package com.intellij.jira.ui.tree;
 
 import com.intellij.jira.jql.JQLSearcherManager;
 import com.intellij.jira.rest.model.jql.JQLSearcher;
-import com.intellij.openapi.project.Project;
+import consulo.project.Project;
 
 import javax.swing.tree.DefaultTreeModel;
 import java.util.List;

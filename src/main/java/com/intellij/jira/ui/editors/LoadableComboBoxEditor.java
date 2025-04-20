@@ -4,6 +4,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonNull;
 import consulo.ui.ex.awt.ComboBox;
 import consulo.ui.ex.awt.FormBuilder;
+import consulo.ui.ex.awt.ValidationInfo;
 import consulo.util.collection.ContainerUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;

@@ -1,30 +1,29 @@
 package com.intellij.jira.ui.table.column;
 
-import com.intellij.openapi.components.Service;
+import consulo.annotation.component.ComponentScope;
+import consulo.annotation.component.ServiceAPI;
+import consulo.annotation.component.ServiceImpl;
+import consulo.application.Application;
+import jakarta.inject.Singleton;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
-@Service
+@Singleton
+@ServiceAPI(ComponentScope.APPLICATION)
+@ServiceImpl
 public class JiraIssueColumnManager {
-
-    private static final JiraIssueColumnManager INSTANCE = new JiraIssueColumnManager();
-
     private static final List<JiraIssueColumn<?, ?>> defaultColumns = List.of(IssueType.INSTANCE, Priority.INSTANCE, Key.INSTANCE,
-                                                                            Summary.INSTANCE, Assignee.INSTANCE, Status.INSTANCE,
-                                                                            ProjectKey.INSTANCE, Created.INSTANCE);
+        Summary.INSTANCE, Assignee.INSTANCE, Status.INSTANCE,
+        ProjectKey.INSTANCE, Created.INSTANCE);
 
-    private static final Map<Integer, JiraIssueColumn<?, ?>> currentColumns = new HashMap<>();
-    private static final Map<String, Integer> currentColumnIndexes = new HashMap<>();
-    private static final Map<String, String> myMaxColumnWidth = new HashMap<>();
-    private static final Map<JiraIssueColumn<?, ?>, JiraIssueColumnProperties> currentColumnProperties = new LinkedHashMap<>();
+    private final Map<Integer, JiraIssueColumn<?, ?>> currentColumns = new HashMap<>();
+    private final Map<String, Integer> currentColumnIndexes = new HashMap<>();
+    private final Map<String, String> maxColumnWidth = new HashMap<>();
+    private final Map<JiraIssueColumn<?, ?>, JiraIssueColumnProperties> currentColumnProperties = new LinkedHashMap<>();
 
-    static {
+    public JiraIssueColumnManager() {
         defaultColumns.forEach(column -> {
             int index = currentColumnIndexes.size();
             currentColumns.put(index, column);
@@ -35,7 +34,7 @@ public class JiraIssueColumnManager {
 
     @NotNull
     public static JiraIssueColumnManager getInstance() {
-        return INSTANCE;
+        return Application.get().getInstance(JiraIssueColumnManager.class);
     }
 
     public int getColumnsCount() {
@@ -59,11 +58,11 @@ public class JiraIssueColumnManager {
     }
 
     public String getColumnWidth(String columnId) {
-        return myMaxColumnWidth.getOrDefault(columnId, "");
+        return maxColumnWidth.getOrDefault(columnId, "");
     }
 
     public void setColumnWidth(String columnId, String value) {
-        myMaxColumnWidth.put(columnId, value);
+        maxColumnWidth.put(columnId, value);
     }
 
     public JiraIssueColumnProperties getColumnProperties(JiraIssueColumn<?, ?> column) {
