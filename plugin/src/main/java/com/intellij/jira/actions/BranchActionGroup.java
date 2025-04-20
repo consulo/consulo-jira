@@ -109,12 +109,6 @@ public class BranchActionGroup extends DefaultActionGroup {
             } else {
                 Notifications.Bus.notify(JiraNotificationManager.getInstance().createNotificationError("Branch creation failed", "Repository not found"));
             }
-
-
-
         }
-
-
     }
-
 }
