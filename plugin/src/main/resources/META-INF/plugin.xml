@@ -17,6 +17,12 @@
         ]]>
     </description>
 
+    <experimental>true</experimental>
+
+    <tags>
+        <tag>issue.managment</tag>
+    </tags>
+
     <extensionPoints>
         <extensionPoint name="issueHighlighterFactory" interface="com.intellij.jira.ui.highlighters.JiraIssueHighlighterFactory" dynamic="true"/>
         <extensionPoint name="valueProvider" interface="com.intellij.jira.util.provider.Provider" dynamic="true"/>
