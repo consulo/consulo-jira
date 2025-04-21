@@ -2,6 +2,7 @@ package com.intellij.jira.filter;
 
 import consulo.application.AllIcons;
 import consulo.dataContext.DataManager;
+import consulo.jira.impl.ui.PopupState;
 import consulo.ui.ex.action.ActionGroup;
 import consulo.ui.ex.action.AnAction;
 import consulo.ui.ex.action.AnActionEvent;
@@ -10,11 +11,11 @@ import consulo.ui.ex.awt.ClickListener;
 import consulo.ui.ex.awt.JBUI;
 import consulo.ui.ex.awt.UIUtil;
 import consulo.ui.ex.awt.accessibility.AccessibleContextDelegate;
+import consulo.ui.ex.awtUnsafe.TargetAWT;
 import consulo.ui.ex.popup.JBPopup;
 import consulo.ui.ex.popup.JBPopupFactory;
 import consulo.ui.ex.popup.ListPopup;
 import consulo.util.lang.StringUtil;
-import org.jetbrains.annotations.Nls;
 import org.jetbrains.annotations.NotNull;
 
 import javax.accessibility.AccessibleContext;
@@ -30,17 +31,19 @@ import java.util.function.Supplier;
 
 public abstract class IssueFilterComponent<Filter extends IssueFilter, Model extends FilterModel<Filter>> extends JPanel {
 
-    protected static final String ALL = VcsLogBundle.messagePointer("vcs.log.filter.all");
+    protected static final String ALL = "All";
 
     private static final int GAP_BEFORE_ARROW = 2;
     protected static final int BORDER_SIZE = 2;
 
     private final PopupState<JBPopup> myPopupState = PopupState.forPopup();
-    @NotNull private final String myDisplayName;
+    @NotNull
+    private final String myDisplayName;
     private JLabel myNameLabel;
     private JLabel myValueLabel;
 
-    @NotNull protected final Model myFilterModel;
+    @NotNull
+    protected final Model myFilterModel;
 
     protected IssueFilterComponent(@NotNull String displayName, @NotNull Model filterModel) {
         myDisplayName = displayName;
@@ -48,7 +51,7 @@ public abstract class IssueFilterComponent<Filter extends IssueFilter, Model ext
     }
 
     public JComponent initUi() {
-        myNameLabel = new DynamicLabel(myDisplayName + ": ");
+        myNameLabel = new DynamicLabel(() -> myDisplayName + ": ");
         myValueLabel = new DynamicLabel(this::getCurrentText);
 
         setDefaultForeground();
@@ -56,10 +59,12 @@ public abstract class IssueFilterComponent<Filter extends IssueFilter, Model ext
         setBorder(wrapBorder(createUnfocusedBorder()));
 
         setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
-        if (myNameLabel != null) add(myNameLabel);
+        if (myNameLabel != null) {
+            add(myNameLabel);
+        }
         add(myValueLabel);
         add(Box.createHorizontalStrut(GAP_BEFORE_ARROW));
-        add(new JLabel(AllIcons.Actions.FindAndShowNextMatchesSmall));
+        add(new JLabel(TargetAWT.to(AllIcons.Actions.FindAndShowNextMatchesSmall)));
 
         installChangeListener(() -> {
             myValueLabel.revalidate();
@@ -75,10 +80,9 @@ public abstract class IssueFilterComponent<Filter extends IssueFilter, Model ext
         return this;
     }
 
-
     public String getCurrentText() {
         Filter filter = myFilterModel.getFilter();
-        return filter == null || StringUtil.isEmpty(filter.getDisplayText()) ? ALL.get() : getText(filter);
+        return filter == null || StringUtil.isEmpty(filter.getDisplayText()) ? ALL : getText(filter);
     }
 
     protected abstract String getText(@NotNull Filter filter);
@@ -89,7 +93,7 @@ public abstract class IssueFilterComponent<Filter extends IssueFilter, Model ext
 
     @NotNull
     protected Color getDefaultSelectorForeground() {
-        return StartupUiUtil.isUnderDarcula() ? UIUtil.getLabelForeground() : UIUtil.getInactiveTextColor().darker().darker();
+        return UIUtil.isUnderDarcula() ? UIUtil.getLabelForeground() : UIUtil.getInactiveTextColor().darker().darker();
     }
 
     protected boolean shouldIndicateHovering() {
@@ -168,7 +172,9 @@ public abstract class IssueFilterComponent<Filter extends IssueFilter, Model ext
     }
 
     public void showPopupMenu() {
-        if (myPopupState.isRecentlyHidden()) return; // do not show new popup
+        if (myPopupState.isRecentlyHidden()) {
+            return; // do not show new popup
+        }
         ListPopup popup = createPopupMenu();
         myPopupState.prepareToShow(popup);
         popup.showUnderneathOf(this);
@@ -177,8 +183,8 @@ public abstract class IssueFilterComponent<Filter extends IssueFilter, Model ext
     @NotNull
     protected ListPopup createPopupMenu() {
         return JBPopupFactory.getInstance().
-                createActionGroupPopup(null, createActionGroup(), DataManager.getInstance().getDataContext(this),
-                        false, null, 10);
+            createActionGroupPopup(null, createActionGroup(), DataManager.getInstance().getDataContext(this),
+                false, null, 10);
     }
 
     protected Border createUnfocusedBorder() {
@@ -190,14 +196,18 @@ public abstract class IssueFilterComponent<Filter extends IssueFilter, Model ext
     }
 
     private static final class DynamicLabel extends JLabel {
-        private final String myText;
+        private final Supplier<String> myText;
 
-        private DynamicLabel(@NotNull String text) {myText = text;}
+        private DynamicLabel(@NotNull Supplier<String> text) {
+            myText = text;
+        }
 
         @Override
         public String getText() {
-            if (myText == null) return "";
-            return myText;
+            if (myText == null) {
+                return "";
+            }
+            return myText.get();
         }
     }
 
@@ -222,7 +232,7 @@ public abstract class IssueFilterComponent<Filter extends IssueFilter, Model ext
 
         @Override
         public String getAccessibleName() {
-            return VcsLogBundle.message("vcs.log.filter.accessible.name", myNameLabel.getText(), myValueLabel.getText());
+            return myNameLabel.getText() + ": " + myValueLabel.getText();
         }
 
         @Override

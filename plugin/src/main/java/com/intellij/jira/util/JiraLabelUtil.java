@@ -101,7 +101,7 @@ public class JiraLabelUtil {
     }
 
     public static JBLabel createStatusLabel(JiraIssueStatus status){
-        return StartupUiUtil.isUnderDarcula() ? new JiraStatusLightLabel(status) : new JiraStatusDarkLabel(status);
+        return UIUtil.isUnderDarcula() ? new JiraStatusLightLabel(status) : new JiraStatusDarkLabel(status);
     }
 
     public static JBLabel createEmptyStatusLabel(){

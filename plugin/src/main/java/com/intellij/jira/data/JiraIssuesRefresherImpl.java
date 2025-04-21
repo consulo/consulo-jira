@@ -7,12 +7,12 @@ import consulo.application.progress.ProgressManager;
 import consulo.application.progress.Task;
 import consulo.component.ProcessCanceledException;
 import consulo.disposer.Disposable;
+import consulo.jira.impl.SingleTaskController;
 import consulo.project.Project;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.Future;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
@@ -42,9 +42,8 @@ public class JiraIssuesRefresherImpl implements JiraIssuesRefresher, Disposable 
 
     protected SingleTaskController.SingleTask startNewBackgroundTask(@NotNull final Task.Backgroundable refreshTask) {
         ProgressIndicator indicator = myProgress.createProgressIndicator();
-        Future<?> future = ((CoreProgressManager) ProgressManager.getInstance()).runProcessWithProgressAsynchronously(refreshTask, indicator,
-                null);
-        return new SingleTaskController.SingleTaskImpl(future, indicator);
+        ProgressManager.getInstance().runProcessWithProgressAsynchronously(refreshTask, indicator);
+        return new SingleTaskController.SingleTaskImpl(indicator);
     }
 
     public Issues getCurrentIssues() {
@@ -115,7 +114,7 @@ public class JiraIssuesRefresherImpl implements JiraIssuesRefresher, Disposable 
         private Issues doRefresh(List<String> jqls) {
             List<JiraIssue> issues = new ArrayList<>();
             for (String jql : jqls) {
-                issues.addAll(getJiraServerManager().getJiraRestApi(myProject).getIssues(jql));
+                issues.addAll(getJiraServerManager().getJiraRestApi((Project) myProject).getIssues(jql));
             }
 
             return Issues.of(issues);

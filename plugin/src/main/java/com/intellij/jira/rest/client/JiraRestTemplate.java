@@ -82,8 +82,8 @@ public class JiraRestTemplate {
         if (!(o instanceof JiraRepository repository)) return false;
 
         if (!Objects.equals(mySearchQuery, repository.getSearchQuery())) return false;
-        if (!Objects.equals(myJiraVersion, repository.getJiraVersion())) return false;
-        if (!Comparing.equal(myInCloud, repository.isInCloud())) return false;
+        //TODO if (!Objects.equals(myJiraVersion, repository.getJiraVersion())) return false;
+        //TODO if (!Comparing.equal(myInCloud, repository.isInCloud())) return false;
         return true;
     }
 
@@ -134,9 +134,7 @@ public class JiraRestTemplate {
         InputStream stream = method.getResponseBodyAsStream();
         String entityContent = "";
         if (stream != null) {
-            try (Reader reader = new InputStreamReader(stream, StandardCharsets.UTF_8)) {
-                entityContent = StreamUtil.readText(reader);
-            }
+            entityContent = StreamUtil.readText(stream, StandardCharsets.UTF_8);
         }
         //TaskUtil.prettyFormatJsonToLog(LOG, entityContent);
         // besides SC_OK, can also be SC_NO_CONTENT in issue transition requests

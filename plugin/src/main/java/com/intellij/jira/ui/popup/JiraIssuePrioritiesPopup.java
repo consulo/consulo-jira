@@ -1,21 +1,29 @@
 package com.intellij.jira.ui.popup;
 
-import consulo.application.ui.wm.IdeFocusManager;
-import consulo.language.editor.CommonDataKeys;
-import consulo.language.editor.PlatformDataKeys;
+import consulo.dataContext.DataContext;
 import consulo.project.Project;
 import consulo.ui.ex.action.ActionGroup;
-import consulo.util.lang.function.Conditions;
+import consulo.ui.ex.awt.UIExAWTDataKey;
+import consulo.ui.ex.popup.JBPopupFactory;
+import consulo.ui.ex.popup.ListPopup;
+import consulo.util.lang.function.Predicates;
+import jakarta.annotation.Nonnull;
 import org.jetbrains.annotations.NotNull;
 
-public class JiraIssuePrioritiesPopup extends PopupFactoryImpl.ActionGroupPopup{
+import javax.swing.*;
 
-    public JiraIssuePrioritiesPopup(@NotNull ActionGroup actionGroup, @NotNull Project project) {
-        super("Change Priority To", actionGroup, SimpleDataContext.builder()
-                .add(CommonDataKeys.PROJECT, project)
-                .add(PlatformDataKeys.CONTEXT_COMPONENT, IdeFocusManager.getInstance(project).getFocusOwner())
-                .build(), false, false, false, false, null, 10, Conditions.alwaysTrue(), null);
+public class JiraIssuePrioritiesPopup {
+
+    public static ListPopup create(@NotNull ActionGroup actionGroup, @NotNull Project project, @Nonnull JComponent component) {
+        return JBPopupFactory.getInstance().createActionGroupPopup("Change Priority To",
+            actionGroup,
+            DataContext.builder().add(Project.KEY, project).add(UIExAWTDataKey.CONTEXT_COMPONENT, component).build(),
+            false,
+            false,
+            false,
+            null,
+            10,
+            Predicates.alwaysTrue()
+        );
     }
-
-
 }

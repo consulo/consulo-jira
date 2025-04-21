@@ -11,6 +11,9 @@ import com.intellij.jira.ui.SearcherIssuesUi;
 import com.intellij.jira.ui.panels.JiraServerNotConfiguredPanel;
 import com.intellij.jira.ui.panels.JiraTabPanel;
 import com.intellij.jira.util.JiraContentUtil;
+import consulo.annotation.component.ComponentScope;
+import consulo.annotation.component.ServiceAPI;
+import consulo.annotation.component.ServiceImpl;
 import consulo.application.ApplicationManager;
 import consulo.disposer.Disposable;
 import consulo.disposer.Disposer;
@@ -18,6 +21,9 @@ import consulo.project.Project;
 import consulo.project.ui.wm.ToolWindowManager;
 import consulo.ui.ex.content.*;
 import consulo.ui.ex.toolWindow.ToolWindow;
+import jakarta.annotation.Nonnull;
+import jakarta.inject.Inject;
+import jakarta.inject.Singleton;
 import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;
@@ -27,6 +33,9 @@ import static com.intellij.jira.server.JiraServerManager.JIRA_SERVER_REMOVED_ALL
 import static com.intellij.jira.ui.JiraToolWindowFactory.TOOL_WINDOW_ID;
 import static com.intellij.jira.util.JiraContentUtil.getIssuesUi;
 
+@ServiceAPI(ComponentScope.PROJECT)
+@ServiceImpl
+@Singleton
 public class JiraTabsManager implements Disposable {
 
     public static final String TAB_ISSUES = "Issues";
@@ -35,6 +44,7 @@ public class JiraTabsManager implements Disposable {
     private final JiraIssuesData myIssueData;
     private boolean myServerConfigured;
 
+    @Inject
     public JiraTabsManager(@NotNull Project project) {
         myProject = project;
         myIssueData = new JiraIssuesData(project, this);
@@ -43,14 +53,15 @@ public class JiraTabsManager implements Disposable {
         project.getMessageBus().connect().subscribe(JIRA_SERVER_CHANGED, () -> {
             if (myServerConfigured && JiraServerManager.getInstance().hasJiraServerConfigured(myProject)) {
                 ApplicationManager.getApplication().invokeLater(() -> {
-                        ContentManager manager = getContentManager();
-                        JiraContentUtil.getAllJiraUis(manager).forEach(ui -> {
-                            if (ui instanceof AbstractIssuesUi) {
-                                ((AbstractIssuesUi) ui).refresh();
-                            }
-                        });
+                    ContentManager manager = getContentManager();
+                    JiraContentUtil.getAllJiraUis(manager).forEach(ui -> {
+                        if (ui instanceof AbstractIssuesUi) {
+                            ((AbstractIssuesUi) ui).refresh();
+                        }
+                    });
                 });
-            } else {
+            }
+            else {
                 openIssuesTab();
             }
         });
@@ -71,7 +82,8 @@ public class JiraTabsManager implements Disposable {
             ContentsUtil.addContent(contentManager, content, true);
             myServerConfigured = true;
             searcherIssuesUi.refresh();
-        } else {
+        }
+        else {
             openNotConfiguredServerTab();
             myServerConfigured = false;
         }
@@ -79,13 +91,13 @@ public class JiraTabsManager implements Disposable {
 
     public void openFilteredIssuesTab(JQLSearcher searcher) {
         AbstractIssuesUi filteredIssuesUi = createFilteredIssuesUi(searcher);
-        openTab(filteredIssuesUi, new TabGroupId("FilteredIssuesGroup", () -> "Filter", false));
+        openTab(filteredIssuesUi, "FilteredIssuesGroup", "Filter", false);
         filteredIssuesUi.refresh();
     }
 
     public void openDetailsIssueTab(String issueKey) {
         JiraUi detailsIssueUi = createDetailsIssueUi(issueKey);
-        openTab(detailsIssueUi, new TabGroupId("DetailsIssueGroup", () -> issueKey, true));
+        openTab(detailsIssueUi, "DetailsIssueGroup", issueKey, true);
     }
 
     public void openNotConfiguredServerTab() {
@@ -107,24 +119,26 @@ public class JiraTabsManager implements Disposable {
     public void updateTabName(JiraUi ui) {
         ContentManager manager = getContentManager();
         JComponent component = ContentUtilEx.findContentComponent(manager, c -> ui == getIssuesUi(c));
-        if (component == null) return;
+        if (component == null) {
+            return;
+        }
 
-        ContentUtilEx.updateTabbedContentDisplayName(manager, component);
+        //FIXME ?? ContentUtilEx.updateTabbedContentDisplayName(manager, component);
     }
 
-    private void openTab(@NotNull JiraUi jiraUi, @NotNull TabGroupId tabGroupId) {
+    private void openTab(@NotNull JiraUi jiraUi, @Nonnull String tabId, @Nonnull String tabName, boolean splitByDefault) {
         Disposer.register(this, jiraUi);
         ContentManager contentManager = getContentManager();
 
-        TabDescriptor tabDescriptor = new TabDescriptor(new JiraTabPanel(jiraUi), jiraUi::getId, jiraUi);
-        String tabName = tabGroupId.getDisplayName(tabDescriptor);
+        JiraTabPanel tabPanel = new JiraTabPanel(jiraUi);
+
         Content content = contentManager.findContent(tabName);
         if (content == null) {
             content = JiraContentUtil.findTabbedContent(contentManager, jiraUi.getId());
         }
 
         if (content == null) {
-            ContentUtilEx.addTabbedContent(contentManager, tabGroupId, tabDescriptor, true);
+            ContentUtilEx.addTabbedContent(contentManager, tabPanel, "", tabName, true);
             return;
         }
 
@@ -153,7 +167,7 @@ public class JiraTabsManager implements Disposable {
     }
 
     public static JiraTabsManager getInstance(@NotNull Project project) {
-        return project.getService(JiraTabsManager.class);
+        return project.getInstance(JiraTabsManager.class);
     }
 
     @Override

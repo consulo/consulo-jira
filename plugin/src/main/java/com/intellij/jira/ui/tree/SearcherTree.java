@@ -2,7 +2,7 @@ package com.intellij.jira.ui.tree;
 
 import com.intellij.jira.jql.JQLSearcherManager;
 import com.intellij.jira.rest.model.jql.JQLSearcher;
-import consulo.application.AllIcons;
+import consulo.platform.base.icon.PlatformIconGroup;
 import consulo.project.Project;
 import consulo.ui.ex.SimpleTextAttributes;
 import consulo.ui.ex.awt.event.DoubleClickListener;
@@ -34,7 +34,6 @@ public class SearcherTree extends Tree {
         new MyDoubleClickListener().installOn(this);
         getSelectionModel().setSelectionMode(TreeSelectionModel.SINGLE_TREE_SELECTION);
         setCellRenderer(new MyColoredTreeCellRenderer());
-        TreeHoverListener.DEFAULT.addTo(this);
         expandAll();
     }
 
@@ -79,7 +78,7 @@ public class SearcherTree extends Tree {
             if (leaf && nonNull(node.getSearcher())) {
                 JQLSearcher selectedSearcher = JQLSearcherManager.getInstance().getSelectedSearcher(myProject);
                 if (selectedSearcher.getId().equals(node.getSearcher().getId())) {
-                   setIcon(AllIcons.Debugger.Db_no_suspend_breakpoint);
+                   setIcon(PlatformIconGroup.generalArrowright());
                 }
 
                 append(node.getText(), node.isEditable() ? SimpleTextAttributes.REGULAR_ATTRIBUTES : SimpleTextAttributes.GRAY_ATTRIBUTES);

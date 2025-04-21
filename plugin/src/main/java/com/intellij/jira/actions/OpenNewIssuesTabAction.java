@@ -4,7 +4,7 @@ import com.intellij.jira.JiraTabsManager;
 import com.intellij.jira.JiraUiDataKeys;
 import com.intellij.jira.rest.model.jql.JQLSearcher;
 import com.intellij.jira.ui.tree.SearcherTreeNode;
-import consulo.application.AllIcons;
+import consulo.jira.icon.JiraIconGroup;
 import consulo.project.Project;
 import consulo.ui.ex.action.AnActionEvent;
 import org.jetbrains.annotations.NotNull;
@@ -12,7 +12,7 @@ import org.jetbrains.annotations.NotNull;
 import static java.util.Objects.nonNull;
 
 public class OpenNewIssuesTabAction extends JiraIssueSearcherAction {
-    private static final ActionProperties properties = ActionProperties.of("Open New Filtered Issues Tab", AllIcons.Actions.OpenNewTab);
+    private static final ActionProperties properties = ActionProperties.of("Open New Filtered Issues Tab", JiraIconGroup.opennewtab());
 
     public OpenNewIssuesTabAction() {
         super(properties);

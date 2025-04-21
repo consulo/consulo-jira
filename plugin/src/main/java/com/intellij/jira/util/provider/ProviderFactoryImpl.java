@@ -1,17 +1,24 @@
 package com.intellij.jira.util.provider;
 
+import consulo.annotation.component.ComponentScope;
+import consulo.annotation.component.ServiceAPI;
+import consulo.annotation.component.ServiceImpl;
 import consulo.component.extension.ExtensionPointName;
+import jakarta.inject.Singleton;
 
 import java.util.HashMap;
 import java.util.Map;
 
+@ServiceAPI(ComponentScope.APPLICATION)
+@ServiceImpl
+@Singleton
 public class ProviderFactoryImpl implements ProviderFactory {
 
-    private static final ExtensionPointName<Provider> VALUE_PROVIDER_EP = ExtensionPointName.create("com.intellij.jira.valueProvider");
-    private static final Map<String, Provider> myProviderCache = new HashMap<>();
+    private static final ExtensionPointName<Provider> VALUE_PROVIDER_EP = ExtensionPointName.create(Provider.class);
+    private final Map<String, Provider> myProviderCache = new HashMap<>();
 
-    static {
-        for(Provider provider : VALUE_PROVIDER_EP.getExtensionList()){
+    public ProviderFactoryImpl() {
+        for (Provider provider : VALUE_PROVIDER_EP.getExtensionList()) {
             myProviderCache.put(provider.getKey(), provider);
         }
     }

@@ -6,13 +6,13 @@ import consulo.application.progress.ProgressIndicator;
 import consulo.application.progress.ProgressManager;
 import consulo.application.progress.Task;
 import consulo.component.ProcessCanceledException;
+import consulo.jira.impl.SingleTaskController;
 import consulo.project.Project;
 import consulo.util.collection.ContainerUtil;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.Future;
 
 public class JiraVisibleIssuesRefresherImpl implements JiraVisibleIssuesRefresher {
 
@@ -44,9 +44,8 @@ public class JiraVisibleIssuesRefresherImpl implements JiraVisibleIssuesRefreshe
             @Override
             protected @NotNull SingleTask startNewBackgroundTask() {
                 ProgressIndicator indicator = progress.createProgressIndicator();
-                Future<?> future = ((CoreProgressManager) ProgressManager.getInstance()).runProcessWithProgressAsynchronously(new MyTask(myProject), indicator,
-                        null);
-                return new SingleTaskController.SingleTaskImpl(future, indicator);
+                ProgressManager.getInstance().runProcessWithProgressAsynchronously(new MyTask(myProject), indicator);
+                return new SingleTaskController.SingleTaskImpl(/*future, */indicator);
             }
         };
     }
@@ -118,7 +117,7 @@ public class JiraVisibleIssuesRefresherImpl implements JiraVisibleIssuesRefreshe
         }
 
         private Issues doRun(Issues issues, List<Request> requests) {
-            FilterRequest filterRequest = ContainerUtil.findLastInstance(requests, FilterRequest.class);
+            FilterRequest filterRequest = ContainerUtil.findInstance(requests.reversed(), FilterRequest.class);
 
             if (filterRequest != null) {
                 issues = myIssueFilterer.filter(issues, filterRequest.myFilters);

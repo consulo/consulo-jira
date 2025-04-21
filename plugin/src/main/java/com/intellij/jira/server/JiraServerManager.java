@@ -2,8 +2,12 @@ package com.intellij.jira.server;
 
 import com.intellij.jira.rest.client.JiraRestTemplate;
 import com.intellij.jira.util.SimpleSelectableList;
+import consulo.annotation.component.ComponentScope;
+import consulo.annotation.component.ServiceAPI;
+import consulo.annotation.component.ServiceImpl;
 import consulo.application.ApplicationManager;
 import consulo.project.Project;
+import jakarta.inject.Singleton;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -12,7 +16,10 @@ import java.util.stream.Collectors;
 
 import static java.util.Objects.isNull;
 
-public class JiraServerManager  {
+@ServiceAPI(ComponentScope.APPLICATION)
+@ServiceImpl
+@Singleton
+public class JiraServerManager {
 
     public static final Class<JiraServerListener> JIRA_SERVER_CHANGED = JiraServerListener.class;
     public static final Class<JiraServerNotConfiguredServer> JIRA_SERVER_REMOVED_ALL = JiraServerNotConfiguredServer.class;
@@ -21,16 +28,16 @@ public class JiraServerManager  {
         return ApplicationManager.getApplication().getInstance(JiraServerManager.class);
     }
 
-    public int getSelectedServerIndex(@NotNull Project project){
+    public int getSelectedServerIndex(@NotNull Project project) {
         return getSelectedProjectServer(project);
     }
 
-    public boolean hasJiraServerConfigured(@NotNull Project project){
+    public boolean hasJiraServerConfigured(@NotNull Project project) {
         return hasSelectedProjectServer(project);
     }
 
     @Nullable
-    public JiraServer getCurrentJiraServer(@NotNull Project project){
+    public JiraServer getCurrentJiraServer(@NotNull Project project) {
         SimpleSelectableList<JiraServer> allServers = getAllServers(project);
         if (allServers.hasSelectedItem()) {
             return allServers.getSelectedItem();
@@ -59,18 +66,18 @@ public class JiraServerManager  {
     }
 
     @Nullable
-    public JiraRestApi getJiraRestApi(@NotNull Project project){
+    public JiraRestApi getJiraRestApi(@NotNull Project project) {
         return convertFrom(getCurrentJiraServer(project));
     }
 
     @NotNull
-    public JiraRestApi getJiraRestApiFrom(@NotNull JiraServer jiraServer){
+    public JiraRestApi getJiraRestApiFrom(@NotNull JiraServer jiraServer) {
         return convertFrom(jiraServer);
     }
 
     @Nullable
-    private JiraRestApi convertFrom(@Nullable JiraServer jiraServer){
-        if(isNull(jiraServer)){
+    private JiraRestApi convertFrom(@Nullable JiraServer jiraServer) {
+        if (isNull(jiraServer)) {
             return null;
         }
 

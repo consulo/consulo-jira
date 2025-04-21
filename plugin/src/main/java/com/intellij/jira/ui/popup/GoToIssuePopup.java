@@ -19,21 +19,21 @@ import java.util.function.Function;
 
 public class GoToIssuePopup {
 
-    private TextFieldWithCompletion textField;
+    private TextFieldWithAutoCompletion textField;
     private JBPopup popup;
     private Function<String, Future> onSelectedIssueKey;
 
 
     public GoToIssuePopup(@NotNull Project project, Collection<String> values, Function<String, Future> onSelectedIssueKey) {
         this.onSelectedIssueKey = onSelectedIssueKey;
-        TextCompletionProvider provider = new TextFieldWithAutoCompletion.StringsCompletionProvider(values, null);
+        TextFieldWithAutoCompletion.StringsCompletionProvider provider = new TextFieldWithAutoCompletion.StringsCompletionProvider(values, null);
 
-        textField = new TextFieldWithCompletion(project, provider, "", true, true, false){
+        textField = new TextFieldWithAutoCompletion<>(project, provider, true, ""){
 
             @Override
             protected boolean processKeyBinding(KeyStroke ks, KeyEvent e, int condition, boolean pressed) {
                 if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-                    onSelectedIssueKey.fun(textField.getText());
+                    onSelectedIssueKey.apply(textField.getText());
                     closePopup();
                     return true;
                 }
@@ -70,6 +70,4 @@ public class GoToIssuePopup {
     public void closePopup(){
         ApplicationManager.getApplication().invokeLater(() -> popup.closeOk(null));
     }
-
-
 }

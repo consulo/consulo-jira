@@ -24,7 +24,7 @@ public class AddIssueChangeListAction extends AnAction {
 
     @Override
     public void actionPerformed(@NotNull AnActionEvent e) {
-        Project project = e.getProject();
+        Project project = e.getData(Project.KEY);
         if (Objects.isNull(project)) {
             return;
         }

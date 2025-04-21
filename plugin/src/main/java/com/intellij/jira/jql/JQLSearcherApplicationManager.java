@@ -3,9 +3,9 @@ package com.intellij.jira.jql;
 import com.intellij.jira.rest.model.jql.JQLSearcher;
 import consulo.application.ApplicationManager;
 import consulo.component.persist.PersistentStateComponent;
+import consulo.component.persist.RoamingType;
 import consulo.component.persist.State;
 import consulo.component.persist.Storage;
-import consulo.component.persist.StoragePathMacros;
 import consulo.util.xml.serializer.XmlSerializationException;
 import consulo.util.xml.serializer.XmlSerializer;
 import consulo.util.xml.serializer.XmlSerializerUtil;
@@ -21,7 +21,7 @@ import java.util.List;
 
 import static java.util.Objects.nonNull;
 
-@State(name = "JQLSearcherApplicationManager", storages = @Storage(StoragePathMacros.CACHE_FILE))
+@State(name = "JQLSearcherApplicationManager", storages = @Storage(value = "jira.xml", roamingType = RoamingType.DISABLED))
 public class JQLSearcherApplicationManager implements PersistentStateComponent<JQLSearcherApplicationManager.Config> {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(JQLSearcherApplicationManager.class);

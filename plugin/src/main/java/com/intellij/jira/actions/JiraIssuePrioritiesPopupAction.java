@@ -11,6 +11,7 @@ import consulo.application.ApplicationManager;
 import consulo.project.Project;
 import consulo.ui.ex.action.ActionGroup;
 import consulo.ui.ex.action.AnActionEvent;
+import consulo.ui.ex.popup.ListPopup;
 
 import java.util.List;
 
@@ -18,7 +19,7 @@ import static java.util.Objects.isNull;
 import static java.util.Objects.nonNull;
 
 public class JiraIssuePrioritiesPopupAction extends JiraIssueAction {
-    private static final ActionProperties properties = ActionProperties.of("Change priority",  AllIcons.Ide.UpDown);
+    private static final ActionProperties properties = ActionProperties.of("Change priority", AllIcons.Ide.UpDown);
 
     public JiraIssuePrioritiesPopupAction() {
         super(properties);
@@ -27,20 +28,20 @@ public class JiraIssuePrioritiesPopupAction extends JiraIssueAction {
     @Override
     public void actionPerformed(AnActionEvent e) {
         Project project = e.getData(Project.KEY);
-        if(isNull(project)){
+        if (isNull(project)) {
             return;
         }
 
-        JiraServerManager manager = ApplicationManager.getApplication().getService(JiraServerManager.class);
+        JiraServerManager manager = ApplicationManager.getApplication().getInstance(JiraServerManager.class);
         JiraRestApi jiraRestApi = manager.getJiraRestApi(project);
-        if(isNull(jiraRestApi)){
-           return;
+        if (isNull(jiraRestApi)) {
+            return;
         }
 
         JiraIssue issue = e.getRequiredData(JiraDataKeys.ISSUE);
         List<JiraIssuePriority> priorities = jiraRestApi.getIssuePriorities();
 
-        JiraIssuePrioritiesPopup popup = new JiraIssuePrioritiesPopup(createActionGroup(priorities, issue), project);
+        ListPopup popup = JiraIssuePrioritiesPopup.create(createActionGroup(priorities, issue), project, getComponent());
         popup.showInCenterOf(getComponent());
 
     }

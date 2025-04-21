@@ -9,8 +9,8 @@ public class JiraServerNotConfiguredPanel extends JiraPanelWithEmptyText {
 
     public JiraServerNotConfiguredPanel(@NotNull Project project) {
         super("No Jira server found");
+        getEmptyText().setText("Test");
         getEmptyText()
             .appendSecondaryText("Configure", SimpleTextAttributes.LINK_PLAIN_ATTRIBUTES, e -> new ConfigureJiraServersDialog(project).show());
     }
-
 }

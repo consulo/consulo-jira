@@ -7,8 +7,8 @@ import com.intellij.jira.ui.JiraIssueActionPlaces;
 import com.intellij.jira.ui.dialog.CreateIssueDialog;
 import consulo.application.ApplicationManager;
 import consulo.dataContext.DataContext;
+import consulo.dataContext.DataManager;
 import consulo.project.Project;
-import consulo.ui.ex.action.ActionToolbar;
 import consulo.ui.ex.action.AnActionEvent;
 import consulo.ui.ex.action.Presentation;
 import consulo.ui.ex.awt.AnActionButton;
@@ -32,7 +32,7 @@ public class CreateIssueButtonAction extends AnActionButton implements CustomCom
 
     @Override
     public void actionPerformed(@NotNull AnActionEvent e) {
-        Project project = e.getProject();
+        Project project = e.getData(Project.KEY);
         if(isNull(project)){
             return;
         }
@@ -57,18 +57,13 @@ public class CreateIssueButtonAction extends AnActionButton implements CustomCom
         JButton createIssueButton = new JButton("Create Issue");
         int buttonHeight = JBUI.scale(26);
         createIssueButton.setPreferredSize(new Dimension(createIssueButton.getPreferredSize().width, buttonHeight));
-        createIssueButton.setBorder(new DarculaButtonPainter() {
-            @Override
-            public Insets getBorderInsets(Component c) {
-                return JBUI.emptyInsets();
-            }});
 
 
         createIssueButton.setFocusable(false);
         createIssueButton.setEnabled(true);
 
         createIssueButton.addActionListener(e -> {
-            DataContext dataContext = ActionToolbar.getDataContextFor(createIssueButton);
+            DataContext dataContext = DataManager.getInstance().getDataContext(createIssueButton);
             actionPerformed(AnActionEvent.createFromAnAction(this, null, JiraIssueActionPlaces.JIRA_ISSUES_TOOLBAR_PLACE, dataContext));
         });
 

@@ -9,26 +9,22 @@ import com.intellij.jira.util.provider.ProviderFactory;
 import com.intellij.jira.util.provider.ProviderFactoryImpl;
 import consulo.application.AllIcons;
 import consulo.application.ApplicationManager;
+import consulo.jira.vcs.BranchCreator;
 import consulo.platform.base.icon.PlatformIconGroup;
 import consulo.project.Project;
 import consulo.project.ui.notification.Notifications;
+import consulo.ui.annotation.RequiredUIAccess;
 import consulo.ui.ex.action.AnAction;
 import consulo.ui.ex.action.AnActionEvent;
 import consulo.ui.ex.action.AnSeparator;
 import consulo.ui.ex.action.DefaultActionGroup;
-import git4idea.branch.GitBranchUtil;
-import git4idea.branch.GitBrancher;
-import git4idea.repo.GitRepository;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.Objects;
 import java.util.stream.Collectors;
-
-import static git4idea.GitUtil.HEAD;
 
 public class BranchActionGroup extends DefaultActionGroup {
 
@@ -45,7 +41,6 @@ public class BranchActionGroup extends DefaultActionGroup {
         DefaultActionGroup newBranchActions = new DefaultActionGroup("New Branch...", true);
         newBranchActions.getTemplatePresentation().setIcon(AllIcons.General.Add);
 
-
         if (Objects.nonNull(e)) {
             JiraIssue issue = e.getData(JiraDataKeys.ISSUE);
             if (Objects.nonNull(issue)) {
@@ -56,13 +51,13 @@ public class BranchActionGroup extends DefaultActionGroup {
 
                 if (Objects.nonNull(state)) {
                     String name = state.getFieldNames()
-                            .stream()
-                            .map(fieldName -> resolveFieldName(issue, fieldName))
-                            .filter(Objects::nonNull)
-                            .collect(Collectors.joining(state.getFieldSeparator().getSeparator()));
+                        .stream()
+                        .map(fieldName -> resolveFieldName(issue, fieldName))
+                        .filter(Objects::nonNull)
+                        .collect(Collectors.joining(state.getFieldSeparator().getSeparator()));
 
                     state.getBranchTypes()
-                            .forEach(type -> newBranchActions.add(NewBranchAction.withName(type + "/" + name)));
+                        .forEach(type -> newBranchActions.add(NewBranchAction.withName(type + "/" + name)));
                 }
 
                 actions.add(newBranchActions);
@@ -86,7 +81,7 @@ public class BranchActionGroup extends DefaultActionGroup {
 
         private final String myBranchName;
 
-        private NewBranchAction(@Nullable  String text) {
+        private NewBranchAction(@Nullable String text) {
             super(text);
             myBranchName = text;
         }
@@ -95,18 +90,18 @@ public class BranchActionGroup extends DefaultActionGroup {
             return new NewBranchAction(name);
         }
 
+        @RequiredUIAccess
         @Override
         public void actionPerformed(@NotNull AnActionEvent e) {
             Project project = e.getData(Project.KEY);
-            if (Objects.isNull(project)) {
+            if (project == null) {
                 return;
             }
 
+            BranchCreator creator = project.getExtensionPoint(BranchCreator.class)
+                .findFirstSafe(branchCreator -> branchCreator.createBranch(myBranchName, e.getDataContext()));
 
-            GitRepository gitRepository = GitBranchUtil.guessRepositoryForOperation(project, e.getDataContext());
-            if (Objects.nonNull(gitRepository)) {
-                GitBrancher.getInstance(project).createBranch(myBranchName, Map.of(gitRepository, HEAD));
-            } else {
+            if (creator == null) {
                 Notifications.Bus.notify(JiraNotificationManager.getInstance().createNotificationError("Branch creation failed", "Repository not found"));
             }
         }

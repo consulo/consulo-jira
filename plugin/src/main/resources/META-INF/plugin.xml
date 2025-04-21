@@ -23,25 +23,15 @@
     </extensionPoints>
 
     <extensions defaultExtensionNs="com.intellij">
-        <toolWindow id="Jira" anchor="bottom" icon="/icons/jiraIcon.svg" factoryClass="com.intellij.jira.ui.JiraToolWindowFactory" canCloseContents="true"/>
-
-        <applicationService serviceImplementation="com.intellij.jira.components.JiraNotificationManager"/>
         <applicationService serviceImplementation="com.intellij.jira.jql.JQLSearcherApplicationManager"/>
         <applicationService serviceImplementation="com.intellij.jira.jql.JQLSearcherManager"/>
         <applicationService serviceImplementation="com.intellij.jira.settings.branch.BranchSettings"/>
         <applicationService serviceImplementation="com.intellij.jira.settings.ChangelistSettings"/>
         <applicationService serviceImplementation="com.intellij.jira.ui.table.column.JiraIssueApplicationSettings"/>
-        <applicationService serviceImplementation="com.intellij.jira.server.JiraServerManager"/>
         <applicationService serviceImplementation="com.intellij.jira.server.JiraServerApplicationManager"/>
         <applicationService serviceImplementation="com.intellij.jira.util.provider.ProviderFactoryImpl"/>
 
-        <projectService serviceImplementation="com.intellij.jira.server.JiraServerProjectManager"/>
-        <projectService serviceImplementation="com.intellij.jira.jql.JQLSearcherProjectManager"/>
-        <projectService serviceImplementation="com.intellij.jira.components.JiraUserProvider"/>
-        <projectService serviceImplementation="com.intellij.jira.JiraTabsManager"/>
 
-        <notificationGroup id="Jira Balloon Notifications" displayType="BALLOON" />
-        <notificationGroup id="Jira Sticky Balloon Notifications" displayType="STICKY_BALLOON" isLogByDefault="true" />
 
         <jira.issueHighlighterFactory implementation="com.intellij.jira.ui.highlighters.MyIssuesHighlighter$Factory"/>
         <jira.issueHighlighterFactory implementation="com.intellij.jira.ui.highlighters.ResolvedIssuesHighlighter$Factory"/>

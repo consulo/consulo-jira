@@ -7,7 +7,6 @@ import com.intellij.jira.ui.JiraIssueStyleFactory;
 import com.intellij.jira.ui.highlighters.JiraIssueHighlighter;
 import consulo.disposer.Disposable;
 import consulo.disposer.Disposer;
-import consulo.ui.ex.JBColor;
 import consulo.ui.ex.SimpleTextAttributes;
 import consulo.ui.ex.awt.JBUI;
 import consulo.ui.ex.awt.table.TableView;
@@ -38,20 +37,21 @@ public class JiraIssueTable extends TableView<JiraIssue> implements Disposable {
 
         myBaseStyleProvider = new BaseStyleProvider(this);
 
-        setBorder(JBUI.Borders.customLineTop(JBColor.border()));
+        setBorder(JBUI.Borders.customLine(1, 0, 0, 0));
         setShowGrid(false);
         setSelectionMode(SINGLE_SELECTION);
         setIntercellSpacing(JBUI.emptySize());
         setRowHeight(25);
-        setTableHeader(new InvisibleResizableHeader() {
-            @Override
-            protected boolean canMoveOrResizeColumn(int modelIndex) {
-                return false;
-            }
-        });
+        // TODO !
+        //        setTableHeader(new InvisibleResizableHeader() {
+        //            @Override
+        //            protected boolean canMoveOrResizeColumn(int modelIndex) {
+        //                return false;
+        //            }
+        //        });
 
         issuesData.getProject().getMessageBus().connect()
-                .subscribe(IssueChangeListener.TOPIC, new OnIssueChanged());
+            .subscribe(IssueChangeListener.TOPIC, new OnIssueChanged());
 
     }
 

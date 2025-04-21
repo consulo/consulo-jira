@@ -16,7 +16,7 @@ import java.util.stream.Collectors;
 public class AssigneeFilterComponent extends IssueFilterComponent<AssigneeFilter, AssigneeFilterModel> {
 
     public AssigneeFilterComponent(@NotNull AssigneeFilterModel filterModel) {
-        super(() -> "Assignee", filterModel);
+        super("Assignee", filterModel);
     }
 
     @Override

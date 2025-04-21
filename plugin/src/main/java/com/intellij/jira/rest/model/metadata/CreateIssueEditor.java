@@ -16,6 +16,7 @@ import com.intellij.jira.ui.editors.LoadableFieldEditor;
 import com.intellij.jira.ui.editors.factory.CreateFieldEditorFactory;
 import com.intellij.jira.util.JiraBorders;
 import com.intellij.jira.util.JiraPanelUtil;
+import com.intellij.tasks.jira.JiraUtil;
 import consulo.project.Project;
 import consulo.ui.ex.awt.*;
 import consulo.util.collection.ContainerUtil;
@@ -200,7 +201,7 @@ public class CreateIssueEditor implements Editor {
 
             List<JiraIssueFieldProperties> fields = myFields.entrySet().stream()
                     .filter(field -> !PROJECT.equals(field.getKey()) && !ISSUE_TYPE.equals(field.getKey()))
-                    .map(entry -> JiraRepository.GSON.fromJson(entry.getValue(), JiraIssueFieldProperties.class))
+                    .map(entry -> JiraUtil.GSON.fromJson(entry.getValue(), JiraIssueFieldProperties.class))
                     .collect(Collectors.toList());
 
             fields.forEach(fieldProperties -> {

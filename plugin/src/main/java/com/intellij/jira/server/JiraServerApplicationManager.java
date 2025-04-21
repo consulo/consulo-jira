@@ -1,13 +1,18 @@
 package com.intellij.jira.server;
 
+import consulo.annotation.component.ComponentScope;
+import consulo.annotation.component.ServiceAPI;
+import consulo.annotation.component.ServiceImpl;
 import consulo.component.persist.PersistentStateComponent;
+import consulo.component.persist.RoamingType;
 import consulo.component.persist.State;
 import consulo.component.persist.Storage;
-import consulo.component.persist.StoragePathMacros;
 import consulo.credentialStorage.CredentialAttributes;
 import consulo.credentialStorage.Credentials;
 import consulo.credentialStorage.PasswordSafe;
 import consulo.util.xml.serializer.XmlSerializerUtil;
+import consulo.util.xml.serializer.annotation.AbstractCollection;
+import jakarta.inject.Singleton;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -15,7 +20,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-@State(name = "JiraServerApplicationManager", storages = @Storage(StoragePathMacros.CACHE_FILE))
+@State(name = "JiraServerApplicationManager", storages = @Storage(value = "jira.xml", roamingType = RoamingType.DISABLED))
+@ServiceAPI(ComponentScope.APPLICATION)
+@ServiceImpl
+@Singleton
 public class JiraServerApplicationManager implements PersistentStateComponent<JiraServerApplicationManager.State> {
 
     private List<JiraServer> myServers = new ArrayList<>();
@@ -79,8 +87,8 @@ public class JiraServerApplicationManager implements PersistentStateComponent<Ji
 
     public static class State {
 
-        @XCollection(propertyElementName = "servers")
-        public List<JiraServer> servers;
+        @AbstractCollection
+        public List<JiraServer> servers = new ArrayList<>();
 
     }
 }

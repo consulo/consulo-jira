@@ -44,7 +44,7 @@ public class CreateIssueTask extends AbstractBackgroundableTask {
 
             File selectedFile = attachmentFieldEditor.getSelectedFile();
             if (selectedFile != null) {
-                new MyAddIssueAttachmentTask(myProject, myCreatedIssue.getKey(), selectedFile).queue();
+                new MyAddIssueAttachmentTask((Project) myProject, myCreatedIssue.getKey(), selectedFile).queue();
             }
         }
 

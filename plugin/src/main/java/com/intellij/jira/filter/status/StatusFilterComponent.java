@@ -15,7 +15,7 @@ public class StatusFilterComponent extends IssueFilterComponent<StatusFilter, St
 
 
     public StatusFilterComponent(@NotNull StatusFilterModel filterModel) {
-        super(() -> "Status", filterModel);
+        super("Status", filterModel);
     }
 
     @Override

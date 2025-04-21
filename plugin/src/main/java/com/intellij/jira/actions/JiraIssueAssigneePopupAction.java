@@ -6,10 +6,11 @@ import com.intellij.jira.rest.model.JiraIssue;
 import com.intellij.jira.rest.model.JiraIssueUser;
 import com.intellij.jira.server.JiraRestApi;
 import com.intellij.jira.ui.popup.JiraIssueAssignableUsersPopup;
-import consulo.application.AllIcons;
+import consulo.platform.base.icon.PlatformIconGroup;
 import consulo.project.Project;
 import consulo.ui.ex.action.ActionGroup;
 import consulo.ui.ex.action.AnActionEvent;
+import consulo.ui.ex.popup.ListPopup;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
@@ -19,7 +20,7 @@ import static com.intellij.jira.rest.model.JiraPermissionType.EDIT_ISSUES;
 import static java.util.Objects.nonNull;
 
 public class JiraIssueAssigneePopupAction extends JiraIssuePopupAction {
-    private static final ActionProperties properties = ActionProperties.of("Assign",  AllIcons.General.User);
+    private static final ActionProperties properties = ActionProperties.of("Assign", PlatformIconGroup.actionsLoginavatar());
 
     public JiraIssueAssigneePopupAction() {
         super(properties);
@@ -34,7 +35,7 @@ public class JiraIssueAssigneePopupAction extends JiraIssuePopupAction {
         }
 
         List<JiraIssueUser> assignableUsers = jiraRestApi.getIssueAssignableUsers(issue.getKey());
-        JiraIssueAssignableUsersPopup popup = new JiraIssueAssignableUsersPopup(createActionGroup(assignableUsers, issue), project);
+        ListPopup popup = JiraIssueAssignableUsersPopup.create(createActionGroup(assignableUsers, issue), project, getComponent());
         popup.showInCenterOf(getComponent());
     }
 

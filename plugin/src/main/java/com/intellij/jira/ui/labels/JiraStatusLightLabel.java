@@ -9,6 +9,7 @@ import consulo.util.lang.StringUtil;
 import org.jetbrains.annotations.NotNull;
 
 import javax.swing.border.Border;
+import javax.swing.border.CompoundBorder;
 import java.awt.*;
 
 public class JiraStatusLightLabel extends JBLabel {
@@ -21,7 +22,7 @@ public class JiraStatusLightLabel extends JBLabel {
         super(StringUtil.toUpperCase(status.getName()), LEFT);
 
         setFont(SANS_SERIF_BOLD);
-        setBorder(JBUI.Borders.compound(JBUI.Borders.customLine(status.getCategoryColor(), 0, 2, 0, 0), PADDING));
+        setBorder(new CompoundBorder(JBUI.Borders.customLine(status.getCategoryColor(), 0, 2, 0, 0), PADDING));
         setForeground(status.getCategoryColor());
     }
 }

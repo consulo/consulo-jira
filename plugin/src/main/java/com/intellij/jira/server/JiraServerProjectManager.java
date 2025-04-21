@@ -1,5 +1,8 @@
 package com.intellij.jira.server;
 
+import consulo.annotation.component.ComponentScope;
+import consulo.annotation.component.ServiceAPI;
+import consulo.annotation.component.ServiceImpl;
 import consulo.component.persist.PersistentStateComponent;
 import consulo.component.persist.State;
 import consulo.component.persist.Storage;
@@ -9,7 +12,9 @@ import consulo.credentialStorage.Credentials;
 import consulo.credentialStorage.PasswordSafe;
 import consulo.project.Project;
 import consulo.util.xml.serializer.XmlSerializerUtil;
+import consulo.util.xml.serializer.annotation.AbstractCollection;
 import consulo.util.xml.serializer.annotation.Tag;
+import jakarta.inject.Singleton;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -18,6 +23,9 @@ import java.util.List;
 import java.util.Objects;
 
 @State(name = "JiraServerManager", storages = @Storage(StoragePathMacros.WORKSPACE_FILE))
+@ServiceAPI(ComponentScope.PROJECT)
+@ServiceImpl
+@Singleton
 public class JiraServerProjectManager implements PersistentStateComponent<JiraServerProjectManager.State> {
 
 
@@ -65,11 +73,11 @@ public class JiraServerProjectManager implements PersistentStateComponent<JiraSe
         return new ArrayList<>(myServers);
     }
 
-    public int getSelectedServerIndex(){
+    public int getSelectedServerIndex() {
         return mySelectedServer;
     }
 
-    public boolean hasSelectedServer(){
+    public boolean hasSelectedServer() {
         return mySelectedServer > -1;
     }
 
@@ -102,12 +110,11 @@ public class JiraServerProjectManager implements PersistentStateComponent<JiraSe
         }
     }
 
-    public static class State{
+    public static class State {
         @Tag("selected")
         public int selected;
 
-        @XCollection(propertyElementName = "servers")
-        public List<JiraServer> servers;
-
+        @AbstractCollection
+        public List<JiraServer> servers = new ArrayList<>();
     }
 }

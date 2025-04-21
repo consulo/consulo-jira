@@ -13,6 +13,7 @@ import com.intellij.jira.ui.panels.JiraTransitionTaskEditor;
 import com.intellij.jira.ui.renders.JiraIssueTransitionListCellRenderer;
 import com.intellij.jira.util.JiraLabelUtil;
 import com.intellij.jira.util.JiraPanelUtil;
+import com.intellij.tasks.jira.JiraUtil;
 import consulo.application.ApplicationManager;
 import consulo.dataContext.DataProvider;
 import consulo.project.Project;
@@ -129,7 +130,7 @@ public class IssueTransitionDialog extends DialogWrapper implements DataProvider
         myOKAction.setEnabled(true);
 
         List<JiraIssueFieldProperties> transitionFields = transition.getFields().entrySet().stream()
-                .map(entry -> JiraRepository.GSON.fromJson(entry.getValue(), JiraIssueFieldProperties.class))
+                .map(entry -> JiraUtil.GSON.fromJson(entry.getValue(), JiraIssueFieldProperties.class))
                 .collect(Collectors.toList());
 
 

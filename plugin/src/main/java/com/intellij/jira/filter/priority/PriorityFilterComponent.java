@@ -14,7 +14,7 @@ import java.util.stream.Collectors;
 public class PriorityFilterComponent extends IssueFilterComponent<PriorityFilter, PriorityFilterModel> {
 
     public PriorityFilterComponent(@NotNull PriorityFilterModel filterModel) {
-        super(() -> "Priority", filterModel);
+        super("Priority", filterModel);
     }
 
     @Override

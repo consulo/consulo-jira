@@ -8,13 +8,14 @@ import com.intellij.jira.actions.AddIssueLinkDialogAction;
 import com.intellij.jira.rest.model.JiraIssueLinkType;
 import com.intellij.jira.rest.model.JiraIssueLinkTypeInfo;
 import com.intellij.jira.ui.dialog.AddIssueLinkDialog;
-import consulo.application.AllIcons;
 import consulo.dataContext.DataManager;
+import consulo.platform.base.icon.PlatformIconGroup;
 import consulo.project.Project;
 import consulo.ui.ex.action.ActionPlaces;
 import consulo.ui.ex.action.AnActionEvent;
 import consulo.ui.ex.awt.FormBuilder;
 import consulo.ui.ex.awt.ValidationInfo;
+import consulo.ui.ex.awtUnsafe.TargetAWT;
 import consulo.util.lang.StringUtil;
 import org.jetbrains.annotations.Nullable;
 
@@ -48,7 +49,7 @@ public class LinkedIssueFieldEditor extends AbstractFieldEditor<String> {
 
     @Override
     public JComponent createPanel() {
-        myButton.setIcon(AllIcons.Ide.UpDown);
+        myButton.setIcon(TargetAWT.to(PlatformIconGroup.ideUpdown()));
         myButton.addActionListener(e -> {
             InputEvent inputEvent = e.getSource() instanceof InputEvent ? (InputEvent)e.getSource() : null;
             MyAddIssueLinkDialogAction action = new MyAddIssueLinkDialogAction();

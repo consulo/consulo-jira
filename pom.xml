@@ -26,6 +26,8 @@
     </repositories>
 
     <modules>
+        <module>jira-api</module>
+        <module>git-impl</module>
         <module>plugin</module>
     </modules>
 </project>

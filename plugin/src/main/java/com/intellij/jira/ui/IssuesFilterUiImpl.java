@@ -4,7 +4,6 @@ import com.intellij.jira.data.Issues;
 import com.intellij.jira.filter.FilterModel;
 import com.intellij.jira.filter.IssueFilterCollection;
 import com.intellij.jira.filter.IssueFilterCollectionImpl;
-import com.intellij.jira.filter.IssueFilterComponent;
 import com.intellij.jira.filter.assignee.AssigneeFilterComponent;
 import com.intellij.jira.filter.assignee.AssigneeFilterModel;
 import com.intellij.jira.filter.priority.PriorityFilterComponent;
@@ -15,13 +14,10 @@ import com.intellij.jira.filter.type.TypeFilterComponent;
 import com.intellij.jira.filter.type.TypeFilterModel;
 import consulo.proxy.EventDispatcher;
 import consulo.ui.ex.action.*;
-import consulo.ui.ex.awt.ClientProperty;
-import consulo.ui.ex.awt.UIUtil;
 import consulo.ui.ex.awt.action.CustomComponentAction;
 import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;
-import java.awt.*;
 import java.util.List;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
@@ -133,18 +129,19 @@ public class IssuesFilterUiImpl implements IssuesFilterUi {
 
         @Override
         public void actionPerformed(@NotNull AnActionEvent e) {
-            MainVcsLogUi vcsLogUi = e.getData(VcsLogInternalDataKeys.MAIN_UI);
-            if (vcsLogUi == null) {
-                return;
-            }
-
-            Component actionComponent = UIUtil.uiTraverser(vcsLogUi.getToolbar()).traverse().find(component ->
-                ClientProperty.get(component, ACTION_KEY) == this
-            );
-
-            if (actionComponent instanceof IssueFilterComponent) {
-                ((IssueFilterComponent) actionComponent).showPopupMenu();
-            }
+            // TODO !!
+//            MainVcsLogUi vcsLogUi = e.getData(VcsLogInternalDataKeys.MAIN_UI);
+//            if (vcsLogUi == null) {
+//                return;
+//            }
+//
+//            Component actionComponent = UIUtil.uiTraverser(vcsLogUi.getToolbar()).traverse().find(component ->
+//                ClientProperty.get(component, ACTION_KEY) == this
+//            );
+//
+//            if (actionComponent instanceof IssueFilterComponent) {
+//                ((IssueFilterComponent) actionComponent).showPopupMenu();
+//            }
         }
     }
 }

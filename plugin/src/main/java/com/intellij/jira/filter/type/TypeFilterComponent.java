@@ -14,7 +14,7 @@ import java.util.stream.Collectors;
 public class TypeFilterComponent extends IssueFilterComponent<TypeFilter, TypeFilterModel> {
 
     public TypeFilterComponent(TypeFilterModel typeFilterModel) {
-        super(() -> "Type", typeFilterModel);
+        super("Type", typeFilterModel);
     }
 
     @Override

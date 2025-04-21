@@ -8,6 +8,7 @@ import consulo.disposer.Disposable;
 import consulo.disposer.Disposer;
 import consulo.project.Project;
 import consulo.ui.ex.awt.SimpleToolWindowPanel;
+import consulo.util.dataholder.Key;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -92,7 +93,7 @@ public class JiraIssueDetailsPanel extends SimpleToolWindowPanel implements Disp
     }
 
     @Override
-    public @Nullable Object getData(@NotNull @NonNls String dataId) {
+    public @Nullable Object getData(@NotNull @NonNls Key dataId) {
         if (myJiraIssuePreviewPanel != null) {
             var data = myJiraIssuePreviewPanel.getData(dataId);
             if (data != null) {

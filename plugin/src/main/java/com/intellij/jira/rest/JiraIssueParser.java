@@ -2,20 +2,10 @@ package com.intellij.jira.rest;
 
 import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
-import com.intellij.jira.rest.model.JiraCreatedIssue;
-import com.intellij.jira.rest.model.JiraGroup;
-import com.intellij.jira.rest.model.JiraIssue;
-import com.intellij.jira.rest.model.JiraIssueAttachment;
-import com.intellij.jira.rest.model.JiraIssueComment;
+import com.intellij.jira.rest.model.*;
 import com.intellij.jira.rest.model.metadata.JiraIssueCreateMetadata;
-import com.intellij.jira.rest.model.JiraIssueLinkType;
-import com.intellij.jira.rest.model.JiraIssuePriority;
-import com.intellij.jira.rest.model.JiraIssueTransition;
-import com.intellij.jira.rest.model.JiraIssueUser;
-import com.intellij.jira.rest.model.JiraIssueWorklog;
-import com.intellij.jira.rest.model.JiraPermission;
 import com.intellij.jira.util.JiraGsonUtil;
-import com.intellij.tasks.jira.JiraRepository;
+import com.intellij.tasks.jira.JiraUtil;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -40,7 +30,7 @@ public class JiraIssueParser {
     }
 
     public static List<JiraIssue> parseIssues(String response){
-        JiraIssuesWrapper<JiraIssue> wrapper = JiraRepository.GSON.fromJson(response, ISSUES_WRAPPER_TYPE);
+        JiraIssuesWrapper<JiraIssue> wrapper = JiraUtil.GSON.fromJson(response, ISSUES_WRAPPER_TYPE);
         if (isNull(wrapper)) {
             return new ArrayList<>();
         }
@@ -49,7 +39,7 @@ public class JiraIssueParser {
     }
 
     public static List<JiraIssueTransition> parseIssueTransitions(String response){
-        JiraIssueTransitionsWrapper<JiraIssueTransition> wrapper = JiraRepository.GSON.fromJson(response, ISSUE_TRANSITION_WRAPPER_TYPE);
+        JiraIssueTransitionsWrapper<JiraIssueTransition> wrapper = JiraUtil.GSON.fromJson(response, ISSUE_TRANSITION_WRAPPER_TYPE);
         if (isNull(wrapper)) {
             return new ArrayList<>();
         }

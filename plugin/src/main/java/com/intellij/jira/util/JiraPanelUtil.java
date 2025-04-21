@@ -5,11 +5,15 @@ import com.intellij.jira.rest.model.JiraIssueComponent;
 import com.intellij.jira.rest.model.JiraProjectVersion;
 import com.intellij.jira.tasks.ToggleWatchIssueTask;
 import com.intellij.jira.ui.panels.JiraPanel;
+import consulo.localize.LocalizeValue;
 import consulo.project.Project;
+import consulo.ui.Button;
+import consulo.ui.ButtonStyle;
 import consulo.ui.ex.JBColor;
 import consulo.ui.ex.awt.JBLabel;
 import consulo.ui.ex.awt.JBUI;
 import consulo.ui.ex.awt.UIUtil;
+import consulo.ui.ex.awtUnsafe.TargetAWT;
 import org.jetbrains.annotations.Nls;
 import org.jetbrains.annotations.NotNull;
 
@@ -140,7 +144,11 @@ public class JiraPanelUtil {
         JiraPanel labelsPanel = createWhitePanel(new FlowLayout(FlowLayout.LEFT));
         labelsPanel.add(label);
 
-        issue.getLabels().forEach(labelText -> labelsPanel.add(new Badge(labelText)));
+        issue.getLabels().forEach(labelText -> {
+            Button button = Button.create(LocalizeValue.of(labelText));
+            button.addStyle(ButtonStyle.BORDERLESS);
+            labelsPanel.add(TargetAWT.to(button));
+        });
 
         JiraPanel panel = createWhiteBorderPanel();
         panel.add(label, LINE_START);
@@ -196,26 +204,4 @@ public class JiraPanelUtil {
                 .map(JiraIssueComponent::getName)
                 .collect(Collectors.joining(", "));
     }
-
-
-    private static class Badge extends TagButton {
-
-        private static final int myInsets = JBUI.scale(4);
-
-        public Badge(@Nls String text) {
-            super(text, null);
-            remove(myCloseButton);
-            myButton.setBackground(JBColor.WHITE);
-        }
-
-        @Override
-        protected void layoutButtons() {
-            myButton.setMargin(JBUI.emptyInsets());
-            Dimension size = myButton.getPreferredSize();
-            Dimension tagSize = new Dimension(size.width - myInsets * 2, size.height);
-            setPreferredSize(tagSize);
-            myButton.setBounds(new Rectangle(tagSize));
-        }
-    }
-
 }

@@ -4,12 +4,12 @@ import com.intellij.jira.data.JiraIssuesData;
 import com.intellij.jira.rest.model.JiraIssue;
 import com.intellij.jira.rest.model.JiraIssueStatus;
 import com.intellij.jira.ui.JiraIssueStyleFactory;
+import consulo.ui.ex.Gray;
+import consulo.ui.ex.JBColor;
 import org.jetbrains.annotations.NotNull;
 
-import static MergeCommitsHighlighter.MERGE_COMMIT_FOREGROUND;
-
 public class ResolvedIssuesHighlighter implements JiraIssueHighlighter {
-
+    public static final JBColor MERGE_COMMIT_FOREGROUND = new JBColor(Gray._128, Gray._96);
 
     @Override
     public @NotNull JiraIssueStyle getStyle(@NotNull JiraIssue issue) {

@@ -52,7 +52,7 @@ public class JiraTransitionTaskEditor implements Editor {
         JPanel newChangelistPanel = FormBuilder.createFormBuilder()
                                                     .addComponent(SeparatorFactory.createSeparator("Changelist", null))
                                                     .addComponent(createChangelistCheck)
-                                                    .setFormLeftIndent(30)
+                                                    //TODO .setFormLeftIndent(30)
                                                     .addLabeledComponent(changeListNameLabel, changeListNameField)
                                                     .addComponent(setDefaultCheck)
                                                     .getPanel();

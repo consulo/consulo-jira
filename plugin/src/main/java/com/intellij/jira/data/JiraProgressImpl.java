@@ -1,6 +1,7 @@
 package com.intellij.jira.data;
 
 import consulo.application.ApplicationManager;
+import consulo.application.progress.EmptyProgressIndicator;
 import consulo.application.progress.ProgressIndicator;
 import consulo.disposer.Disposable;
 import consulo.disposer.Disposer;
@@ -15,7 +16,7 @@ public class JiraProgressImpl implements JiraProgress, Disposable {
 
     @NotNull private final Object myLock = new Object();
     @NotNull private final List<JiraProgressListener> myListeners = new ArrayList<>();
-    @NotNull private final Set<JiraProgressIndicator> myTasksWithVisibleProgress = new HashSet<>();
+    @NotNull private final Set<ProgressIndicator> myTasksWithVisibleProgress = new HashSet<>();
 
     public JiraProgressImpl(@NotNull Disposable parent) {
         Disposer.register(parent, this);
@@ -70,7 +71,7 @@ public class JiraProgressImpl implements JiraProgress, Disposable {
         }
     }
 
-    private final class JiraProgressIndicator extends AbstractProgressIndicatorBase {
+    private final class JiraProgressIndicator extends EmptyProgressIndicator {
        // @NotNull private ProgressKey myKey;
         private final boolean myVisible;
 
@@ -80,18 +81,14 @@ public class JiraProgressImpl implements JiraProgress, Disposable {
 
         @Override
         public void start() {
-            synchronized (getLock()) {
-                super.start();
-                started(this);
-            }
+            super.start();
+            started(this);
         }
 
         @Override
         public void stop() {
-            synchronized (getLock()) {
-                super.stop();
-                stopped(this);
-            }
+            super.stop();
+            stopped(this);
         }
 
 

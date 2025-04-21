@@ -1,33 +1,33 @@
 package com.intellij.jira.components;
 
+import consulo.annotation.component.ComponentScope;
+import consulo.annotation.component.ServiceAPI;
+import consulo.annotation.component.ServiceImpl;
 import consulo.application.ApplicationManager;
+import consulo.jira.notification.JiraNotificationContributor;
 import consulo.project.ui.notification.Notification;
-import consulo.project.ui.notification.NotificationGroup;
 import consulo.project.ui.notification.NotificationType;
+import jakarta.inject.Singleton;
 
+@ServiceAPI(ComponentScope.APPLICATION)
+@ServiceImpl
+@Singleton
 public class JiraNotificationManager {
 
-    private static final String BALLON_NOTIFICATION_GROUP_NAME = "Jira Balloon Notifications";
-    private static final String STICKY_BALLON_NOTIFICATION_GROUP_NAME = "Jira Sticky Balloon Notifications";
-
-    public static JiraNotificationManager getInstance(){
+    public static JiraNotificationManager getInstance() {
         return ApplicationManager.getApplication().getInstance(JiraNotificationManager.class);
     }
 
-    public Notification createNotification(String title, String content){
-        return getNotificationGroup(BALLON_NOTIFICATION_GROUP_NAME).createNotification(title, content, NotificationType.INFORMATION);
+    public Notification createNotification(String title, String content) {
+        return JiraNotificationContributor.BALLON.createNotification(title, content, NotificationType.INFORMATION, null);
     }
 
-    public Notification createNotificationError(String title, String content){
-        return getNotificationGroup(STICKY_BALLON_NOTIFICATION_GROUP_NAME).createNotification(title, content, NotificationType.ERROR);
+    public Notification createNotificationError(String title, String content) {
+        return JiraNotificationContributor.STICKY.createNotification(title, content, NotificationType.ERROR, null);
     }
 
-    public Notification createSilentNotification(String title, String content){
-        return getNotificationGroup(BALLON_NOTIFICATION_GROUP_NAME).createNotification(title, content, NotificationType.INFORMATION);
-    }
-
-    private static NotificationGroup getNotificationGroup(String name) {
-        return NotificationGroupManager.getInstance().getNotificationGroup(name);
+    public Notification createSilentNotification(String title, String content) {
+        return JiraNotificationContributor.STICKY.createNotification(title, content, NotificationType.INFORMATION, null);
     }
 
 }

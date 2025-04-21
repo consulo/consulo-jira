@@ -17,9 +17,10 @@ import consulo.disposer.Disposable;
 import consulo.disposer.Disposer;
 import consulo.ui.ex.action.ActionManager;
 import consulo.ui.ex.action.ActionToolbar;
+import consulo.ui.ex.action.AnAction;
 import consulo.ui.ex.action.DefaultActionGroup;
-import consulo.ui.ex.action.util.ActionUtil;
 import consulo.ui.ex.awt.OnePixelSplitter;
+import consulo.ui.ex.awt.ProgressStripe;
 import consulo.ui.ex.awt.ScrollPaneFactory;
 import consulo.ui.ex.awt.Splitter;
 import consulo.util.dataholder.Key;
@@ -104,8 +105,8 @@ public class JiraIssuesPanel extends JiraPanel implements DataProvider, Disposab
     }
 
     private static void invokeOpenTaskAction(@NotNull InputEvent e, @NotNull Component component) {
-        var action = ActionManager.getInstance().getAction(OpenIssueTaskAction.ID);
-        ActionUtil.invokeAction(action, component, "JiraIssuesTable", e, null);
+        AnAction action = ActionManager.getInstance().getAction(OpenIssueTaskAction.ID);
+        // TODO !!! ActionUtil.invokeAction(action, component, "JiraIssuesTable", e, null);
     }
 
     @NotNull

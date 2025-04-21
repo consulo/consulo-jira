@@ -8,6 +8,7 @@ import com.intellij.jira.util.JiraPanelUtil;
 import com.intellij.jira.util.SimpleSelectableList;
 import consulo.application.ApplicationManager;
 import consulo.application.util.ConcurrentFactoryMap;
+import consulo.jira.icon.JiraIconGroup;
 import consulo.project.Project;
 import consulo.ui.ex.SimpleTextAttributes;
 import consulo.ui.ex.awt.*;
@@ -93,7 +94,7 @@ public class ConfigureJiraServersDialog extends DialogWrapper {
         myServersList.setCellRenderer(new ColoredListCellRenderer<>() {
             @Override
             protected void customizeCellRenderer(@NotNull JList<? extends JiraServer> list, JiraServer value, int index, boolean selected, boolean hasFocus) {
-                setIcon(TasksCoreIcons.Jira);
+                setIcon(JiraIconGroup.jiraicon());
                 append(value.getPresentableName(), SimpleTextAttributes.REGULAR_ATTRIBUTES);
             }
         });
@@ -146,7 +147,7 @@ public class ConfigureJiraServersDialog extends DialogWrapper {
                             addJiraServer();
                         })
                         .setRemoveAction(button -> {
-                            if (Messages.showOkCancelDialog(myProject, "You are going to delete this server, are you sure?","Delete Server", Messages.getOkButton(), Messages.getCancelButton(), Messages.getQuestionIcon()) == Messages.OK) {
+                            if (Messages.showOkCancelDialog(myProject, "You are going to delete this server, are you sure?","Delete Server", "OK", "Cancel", Messages.getQuestionIcon()) == Messages.OK) {
                                 removeJiraServer();
                             }
                         })

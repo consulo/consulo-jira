@@ -32,8 +32,8 @@ public class JiraIssueListTableModel extends ListTableModel<JiraIssue> {
         issues.forEach(issue -> {
             for (JiraIssueColumn<?, ?> column : getJiraIssueColumnManager().getCurrentColumns()) {
                 String columnWidth = getJiraIssueColumnManager().getColumnWidth(column.getId());
-                String valueColumnWidth = ((JiraIssueColumn<JiraIssue, String>) column).valueOf(issue);
-                if (StringUtil.length(columnWidth) < StringUtil.length(valueColumnWidth)) {
+                String valueColumnWidth = StringUtil.notNullize(((JiraIssueColumn<JiraIssue, String>) column).valueOf(issue));
+                if (columnWidth.length() < valueColumnWidth.length()) {
                     getJiraIssueColumnManager().setColumnWidth(column.getId(), valueColumnWidth);
                 }
             }

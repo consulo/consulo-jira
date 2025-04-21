@@ -1,6 +1,9 @@
 package com.intellij.jira.jql;
 
 import com.intellij.jira.rest.model.jql.JQLSearcher;
+import consulo.annotation.component.ComponentScope;
+import consulo.annotation.component.ServiceAPI;
+import consulo.annotation.component.ServiceImpl;
 import consulo.component.persist.PersistentStateComponent;
 import consulo.component.persist.State;
 import consulo.component.persist.Storage;
@@ -10,6 +13,8 @@ import consulo.util.xml.serializer.XmlSerializationException;
 import consulo.util.xml.serializer.XmlSerializer;
 import consulo.util.xml.serializer.XmlSerializerUtil;
 import consulo.util.xml.serializer.annotation.Tag;
+import jakarta.inject.Inject;
+import jakarta.inject.Singleton;
 import org.jdom.Element;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -22,6 +27,9 @@ import java.util.List;
 import static java.util.Objects.nonNull;
 
 @State(name = "JQLSearcherProjectManager", storages = @Storage(StoragePathMacros.WORKSPACE_FILE))
+@ServiceAPI(ComponentScope.PROJECT)
+@ServiceImpl
+@Singleton
 public class JQLSearcherProjectManager implements PersistentStateComponent<JQLSearcherProjectManager.Config> {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(JQLSearcherProjectManager.class);
@@ -32,8 +40,9 @@ public class JQLSearcherProjectManager implements PersistentStateComponent<JQLSe
 
     private Config myConfig = new Config();
 
+    @Inject
     protected JQLSearcherProjectManager(Project project) {
-        this.myProject = project;
+        myProject = project;
     }
 
     public static JQLSearcherProjectManager getInstance(@NotNull Project project) {

@@ -13,6 +13,7 @@ import java.util.List;
 import static com.intellij.jira.util.JiraGsonUtil.createArrayNameObjects;
 import static com.intellij.jira.util.JiraGsonUtil.createNameObject;
 import static consulo.util.collection.ContainerUtil.getFirstItem;
+import static consulo.util.lang.StringUtil.isEmpty;
 import static consulo.util.lang.StringUtil.trim;
 import static java.util.Objects.nonNull;
 import static java.util.stream.Collectors.toList;

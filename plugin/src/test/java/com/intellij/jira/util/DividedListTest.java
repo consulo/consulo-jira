@@ -1,6 +1,5 @@
 package com.intellij.jira.util;
 
-import com.intellij.openapi.util.Condition;
 import org.apache.commons.lang3.StringUtils;
 import org.junit.Assert;
 import org.junit.Before;
@@ -9,10 +8,11 @@ import org.junit.Test;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.function.Predicate;
 
 public class DividedListTest {
 
-    private static final Condition<String> IS_FRUIT = StringUtils::isAlpha;
+    private static final Predicate<String> IS_FRUIT = StringUtils::isAlpha;
     private static final String BANANA = "Banana";
     private static final String APPLE = "Apple";
     private static final String ORANGE = "Orange";
