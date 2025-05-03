@@ -6,8 +6,8 @@ import com.intellij.jira.rest.model.jql.SearcherEditor;
 import consulo.project.Project;
 import consulo.ui.ex.awt.DialogWrapper;
 import consulo.ui.ex.awt.ValidationInfo;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import jakarta.annotation.Nonnull;
+import jakarta.annotation.Nullable;
 
 import javax.swing.*;
 
@@ -20,7 +20,7 @@ public class EditSearcherDialog extends DialogWrapper {
     private final JQLSearcher myOldSearcher;
     protected final SearcherEditor myEditor;
 
-    public EditSearcherDialog(@NotNull Project project, @NotNull JQLSearcher searcher) {
+    public EditSearcherDialog(@Nonnull Project project, @Nonnull JQLSearcher searcher) {
         super(project, false);
         myProject = project;
         myOldSearcher = searcher.clone();

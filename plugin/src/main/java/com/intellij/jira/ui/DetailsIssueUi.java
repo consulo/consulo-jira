@@ -2,7 +2,7 @@ package com.intellij.jira.ui;
 
 import com.intellij.jira.data.JiraIssuesData;
 import com.intellij.jira.ui.panels.JiraIssuePanel;
-import org.jetbrains.annotations.NotNull;
+import jakarta.annotation.Nonnull;
 
 import javax.swing.JComponent;
 
@@ -17,12 +17,12 @@ public class DetailsIssueUi implements IssueUi {
     }
 
     @Override
-    public @NotNull String getId() {
+    public @Nonnull String getId() {
         return ""; // TabGroupId provides the id
     }
 
     @Override
-    public @NotNull JComponent getMainComponent() {
+    public @Nonnull JComponent getMainComponent() {
         return new JiraIssuePanel(myIssuesData, myIssueKey, this);
     }
 

@@ -12,8 +12,8 @@ import consulo.project.Project;
 import consulo.ui.ex.awt.FormBuilder;
 import consulo.ui.ex.awt.ValidationInfo;
 import consulo.util.lang.StringUtil;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import jakarta.annotation.Nonnull;
+import jakarta.annotation.Nullable;
 
 import javax.swing.*;
 import java.util.Arrays;
@@ -67,7 +67,7 @@ public class LabelsFieldEditor extends AbstractFieldEditor<String> {
         }
 
         @Override
-        public @NotNull Collection<String> getItems(String prefix, boolean cached, CompletionParameters parameters) {
+        public @Nonnull Collection<String> getItems(String prefix, boolean cached, CompletionParameters parameters) {
             JiraServerManager manager = ApplicationManager.getApplication().getInstance(JiraServerManager.class);
             JiraRestApi jiraRestApi = manager.getJiraRestApi(myProject);
 

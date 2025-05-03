@@ -6,7 +6,7 @@ import com.intellij.jira.server.JiraRestApi;
 import com.intellij.jira.util.result.Result;
 import consulo.application.progress.ProgressIndicator;
 import consulo.project.Project;
-import org.jetbrains.annotations.NotNull;
+import jakarta.annotation.Nonnull;
 
 import java.util.Map;
 
@@ -15,14 +15,14 @@ public class TransitIssueTask extends AbstractBackgroundableTask {
     private String transitionId;
     private Map<String, FieldEditorInfo> fields;
 
-    public TransitIssueTask(@NotNull Project project, String issueId, String transitionId, Map<String, FieldEditorInfo> transitionFields) {
+    public TransitIssueTask(@Nonnull Project project, String issueId, String transitionId, Map<String, FieldEditorInfo> transitionFields) {
         super(project, "Transiting Issue...", issueId);
         this.transitionId = transitionId;
         this.fields = transitionFields;
     }
 
     @Override
-    public void run(@NotNull ProgressIndicator indicator) {
+    public void run(@Nonnull ProgressIndicator indicator) {
         JiraRestApi jiraRestApi = getJiraRestApi();
         Result result = jiraRestApi.transitIssue(issueIdOrKey, transitionId, fields);
         if(!result.isValid()) {

@@ -5,7 +5,7 @@ import consulo.util.lang.StringUtil;
 import consulo.util.xml.serializer.annotation.Attribute;
 import consulo.util.xml.serializer.annotation.Tag;
 import consulo.util.xml.serializer.annotation.Transient;
-import org.jetbrains.annotations.NotNull;
+import jakarta.annotation.Nonnull;
 
 import java.util.Objects;
 
@@ -128,7 +128,7 @@ public class JiraServer {
         return StringUtil.isEmpty(trim(getUrl())) ? "<undefined>" : getUrl();
     }
 
-    @NotNull
+    @Nonnull
     @Override
     public JiraServer clone(){
         return new JiraServer(this);

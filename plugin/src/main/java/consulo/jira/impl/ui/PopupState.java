@@ -5,8 +5,8 @@ import consulo.application.util.registry.Registry;
 import consulo.ui.ex.popup.JBPopup;
 import consulo.ui.ex.popup.event.JBPopupListener;
 import consulo.ui.ex.popup.event.LightweightWindowEvent;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import jakarta.annotation.Nonnull;
+import jakarta.annotation.Nullable;
 
 import java.lang.ref.WeakReference;
 
@@ -19,12 +19,12 @@ public abstract class PopupState<Popup> {
     private boolean hiddenLongEnough = true;
     private long timeHiddenAt;
 
-    public static @NotNull PopupState<JBPopup> forPopup() {
+    public static @Nonnull PopupState<JBPopup> forPopup() {
         return new JBPopupState();
     }
 
 
-    public void prepareToShow(@NotNull Popup popup) {
+    public void prepareToShow(@Nonnull Popup popup) {
         hidePopup();
         addListener(popup);
         reference = new WeakReference<>(popup);
@@ -57,13 +57,13 @@ public abstract class PopupState<Popup> {
     }
 
 
-    abstract void addListener(@NotNull Popup popup);
+    abstract void addListener(@Nonnull Popup popup);
 
-    abstract void removeListener(@NotNull Popup popup);
+    abstract void removeListener(@Nonnull Popup popup);
 
-    abstract boolean isShowing(@NotNull Popup popup);
+    abstract boolean isShowing(@Nonnull Popup popup);
 
-    abstract void hide(@NotNull Popup popup);
+    abstract void hide(@Nonnull Popup popup);
 
     void onHide() {
         Popup popup = getPopup();
@@ -75,28 +75,28 @@ public abstract class PopupState<Popup> {
 
     private static final class JBPopupState extends PopupState<JBPopup> implements JBPopupListener {
         @Override
-        void addListener(@NotNull JBPopup popup) {
+        void addListener(@Nonnull JBPopup popup) {
             popup.addListener(this);
         }
 
         @Override
-        void removeListener(@NotNull JBPopup popup) {
+        void removeListener(@Nonnull JBPopup popup) {
             popup.removeListener(this);
         }
 
         @Override
-        boolean isShowing(@NotNull JBPopup popup) {
+        boolean isShowing(@Nonnull JBPopup popup) {
             return popup.isVisible();
         }
 
         @Override
-        void hide(@NotNull JBPopup popup) {
+        void hide(@Nonnull JBPopup popup) {
             popup.cancel();
             removeListener(popup);
         }
 
         @Override
-        public void onClosed(@NotNull LightweightWindowEvent event) {
+        public void onClosed(@Nonnull LightweightWindowEvent event) {
             onHide();
         }
     }

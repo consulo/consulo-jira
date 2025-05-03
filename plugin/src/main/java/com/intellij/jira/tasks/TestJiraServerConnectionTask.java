@@ -9,8 +9,8 @@ import consulo.application.progress.Task;
 import consulo.component.ProcessCanceledException;
 import consulo.project.Project;
 import consulo.task.TaskRepository;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import jakarta.annotation.Nonnull;
+import jakarta.annotation.Nullable;
 
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
@@ -23,7 +23,7 @@ public class TestJiraServerConnectionTask extends Task.Modal {
     private TaskRepository.CancellableConnection myConnection;
     private JiraServer myServer;
 
-    public TestJiraServerConnectionTask(@Nullable Project project, @NotNull JiraServer server) {
+    public TestJiraServerConnectionTask(@Nullable Project project, @Nonnull JiraServer server) {
         super(project, "Test connection", true);
         this.myProject = project;
         this.myServer = server;
@@ -38,7 +38,7 @@ public class TestJiraServerConnectionTask extends Task.Modal {
     }
 
     @Override
-    public void run(@NotNull ProgressIndicator indicator) {
+    public void run(@Nonnull ProgressIndicator indicator) {
         indicator.setText("Connecting to " + myServer.getUrl() + "...");
         indicator.setFraction(0);
         indicator.setIndeterminate(true);

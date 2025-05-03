@@ -15,8 +15,8 @@ import consulo.ui.ex.action.ActionGroup;
 import consulo.ui.ex.awt.JBList;
 import consulo.ui.ex.awt.ScrollPaneFactory;
 import consulo.util.dataholder.Key;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import jakarta.annotation.Nonnull;
+import jakarta.annotation.Nullable;
 
 import javax.swing.*;
 import java.awt.*;
@@ -34,7 +34,7 @@ class JiraIssueWorkLogsPanel extends AbstractJiraToolWindowPanel {
 
     private JBList<JiraIssueWorklog> issueWorklogList;
 
-    JiraIssueWorkLogsPanel(@NotNull JiraIssue issue) {
+    JiraIssueWorkLogsPanel(@Nonnull JiraIssue issue) {
         super(issue);
         this.timeTracking = issue.getTimetracking();
 
@@ -52,7 +52,7 @@ class JiraIssueWorkLogsPanel extends AbstractJiraToolWindowPanel {
     }
 
     @Override
-    public @Nullable Object getData(@NotNull Key dataId) {
+    public @Nullable Object getData(@Nonnull Key dataId) {
         if (JiraDataKeys.ISSUE_WORKLOG.is(dataId)
                 && Objects.nonNull(issueWorklogList.getSelectedValue())) {
             return worklog;

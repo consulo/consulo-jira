@@ -5,19 +5,19 @@ import com.intellij.jira.server.JiraRestApi;
 import com.intellij.jira.util.result.Result;
 import consulo.application.progress.ProgressIndicator;
 import consulo.project.Project;
-import org.jetbrains.annotations.NotNull;
+import jakarta.annotation.Nonnull;
 
 public class DeleteCommentTask extends AbstractBackgroundableTask {
 
     private String commentId;
 
-    public DeleteCommentTask(@NotNull Project project, String issueKey, String commentId) {
+    public DeleteCommentTask(@Nonnull Project project, String issueKey, String commentId) {
         super(project, "Deleting comment...", issueKey);
         this.commentId = commentId;
     }
 
     @Override
-    public void run(@NotNull ProgressIndicator indicator) {
+    public void run(@Nonnull ProgressIndicator indicator) {
         JiraRestApi jiraRestApi = getJiraRestApi();
 
         Result result = jiraRestApi.deleteIssueComment(issueIdOrKey, commentId);

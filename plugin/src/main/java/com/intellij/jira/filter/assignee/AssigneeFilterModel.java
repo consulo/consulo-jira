@@ -3,8 +3,8 @@ package com.intellij.jira.filter.assignee;
 import com.intellij.jira.data.Issues;
 import com.intellij.jira.filter.FilterModel;
 import com.intellij.jira.filter.IssueFilterCollection;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import jakarta.annotation.Nonnull;
+import jakarta.annotation.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,12 +30,12 @@ public class AssigneeFilterModel extends FilterModel<AssigneeFilter> {
     }
 
     @Override
-    protected @Nullable AssigneeFilter createFilter(@NotNull List<String> values) {
+    protected @Nullable AssigneeFilter createFilter(@Nonnull List<String> values) {
         return new AssigneeFilterImpl(values);
     }
 
     @Override
-    protected @NotNull List<String> getFilterValues(@NotNull AssigneeFilter filter) {
+    protected @Nonnull List<String> getFilterValues(@Nonnull AssigneeFilter filter) {
         return new ArrayList<>(filter.getUsers());
     }
 

@@ -8,7 +8,7 @@ import consulo.ui.ex.awt.JBUI;
 import consulo.ui.ex.awt.UIUtil;
 import consulo.ui.ex.popup.JBPopup;
 import consulo.ui.ex.popup.JBPopupFactory;
-import org.jetbrains.annotations.NotNull;
+import jakarta.annotation.Nonnull;
 
 import javax.swing.*;
 import java.awt.*;
@@ -24,7 +24,7 @@ public class GoToIssuePopup {
     private Function<String, Future> onSelectedIssueKey;
 
 
-    public GoToIssuePopup(@NotNull Project project, Collection<String> values, Function<String, Future> onSelectedIssueKey) {
+    public GoToIssuePopup(@Nonnull Project project, Collection<String> values, Function<String, Future> onSelectedIssueKey) {
         this.onSelectedIssueKey = onSelectedIssueKey;
         TextFieldWithAutoCompletion.StringsCompletionProvider provider = new TextFieldWithAutoCompletion.StringsCompletionProvider(values, null);
 

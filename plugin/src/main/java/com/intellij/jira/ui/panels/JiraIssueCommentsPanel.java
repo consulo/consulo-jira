@@ -16,8 +16,8 @@ import consulo.ui.ex.awt.JBList;
 import consulo.ui.ex.awt.JBUI;
 import consulo.ui.ex.awt.ScrollPaneFactory;
 import consulo.util.dataholder.Key;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import jakarta.annotation.Nonnull;
+import jakarta.annotation.Nullable;
 
 import javax.swing.*;
 import java.awt.*;
@@ -33,7 +33,7 @@ class JiraIssueCommentsPanel extends AbstractJiraToolWindowPanel {
     private JiraIssueComment comment;
     private JBList<JiraIssueComment> issueCommentList;
 
-    JiraIssueCommentsPanel(@NotNull JiraIssue issue) {
+    JiraIssueCommentsPanel(@Nonnull JiraIssue issue) {
         super(issue);
         initContent(issue.getRenderedComments());
     }
@@ -49,7 +49,7 @@ class JiraIssueCommentsPanel extends AbstractJiraToolWindowPanel {
     }
 
     @Override
-    public @Nullable Object getData(@NotNull Key dataId) {
+    public @Nullable Object getData(@Nonnull Key dataId) {
         if (JiraDataKeys.ISSUE_COMMENT.is(dataId) && Objects.nonNull(issueCommentList.getSelectedValue())) {
             return comment;
         }

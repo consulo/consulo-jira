@@ -13,8 +13,8 @@ import consulo.ui.ex.action.ActionGroup;
 import consulo.ui.ex.awt.JBList;
 import consulo.ui.ex.awt.ScrollPaneFactory;
 import consulo.util.dataholder.Key;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import jakarta.annotation.Nonnull;
+import jakarta.annotation.Nullable;
 
 import javax.swing.*;
 import java.awt.*;
@@ -31,7 +31,7 @@ class JiraIssueLinksPanel extends AbstractJiraToolWindowPanel {
     private JiraIssueLink issueLink;
     private JBList<JiraIssueLink> issueLinkList;
 
-    JiraIssueLinksPanel(@NotNull JiraIssue issue) {
+    JiraIssueLinksPanel(@Nonnull JiraIssue issue) {
         super(true, issue);
         initContent(issue.getIssueLinks());
     }
@@ -46,7 +46,7 @@ class JiraIssueLinksPanel extends AbstractJiraToolWindowPanel {
     }
 
     @Override
-    public @Nullable Object getData(@NotNull Key dataId) {
+    public @Nullable Object getData(@Nonnull Key dataId) {
         if (JiraDataKeys.ISSUE_LINK.is(dataId)
             && Objects.nonNull(issueLinkList.getSelectedValue())) {
             return issueLink;

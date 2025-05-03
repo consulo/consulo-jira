@@ -12,8 +12,8 @@ import consulo.ui.ex.action.AnActionEvent;
 import consulo.ui.ex.awt.*;
 import consulo.util.lang.StringUtil;
 import it.unimi.dsi.fastutil.ints.IntArrayList;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import jakarta.annotation.Nonnull;
+import jakarta.annotation.Nullable;
 
 import javax.swing.*;
 import java.awt.*;
@@ -87,7 +87,7 @@ public abstract class SelectFieldEditor<T> extends AbstractFieldEditor<T> {
 
         protected JBList<E> myList;
 
-        public PickerDialog(@Nullable Project project, @NotNull String title, List<E> items, List<E> selectedItems) {
+        public PickerDialog(@Nullable Project project, @Nonnull String title, List<E> items, List<E> selectedItems) {
             super(project, false);
             setTitle(title);
             myList = new JBList(items);

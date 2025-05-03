@@ -4,7 +4,7 @@ import com.intellij.jira.server.JiraRestApi;
 import com.intellij.jira.ui.dialog.ChangelistSettingsDialog;
 import consulo.project.Project;
 import consulo.ui.ex.action.AnActionEvent;
-import org.jetbrains.annotations.NotNull;
+import jakarta.annotation.Nonnull;
 
 public class ChangelistSettingsDialogAction extends JiraIssueDialogAction {
 
@@ -15,7 +15,7 @@ public class ChangelistSettingsDialogAction extends JiraIssueDialogAction {
     }
 
     @Override
-    public void onClick(@NotNull AnActionEvent e, @NotNull Project project, @NotNull JiraRestApi jiraRestApi) {
+    public void onClick(@Nonnull AnActionEvent e, @Nonnull Project project, @Nonnull JiraRestApi jiraRestApi) {
         ChangelistSettingsDialog dialog = new ChangelistSettingsDialog(project);
         dialog.show();
     }

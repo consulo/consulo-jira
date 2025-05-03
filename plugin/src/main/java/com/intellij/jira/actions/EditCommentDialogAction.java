@@ -8,7 +8,7 @@ import com.intellij.jira.ui.dialog.EditCommentDialog;
 import consulo.application.AllIcons;
 import consulo.project.Project;
 import consulo.ui.ex.action.AnActionEvent;
-import org.jetbrains.annotations.NotNull;
+import jakarta.annotation.Nonnull;
 
 import java.util.List;
 import java.util.Objects;
@@ -24,7 +24,7 @@ public class EditCommentDialogAction extends JiraIssueDialogAction {
     }
 
     @Override
-    public void onClick(@NotNull AnActionEvent e, @NotNull Project project, @NotNull JiraRestApi jiraRestApi) {
+    public void onClick(@Nonnull AnActionEvent e, @Nonnull Project project, @Nonnull JiraRestApi jiraRestApi) {
         String issueKey = e.getRequiredData(JiraDataKeys.ISSUE_KEY);
         JiraIssueComment issueComment = e.getRequiredData(JiraDataKeys.ISSUE_COMMENT);
 

@@ -3,7 +3,7 @@ package com.intellij.jira.ui.table.column;
 import com.intellij.jira.rest.model.JiraIssue;
 import com.intellij.jira.ui.renders.JiraIconAndTextTableCellRenderer;
 import com.intellij.jira.util.JiraIssueUtil;
-import org.jetbrains.annotations.Nullable;
+import jakarta.annotation.Nullable;
 
 import javax.swing.table.TableCellRenderer;
 

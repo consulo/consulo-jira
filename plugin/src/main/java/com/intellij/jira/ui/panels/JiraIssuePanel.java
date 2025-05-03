@@ -8,7 +8,7 @@ import consulo.disposer.Disposable;
 import consulo.disposer.Disposer;
 import consulo.ui.ex.awt.JBSplitter;
 import consulo.ui.ex.awt.OnePixelSplitter;
-import org.jetbrains.annotations.NotNull;
+import jakarta.annotation.Nonnull;
 
 import javax.swing.*;
 import java.awt.*;
@@ -23,7 +23,7 @@ public class JiraIssuePanel extends JiraPanel implements Disposable {
     private JiraIssueDescriptionPanel myDescriptionPanel;
     private JiraIssueStatusActivityPanel myStatusActivityPanel;
 
-    public JiraIssuePanel(@NotNull JiraIssuesData issuesData, String issueKey, @NotNull Disposable parent) {
+    public JiraIssuePanel(@Nonnull JiraIssuesData issuesData, String issueKey, @Nonnull Disposable parent) {
         super(new BorderLayout());
 
         Disposer.register(parent, this);

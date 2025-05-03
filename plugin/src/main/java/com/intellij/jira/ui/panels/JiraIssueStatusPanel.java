@@ -13,9 +13,9 @@ import consulo.component.messagebus.MessageBusConnection;
 import consulo.ui.ex.JBColor;
 import consulo.ui.ex.action.ActionGroup;
 import consulo.util.dataholder.Key;
+import jakarta.annotation.Nonnull;
+import jakarta.annotation.Nullable;
 import org.jetbrains.annotations.NonNls;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
 
@@ -24,7 +24,7 @@ public class JiraIssueStatusPanel extends AbstractJiraToolWindowPanel {
     private final JiraIssuesData myIssuesData;
     private JiraIssue myIssue;
 
-    public JiraIssueStatusPanel(@NotNull JiraIssuesData issuesData, JiraIssue issue) {
+    public JiraIssueStatusPanel(@Nonnull JiraIssuesData issuesData, JiraIssue issue) {
         super(issue);
         myIssuesData = issuesData;
         this.myIssue = issue;
@@ -44,7 +44,7 @@ public class JiraIssueStatusPanel extends AbstractJiraToolWindowPanel {
     }
 
     @Override
-    public @Nullable Object getData(@NotNull @NonNls Key dataId) {
+    public @Nullable Object getData(@Nonnull @NonNls Key dataId) {
         if (JiraDataKeys.ISSUE.is(dataId)) {
             return myIssue;
         }
@@ -84,7 +84,7 @@ public class JiraIssueStatusPanel extends AbstractJiraToolWindowPanel {
         setContent(mainPanel);
     }
 
-    public void update(@NotNull JiraIssue issue) {
+    public void update(@Nonnull JiraIssue issue) {
         myIssue = issue;
         init();
     }

@@ -3,8 +3,8 @@ package com.intellij.jira.filter.type;
 import com.intellij.jira.data.Issues;
 import com.intellij.jira.filter.FilterModel;
 import com.intellij.jira.filter.IssueFilterCollection;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import jakarta.annotation.Nonnull;
+import jakarta.annotation.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,13 +31,13 @@ public class TypeFilterModel extends FilterModel<TypeFilter> {
 
     @Nullable
     @Override
-    protected TypeFilter createFilter(@NotNull List<String> values) {
+    protected TypeFilter createFilter(@Nonnull List<String> values) {
         return new TypeFilterImpl(values);
     }
 
-    @NotNull
+    @Nonnull
     @Override
-    protected List<String> getFilterValues(@NotNull TypeFilter filter) {
+    protected List<String> getFilterValues(@Nonnull TypeFilter filter) {
         return new ArrayList<>(filter.getIssueTypes());
     }
 

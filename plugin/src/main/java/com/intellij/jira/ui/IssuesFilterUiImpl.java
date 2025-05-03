@@ -15,7 +15,7 @@ import com.intellij.jira.filter.type.TypeFilterModel;
 import consulo.proxy.EventDispatcher;
 import consulo.ui.ex.action.*;
 import consulo.ui.ex.awt.action.CustomComponentAction;
-import org.jetbrains.annotations.NotNull;
+import jakarta.annotation.Nonnull;
 
 import javax.swing.*;
 import java.util.List;
@@ -60,7 +60,7 @@ public class IssuesFilterUiImpl implements IssuesFilterUi {
             myStatusFilterModel.getIssueTypeFilter()));
     }
 
-    @NotNull
+    @Nonnull
     @Override
     public ActionGroup createActionGroup() {
         DefaultActionGroup actionGroup = new DefaultActionGroup();
@@ -86,7 +86,7 @@ public class IssuesFilterUiImpl implements IssuesFilterUi {
     }
 
     @Override
-    public void addFilterListener(@NotNull IssueFilterListener listener) {
+    public void addFilterListener(@Nonnull IssueFilterListener listener) {
         myFilterListenerDispatcher.addListener(listener);
     }
 
@@ -112,23 +112,23 @@ public class IssuesFilterUiImpl implements IssuesFilterUi {
 
     protected static class FilterActionComponent extends DumbAwareAction implements CustomComponentAction {
 
-        @NotNull
+        @Nonnull
         private final Supplier<? extends JComponent> myComponentCreator;
 
-        public FilterActionComponent(@NotNull String dynamicText,
-                                     @NotNull Supplier<? extends JComponent> componentCreator) {
+        public FilterActionComponent(@Nonnull String dynamicText,
+                                     @Nonnull Supplier<? extends JComponent> componentCreator) {
             super(dynamicText);
             myComponentCreator = componentCreator;
         }
 
-        @NotNull
+        @Nonnull
         @Override
-        public JComponent createCustomComponent(@NotNull Presentation presentation, @NotNull String place) {
+        public JComponent createCustomComponent(@Nonnull Presentation presentation, @Nonnull String place) {
             return myComponentCreator.get();
         }
 
         @Override
-        public void actionPerformed(@NotNull AnActionEvent e) {
+        public void actionPerformed(@Nonnull AnActionEvent e) {
             // TODO !!
 //            MainVcsLogUi vcsLogUi = e.getData(VcsLogInternalDataKeys.MAIN_UI);
 //            if (vcsLogUi == null) {

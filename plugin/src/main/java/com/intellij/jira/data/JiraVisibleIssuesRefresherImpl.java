@@ -9,7 +9,7 @@ import consulo.component.ProcessCanceledException;
 import consulo.jira.impl.SingleTaskController;
 import consulo.project.Project;
 import consulo.util.collection.ContainerUtil;
-import org.jetbrains.annotations.NotNull;
+import jakarta.annotation.Nonnull;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,7 +27,7 @@ public class JiraVisibleIssuesRefresherImpl implements JiraVisibleIssuesRefreshe
     private final SingleTaskController<Request, Issues> mySingleTaskController;
     private List<VisibleIssueChangeListener> myVisibleIssueChangeListeners = new ArrayList<>();
 
-    public JiraVisibleIssuesRefresherImpl(@NotNull JiraIssuesData issuesData, @NotNull Issues initialIssues, JiraProgress progress, IssueFilterCollection filters, IssueFilterer issueFilterer) {
+    public JiraVisibleIssuesRefresherImpl(@Nonnull JiraIssuesData issuesData, @Nonnull Issues initialIssues, JiraProgress progress, IssueFilterCollection filters, IssueFilterer issueFilterer) {
         myProject = issuesData.getProject();
         myIssueData = issuesData;
         myFilters = filters;
@@ -42,7 +42,7 @@ public class JiraVisibleIssuesRefresherImpl implements JiraVisibleIssuesRefreshe
             }
         }) {
             @Override
-            protected @NotNull SingleTask startNewBackgroundTask() {
+            protected @Nonnull SingleTask startNewBackgroundTask() {
                 ProgressIndicator indicator = progress.createProgressIndicator();
                 ProgressManager.getInstance().runProcessWithProgressAsynchronously(new MyTask(myProject), indicator);
                 return new SingleTaskController.SingleTaskImpl(/*future, */indicator);
@@ -92,12 +92,12 @@ public class JiraVisibleIssuesRefresherImpl implements JiraVisibleIssuesRefreshe
 
     private class MyTask extends Task.Backgroundable {
 
-        public MyTask(@NotNull Project project) {
+        public MyTask(@Nonnull Project project) {
             super(project, "Applying filters");
         }
 
         @Override
-        public void run(@NotNull ProgressIndicator indicator) {
+        public void run(@Nonnull ProgressIndicator indicator) {
             indicator.setIndeterminate(true);
             Issues issues = myIssues;
             List<Request> requests = mySingleTaskController.peekRequests();

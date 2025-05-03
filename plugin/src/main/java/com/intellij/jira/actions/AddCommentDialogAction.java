@@ -7,7 +7,7 @@ import com.intellij.jira.ui.dialog.AddCommentDialog;
 import consulo.application.AllIcons;
 import consulo.project.Project;
 import consulo.ui.ex.action.AnActionEvent;
-import org.jetbrains.annotations.NotNull;
+import jakarta.annotation.Nonnull;
 
 import java.util.List;
 
@@ -22,7 +22,7 @@ public class AddCommentDialogAction extends JiraIssueDialogAction{
     }
 
     @Override
-    public void onClick(@NotNull AnActionEvent e, @NotNull Project project, @NotNull JiraRestApi jiraRestApi) {
+    public void onClick(@Nonnull AnActionEvent e, @Nonnull Project project, @Nonnull JiraRestApi jiraRestApi) {
         String issueKey = e.getRequiredData(JiraDataKeys.ISSUE_KEY);
         boolean userHasPermission = jiraRestApi.userHasPermissionOnIssue(issueKey, BROWSE_PROJECTS, ADD_COMMENTS);
         if(!userHasPermission){

@@ -2,7 +2,7 @@ package com.intellij.jira.settings.editor;
 
 import com.intellij.jira.settings.ChangelistState;
 import consulo.ui.ex.awt.ValidationInfo;
-import org.jetbrains.annotations.Nullable;
+import jakarta.annotation.Nullable;
 
 import javax.swing.*;
 import java.awt.event.ActionListener;

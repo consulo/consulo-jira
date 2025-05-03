@@ -8,7 +8,7 @@ import com.intellij.jira.rest.model.JiraIssueTimeTracking;
 import consulo.ui.ex.awt.FormBuilder;
 import consulo.ui.ex.awt.ValidationInfo;
 import consulo.util.lang.StringUtil;
-import org.jetbrains.annotations.Nullable;
+import jakarta.annotation.Nullable;
 
 import javax.swing.*;
 import java.util.Objects;

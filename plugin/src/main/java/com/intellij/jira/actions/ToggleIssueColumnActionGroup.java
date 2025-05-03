@@ -5,8 +5,8 @@ import com.intellij.jira.ui.table.column.JiraIssueColumn;
 import consulo.application.ApplicationManager;
 import consulo.project.Project;
 import consulo.ui.ex.action.*;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import jakarta.annotation.Nonnull;
+import jakarta.annotation.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,7 +22,8 @@ public class ToggleIssueColumnActionGroup extends DefaultActionGroup {
     }
 
     @Override
-    public AnAction @NotNull [] getChildren(@Nullable AnActionEvent e) {
+    @Nonnull
+    public AnAction[] getChildren(@Nullable AnActionEvent e) {
         List<AnAction> actions = new ArrayList<>();
         if (e != null) {
             actions.add(AnSeparator.create("Show Columns"));
@@ -36,11 +37,12 @@ public class ToggleIssueColumnActionGroup extends DefaultActionGroup {
     }
 
     @Override
-    public void update(@NotNull AnActionEvent e) {
+    public void update(@Nonnull AnActionEvent e) {
         Project project = e.getData(Project.KEY);
-        if (isNull(project)|| !project.isInitialized() || project.isDisposed()) {
+        if (isNull(project) || !project.isInitialized() || project.isDisposed()) {
             e.getPresentation().setVisible(false);
-        } else {
+        }
+        else {
             JiraServerManager manager = ApplicationManager.getApplication().getInstance(JiraServerManager.class);
             e.getPresentation().setVisible(manager.hasJiraServerConfigured(project));
         }
@@ -49,27 +51,28 @@ public class ToggleIssueColumnActionGroup extends DefaultActionGroup {
     private static final class ToggleColumnAction extends ToggleAction {
         private final JiraIssueColumn<?, ?> myColumn;
 
-        private ToggleColumnAction(@NotNull JiraIssueColumn<?, ?> column) {
+        private ToggleColumnAction(@Nonnull JiraIssueColumn<?, ?> column) {
             super(column.getName());
             myColumn = column;
         }
 
         @Override
-        public boolean isSelected(@NotNull AnActionEvent e) {
+        public boolean isSelected(@Nonnull AnActionEvent e) {
             return isVisible(myColumn);
         }
 
         @Override
-        public void setSelected(@NotNull AnActionEvent e, boolean state) {
+        public void setSelected(@Nonnull AnActionEvent e, boolean state) {
             if (state) {
                 addColumn(myColumn);
-            } else {
+            }
+            else {
                 removeColumn(myColumn);
             }
         }
 
         @Override
-        public void update(@NotNull AnActionEvent e) {
+        public void update(@Nonnull AnActionEvent e) {
             super.update(e);
             e.getPresentation().setEnabledAndVisible(true);
         }

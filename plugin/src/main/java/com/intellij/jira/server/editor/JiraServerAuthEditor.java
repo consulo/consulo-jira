@@ -10,8 +10,8 @@ import consulo.project.Project;
 import consulo.ui.ex.awt.*;
 import consulo.ui.ex.awt.event.DocumentAdapter;
 import consulo.util.lang.StringUtil;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import jakarta.annotation.Nonnull;
+import jakarta.annotation.Nullable;
 
 import javax.swing.*;
 import javax.swing.event.DocumentEvent;
@@ -87,7 +87,7 @@ public abstract class JiraServerAuthEditor implements Editor {
     protected void installListener(JTextField textField) {
         textField.getDocument().addDocumentListener(new DocumentAdapter() {
             @Override
-            protected void textChanged(@NotNull DocumentEvent e) {
+            protected void textChanged(@Nonnull DocumentEvent e) {
                 ApplicationManager.getApplication().invokeLater(() -> {
                     apply();
                 });

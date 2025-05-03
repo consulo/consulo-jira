@@ -6,7 +6,7 @@ import consulo.ui.ex.awt.JBFont;
 import consulo.ui.ex.awt.JBLabel;
 import consulo.ui.ex.awt.JBUI;
 import consulo.util.lang.StringUtil;
-import org.jetbrains.annotations.NotNull;
+import jakarta.annotation.Nonnull;
 
 import javax.swing.border.Border;
 import javax.swing.border.CompoundBorder;
@@ -18,7 +18,7 @@ public class JiraStatusLightLabel extends JBLabel {
     private static final Font SANS_SERIF_BOLD = JBFont.create(new Font("SansSerif", Font.BOLD, 9));
     protected static final Border PADDING = JiraBorders.empty(1, 4, 0, 4);
 
-    public JiraStatusLightLabel(@NotNull JiraIssueStatus status) {
+    public JiraStatusLightLabel(@Nonnull JiraIssueStatus status) {
         super(StringUtil.toUpperCase(status.getName()), LEFT);
 
         setFont(SANS_SERIF_BOLD);

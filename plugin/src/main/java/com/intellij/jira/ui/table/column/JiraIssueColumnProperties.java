@@ -1,13 +1,13 @@
 package com.intellij.jira.ui.table.column;
 
 import com.intellij.jira.ui.JiraIssueUiProperties;
-import org.jetbrains.annotations.NotNull;
+import jakarta.annotation.Nonnull;
 
 public class JiraIssueColumnProperties {
 
     private TableColumnVisibilityProperty visibility;
 
-    public JiraIssueColumnProperties(@NotNull JiraIssueColumn<?, ?> column) {
+    public JiraIssueColumnProperties(@Nonnull JiraIssueColumn<?, ?> column) {
         visibility = new TableColumnVisibilityProperty(column);
     }
 
@@ -19,7 +19,7 @@ public class JiraIssueColumnProperties {
 
         private final JiraIssueColumn<?, ?> column;
 
-        public TableColumnVisibilityProperty(@NotNull JiraIssueColumn<?, ?> column) {
+        public TableColumnVisibilityProperty(@Nonnull JiraIssueColumn<?, ?> column) {
             super(String.format("Table.%s.ColumnIdVisibility", column.getId()));
             this.column = column;
         }

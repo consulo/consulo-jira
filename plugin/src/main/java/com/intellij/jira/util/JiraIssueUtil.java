@@ -4,7 +4,7 @@ import com.intellij.jira.rest.model.JiraIssue;
 import com.intellij.jira.rest.model.JiraIssueUser;
 import consulo.application.util.DateFormatUtil;
 import consulo.util.lang.StringUtil;
-import org.jetbrains.annotations.NotNull;
+import jakarta.annotation.Nonnull;
 
 import java.util.Date;
 import java.util.regex.Matcher;
@@ -20,8 +20,8 @@ public class JiraIssueUtil {
 
     private JiraIssueUtil() { }
 
-    @NotNull
-    public static String getAssignee(@NotNull JiraIssue jiraIssue) {
+    @Nonnull
+    public static String getAssignee(@Nonnull JiraIssue jiraIssue) {
         JiraIssueUser assignedUser = jiraIssue.getAssignee();
         if (isNull(assignedUser)) {
             return EMPTY_TEXT;
@@ -37,25 +37,25 @@ public class JiraIssueUtil {
         return StringUtil.defaultIfEmpty(assignedUser.getDisplayName(), EMPTY_TEXT);
     }
 
-    @NotNull
-    public static String getIssueType(@NotNull JiraIssue jiraIssue) {
+    @Nonnull
+    public static String getIssueType(@Nonnull JiraIssue jiraIssue) {
         return nonNull(jiraIssue.getIssuetype()) ? jiraIssue.getIssuetype().getName() : EMPTY_TEXT;
     }
 
-    @NotNull
-    public static String getPriority(@NotNull JiraIssue jiraIssue) {
+    @Nonnull
+    public static String getPriority(@Nonnull JiraIssue jiraIssue) {
         return nonNull(jiraIssue.getPriority()) ? jiraIssue.getPriority().getName() : EMPTY_TEXT;
     }
 
-    public static String getStatus(@NotNull JiraIssue jiraIssue) {
+    public static String getStatus(@Nonnull JiraIssue jiraIssue) {
         return jiraIssue.getStatus().getName();
     }
 
-    public static String getCreated(@NotNull JiraIssue jiraIssue) {
+    public static String getCreated(@Nonnull JiraIssue jiraIssue) {
         return getPrettyDateTime(jiraIssue.getCreated());
     }
 
-    public static String getUpdated(@NotNull JiraIssue jiraIssue) {
+    public static String getUpdated(@Nonnull JiraIssue jiraIssue) {
         return getPrettyDateTime(jiraIssue.getUpdated());
     }
 

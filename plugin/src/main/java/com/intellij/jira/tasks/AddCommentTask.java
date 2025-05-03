@@ -5,8 +5,8 @@ import com.intellij.jira.server.JiraRestApi;
 import com.intellij.jira.util.result.Result;
 import consulo.application.progress.ProgressIndicator;
 import consulo.project.Project;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import jakarta.annotation.Nonnull;
+import jakarta.annotation.Nullable;
 
 public class AddCommentTask extends AbstractBackgroundableTask {
 
@@ -20,7 +20,7 @@ public class AddCommentTask extends AbstractBackgroundableTask {
     }
 
     @Override
-    public void run(@NotNull ProgressIndicator indicator) {
+    public void run(@Nonnull ProgressIndicator indicator) {
         JiraRestApi jiraRestApi = getJiraRestApi();
 
         Result result = jiraRestApi.addIssueComment(body, issueIdOrKey, viewableBy);

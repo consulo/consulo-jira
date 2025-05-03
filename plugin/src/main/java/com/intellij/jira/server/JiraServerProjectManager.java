@@ -14,9 +14,9 @@ import consulo.project.Project;
 import consulo.util.xml.serializer.XmlSerializerUtil;
 import consulo.util.xml.serializer.annotation.AbstractCollection;
 import consulo.util.xml.serializer.annotation.Tag;
+import jakarta.annotation.Nullable;
 import jakarta.inject.Singleton;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import jakarta.annotation.Nonnull;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,7 +34,7 @@ public class JiraServerProjectManager implements PersistentStateComponent<JiraSe
 
     private State myState = new State();
 
-    public static JiraServerManager getInstance(@NotNull Project project) {
+    public static JiraServerManager getInstance(@Nonnull Project project) {
         return project.getInstance(JiraServerManager.class);
     }
 
@@ -48,7 +48,7 @@ public class JiraServerProjectManager implements PersistentStateComponent<JiraSe
     }
 
     @Override
-    public void loadState(@NotNull State state) {
+    public void loadState(@Nonnull State state) {
         XmlSerializerUtil.copyBean(state, myState);
 
         myServers.clear();

@@ -13,11 +13,11 @@ import consulo.util.xml.serializer.XmlSerializationException;
 import consulo.util.xml.serializer.XmlSerializer;
 import consulo.util.xml.serializer.XmlSerializerUtil;
 import consulo.util.xml.serializer.annotation.Tag;
+import jakarta.annotation.Nullable;
 import jakarta.inject.Inject;
 import jakarta.inject.Singleton;
 import org.jdom.Element;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import jakarta.annotation.Nonnull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -45,7 +45,7 @@ public class JQLSearcherProjectManager implements PersistentStateComponent<JQLSe
         myProject = project;
     }
 
-    public static JQLSearcherProjectManager getInstance(@NotNull Project project) {
+    public static JQLSearcherProjectManager getInstance(@Nonnull Project project) {
         return project.getInstance(JQLSearcherProjectManager.class);
     }
 
@@ -58,7 +58,7 @@ public class JQLSearcherProjectManager implements PersistentStateComponent<JQLSe
     }
 
     @Override
-    public void loadState(@NotNull Config config) {
+    public void loadState(@Nonnull Config config) {
         XmlSerializerUtil.copyBean(config, myConfig);
 
         projectSearchers.clear();

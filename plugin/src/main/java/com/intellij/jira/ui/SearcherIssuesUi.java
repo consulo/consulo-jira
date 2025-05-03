@@ -19,9 +19,9 @@ import consulo.ui.ex.action.DefaultActionGroup;
 import consulo.ui.ex.awt.*;
 import consulo.ui.ex.awtUnsafe.TargetAWT;
 import consulo.util.dataholder.Key;
+import jakarta.annotation.Nonnull;
+import jakarta.annotation.Nullable;
 import org.jetbrains.annotations.NonNls;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
 import java.awt.*;
@@ -102,7 +102,7 @@ public class SearcherIssuesUi extends DefaultIssuesUi {
                 .subscribe(JQLSearcherManager.JQL_SEARCHERS_CHANGE, new MySearcherListener());
     }
 
-    @NotNull
+    @Nonnull
     @Override
     public JComponent getMainComponent() {
         return mySearchersWithIssuesPanel;
@@ -133,7 +133,7 @@ public class SearcherIssuesUi extends DefaultIssuesUi {
         }
 
         @Override
-        public @Nullable Object getData(@NotNull @NonNls Key dataId) {
+        public @Nullable Object getData(@Nonnull @NonNls Key dataId) {
             if (JiraUiDataKeys.SEARCHER_TREE_NODE.is(dataId)) {
                 return myTree.getSelectedNode();
             } else if (JiraUiDataKeys.JIRA_UI_PROPERTIES.is(dataId)) {
@@ -229,7 +229,7 @@ public class SearcherIssuesUi extends DefaultIssuesUi {
     private class MyPropertyChangeListener implements JiraIssueUiProperties.PropertyChangeListener {
 
         @Override
-        public <T> void onChanged(JiraIssueUiProperties.@NotNull JiraIssueUiProperty<T> property) {
+        public <T> void onChanged(JiraIssueUiProperties.JiraIssueUiProperty<T> property) {
             if (SHOW_SEARCHERS_PROPERTY.equals(property)) {
                 toggleSearchersPanel(myAppSettings.get(SHOW_SEARCHERS_PROPERTY));
             }

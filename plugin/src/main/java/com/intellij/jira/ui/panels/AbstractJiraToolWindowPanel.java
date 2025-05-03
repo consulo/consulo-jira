@@ -8,9 +8,9 @@ import consulo.ui.ex.action.ActionToolbar;
 import consulo.ui.ex.awt.SimpleToolWindowPanel;
 import consulo.ui.ex.awt.Wrapper;
 import consulo.util.dataholder.Key;
+import jakarta.annotation.Nonnull;
+import jakarta.annotation.Nullable;
 import org.jetbrains.annotations.NonNls;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
 
@@ -43,7 +43,7 @@ public abstract class AbstractJiraToolWindowPanel extends SimpleToolWindowPanel 
     }
 
     @Override
-    public @Nullable Object getData(@NotNull @NonNls Key dataId) {
+    public @Nullable Object getData(@Nonnull @NonNls Key dataId) {
         if (JiraDataKeys.ISSUE_KEY == dataId) {
             return issueKey;
         } else if (JiraDataKeys.PROJECT_KEY == dataId) {
@@ -64,7 +64,7 @@ public abstract class AbstractJiraToolWindowPanel extends SimpleToolWindowPanel 
         //GuiUtils.installVisibilityReferent(myToolbarWrapper, actionToolbar.getComponent());
     }
 
-    public void setToolbarHeightReferent(@NotNull JComponent referent) {
+    public void setToolbarHeightReferent(@Nonnull JComponent referent) {
         myToolbarWrapper.setVerticalSizeReferent(referent);
     }
 

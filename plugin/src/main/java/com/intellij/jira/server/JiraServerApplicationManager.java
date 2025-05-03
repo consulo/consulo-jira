@@ -13,8 +13,8 @@ import consulo.credentialStorage.PasswordSafe;
 import consulo.util.xml.serializer.XmlSerializerUtil;
 import consulo.util.xml.serializer.annotation.AbstractCollection;
 import jakarta.inject.Singleton;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import jakarta.annotation.Nonnull;
+import jakarta.annotation.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,7 +37,7 @@ public class JiraServerApplicationManager implements PersistentStateComponent<Ji
     }
 
     @Override
-    public void loadState(@NotNull State state) {
+    public void loadState(@Nonnull State state) {
         XmlSerializerUtil.copyBean(state, myState);
 
         myServers.clear();

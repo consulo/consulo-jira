@@ -8,19 +8,19 @@ import consulo.project.Project;
 import consulo.project.ui.notification.Notifications;
 import consulo.ui.ex.action.AnAction;
 import consulo.ui.ex.action.AnActionEvent;
-import org.jetbrains.annotations.NotNull;
+import jakarta.annotation.Nonnull;
 
 import static java.util.Objects.isNull;
 import static java.util.Objects.nonNull;
 
 public abstract class JiraIssueDialogAction extends AnAction {
 
-    public JiraIssueDialogAction(@NotNull ActionProperties actionProperties) {
+    public JiraIssueDialogAction(@Nonnull ActionProperties actionProperties) {
         super(actionProperties.getText(), actionProperties.getDescription(), actionProperties.getIcon());
     }
 
     @Override
-    public void actionPerformed(@NotNull AnActionEvent event) {
+    public void actionPerformed(@Nonnull AnActionEvent event) {
         try{
             Project project = event.getData(Project.KEY);
             if(isNull(project)){
@@ -40,9 +40,9 @@ public abstract class JiraIssueDialogAction extends AnAction {
         }
     }
 
-    public abstract void onClick(@NotNull AnActionEvent e, @NotNull Project project, @NotNull JiraRestApi jiraRestApi);
+    public abstract void onClick(@Nonnull AnActionEvent e, @Nonnull Project project, @Nonnull JiraRestApi jiraRestApi);
 
-    public void onError(@NotNull Throwable error){
+    public void onError(@Nonnull Throwable error){
         String content = nonNull(error.getCause()) ? error.getCause().getMessage() : "";
         Notifications.Bus.notify(JiraNotificationManager.getInstance().createNotificationError(error.getMessage(), content));
     }

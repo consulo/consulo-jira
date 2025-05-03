@@ -6,8 +6,8 @@ import consulo.language.editor.ui.awt.EditorTextField;
 import consulo.language.editor.ui.awt.LanguageTextField;
 import consulo.project.Project;
 import consulo.ui.ex.awt.*;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import jakarta.annotation.Nonnull;
+import jakarta.annotation.Nullable;
 
 import javax.swing.*;
 
@@ -32,7 +32,7 @@ public class SearcherEditor implements Editor {
 
     private JCheckBox mySharedSearcherCheckBox;
 
-    public SearcherEditor(@NotNull Project project, @NotNull JQLSearcher searcher) {
+    public SearcherEditor(@Nonnull Project project, @Nonnull JQLSearcher searcher) {
         myProject = project;
         mySearcher = searcher;
         mySharedSearcher = searcher.isShared();

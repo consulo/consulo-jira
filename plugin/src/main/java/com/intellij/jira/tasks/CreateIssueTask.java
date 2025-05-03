@@ -9,7 +9,7 @@ import com.intellij.jira.ui.editors.AttachmentFieldEditor;
 import com.intellij.jira.util.result.Result;
 import consulo.application.progress.ProgressIndicator;
 import consulo.project.Project;
-import org.jetbrains.annotations.NotNull;
+import jakarta.annotation.Nonnull;
 
 import java.io.File;
 import java.util.Map;
@@ -21,13 +21,13 @@ public class CreateIssueTask extends AbstractBackgroundableTask {
     private final Map<String, TransitionFieldHelper.FieldEditorInfo> myCreateIssueFields;
     private JiraCreatedIssue myCreatedIssue;
 
-    public CreateIssueTask(@NotNull Project project, Map<String, TransitionFieldHelper.FieldEditorInfo> createIssueFields) {
+    public CreateIssueTask(@Nonnull Project project, Map<String, TransitionFieldHelper.FieldEditorInfo> createIssueFields) {
         super(project, "Creating Issue...", null);
         myCreateIssueFields = createIssueFields;
     }
 
     @Override
-    public void run(@NotNull ProgressIndicator indicator) {
+    public void run(@Nonnull ProgressIndicator indicator) {
         JiraRestApi jiraRestApi = getJiraRestApi();
         Result<JiraCreatedIssue> createdIssue = jiraRestApi.createIssue(myCreateIssueFields);
         if(!createdIssue.isValid()) {
@@ -58,7 +58,7 @@ public class CreateIssueTask extends AbstractBackgroundableTask {
 
     private class MyAddIssueAttachmentTask extends AddIssueAttachmentTask {
 
-        public MyAddIssueAttachmentTask(@NotNull Project project, @NotNull String issueKey, @NotNull File attachment) {
+        public MyAddIssueAttachmentTask(@Nonnull Project project, @Nonnull String issueKey, @Nonnull File attachment) {
             super(project, issueKey, attachment);
         }
 

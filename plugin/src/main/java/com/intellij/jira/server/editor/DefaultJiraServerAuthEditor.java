@@ -4,7 +4,7 @@ import com.intellij.jira.server.JiraServer;
 import com.intellij.jira.ui.editors.Editor;
 import consulo.project.Project;
 import consulo.ui.ex.awt.*;
-import org.jetbrains.annotations.Nullable;
+import jakarta.annotation.Nullable;
 
 import javax.swing.*;
 import java.util.function.BiConsumer;

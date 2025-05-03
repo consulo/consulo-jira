@@ -4,8 +4,8 @@ import com.intellij.jira.rest.model.JiraIssueTimeTracking;
 import com.intellij.jira.rest.model.JiraIssueWorklog;
 import com.intellij.jira.tasks.AddWorklogTask;
 import consulo.project.Project;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import jakarta.annotation.Nonnull;
+import jakarta.annotation.Nullable;
 
 import javax.swing.*;
 import java.util.List;
@@ -19,7 +19,7 @@ public class AddWorklogDialog extends EditWorklogDialog {
         setTitle("Add Log Work: " + issueKey);
     }
 
-    @NotNull
+    @Nonnull
     @Override
     protected Action[] createActions() {
         return new Action[]{new AddWorklogExecuteAction(), myCancelAction};

@@ -20,8 +20,8 @@ import consulo.project.Project;
 import consulo.ui.ex.JBColor;
 import consulo.ui.ex.awt.*;
 import consulo.util.dataholder.Key;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import jakarta.annotation.Nonnull;
+import jakarta.annotation.Nullable;
 
 import javax.swing.*;
 import java.awt.*;
@@ -57,7 +57,7 @@ public class IssueTransitionDialog extends DialogWrapper implements DataProvider
     private final Map<String, FieldEditorInfo> myTransitionFields = new HashMap<>();
 
 
-    public IssueTransitionDialog(@NotNull Project project, @NotNull JiraIssue issue, List<JiraIssueTransition> transitions) {
+    public IssueTransitionDialog(@Nonnull Project project, @Nonnull JiraIssue issue, List<JiraIssueTransition> transitions) {
         super(project, false);
         myProject = project;
         myIssue = issue;
@@ -115,7 +115,7 @@ public class IssueTransitionDialog extends DialogWrapper implements DataProvider
     }
 
     @Override
-    public @Nullable Object getData(@NotNull Key dataId) {
+    public @Nullable Object getData(@Nonnull Key dataId) {
         if (JiraDataKeys.ISSUE_KEY.is(dataId)) {
             return myIssue.getKey();
         } else if (JiraDataKeys.PROJECT_KEY.is(dataId)) {

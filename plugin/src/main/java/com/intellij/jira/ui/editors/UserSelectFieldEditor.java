@@ -6,7 +6,7 @@ import com.intellij.jira.JiraDataKeys;
 import com.intellij.jira.rest.model.JiraIssueUser;
 import consulo.project.Project;
 import consulo.ui.ex.action.AnActionEvent;
-import org.jetbrains.annotations.Nullable;
+import jakarta.annotation.Nullable;
 
 import java.util.ArrayList;
 import java.util.Collections;

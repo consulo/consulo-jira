@@ -6,7 +6,7 @@ import com.intellij.jira.rest.model.JiraProject;
 import com.intellij.jira.util.JiraGsonUtil;
 import consulo.project.Project;
 import consulo.ui.ex.action.AnActionEvent;
-import org.jetbrains.annotations.Nullable;
+import jakarta.annotation.Nullable;
 
 import javax.swing.*;
 import java.util.Collections;

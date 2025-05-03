@@ -11,8 +11,8 @@ import consulo.ui.ex.action.DefaultActionGroup;
 import consulo.ui.ex.awt.*;
 import consulo.ui.ex.popup.JBPopupFactory;
 import consulo.util.lang.StringUtil;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import jakarta.annotation.Nonnull;
+import jakarta.annotation.Nullable;
 
 import javax.swing.*;
 import java.util.ArrayList;
@@ -165,7 +165,7 @@ public class CustomChangelistSettingsEditor extends ChangelistSettingsEditor {
         }
 
         @Override
-        public void actionPerformed(@NotNull AnActionEvent e) {
+        public void actionPerformed(@Nonnull AnActionEvent e) {
             ((CollectionListModel<String>) myFieldNamesList.getModel()).add(field);
             myFieldNamesList.setSelectedIndex(myFieldNamesList.getModel().getSize() - 1);
             myFieldNamesList.doLayout();

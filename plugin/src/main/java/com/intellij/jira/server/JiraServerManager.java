@@ -7,9 +7,9 @@ import consulo.annotation.component.ServiceAPI;
 import consulo.annotation.component.ServiceImpl;
 import consulo.application.ApplicationManager;
 import consulo.project.Project;
+import jakarta.annotation.Nonnull;
 import jakarta.inject.Singleton;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import jakarta.annotation.Nullable;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -28,16 +28,16 @@ public class JiraServerManager {
         return ApplicationManager.getApplication().getInstance(JiraServerManager.class);
     }
 
-    public int getSelectedServerIndex(@NotNull Project project) {
+    public int getSelectedServerIndex(@Nonnull Project project) {
         return getSelectedProjectServer(project);
     }
 
-    public boolean hasJiraServerConfigured(@NotNull Project project) {
+    public boolean hasJiraServerConfigured(@Nonnull Project project) {
         return hasSelectedProjectServer(project);
     }
 
     @Nullable
-    public JiraServer getCurrentJiraServer(@NotNull Project project) {
+    public JiraServer getCurrentJiraServer(@Nonnull Project project) {
         SimpleSelectableList<JiraServer> allServers = getAllServers(project);
         if (allServers.hasSelectedItem()) {
             return allServers.getSelectedItem();
@@ -46,7 +46,7 @@ public class JiraServerManager {
         return null;
     }
 
-    public void setServers(@NotNull Project project, SimpleSelectableList<JiraServer> servers) {
+    public void setServers(@Nonnull Project project, SimpleSelectableList<JiraServer> servers) {
 
         // Updates Global Servers
         List<JiraServer> globalServers = servers.getItems().stream().filter(JiraServer::isShared).collect(Collectors.toList());
@@ -66,12 +66,12 @@ public class JiraServerManager {
     }
 
     @Nullable
-    public JiraRestApi getJiraRestApi(@NotNull Project project) {
+    public JiraRestApi getJiraRestApi(@Nonnull Project project) {
         return convertFrom(getCurrentJiraServer(project));
     }
 
-    @NotNull
-    public JiraRestApi getJiraRestApiFrom(@NotNull JiraServer jiraServer) {
+    @Nonnull
+    public JiraRestApi getJiraRestApiFrom(@Nonnull JiraServer jiraServer) {
         return convertFrom(jiraServer);
     }
 
@@ -84,7 +84,7 @@ public class JiraServerManager {
         return new JiraRestApi(new JiraRestTemplate(jiraServer));
     }
 
-    public SimpleSelectableList<JiraServer> getAllServers(@NotNull Project project) {
+    public SimpleSelectableList<JiraServer> getAllServers(@Nonnull Project project) {
         SimpleSelectableList<JiraServer> allServers = SimpleSelectableList.of(getGlobalServers());
 
         JiraServerProjectManager serverProjectManager = getJiraServerProjectManager(project);
@@ -101,11 +101,11 @@ public class JiraServerManager {
         return getJiraServerApplicationManager().getServers();
     }
 
-    public boolean hasSelectedProjectServer(@NotNull Project project) {
+    public boolean hasSelectedProjectServer(@Nonnull Project project) {
         return getAllServers(project).hasSelectedItem();
     }
 
-    public int getSelectedProjectServer(@NotNull Project project) {
+    public int getSelectedProjectServer(@Nonnull Project project) {
         return getJiraServerProjectManager(project).getSelectedServerIndex();
     }
 
@@ -113,7 +113,7 @@ public class JiraServerManager {
         return ApplicationManager.getApplication().getInstance(JiraServerApplicationManager.class);
     }
 
-    private JiraServerProjectManager getJiraServerProjectManager(@NotNull Project project) {
+    private JiraServerProjectManager getJiraServerProjectManager(@Nonnull Project project) {
         return project.getInstance(JiraServerProjectManager.class);
     }
 }

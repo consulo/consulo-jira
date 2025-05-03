@@ -4,7 +4,7 @@ import com.google.gson.JsonElement;
 import consulo.ui.ex.awt.FormBuilder;
 import consulo.ui.ex.awt.ValidationInfo;
 import consulo.util.lang.StringUtil;
-import org.jetbrains.annotations.Nullable;
+import jakarta.annotation.Nullable;
 
 import javax.swing.*;
 import java.io.File;

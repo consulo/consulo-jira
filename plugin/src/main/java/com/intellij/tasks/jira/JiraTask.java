@@ -1,144 +1,151 @@
-/*
- * Copyright 2000-2009 JetBrains s.r.o.
- *
- *  Licensed under the Apache License, Version 2.0 (the "License");
- *  you may not use this file except in compliance with the License.
- *  You may obtain a copy of the License at
- *
- *  http://www.apache.org/licenses/LICENSE-2.0
- *
- *  Unless required by applicable law or agreed to in writing, software
- *  distributed under the License is distributed on an "AS IS" BASIS,
- *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *  See the License for the specific language governing permissions and
- *  limitations under the License.
- */
-
+// Copyright 2000-2024 JetBrains s.r.o. and contributors. Use of this source code is governed by the Apache 2.0 license.
 package com.intellij.tasks.jira;
 
-import com.intellij.tasks.jira.model.JiraIssue;
-import com.intellij.tasks.jira.model.JiraIssueType;
-import com.intellij.tasks.jira.model.JiraStatus;
+import consulo.application.AllIcons;
 import consulo.jira.icon.JiraIconGroup;
 import consulo.platform.base.icon.PlatformIconGroup;
 import consulo.task.*;
 import consulo.ui.image.Image;
-import consulo.util.collection.ContainerUtil;
+import consulo.util.lang.ObjectUtil;
 import jakarta.annotation.Nonnull;
 import jakarta.annotation.Nullable;
 
 import java.util.Date;
 
 /**
- * @author Dmitry Avdeev
+ * Base class containing common interpretation of issues object's fields in
+ * JIRA's XML-RPC and REST interfaces.
+ *
+ * @author Mikhail Golubev
  */
-public class JiraTask extends Task {
+public abstract class JiraTask extends Task {
+    protected final TaskRepository myRepository;
+    // Deferred icon must be stored as a field because otherwise it's going to initiate repainting
+    // of the containing component and will be re-built anew indefinitely.
+    // It can be accessed not only in EDT, e.g. to get completion items for tasks.
+    private volatile Image myIcon;
 
-  private final JiraIssue myJiraIssue;
-  private final TaskRepository myRepository;
+    protected JiraTask(@Nonnull TaskRepository repository) {
+        myRepository = repository;
+    }
 
-  public JiraTask(JiraIssue jiraIssue, TaskRepository repository) {
-    myJiraIssue = jiraIssue;
-    myRepository = repository;
-  }
+    @Override
+    public abstract @Nonnull String getId();
 
-  @Nonnull
-  public String getId() {
-    return myJiraIssue.getKey();
-  }
+    @Override
+    public abstract @Nonnull String getSummary();
 
-  @Nonnull
-  public String getSummary() {
-    return myJiraIssue.getSummary();
-  }
+    @Override
+    public abstract String getDescription();
 
-  public String getDescription() {
-    return myJiraIssue.getDescription();
-  }
+    @Override
+    @Nonnull
+    public abstract Comment[] getComments();
 
-
-  @Nonnull
-  public Comment[] getComments() {
-    return ContainerUtil.map2Array(myJiraIssue.getComments(), Comment.class, JiraCommentAdapter::new);
-  }
-
-  @Nonnull
-  public Image getIcon() {
-    JiraIssueType issueType = myJiraIssue.getIssueType();
-    String iconUrl = issueType.getIconUrl();
     // iconUrl will be null in JIRA versions prior 5.x.x
-    final Image icon = iconUrl == null
-      ? JiraIconGroup.jiraicon()
-      : isClosed() ? CachedIconLoader.getDisabledIcon(iconUrl) : CachedIconLoader.getIcon(iconUrl);
-    return icon != null ? icon : PlatformIconGroup.actionsHelp();
-  }
+    protected abstract @Nullable String getIconUrl();
 
-  @Nonnull
-  @Override
-  public TaskType getType() {
-    String type = myJiraIssue.getIssueType().getName();
-    if (type == null) {
-      return TaskType.OTHER;
+    @Override
+    public abstract @Nonnull TaskType getType();
+
+    @Override
+    public abstract TaskState getState();
+
+    @Override
+    public abstract @Nullable Date getUpdated();
+
+    @Override
+    public abstract Date getCreated();
+
+    @Override
+    public final String getIssueUrl() {
+        return myRepository.getUrl() + "/browse/" + getId();
     }
-    else if (type.equals("Bug")) {
-      return TaskType.BUG;
+
+    @Override
+    @Nonnull
+    public final Image getIcon() {
+        if (myIcon == null) {
+            // getIconUrl() shouldn't be called before the instance is properly initialized
+            final String iconUrl = getIconUrl();
+            final Image icon = iconUrl == null
+                ? JiraIconGroup.jiraicon()
+                : isClosed() ? CachedIconLoader.getDisabledIcon(iconUrl) : CachedIconLoader.getIcon(iconUrl);
+            return icon != null ? icon : PlatformIconGroup.actionsHelp();
+        }
+        return myIcon;
     }
-    else if (type.equals("Exception")) {
-      return TaskType.EXCEPTION;
+
+    @Override
+    @Nonnull
+    public final TaskRepository getRepository() {
+        return myRepository;
     }
-    else if (type.equals("New Feature")) {
-      return TaskType.FEATURE;
+
+    @Override
+    public final boolean isClosed() {
+        return getState() == TaskState.RESOLVED;
     }
-    else {
-      return TaskType.OTHER;
+
+    @Override
+    public final boolean isIssue() {
+        return true;
     }
-  }
 
-  @Override
-  public TaskState getState() {
-    JiraStatus status = myJiraIssue.getStatus();
-    switch (Integer.parseInt(status.getId())) {
-      case 1:
-        return TaskState.OPEN;
-      case 3:
-        return TaskState.IN_PROGRESS;
-      case 4:
-        return TaskState.REOPENED;
-      case 5: // resolved
-      case 6: // closed
-        return TaskState.RESOLVED;
+    /**
+     * Pick the appropriate issue type's icon by its URL, contained in JIRA's responses.
+     * Icons will be lazily fetched using {@link CachedIconLoader}.
+     *
+     * @param iconUrl unique icon URL as returned from {@link #getIconUrl()}
+     * @return task con.
+     */
+    @Nonnull
+    protected static Image getIconByUrl(@Nullable String iconUrl) {
+        return ObjectUtil.notNull(CachedIconLoader.getIcon(iconUrl), AllIcons.FileTypes.Any_type);
     }
-    return null;
-  }
 
-  @Nullable
-  @Override
-  public Date getUpdated() {
-    return myJiraIssue.getUpdated();
-  }
+    /**
+     * Map unique state id to corresponding {@link TaskState} item.
+     *
+     * @param id issue's state numeric id
+     * @return {@link TaskState} item or {@code null}, if none matches
+     */
+    @SuppressWarnings("MethodMayBeStatic")
+    @Nullable
+    protected final  TaskState getStateById(int id) {
+        return switch (id) {
+            case 1 -> TaskState.OPEN;
+            case 3 -> TaskState.IN_PROGRESS;
+            case 4 -> TaskState.REOPENED;
+            case 5,  // resolved
+                 6 -> // closed
+                TaskState.RESOLVED;
+            default -> null;
+        };
+    }
 
-  @Override
-  public Date getCreated() {
-    return myJiraIssue.getCreated();
-  }
-
-  @Override
-  public boolean isClosed() {
-    return getState() == TaskState.RESOLVED;
-  }
-
-  public boolean isIssue() {
-    return true;
-  }
-
-  @Override
-  public String getIssueUrl() {
-    return myRepository.getUrl() + "/browse/" + myJiraIssue.getKey();
-  }
-
-  @Nullable
-  @Override
-  public TaskRepository getRepository() {
-    return myRepository;
-  }
+    /**
+     * Map task's type name in JIRA's API to corresponding {@link TaskType} item.
+     *
+     * @param type issue's type name
+     * @return {@link TaskType} item or {@link TaskType#OTHER}, if none matches
+     */
+    @SuppressWarnings("MethodMayBeStatic")
+    protected final TaskType getTypeByName(@Nullable String type) {
+        if (type == null) {
+            return TaskType.OTHER;
+        }
+        else if ("Bug".equals(type)) {
+            return TaskType.BUG;
+        }
+        else if ("Exception".equals(type)) {
+            return TaskType.EXCEPTION;
+        }
+        else if ("New Feature".equals(type)) {
+            return TaskType.FEATURE;
+        }
+        else {
+            return TaskType.OTHER;
+        }
+    }
 }

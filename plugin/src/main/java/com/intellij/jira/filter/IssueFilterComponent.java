@@ -16,7 +16,7 @@ import consulo.ui.ex.popup.JBPopup;
 import consulo.ui.ex.popup.JBPopupFactory;
 import consulo.ui.ex.popup.ListPopup;
 import consulo.util.lang.StringUtil;
-import org.jetbrains.annotations.NotNull;
+import jakarta.annotation.Nonnull;
 
 import javax.accessibility.AccessibleContext;
 import javax.accessibility.AccessibleRole;
@@ -37,15 +37,15 @@ public abstract class IssueFilterComponent<Filter extends IssueFilter, Model ext
     protected static final int BORDER_SIZE = 2;
 
     private final PopupState<JBPopup> myPopupState = PopupState.forPopup();
-    @NotNull
+    @Nonnull
     private final String myDisplayName;
     private JLabel myNameLabel;
     private JLabel myValueLabel;
 
-    @NotNull
+    @Nonnull
     protected final Model myFilterModel;
 
-    protected IssueFilterComponent(@NotNull String displayName, @NotNull Model filterModel) {
+    protected IssueFilterComponent(@Nonnull String displayName, @Nonnull Model filterModel) {
         myDisplayName = displayName;
         myFilterModel = filterModel;
     }
@@ -85,13 +85,13 @@ public abstract class IssueFilterComponent<Filter extends IssueFilter, Model ext
         return filter == null || StringUtil.isEmpty(filter.getDisplayText()) ? ALL : getText(filter);
     }
 
-    protected abstract String getText(@NotNull Filter filter);
+    protected abstract String getText(@Nonnull Filter filter);
 
-    public void installChangeListener(@NotNull Runnable onChange) {
+    public void installChangeListener(@Nonnull Runnable onChange) {
         myFilterModel.addSetFilterListener(onChange);
     }
 
-    @NotNull
+    @Nonnull
     protected Color getDefaultSelectorForeground() {
         return UIUtil.isUnderDarcula() ? UIUtil.getLabelForeground() : UIUtil.getInactiveTextColor().darker().darker();
     }
@@ -105,7 +105,7 @@ public abstract class IssueFilterComponent<Filter extends IssueFilter, Model ext
      */
     protected abstract ActionGroup createActionGroup();
 
-    @NotNull
+    @Nonnull
     protected AnAction createAllAction() {
         return new AllAction();
     }
@@ -117,7 +117,7 @@ public abstract class IssueFilterComponent<Filter extends IssueFilter, Model ext
         }
 
         @Override
-        public void actionPerformed(@NotNull AnActionEvent e) {
+        public void actionPerformed(@Nonnull AnActionEvent e) {
             myFilterModel.setFilter(null);
         }
     }
@@ -125,7 +125,7 @@ public abstract class IssueFilterComponent<Filter extends IssueFilter, Model ext
     private void showPopupMenuFromKeyboard() {
         addKeyListener(new KeyAdapter() {
             @Override
-            public void keyPressed(@NotNull KeyEvent e) {
+            public void keyPressed(@Nonnull KeyEvent e) {
                 if (e.getKeyCode() == KeyEvent.VK_ENTER || e.getKeyCode() == KeyEvent.VK_DOWN) {
                     showPopupMenu();
                 }
@@ -136,7 +136,7 @@ public abstract class IssueFilterComponent<Filter extends IssueFilter, Model ext
     private void showPopupMenuOnClick() {
         new ClickListener() {
             @Override
-            public boolean onClick(@NotNull MouseEvent event, int clickCount) {
+            public boolean onClick(@Nonnull MouseEvent event, int clickCount) {
                 showPopupMenu();
                 return true;
             }
@@ -146,12 +146,12 @@ public abstract class IssueFilterComponent<Filter extends IssueFilter, Model ext
     private void indicateHovering() {
         addMouseListener(new MouseAdapter() {
             @Override
-            public void mouseEntered(@NotNull MouseEvent e) {
+            public void mouseEntered(@Nonnull MouseEvent e) {
                 setOnHoverForeground();
             }
 
             @Override
-            public void mouseExited(@NotNull MouseEvent e) {
+            public void mouseExited(@Nonnull MouseEvent e) {
                 setDefaultForeground();
             }
         });
@@ -180,7 +180,7 @@ public abstract class IssueFilterComponent<Filter extends IssueFilter, Model ext
         popup.showUnderneathOf(this);
     }
 
-    @NotNull
+    @Nonnull
     protected ListPopup createPopupMenu() {
         return JBPopupFactory.getInstance().
             createActionGroupPopup(null, createActionGroup(), DataManager.getInstance().getDataContext(this),
@@ -198,7 +198,7 @@ public abstract class IssueFilterComponent<Filter extends IssueFilter, Model ext
     private static final class DynamicLabel extends JLabel {
         private final Supplier<String> myText;
 
-        private DynamicLabel(@NotNull Supplier<String> text) {
+        private DynamicLabel(@Nonnull Supplier<String> text) {
             myText = text;
         }
 

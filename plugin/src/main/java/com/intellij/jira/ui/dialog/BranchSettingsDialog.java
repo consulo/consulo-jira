@@ -6,8 +6,8 @@ import consulo.project.Project;
 import consulo.ui.ex.awt.DialogWrapper;
 import consulo.ui.ex.awt.FormBuilder;
 import consulo.ui.ex.awt.ValidationInfo;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import jakarta.annotation.Nonnull;
+import jakarta.annotation.Nullable;
 
 import javax.swing.*;
 
@@ -17,7 +17,7 @@ public class BranchSettingsDialog extends DialogWrapper {
 
     private final BranchSettingsEditor myBranchSettingsEditor;
 
-    public BranchSettingsDialog(@NotNull Project project, @NotNull BranchSettings branchSettings) {
+    public BranchSettingsDialog(@Nonnull Project project, @Nonnull BranchSettings branchSettings) {
         super(project, false);
         myBranchSettings = branchSettings;
         myBranchSettingsEditor = new BranchSettingsEditor(project, branchSettings);

@@ -13,7 +13,7 @@ import org.apache.commons.httpclient.methods.*;
 import org.apache.commons.httpclient.methods.multipart.FilePart;
 import org.apache.commons.httpclient.methods.multipart.MultipartRequestEntity;
 import org.apache.commons.httpclient.methods.multipart.Part;
-import org.jetbrains.annotations.NotNull;
+import jakarta.annotation.Nonnull;
 
 import java.io.File;
 import java.io.UnsupportedEncodingException;
@@ -39,7 +39,7 @@ public class JiraRestClient {
 
     private final JiraRestTemplate myJiraRestTemplate;
 
-    public JiraRestClient(@NotNull JiraRestTemplate jiraRestTemplate) {
+    public JiraRestClient(@Nonnull JiraRestTemplate jiraRestTemplate) {
         myJiraRestTemplate = jiraRestTemplate;
     }
 

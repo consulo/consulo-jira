@@ -23,39 +23,7 @@
         <tag>issue.managment</tag>
     </tags>
 
-    <extensionPoints>
-        <extensionPoint name="issueHighlighterFactory" interface="com.intellij.jira.ui.highlighters.JiraIssueHighlighterFactory" dynamic="true"/>
-        <extensionPoint name="valueProvider" interface="com.intellij.jira.util.provider.Provider" dynamic="true"/>
-    </extensionPoints>
-
-    <extensions defaultExtensionNs="com.intellij">
-        <applicationService serviceImplementation="com.intellij.jira.jql.JQLSearcherApplicationManager"/>
-        <applicationService serviceImplementation="com.intellij.jira.jql.JQLSearcherManager"/>
-        <applicationService serviceImplementation="com.intellij.jira.settings.branch.BranchSettings"/>
-        <applicationService serviceImplementation="com.intellij.jira.settings.ChangelistSettings"/>
-        <applicationService serviceImplementation="com.intellij.jira.ui.table.column.JiraIssueApplicationSettings"/>
-        <applicationService serviceImplementation="com.intellij.jira.server.JiraServerApplicationManager"/>
-        <applicationService serviceImplementation="com.intellij.jira.util.provider.ProviderFactoryImpl"/>
-
-
-
-        <jira.issueHighlighterFactory implementation="com.intellij.jira.ui.highlighters.MyIssuesHighlighter$Factory"/>
-        <jira.issueHighlighterFactory implementation="com.intellij.jira.ui.highlighters.ResolvedIssuesHighlighter$Factory"/>
-
-        <jira.valueProvider implementation="com.intellij.jira.util.provider.impl.IssueKeyProvider"/>
-        <jira.valueProvider implementation="com.intellij.jira.util.provider.impl.IssueSummaryProvider"/>
-        <jira.valueProvider implementation="com.intellij.jira.util.provider.impl.ProjectKeyProvider"/>
-
-    </extensions>
-
     <actions>
-        <action id="Jira.Issue.Refresh"
-                class="com.intellij.jira.actions.JiraIssuesRefreshAction"
-                text="Refresh Issues"
-                description="Updates the project issues"
-                icon="AllIcons.Actions.Refresh">
-        </action>
-
         <action class="com.intellij.jira.actions.AddSearcherAction" id="Jira.Issue.Jql.Add"/>
         <action class="com.intellij.jira.actions.EditSearcherAction" id="Jira.Issue.Jql.Edit"/>
         <action class="com.intellij.jira.actions.GoToIssuePopupAction" id="Jira.Issue.GoTo"/>
@@ -65,16 +33,11 @@
 
         <action class="com.intellij.jira.actions.OpenIssueTaskAction" id="Jira.Issue.OpenTask"/>
 
-
-        <action id="Jira.Issues.Hide.Searchers" class="com.intellij.jira.actions.HideSearchersAction"
-                icon="AllIcons.Actions.ArrowCollapse" text="Hide Searchers"/>
-
         <group class="com.intellij.jira.actions.HighlightersActionGroup" id="Jira.Issue.HighlightersActionGroup"/>
         <action class="com.intellij.jira.actions.ToggleIssueColumnActionGroup" id="Jira.Issue.ToggleColumns"/>
         <action class="com.intellij.jira.actions.CreateIssueButtonAction" id="Jira.Issue.Add"/>
 
-        <group id="Jira.Issues.PresentationSettings" class="com.intellij.jira.actions.JiraIssueToolbarPopupActionGroup"
-               icon="AllIcons.Actions.Show" popup="true">
+        <group id="Jira.Issues.PresentationSettings" class="com.intellij.jira.actions.JiraIssueToolbarPopupActionGroup" popup="true">
             <reference id="Jira.Issue.HighlightersActionGroup"/>
             <reference id="Jira.Issue.ToggleColumns"/>
         </group>

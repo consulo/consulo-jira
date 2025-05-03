@@ -5,7 +5,7 @@ import consulo.application.progress.EmptyProgressIndicator;
 import consulo.application.progress.ProgressIndicator;
 import consulo.disposer.Disposable;
 import consulo.disposer.Disposer;
-import org.jetbrains.annotations.NotNull;
+import jakarta.annotation.Nonnull;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -14,16 +14,19 @@ import java.util.Set;
 
 public class JiraProgressImpl implements JiraProgress, Disposable {
 
-    @NotNull private final Object myLock = new Object();
-    @NotNull private final List<JiraProgressListener> myListeners = new ArrayList<>();
-    @NotNull private final Set<ProgressIndicator> myTasksWithVisibleProgress = new HashSet<>();
+    @Nonnull
+    private final Object myLock = new Object();
+    @Nonnull
+    private final List<JiraProgressListener> myListeners = new ArrayList<>();
+    @Nonnull
+    private final Set<ProgressIndicator> myTasksWithVisibleProgress = new HashSet<>();
 
-    public JiraProgressImpl(@NotNull Disposable parent) {
+    public JiraProgressImpl(@Nonnull Disposable parent) {
         Disposer.register(parent, this);
     }
 
     @Override
-    public void addProgressListener(JiraProgressListener listener, @NotNull Disposable parent) {
+    public void addProgressListener(JiraProgressListener listener, @Nonnull Disposable parent) {
         synchronized (myLock) {
             myListeners.add(listener);
             if (parent != null) {

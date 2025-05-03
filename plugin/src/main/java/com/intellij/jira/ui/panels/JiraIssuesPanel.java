@@ -26,8 +26,8 @@ import consulo.ui.ex.awt.Splitter;
 import consulo.util.dataholder.Key;
 import net.miginfocom.swing.MigLayout;
 import org.jetbrains.annotations.NonNls;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import jakarta.annotation.Nonnull;
+import jakarta.annotation.Nullable;
 
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
@@ -49,7 +49,7 @@ public class JiraIssuesPanel extends JiraPanel implements DataProvider, Disposab
 
     private final Splitter myIssuesBrowserSplitter;
 
-    public JiraIssuesPanel(@NotNull JiraIssuesData issuesData, @NotNull AbstractIssuesUi issuesUi, @NotNull Disposable parent) {
+    public JiraIssuesPanel(@Nonnull JiraIssuesData issuesData, @Nonnull AbstractIssuesUi issuesUi, @Nonnull Disposable parent) {
         super(new BorderLayout());
 
         Disposer.register(parent, this);
@@ -104,12 +104,12 @@ public class JiraIssuesPanel extends JiraPanel implements DataProvider, Disposab
         add(myIssuesBrowserSplitter);
     }
 
-    private static void invokeOpenTaskAction(@NotNull InputEvent e, @NotNull Component component) {
+    private static void invokeOpenTaskAction(@Nonnull InputEvent e, @Nonnull Component component) {
         AnAction action = ActionManager.getInstance().getAction(OpenIssueTaskAction.ID);
         // TODO !!! ActionUtil.invokeAction(action, component, "JiraIssuesTable", e, null);
     }
 
-    @NotNull
+    @Nonnull
     protected String getToolbarOrientation() {
         return BorderLayout.NORTH;
     }
@@ -119,7 +119,7 @@ public class JiraIssuesPanel extends JiraPanel implements DataProvider, Disposab
     }
 
     @Override
-    public @Nullable Object getData(@NotNull @NonNls Key dataId) {
+    public @Nullable Object getData(@Nonnull @NonNls Key dataId) {
         if (JiraUiDataKeys.ISSUES_PANEL.is(dataId)) {
             return this;
         } else if (JiraUiDataKeys.JIRA_UI_PROPERTIES.is(dataId)) {
@@ -131,7 +131,7 @@ public class JiraIssuesPanel extends JiraPanel implements DataProvider, Disposab
         return null;
     }
 
-    @NotNull
+    @Nonnull
     protected JComponent getToolbar() {
         DefaultActionGroup toolbarGroup = new DefaultActionGroup();
         toolbarGroup.copyFromGroup((DefaultActionGroup) ActionManager.getInstance().getAction(JiraIssueActionPlaces.JIRA_ISSUES_TOOLBAR_LEFT));

@@ -2,7 +2,7 @@ package com.intellij.jira.actions;
 
 import consulo.ui.ex.action.CustomShortcutSet;
 import consulo.ui.image.Image;
-import org.jetbrains.annotations.Nullable;
+import jakarta.annotation.Nullable;
 
 import static java.util.Objects.isNull;
 

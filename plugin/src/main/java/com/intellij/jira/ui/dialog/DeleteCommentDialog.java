@@ -5,8 +5,8 @@ import com.intellij.jira.ui.panels.JiraPanel;
 import consulo.project.Project;
 import consulo.ui.ex.awt.DialogWrapper;
 import consulo.ui.ex.awt.JBLabel;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import jakarta.annotation.Nonnull;
+import jakarta.annotation.Nullable;
 
 import javax.swing.*;
 import java.awt.*;
@@ -44,7 +44,7 @@ public class DeleteCommentDialog extends DialogWrapper {
     }
 
 
-    @NotNull
+    @Nonnull
     @Override
     protected Action[] createActions() {
         return new Action[]{new DeleteCommentExecuteAction(), myCancelAction};

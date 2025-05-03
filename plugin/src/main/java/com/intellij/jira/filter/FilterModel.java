@@ -1,8 +1,8 @@
 package com.intellij.jira.filter;
 
 import com.intellij.jira.data.Issues;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import jakarta.annotation.Nonnull;
+import jakarta.annotation.Nullable;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -11,7 +11,7 @@ import java.util.function.Supplier;
 
 public abstract class FilterModel<T> {
 
-    @NotNull
+    @Nonnull
     private final Collection<Runnable> mySetFilterListeners = new ArrayList<>();
 
     @Nullable
@@ -54,12 +54,12 @@ public abstract class FilterModel<T> {
 
 
     @Nullable
-    protected abstract T createFilter(@NotNull List<String> values);
+    protected abstract T createFilter(@Nonnull List<String> values);
 
-    @NotNull
-    protected abstract List<String> getFilterValues(@NotNull T filter);
+    @Nonnull
+    protected abstract List<String> getFilterValues(@Nonnull T filter);
 
-    public void addSetFilterListener(@NotNull Runnable runnable) {
+    public void addSetFilterListener(@Nonnull Runnable runnable) {
         mySetFilterListeners.add(runnable);
     }
 

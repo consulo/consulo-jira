@@ -5,8 +5,8 @@ import com.google.gson.JsonNull;
 import consulo.project.Project;
 import consulo.ui.ex.action.AnActionEvent;
 import consulo.util.lang.StringUtil;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import jakarta.annotation.Nonnull;
+import jakarta.annotation.Nullable;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -35,7 +35,7 @@ public class MultiSelectFieldEditor<T> extends SelectFieldEditor<T> {
         myTextField.setText(currentItems.isEmpty() ? "" : String.join(", ", toStringList(currentItems)));
     }
 
-    @NotNull
+    @Nonnull
     private List<String> toStringList(List items) {
         if (items == null) {
             return Collections.emptyList();

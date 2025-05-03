@@ -5,8 +5,8 @@ import consulo.project.Project;
 import consulo.ui.ex.awt.DialogWrapper;
 import consulo.ui.ex.awt.FormBuilder;
 import consulo.ui.ex.awt.JBLabel;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import jakarta.annotation.Nonnull;
+import jakarta.annotation.Nullable;
 
 import javax.swing.*;
 
@@ -18,7 +18,7 @@ public class DeleteIssueAttachmentDialog extends DialogWrapper {
     private String issueKey;
     private String attachmentId;
 
-    public DeleteIssueAttachmentDialog(@NotNull Project project, String issueKey, String attachmentId) {
+    public DeleteIssueAttachmentDialog(@Nonnull Project project, String issueKey, String attachmentId) {
         super(project, false);
         this.project = project;
         this.issueKey = issueKey;

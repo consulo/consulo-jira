@@ -1,7 +1,7 @@
 package com.intellij.jira.ui.editors;
 
 import consulo.ui.ex.awt.ValidationInfo;
-import org.jetbrains.annotations.Nullable;
+import jakarta.annotation.Nullable;
 
 import javax.swing.text.DateFormatter;
 import java.text.SimpleDateFormat;

@@ -6,7 +6,7 @@ import com.intellij.jira.rest.model.JiraIssue;
 import com.intellij.jira.rest.model.JiraIssueUser;
 import com.intellij.jira.ui.JiraIssueStyleFactory;
 import consulo.project.Project;
-import org.jetbrains.annotations.NotNull;
+import jakarta.annotation.Nonnull;
 
 public class MyIssuesHighlighter implements JiraIssueHighlighter {
 
@@ -17,7 +17,7 @@ public class MyIssuesHighlighter implements JiraIssueHighlighter {
     }
 
     @Override
-    public @NotNull JiraIssueStyle getStyle(@NotNull JiraIssue issue) {
+    public @Nonnull JiraIssueStyle getStyle(@Nonnull JiraIssue issue) {
         Project project = myData.getProject();
 
         JiraIssueUser currentUser = JiraUserProvider.getInstance(project).getCurrent();
@@ -31,24 +31,6 @@ public class MyIssuesHighlighter implements JiraIssueHighlighter {
         }
 
         return JiraIssueStyle.DEFAULT;
-    }
-
-    public static class Factory implements JiraIssueHighlighterFactory {
-
-        @Override
-        public JiraIssueHighlighter createHighlighter(JiraIssuesData data) {
-            return new MyIssuesHighlighter(data);
-        }
-
-        @Override
-        public String getId() {
-            return "MY_ISSUES";
-        }
-
-        @Override
-        public String getTitle() {
-            return "My Issues";
-        }
     }
 
 

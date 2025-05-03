@@ -24,7 +24,6 @@ import consulo.ui.ex.toolWindow.ToolWindow;
 import jakarta.annotation.Nonnull;
 import jakarta.inject.Inject;
 import jakarta.inject.Singleton;
-import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;
 
@@ -45,7 +44,7 @@ public class JiraTabsManager implements Disposable {
     private boolean myServerConfigured;
 
     @Inject
-    public JiraTabsManager(@NotNull Project project) {
+    public JiraTabsManager(@Nonnull Project project) {
         myProject = project;
         myIssueData = new JiraIssuesData(project, this);
 
@@ -112,7 +111,7 @@ public class JiraTabsManager implements Disposable {
         ContentsUtil.addContent(contentManager, content, true);
     }
 
-    public void closeTab(@NotNull String name) {
+    public void closeTab(@Nonnull String name) {
         JiraContentUtil.closeTab(getContentManager(), name);
     }
 
@@ -126,7 +125,7 @@ public class JiraTabsManager implements Disposable {
         //FIXME ?? ContentUtilEx.updateTabbedContentDisplayName(manager, component);
     }
 
-    private void openTab(@NotNull JiraUi jiraUi, @Nonnull String tabId, @Nonnull String tabName, boolean splitByDefault) {
+    private void openTab(@Nonnull JiraUi jiraUi, @Nonnull String tabId, @Nonnull String tabName, boolean splitByDefault) {
         Disposer.register(this, jiraUi);
         ContentManager contentManager = getContentManager();
 
@@ -166,7 +165,7 @@ public class JiraTabsManager implements Disposable {
         return jiraToolWindow.getContentManager();
     }
 
-    public static JiraTabsManager getInstance(@NotNull Project project) {
+    public static JiraTabsManager getInstance(@Nonnull Project project) {
         return project.getInstance(JiraTabsManager.class);
     }
 

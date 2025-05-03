@@ -6,7 +6,7 @@ import com.intellij.jira.server.JiraRestApi;
 import com.intellij.jira.util.result.Result;
 import consulo.application.progress.ProgressIndicator;
 import consulo.project.Project;
-import org.jetbrains.annotations.NotNull;
+import jakarta.annotation.Nonnull;
 
 import static com.intellij.jira.rest.model.JiraPermissionType.BROWSE_PROJECTS;
 import static com.intellij.jira.rest.model.JiraPermissionType.EDIT_ISSUES;
@@ -15,13 +15,13 @@ public class ChangeIssuePriorityTask extends AbstractBackgroundableTask {
 
     private final String myPriorityName;
 
-    public ChangeIssuePriorityTask(@NotNull Project project, String priorityName, String issueIdOrKey) {
+    public ChangeIssuePriorityTask(@Nonnull Project project, String priorityName, String issueIdOrKey) {
         super(project, "Updating Issue Priority...", issueIdOrKey);
         this.myPriorityName = priorityName;
     }
 
     @Override
-    public void run(@NotNull ProgressIndicator indicator) {
+    public void run(@Nonnull ProgressIndicator indicator) {
         JiraRestApi jiraRestApi = getJiraRestApi();
         // Check user permissions
         boolean hasPermission = jiraRestApi.userHasPermissionOnIssue(issueIdOrKey, BROWSE_PROJECTS, EDIT_ISSUES);

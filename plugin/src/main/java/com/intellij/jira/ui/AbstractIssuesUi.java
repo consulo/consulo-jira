@@ -17,7 +17,7 @@ import com.intellij.jira.ui.table.column.JiraIssueApplicationSettings;
 import com.intellij.jira.ui.table.column.JiraIssueColumnProperties;
 import consulo.application.ApplicationManager;
 import consulo.disposer.Disposer;
-import org.jetbrains.annotations.NotNull;
+import jakarta.annotation.Nonnull;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -34,7 +34,8 @@ public abstract class AbstractIssuesUi implements IssuesUi {
     private final MyIssuesChangeListener myIssuesChangeListener;
 
     private final JiraIssuesRefresherImpl myRefresher;
-    @NotNull private final List<JiraIssuesData.IssuesChangeListener> myIssuesChangeListeners = Lists.newCopyOnWriteArrayList();
+    @Nonnull
+    private final List<JiraIssuesData.IssuesChangeListener> myIssuesChangeListeners = Lists.newCopyOnWriteArrayList();
 
     private JiraVisibleIssuesRefresher myVisibleIssuesRefresher;
     private JiraVisibleIssuesRefresher.VisibleIssueChangeListener myVisibleIssueChangeListener;
@@ -93,12 +94,12 @@ public abstract class AbstractIssuesUi implements IssuesUi {
     }
 
 
-    private void fireIssuesChangeEvent(@NotNull final Issues issues) {
+    private void fireIssuesChangeEvent(@Nonnull final Issues issues) {
         ApplicationManager.getApplication().invokeLater(() -> {
             for (JiraIssuesData.IssuesChangeListener listener : myIssuesChangeListeners) {
                 listener.onIssuesChange(issues);
             }
-        }, o -> isDisposed());
+        }, this::isDisposed);
     }
 
     public JiraProgress getProgress() {
@@ -107,7 +108,7 @@ public abstract class AbstractIssuesUi implements IssuesUi {
 
     abstract void setIssues(Issues issues);
 
-    @NotNull
+    @Nonnull
     abstract JQLSearcher getSearcher();
 
     public JiraVisibleIssuesRefresher getRefresher() {
@@ -122,7 +123,7 @@ public abstract class AbstractIssuesUi implements IssuesUi {
         myVisibleIssuesRefresher.onFiltersChange(filters);
     }
 
-    @NotNull
+    @Nonnull
     @Override
     public String getId() {
         return myId;
@@ -133,7 +134,7 @@ public abstract class AbstractIssuesUi implements IssuesUi {
         return myFilterUi;
     }
 
-    @NotNull
+    @Nonnull
     @Override
     public Issues getIssues() {
         return myIssues;
@@ -172,7 +173,7 @@ public abstract class AbstractIssuesUi implements IssuesUi {
     private class MyPropertyChangeListener implements JiraIssueUiProperties.PropertyChangeListener {
 
         @Override
-        public <T> void onChanged(JiraIssueUiProperties.@NotNull JiraIssueUiProperty<T> property) {
+        public <T> void onChanged(JiraIssueUiProperties.JiraIssueUiProperty<T> property) {
             if (property instanceof JiraIssueHighlighterProperty) {
                 updateHighlighters();
             } else if (property instanceof JiraIssueColumnProperties.TableColumnVisibilityProperty) {

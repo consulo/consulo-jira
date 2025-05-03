@@ -9,7 +9,7 @@ import consulo.component.ProcessCanceledException;
 import consulo.disposer.Disposable;
 import consulo.jira.impl.SingleTaskController;
 import consulo.project.Project;
-import org.jetbrains.annotations.NotNull;
+import jakarta.annotation.Nonnull;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,7 +24,7 @@ public class JiraIssuesRefresherImpl implements JiraIssuesRefresher, Disposable 
 
     private final SingleTaskController<RefreshRequest, Issues> mySingleTaskController;
 
-    public JiraIssuesRefresherImpl(@NotNull Project project, @NotNull JiraProgress progress, @NotNull Consumer<? super Issues> issuesUpdateHandler) {
+    public JiraIssuesRefresherImpl(@Nonnull Project project, @Nonnull JiraProgress progress, @Nonnull Consumer<? super Issues> issuesUpdateHandler) {
         myProject = project;
         myProgress = progress;
 
@@ -33,14 +33,14 @@ public class JiraIssuesRefresherImpl implements JiraIssuesRefresher, Disposable 
             issuesUpdateHandler.accept(issues);
         }) {
             @Override
-            protected @NotNull SingleTask startNewBackgroundTask() {
+            protected @Nonnull SingleTask startNewBackgroundTask() {
                 return JiraIssuesRefresherImpl.this.startNewBackgroundTask(new MyRefreshTask());
             }
         };
     }
 
 
-    protected SingleTaskController.SingleTask startNewBackgroundTask(@NotNull final Task.Backgroundable refreshTask) {
+    protected SingleTaskController.SingleTask startNewBackgroundTask(@Nonnull final Task.Backgroundable refreshTask) {
         ProgressIndicator indicator = myProgress.createProgressIndicator();
         ProgressManager.getInstance().runProcessWithProgressAsynchronously(refreshTask, indicator);
         return new SingleTaskController.SingleTaskImpl(indicator);
@@ -64,7 +64,7 @@ public class JiraIssuesRefresherImpl implements JiraIssuesRefresher, Disposable 
         return myProgress;
     }
 
-    @NotNull
+    @Nonnull
     private JiraServerManager getJiraServerManager() {
         return JiraServerManager.getInstance();
     }
@@ -73,7 +73,7 @@ public class JiraIssuesRefresherImpl implements JiraIssuesRefresher, Disposable 
     private static class RefreshRequest {
         private final String jql;
 
-        RefreshRequest(@NotNull String jql) {
+        RefreshRequest(@Nonnull String jql) {
             this.jql = jql;
         }
 
@@ -89,7 +89,7 @@ public class JiraIssuesRefresherImpl implements JiraIssuesRefresher, Disposable 
         }
 
         @Override
-        public void run(@NotNull ProgressIndicator indicator) {
+        public void run(@Nonnull ProgressIndicator indicator) {
             indicator.setIndeterminate(true);
             Issues issues = myIssues;
             while (true) {

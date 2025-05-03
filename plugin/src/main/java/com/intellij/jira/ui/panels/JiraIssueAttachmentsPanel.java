@@ -14,8 +14,8 @@ import consulo.ui.ex.action.ActionGroup;
 import consulo.ui.ex.awt.JBList;
 import consulo.ui.ex.awt.ScrollPaneFactory;
 import consulo.util.dataholder.Key;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import jakarta.annotation.Nonnull;
+import jakarta.annotation.Nullable;
 
 import javax.swing.*;
 import java.awt.*;
@@ -48,7 +48,7 @@ public class JiraIssueAttachmentsPanel extends AbstractJiraToolWindowPanel {
     }
 
     @Override
-    public @Nullable Object getData(@NotNull Key dataId) {
+    public @Nullable Object getData(@Nonnull Key dataId) {
         if (JiraDataKeys.ISSUE_ATTACHMENT.is(dataId)
                 && Objects.nonNull(issueAttachmentList.getSelectedValue())) {
             return  issueAttachment;

@@ -1,8 +1,8 @@
 package com.intellij.jira.ui;
 
 import com.intellij.jira.ui.highlighters.JiraIssueHighlighter;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import jakarta.annotation.Nonnull;
+import jakarta.annotation.Nullable;
 
 import java.awt.*;
 import java.util.Collection;
@@ -29,8 +29,8 @@ public final class JiraIssueStyleFactory {
         return new JiraIssueStyleImpl(myFgColor, myBgColor, myTextStyle);
     }
 
-    @NotNull
-    public static JiraIssueHighlighter.JiraIssueStyle combine(@NotNull Collection<? extends JiraIssueHighlighter.JiraIssueStyle> styles) {
+    @Nonnull
+    public static JiraIssueHighlighter.JiraIssueStyle combine(@Nonnull Collection<? extends JiraIssueHighlighter.JiraIssueStyle> styles) {
         Color foreground = null;
         Color background = null;
         JiraIssueHighlighter.TextStyle textStyle = null;

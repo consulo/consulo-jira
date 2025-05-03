@@ -9,8 +9,8 @@ import consulo.project.Project;
 import consulo.ui.ex.awt.DialogWrapper;
 import consulo.ui.ex.awt.FormBuilder;
 import consulo.ui.ex.awt.ValidationInfo;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import jakarta.annotation.Nonnull;
+import jakarta.annotation.Nullable;
 
 import javax.swing.*;
 import java.util.ArrayList;
@@ -80,7 +80,7 @@ public class EditWorklogDialog extends DialogWrapper {
         return myTimeSpentEditor.getTextField();
     }
 
-    @NotNull
+    @Nonnull
     @Override
     protected Action[] createActions() {
         return new Action[]{new EditWorklogExecuteAction(), myCancelAction};

@@ -1,7 +1,7 @@
 package com.intellij.jira.ui.table.column;
 
 import consulo.ui.ex.awt.ColumnInfo;
-import org.jetbrains.annotations.Nullable;
+import jakarta.annotation.Nullable;
 
 import java.util.Objects;
 

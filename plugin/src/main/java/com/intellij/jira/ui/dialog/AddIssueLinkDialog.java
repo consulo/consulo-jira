@@ -10,7 +10,7 @@ import consulo.ui.ex.awt.CollectionComboBoxModel;
 import consulo.ui.ex.awt.ComboBox;
 import consulo.ui.ex.awt.DialogWrapper;
 import consulo.ui.ex.awt.FormBuilder;
-import org.jetbrains.annotations.Nullable;
+import jakarta.annotation.Nullable;
 
 import javax.swing.*;
 import java.util.List;

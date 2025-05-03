@@ -7,7 +7,7 @@ import consulo.ui.ex.action.AnActionEvent;
 import consulo.ui.ex.action.DefaultActionGroup;
 import consulo.ui.ex.action.DumbAwareAction;
 import consulo.util.lang.StringUtil;
-import org.jetbrains.annotations.NotNull;
+import jakarta.annotation.Nonnull;
 
 import java.util.List;
 import java.util.Set;
@@ -15,12 +15,12 @@ import java.util.stream.Collectors;
 
 public class AssigneeFilterComponent extends IssueFilterComponent<AssigneeFilter, AssigneeFilterModel> {
 
-    public AssigneeFilterComponent(@NotNull AssigneeFilterModel filterModel) {
+    public AssigneeFilterComponent(@Nonnull AssigneeFilterModel filterModel) {
         super("Assignee", filterModel);
     }
 
     @Override
-    protected String getText(@NotNull AssigneeFilter filter) {
+    protected String getText(@Nonnull AssigneeFilter filter) {
         return filter.getDisplayText();
     }
 
@@ -42,15 +42,16 @@ public class AssigneeFilterComponent extends IssueFilterComponent<AssigneeFilter
     }
 
     protected class IssueAssigneeAction extends DumbAwareAction {
-        @NotNull protected final String myUser;
+        @Nonnull
+        protected final String myUser;
 
-        public IssueAssigneeAction(@NotNull String value) {
+        public IssueAssigneeAction(@Nonnull String value) {
             getTemplatePresentation().setText(value);
             myUser = value;
         }
 
         @Override
-        public void actionPerformed(@NotNull AnActionEvent e) {
+        public void actionPerformed(@Nonnull AnActionEvent e) {
             myFilterModel.setFilter(new AssigneeFilterImpl(List.of(myUser)));
         }
     }

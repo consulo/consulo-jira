@@ -3,7 +3,7 @@ package com.intellij.jira.ui.editors;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonNull;
 import consulo.ui.ex.awt.ValidationInfo;
-import org.jetbrains.annotations.Nullable;
+import jakarta.annotation.Nullable;
 
 import java.util.regex.Pattern;
 

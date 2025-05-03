@@ -9,9 +9,9 @@ import consulo.disposer.Disposer;
 import consulo.project.Project;
 import consulo.ui.ex.awt.SimpleToolWindowPanel;
 import consulo.util.dataholder.Key;
+import jakarta.annotation.Nonnull;
 import org.jetbrains.annotations.NonNls;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import jakarta.annotation.Nullable;
 
 import javax.swing.*;
 import java.util.HashMap;
@@ -39,7 +39,7 @@ public class JiraIssueDetailsPanel extends SimpleToolWindowPanel implements Disp
     private JiraIssueCommentsPanel myJiraIssueCommentsPanel;
     private JiraIssueWorkLogsPanel myJiraIssueWorkLogsPanel;
 
-    public JiraIssueDetailsPanel(@NotNull JiraIssuesData issuesData, @NotNull Disposable parent){
+    public JiraIssueDetailsPanel(@Nonnull JiraIssuesData issuesData, @Nonnull Disposable parent){
         super(true);
 
         Disposer.register(parent, this);
@@ -84,7 +84,7 @@ public class JiraIssueDetailsPanel extends SimpleToolWindowPanel implements Disp
         return total > 0 ? " (" + total + ") " : " ";
     }
 
-    public void setToolbarHeightReferent(@NotNull JComponent referent) {
+    public void setToolbarHeightReferent(@Nonnull JComponent referent) {
         myJiraIssuePreviewPanel.setToolbarHeightReferent(referent);
         myJiraIssueAttachmentsPanel.setToolbarHeightReferent(referent);
         myJiraIssueLinksPanel.setToolbarHeightReferent(referent);
@@ -93,7 +93,7 @@ public class JiraIssueDetailsPanel extends SimpleToolWindowPanel implements Disp
     }
 
     @Override
-    public @Nullable Object getData(@NotNull @NonNls Key dataId) {
+    public @Nullable Object getData(@Nonnull @NonNls Key dataId) {
         if (myJiraIssuePreviewPanel != null) {
             var data = myJiraIssuePreviewPanel.getData(dataId);
             if (data != null) {

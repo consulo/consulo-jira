@@ -1,7 +1,7 @@
 package com.intellij.jira.ui;
 
 import consulo.disposer.Disposable;
-import org.jetbrains.annotations.NotNull;
+import jakarta.annotation.Nonnull;
 
 import javax.swing.*;
 
@@ -10,10 +10,10 @@ import javax.swing.*;
  */
 public interface JiraUi extends Disposable {
 
-    @NotNull
+    @Nonnull
     String getId();
 
-    @NotNull
+    @Nonnull
     JComponent getMainComponent();
 
 }

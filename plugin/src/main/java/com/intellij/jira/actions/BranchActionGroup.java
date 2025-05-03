@@ -18,8 +18,8 @@ import consulo.ui.ex.action.AnAction;
 import consulo.ui.ex.action.AnActionEvent;
 import consulo.ui.ex.action.AnSeparator;
 import consulo.ui.ex.action.DefaultActionGroup;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import jakarta.annotation.Nonnull;
+import jakarta.annotation.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,8 +27,6 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class BranchActionGroup extends DefaultActionGroup {
-
-
     public BranchActionGroup() {
         super("Branch", true);
         getTemplatePresentation().setIcon(PlatformIconGroup.vcsBranch());
@@ -36,7 +34,8 @@ public class BranchActionGroup extends DefaultActionGroup {
 
 
     @Override
-    public AnAction @NotNull [] getChildren(@Nullable AnActionEvent e) {
+    @Nonnull
+    public AnAction[] getChildren(@Nullable AnActionEvent e) {
         List<AnAction> actions = new ArrayList<>();
         DefaultActionGroup newBranchActions = new DefaultActionGroup("New Branch...", true);
         newBranchActions.getTemplatePresentation().setIcon(AllIcons.General.Add);
@@ -92,7 +91,7 @@ public class BranchActionGroup extends DefaultActionGroup {
 
         @RequiredUIAccess
         @Override
-        public void actionPerformed(@NotNull AnActionEvent e) {
+        public void actionPerformed(@Nonnull AnActionEvent e) {
             Project project = e.getData(Project.KEY);
             if (project == null) {
                 return;

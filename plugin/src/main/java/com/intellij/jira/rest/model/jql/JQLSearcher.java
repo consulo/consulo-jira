@@ -3,8 +3,8 @@ package com.intellij.jira.rest.model.jql;
 import consulo.util.lang.StringUtil;
 import consulo.util.xml.serializer.annotation.Attribute;
 import consulo.util.xml.serializer.annotation.Tag;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import jakarta.annotation.Nonnull;
+import jakarta.annotation.Nullable;
 
 import java.util.Objects;
 import java.util.UUID;
@@ -33,7 +33,7 @@ public class JQLSearcher {
         this(other.getId(), other.getAlias(), other.getJql(), other.isShared());
     }
 
-    private JQLSearcher(@NotNull String id, @Nullable String alias, String jql, boolean shared) {
+    private JQLSearcher(@Nonnull String id, @Nullable String alias, String jql, boolean shared) {
         myId = id;
         setAlias(alias);
         setJql(jql);

@@ -2,16 +2,16 @@ package com.intellij.jira.ui;
 
 import com.intellij.jira.data.Issues;
 import com.intellij.jira.ui.table.JiraIssueTable;
-import org.jetbrains.annotations.NotNull;
+import jakarta.annotation.Nonnull;
 
 public interface IssuesUi extends JiraUi {
 
-    @NotNull
+    @Nonnull
     JiraIssueTable getTable();
 
     IssuesFilterUi getFilterUi();
 
-    @NotNull
+    @Nonnull
     Issues getIssues();
 
 }

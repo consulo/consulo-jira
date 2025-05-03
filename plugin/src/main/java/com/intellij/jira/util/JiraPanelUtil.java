@@ -14,8 +14,7 @@ import consulo.ui.ex.awt.JBLabel;
 import consulo.ui.ex.awt.JBUI;
 import consulo.ui.ex.awt.UIUtil;
 import consulo.ui.ex.awtUnsafe.TargetAWT;
-import org.jetbrains.annotations.Nls;
-import org.jetbrains.annotations.NotNull;
+import jakarta.annotation.Nonnull;
 
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -44,7 +43,7 @@ public class JiraPanelUtil {
                 .withBorder(MARGIN_BOTTOM);
     }
 
-    public static JiraPanel createWhitePanel(@NotNull LayoutManager layout){
+    public static JiraPanel createWhitePanel(@Nonnull LayoutManager layout){
         return new JiraPanel(layout)
                 .withBackground(JBColor.WHITE);
     }
@@ -66,41 +65,41 @@ public class JiraPanelUtil {
         return createPanelWithLine(true);
     }
 
-    public static JPanel createTypePanel(@NotNull JiraIssue issue) {
+    public static JPanel createTypePanel(@Nonnull JiraIssue issue) {
         JBLabel typeLabel = JiraLabelUtil.createBoldLabel("Type: ");
         JBLabel typeValueLabel = JiraLabelUtil.createLabel(issue.getIssuetype().getName());
 
         return createWhiteBorderPanel(typeLabel, typeValueLabel);
     }
 
-    public static JPanel createStatusPanel(@NotNull JiraIssue issue) {
+    public static JPanel createStatusPanel(@Nonnull JiraIssue issue) {
         JLabel statusValueLabel = JiraLabelUtil.createStatusLabel(issue.getStatus());
 
         return createWhiteLeftFlowPanel(statusValueLabel);
     }
 
-    public static JPanel createPriorityPanel(@NotNull JiraIssue issue) {
+    public static JPanel createPriorityPanel(@Nonnull JiraIssue issue) {
         JBLabel priorityLabel = JiraLabelUtil.createBoldLabel("Priority: ");
         JBLabel priorityValueLabel = JiraLabelUtil.createPriorityLabel(issue.getPriority());
 
         return createWhiteBorderPanel(priorityLabel, priorityValueLabel);
     }
 
-    public static JPanel createReporterPanel(@NotNull JiraIssue issue) {
+    public static JPanel createReporterPanel(@Nonnull JiraIssue issue) {
         JBLabel reporterLabel = JiraLabelUtil.createBoldLabel("Reporter: ");
         JBLabel reporterValueLabel = JiraLabelUtil.createLabel(issue.getReporter() != null ? issue.getReporter().getDisplayName() : EMPTY_TEXT);
 
         return createWhiteBorderPanel(reporterLabel, reporterValueLabel);
     }
 
-    public static JPanel createAssigneePanel(@NotNull JiraIssue issue) {
+    public static JPanel createAssigneePanel(@Nonnull JiraIssue issue) {
         JBLabel assigneeLabel = JiraLabelUtil.createBoldLabel("Assignee: ");
         JBLabel assigneeValueLabel = JiraLabelUtil.createLabel(issue.getAssignee() != null ? issue.getAssignee().getDisplayName() : EMPTY_TEXT);
 
         return createWhiteBorderPanel(assigneeLabel, assigneeValueLabel);
     }
 
-    public static JiraPanel createWatchesPanel(@NotNull JiraIssue issue, @NotNull Project project) {
+    public static JiraPanel createWatchesPanel(@Nonnull JiraIssue issue, @Nonnull Project project) {
         JiraPanel watchesPanel = JiraPanelUtil.createWhitePanel(new FlowLayout(FlowLayout.LEFT, 0, 0)).withBorder(MARGIN_BOTTOM);
         JBLabel watchesLabel = JiraLabelUtil.createBoldLabel("Watchers: ");
         JBLabel watchesValueLabel = JiraLabelUtil.createLabel(issue.getWatches().getWatchCount() + " ");
@@ -124,21 +123,21 @@ public class JiraPanelUtil {
         return watchesPanel;
     }
 
-    public static JiraPanel createVersionsPanel(@NotNull JiraIssue issue) {
+    public static JiraPanel createVersionsPanel(@Nonnull JiraIssue issue) {
         JBLabel versionsLabel = JiraLabelUtil.createBoldLabel("Versions: ");
         JBLabel versionsValueLabel = JiraLabelUtil.createLabel(getVersionsNames(issue.getVersions()));
 
         return createWhiteBorderPanel(versionsLabel, versionsValueLabel);
     }
 
-    public static JiraPanel createComponentsPanel(@NotNull JiraIssue issue) {
+    public static JiraPanel createComponentsPanel(@Nonnull JiraIssue issue) {
         JBLabel componentsLabel = JiraLabelUtil.createBoldLabel("Components: ");
         JBLabel componentsValueLabel = JiraLabelUtil.createLabel(getComponentNames(issue.getComponents()));
 
         return createWhiteBorderPanel(componentsLabel, componentsValueLabel);
     }
 
-    public static JiraPanel createLabelsPanel(@NotNull JiraIssue issue) {
+    public static JiraPanel createLabelsPanel(@Nonnull JiraIssue issue) {
         JBLabel label = JiraLabelUtil.createBoldLabel("Labels: ");
 
         JiraPanel labelsPanel = createWhitePanel(new FlowLayout(FlowLayout.LEFT));

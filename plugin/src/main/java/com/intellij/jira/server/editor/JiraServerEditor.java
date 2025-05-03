@@ -5,7 +5,7 @@ import com.intellij.jira.ui.editors.Editor;
 import consulo.project.Project;
 import consulo.ui.ex.awt.FormBuilder;
 import consulo.ui.ex.awt.ValidationInfo;
-import org.jetbrains.annotations.Nullable;
+import jakarta.annotation.Nullable;
 
 import javax.swing.*;
 import java.util.function.BiConsumer;

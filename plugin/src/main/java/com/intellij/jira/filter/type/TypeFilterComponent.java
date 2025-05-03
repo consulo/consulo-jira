@@ -5,7 +5,7 @@ import consulo.ui.ex.action.ActionGroup;
 import consulo.ui.ex.action.AnActionEvent;
 import consulo.ui.ex.action.DefaultActionGroup;
 import consulo.ui.ex.action.DumbAwareAction;
-import org.jetbrains.annotations.NotNull;
+import jakarta.annotation.Nonnull;
 
 import java.util.List;
 import java.util.Set;
@@ -18,7 +18,7 @@ public class TypeFilterComponent extends IssueFilterComponent<TypeFilter, TypeFi
     }
 
     @Override
-    protected String getText(@NotNull TypeFilter typeFilter) {
+    protected String getText(@Nonnull TypeFilter typeFilter) {
         return typeFilter.getDisplayText();
     }
 
@@ -36,17 +36,18 @@ public class TypeFilterComponent extends IssueFilterComponent<TypeFilter, TypeFi
     }
 
     protected class IssueTypeAction extends DumbAwareAction {
-        @NotNull protected final String myType;
+        @Nonnull
+        protected final String myType;
 
 
-        public IssueTypeAction(@NotNull String value) {
+        public IssueTypeAction(@Nonnull String value) {
             getTemplatePresentation().setText(value);
             myType = value;
 
         }
 
         @Override
-        public void actionPerformed(@NotNull AnActionEvent e) {
+        public void actionPerformed(@Nonnull AnActionEvent e) {
             myFilterModel.setFilter(new TypeFilterImpl(List.of(myType)));
         }
     }

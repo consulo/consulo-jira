@@ -7,21 +7,21 @@ import consulo.project.Project;
 import consulo.project.ui.notification.Notifications;
 import consulo.versionControlSystem.change.ChangeListManager;
 import consulo.versionControlSystem.change.LocalChangeList;
-import org.jetbrains.annotations.NotNull;
+import jakarta.annotation.Nonnull;
 
 public class AddChangelistTask extends Task.Backgroundable {
 
     private final String changelistName;
     private final boolean isDefault;
 
-    public AddChangelistTask(@NotNull Project project, @NotNull String changelistName, boolean isDefault) {
+    public AddChangelistTask(@Nonnull Project project, @Nonnull String changelistName, boolean isDefault) {
         super(project, "Creating changelist...");
         this.changelistName = changelistName;
         this.isDefault = isDefault;
     }
 
     @Override
-    public void run(@NotNull ProgressIndicator indicator) {
+    public void run(@Nonnull ProgressIndicator indicator) {
         ChangeListManager changeListManager = ChangeListManager.getInstance((Project) myProject);
         LocalChangeList localChangeList = changeListManager.addChangeList(changelistName, null);
         if (isDefault) {

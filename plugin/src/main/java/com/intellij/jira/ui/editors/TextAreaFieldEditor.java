@@ -5,7 +5,7 @@ import com.google.gson.JsonNull;
 import consulo.ui.ex.JBColor;
 import consulo.ui.ex.awt.FormBuilder;
 import consulo.ui.ex.awt.ValidationInfo;
-import org.jetbrains.annotations.Nullable;
+import jakarta.annotation.Nullable;
 
 import javax.swing.*;
 import java.util.Objects;

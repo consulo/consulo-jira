@@ -9,8 +9,8 @@ import com.intellij.jira.util.JiraLabelUtil;
 import consulo.project.Project;
 import consulo.ui.ex.JBColor;
 import consulo.ui.ex.awt.*;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import jakarta.annotation.Nonnull;
+import jakarta.annotation.Nullable;
 
 import javax.swing.*;
 import java.awt.*;
@@ -36,7 +36,7 @@ public class EditCommentDialog extends DialogWrapper {
 
     private JiraIssueComment comment;
 
-    public EditCommentDialog(@NotNull Project project, String issueKey, List<String> projectRoles, JiraIssueComment comment) {
+    public EditCommentDialog(@Nonnull Project project, String issueKey, List<String> projectRoles, JiraIssueComment comment) {
         super(project, false);
         this.myProject = project;
         this.issueKey = issueKey;
@@ -83,7 +83,7 @@ public class EditCommentDialog extends DialogWrapper {
     }
 
 
-    @NotNull
+    @Nonnull
     @Override
     protected Action[] createActions() {
         return new Action[]{new EditCommentExecuteAction(), myCancelAction};

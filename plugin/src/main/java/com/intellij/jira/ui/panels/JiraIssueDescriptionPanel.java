@@ -20,9 +20,9 @@ import consulo.ui.ex.awt.ScrollPaneFactory;
 import consulo.ui.ex.awt.UIUtil;
 import consulo.util.dataholder.Key;
 import consulo.util.lang.StringUtil;
+import jakarta.annotation.Nonnull;
 import org.jetbrains.annotations.NonNls;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import jakarta.annotation.Nullable;
 
 import javax.swing.*;
 
@@ -38,7 +38,7 @@ public class JiraIssueDescriptionPanel extends AbstractJiraToolWindowPanel {
     private final JiraIssuesData myIssuesData;
     private JiraIssue myIssue;
 
-    public JiraIssueDescriptionPanel(@NotNull JiraIssuesData issuesData, @NotNull JiraIssue issue) {
+    public JiraIssueDescriptionPanel(@Nonnull JiraIssuesData issuesData, @Nonnull JiraIssue issue) {
         super(issue);
         myIssuesData = issuesData;
         myIssue = issue;
@@ -58,7 +58,7 @@ public class JiraIssueDescriptionPanel extends AbstractJiraToolWindowPanel {
     }
 
     @Override
-    public @Nullable Object getData(@NotNull @NonNls Key dataId) {
+    public @Nullable Object getData(@Nonnull @NonNls Key dataId) {
         if (JiraDataKeys.ISSUE.is(dataId)) {
             return myIssue;
         }
@@ -106,7 +106,7 @@ public class JiraIssueDescriptionPanel extends AbstractJiraToolWindowPanel {
         setContent(scrollPane);
     }
 
-    public void update(@NotNull JiraIssue issue) {
+    public void update(@Nonnull JiraIssue issue) {
         myIssue = issue;
         init();
     }

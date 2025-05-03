@@ -6,7 +6,7 @@ import com.intellij.jira.server.JiraRestApi;
 import com.intellij.jira.util.result.Result;
 import consulo.application.progress.ProgressIndicator;
 import consulo.project.Project;
-import org.jetbrains.annotations.NotNull;
+import jakarta.annotation.Nonnull;
 
 import static com.intellij.jira.rest.model.JiraPermissionType.BROWSE_PROJECTS;
 import static com.intellij.jira.rest.model.JiraPermissionType.MANAGE_WATCHERS;
@@ -15,13 +15,13 @@ public class ToggleWatchIssueTask extends AbstractBackgroundableTask {
 
     private boolean isWatching;
 
-    public ToggleWatchIssueTask(@NotNull Project project, String issueKey, boolean isWatching) {
+    public ToggleWatchIssueTask(@Nonnull Project project, String issueKey, boolean isWatching) {
         super(project, "Editing Issue watchers...", issueKey);
         this.isWatching = isWatching;
     }
 
     @Override
-    public void run(@NotNull ProgressIndicator indicator) {
+    public void run(@Nonnull ProgressIndicator indicator) {
         JiraRestApi jiraRestApi = getJiraRestApi();
 
         boolean hasPermission = jiraRestApi.userHasPermissionOnIssue(issueIdOrKey, BROWSE_PROJECTS, MANAGE_WATCHERS);

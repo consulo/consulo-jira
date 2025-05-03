@@ -6,8 +6,8 @@ import consulo.ui.ex.awt.ComboBox;
 import consulo.ui.ex.awt.FormBuilder;
 import consulo.ui.ex.awt.ValidationInfo;
 import consulo.util.collection.ContainerUtil;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import jakarta.annotation.Nonnull;
+import jakarta.annotation.Nullable;
 
 import javax.swing.*;
 import java.awt.*;
@@ -32,7 +32,7 @@ public class LoadableComboBoxEditor<T> extends LoadableFieldEditor<T> {
     }
 
     @Override
-    protected void doUpdateValues(@NotNull Set<T> values) {
+    protected void doUpdateValues(@Nonnull Set<T> values) {
         Object selected = myComboBox.getSelectedItem();
         myComboBox.removeAllItems();
 
@@ -91,7 +91,7 @@ public class LoadableComboBoxEditor<T> extends LoadableFieldEditor<T> {
         return createNameObject(getSelectedValueAsString());
     }
 
-    @NotNull
+    @Nonnull
     public String getSelectedValueAsString(){
         return hasSelectedValue() ? getSelectedValue().toString() : "";
     }

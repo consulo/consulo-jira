@@ -6,7 +6,7 @@ import com.intellij.jira.ui.dialog.BranchSettingsDialog;
 import consulo.application.AllIcons;
 import consulo.project.Project;
 import consulo.ui.ex.action.AnActionEvent;
-import org.jetbrains.annotations.NotNull;
+import jakarta.annotation.Nonnull;
 
 public class BranchSettingsDialogAction extends JiraIssueDialogAction {
 
@@ -17,7 +17,7 @@ public class BranchSettingsDialogAction extends JiraIssueDialogAction {
     }
 
     @Override
-    public void onClick(@NotNull AnActionEvent e, @NotNull Project project, @NotNull JiraRestApi jiraRestApi) {
+    public void onClick(@Nonnull AnActionEvent e, @Nonnull Project project, @Nonnull JiraRestApi jiraRestApi) {
         BranchSettingsDialog branchSettingsDialog = new BranchSettingsDialog(project, BranchSettings.getInstance());
         branchSettingsDialog.show();
     }

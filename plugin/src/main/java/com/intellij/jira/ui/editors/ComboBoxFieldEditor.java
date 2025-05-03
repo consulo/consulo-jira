@@ -6,8 +6,8 @@ import consulo.ui.ex.awt.CollectionComboBoxModel;
 import consulo.ui.ex.awt.ComboBox;
 import consulo.ui.ex.awt.FormBuilder;
 import consulo.ui.ex.awt.ValidationInfo;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import jakarta.annotation.Nonnull;
+import jakarta.annotation.Nullable;
 
 import javax.swing.*;
 import java.awt.event.ActionListener;
@@ -53,7 +53,7 @@ public class ComboBoxFieldEditor<T> extends AbstractFieldEditor<T> {
         return (T) myComboBox.getSelectedItem();
     }
 
-    @NotNull
+    @Nonnull
     public String getSelectedValueAsString(){
         return nonNull(getSelectedValue()) ? getSelectedValue().toString() : "";
     }

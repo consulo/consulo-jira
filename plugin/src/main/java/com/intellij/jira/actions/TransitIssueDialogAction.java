@@ -9,7 +9,7 @@ import com.intellij.jira.ui.dialog.IssueTransitionDialog;
 import consulo.platform.base.icon.PlatformIconGroup;
 import consulo.project.Project;
 import consulo.ui.ex.action.AnActionEvent;
-import org.jetbrains.annotations.NotNull;
+import jakarta.annotation.Nonnull;
 
 import java.util.List;
 
@@ -25,7 +25,7 @@ public class TransitIssueDialogAction extends JiraIssueDialogAction {
     }
 
     @Override
-    public void onClick(@NotNull AnActionEvent e, @NotNull Project project, @NotNull JiraRestApi jiraRestApi) {
+    public void onClick(@Nonnull AnActionEvent e, @Nonnull Project project, @Nonnull JiraRestApi jiraRestApi) {
         JiraIssue issue = e.getRequiredData(JiraDataKeys.ISSUE);
 
         boolean userHasPermission = jiraRestApi.userHasPermissionOnIssue(issue.getKey(), BROWSE_PROJECTS, TRANSITION_ISSUES);

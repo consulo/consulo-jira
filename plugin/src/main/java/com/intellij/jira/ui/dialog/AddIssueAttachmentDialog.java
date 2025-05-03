@@ -6,8 +6,8 @@ import consulo.project.Project;
 import consulo.ui.ex.awt.DialogWrapper;
 import consulo.ui.ex.awt.FormBuilder;
 import consulo.ui.ex.awt.ValidationInfo;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import jakarta.annotation.Nonnull;
+import jakarta.annotation.Nullable;
 
 import javax.swing.*;
 
@@ -19,7 +19,7 @@ public class AddIssueAttachmentDialog extends DialogWrapper {
     private Project myProject;
     private String issueKey;
 
-    public AddIssueAttachmentDialog(@NotNull Project project, @NotNull String issueKey) {
+    public AddIssueAttachmentDialog(@Nonnull Project project, @Nonnull String issueKey) {
         super(project, false);
         myProject = project;
         this.issueKey = issueKey;

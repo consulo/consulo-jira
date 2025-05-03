@@ -14,8 +14,8 @@ import consulo.ui.ex.action.DefaultActionGroup;
 import consulo.ui.ex.awt.*;
 import consulo.ui.ex.popup.JBPopupFactory;
 import consulo.util.lang.StringUtil;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import jakarta.annotation.Nonnull;
+import jakarta.annotation.Nullable;
 
 import javax.swing.*;
 import java.util.List;
@@ -41,7 +41,7 @@ public class BranchSettingsEditor implements Editor {
     private JPanel myBranchNameToolbarPanel;
     private JLabel myBranchNameExample;
 
-    public BranchSettingsEditor(@NotNull Project project, BranchSettings branchSettings) {
+    public BranchSettingsEditor(@Nonnull Project project, BranchSettings branchSettings) {
         myProject = project;
         myBranchSettings = branchSettings;
     }
@@ -187,7 +187,7 @@ public class BranchSettingsEditor implements Editor {
         }
 
         @Override
-        public void actionPerformed(@NotNull AnActionEvent e) {
+        public void actionPerformed(@Nonnull AnActionEvent e) {
             CollectionListModel<String> model = (CollectionListModel<String>) myBranchNameList.getModel();
             if (!model.contains(field)) {
                 model.add(field);

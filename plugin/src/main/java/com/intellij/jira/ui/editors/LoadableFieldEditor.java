@@ -1,8 +1,8 @@
 package com.intellij.jira.ui.editors;
 
 import consulo.ui.ex.awt.AsyncProcessIcon;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import jakarta.annotation.Nonnull;
+import jakarta.annotation.Nullable;
 
 import java.util.Set;
 
@@ -19,7 +19,7 @@ public abstract class LoadableFieldEditor<T> extends AbstractFieldEditor<T> {
         super(fieldName, null, required);
     }
 
-    public final void setDataProvider(@NotNull DataProvider<T> dataProvider) {
+    public final void setDataProvider(@Nonnull DataProvider<T> dataProvider) {
         myDataProvider = dataProvider;
 
         Set<T> cachedValues = dataProvider.getCachedValues();
@@ -28,9 +28,9 @@ public abstract class LoadableFieldEditor<T> extends AbstractFieldEditor<T> {
         }
     }
 
-    protected abstract void doUpdateValues(@NotNull Set<T> values);
+    protected abstract void doUpdateValues(@Nonnull Set<T> values);
 
-    public final void onUpdateValues(@NotNull Set<T> values) {
+    public final void onUpdateValues(@Nonnull Set<T> values) {
         changeUpdateStatus(UpdateStatus.LOADED);
         doUpdateValues(values);
     }
@@ -42,7 +42,7 @@ public abstract class LoadableFieldEditor<T> extends AbstractFieldEditor<T> {
         provider.updateValuesAsynchronously();
     }
 
-    private void changeUpdateStatus(@NotNull UpdateStatus status) {
+    private void changeUpdateStatus(@Nonnull UpdateStatus status) {
         if (status == UpdateStatus.LOADING) {
             myLoadingIcon.resume();
         } else {

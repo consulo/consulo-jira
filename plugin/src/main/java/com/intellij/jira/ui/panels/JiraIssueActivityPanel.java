@@ -6,7 +6,7 @@ import com.intellij.jira.rest.model.JiraIssue;
 import com.intellij.jira.ui.JiraTabbedPane;
 import consulo.application.ApplicationManager;
 import consulo.component.messagebus.MessageBusConnection;
-import org.jetbrains.annotations.NotNull;
+import jakarta.annotation.Nonnull;
 
 import javax.swing.*;
 
@@ -17,7 +17,7 @@ public class JiraIssueActivityPanel extends JiraTabbedPane {
 
     private int mySelectedTab = 0;
 
-    JiraIssueActivityPanel(@NotNull JiraIssuesData issuesData, JiraIssue issue) {
+    JiraIssueActivityPanel(@Nonnull JiraIssuesData issuesData, JiraIssue issue) {
         super(JTabbedPane.BOTTOM);
         myIssuesData = issuesData;
         myIssue = issue;
@@ -28,7 +28,7 @@ public class JiraIssueActivityPanel extends JiraTabbedPane {
         subscribeTopic();
     }
 
-    public void update(@NotNull JiraIssue issue) {
+    public void update(@Nonnull JiraIssue issue) {
         myIssue = issue;
         updatePanel();
     }

@@ -15,7 +15,7 @@ import consulo.ui.ex.awt.AnActionButton;
 import consulo.ui.ex.awt.BorderLayoutPanel;
 import consulo.ui.ex.awt.JBUI;
 import consulo.ui.ex.awt.action.CustomComponentAction;
-import org.jetbrains.annotations.NotNull;
+import jakarta.annotation.Nonnull;
 
 import javax.swing.*;
 import java.awt.*;
@@ -31,7 +31,7 @@ public class CreateIssueButtonAction extends AnActionButton implements CustomCom
     }
 
     @Override
-    public void actionPerformed(@NotNull AnActionEvent e) {
+    public void actionPerformed(@Nonnull AnActionEvent e) {
         Project project = e.getData(Project.KEY);
         if(isNull(project)){
             return;
@@ -53,7 +53,7 @@ public class CreateIssueButtonAction extends AnActionButton implements CustomCom
     }
 
     @Override
-    public @NotNull JComponent createCustomComponent(@NotNull Presentation presentation, @NotNull String place) {
+    public @Nonnull JComponent createCustomComponent(@Nonnull Presentation presentation, @Nonnull String place) {
         JButton createIssueButton = new JButton("Create Issue");
         int buttonHeight = JBUI.scale(26);
         createIssueButton.setPreferredSize(new Dimension(createIssueButton.getPreferredSize().width, buttonHeight));

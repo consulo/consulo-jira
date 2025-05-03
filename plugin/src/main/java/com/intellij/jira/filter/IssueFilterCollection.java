@@ -1,7 +1,7 @@
 package com.intellij.jira.filter;
 
+import jakarta.annotation.Nonnull;
 import org.jetbrains.annotations.NonNls;
-import org.jetbrains.annotations.NotNull;
 
 import java.util.Collection;
 import java.util.Objects;
@@ -13,14 +13,14 @@ public interface IssueFilterCollection {
     <T extends IssueFilter> T get(FilterKey<T> key);
 
     class FilterKey<T extends IssueFilter> {
-        @NotNull
+        @Nonnull
         private final String myName;
 
-        public FilterKey(@NotNull String name) {
+        public FilterKey(@Nonnull String name) {
             myName = name;
         }
 
-        @NotNull
+        @Nonnull
         public String getName() {
             return myName;
         }
@@ -38,7 +38,7 @@ public interface IssueFilterCollection {
             return Objects.hash(myName);
         }
 
-        public static <T extends IssueFilter> IssueFilterCollection.FilterKey<T> create(@NonNls @NotNull String name) {
+        public static <T extends IssueFilter> IssueFilterCollection.FilterKey<T> create(@NonNls @Nonnull String name) {
             return new IssueFilterCollection.FilterKey<>(name);
         }
 

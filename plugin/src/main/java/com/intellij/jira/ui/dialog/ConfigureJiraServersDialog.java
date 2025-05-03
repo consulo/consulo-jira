@@ -12,8 +12,8 @@ import consulo.jira.icon.JiraIconGroup;
 import consulo.project.Project;
 import consulo.ui.ex.SimpleTextAttributes;
 import consulo.ui.ex.awt.*;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import jakarta.annotation.Nonnull;
+import jakarta.annotation.Nullable;
 
 import javax.swing.*;
 import java.awt.*;
@@ -48,7 +48,7 @@ public class ConfigureJiraServersDialog extends DialogWrapper {
     private Consumer<JiraServer> myChangeUrlListener;
 
 
-    public ConfigureJiraServersDialog(@NotNull Project project) {
+    public ConfigureJiraServersDialog(@Nonnull Project project) {
         super(project, false);
         this.myProject = project;
         this.myManager = ApplicationManager.getApplication().getInstance(JiraServerManager.class);
@@ -93,7 +93,7 @@ public class ConfigureJiraServersDialog extends DialogWrapper {
 
         myServersList.setCellRenderer(new ColoredListCellRenderer<>() {
             @Override
-            protected void customizeCellRenderer(@NotNull JList<? extends JiraServer> list, JiraServer value, int index, boolean selected, boolean hasFocus) {
+            protected void customizeCellRenderer(@Nonnull JList<? extends JiraServer> list, JiraServer value, int index, boolean selected, boolean hasFocus) {
                 setIcon(JiraIconGroup.jiraicon());
                 append(value.getPresentableName(), SimpleTextAttributes.REGULAR_ATTRIBUTES);
             }
@@ -113,7 +113,7 @@ public class ConfigureJiraServersDialog extends DialogWrapper {
         return mySplitter;
     }
 
-    @NotNull
+    @Nonnull
     @Override
     protected List<ValidationInfo> doValidateAll() {
         List<ValidationInfo> validationInfos = new ArrayList<>();

@@ -4,14 +4,14 @@ import com.intellij.jira.jql.JQLSearcherManager;
 import com.intellij.jira.rest.model.jql.JQLSearcher;
 import consulo.project.Project;
 import consulo.ui.ex.awt.ValidationInfo;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import jakarta.annotation.Nonnull;
+import jakarta.annotation.Nullable;
 
 import static java.util.Objects.nonNull;
 
 public class NewSearcherDialog extends EditSearcherDialog {
 
-    public NewSearcherDialog(@NotNull Project project) {
+    public NewSearcherDialog(@Nonnull Project project) {
         super(project, new JQLSearcher());
         setTitle("New Searcher");
     }

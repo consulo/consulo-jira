@@ -5,7 +5,7 @@ import com.intellij.jira.rest.model.jql.JQLSearcher;
 import consulo.application.AllIcons;
 import consulo.project.Project;
 import consulo.ui.ex.action.AnActionEvent;
-import org.jetbrains.annotations.NotNull;
+import jakarta.annotation.Nonnull;
 
 public class DeleteSearcherAction extends JiraIssueSearcherAction {
 
@@ -16,7 +16,7 @@ public class DeleteSearcherAction extends JiraIssueSearcherAction {
     }
 
     @Override
-    public void actionPerformed(@NotNull AnActionEvent e) {
+    public void actionPerformed(@Nonnull AnActionEvent e) {
         JQLSearcher searcher = getSearcher(e);
 
         JQLSearcherManager.getInstance().remove(e.getData(Project.KEY), searcher.getId(), searcher);

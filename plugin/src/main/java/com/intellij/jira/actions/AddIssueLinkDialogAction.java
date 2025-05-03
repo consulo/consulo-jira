@@ -9,7 +9,7 @@ import com.intellij.jira.ui.dialog.AddIssueLinkDialog;
 import consulo.application.AllIcons;
 import consulo.project.Project;
 import consulo.ui.ex.action.AnActionEvent;
-import org.jetbrains.annotations.NotNull;
+import jakarta.annotation.Nonnull;
 
 import java.util.List;
 
@@ -26,7 +26,7 @@ public class AddIssueLinkDialogAction extends JiraIssueDialogAction {
     }
 
     @Override
-    public void onClick(@NotNull AnActionEvent e, @NotNull Project project, @NotNull JiraRestApi jiraRestApi) {
+    public void onClick(@Nonnull AnActionEvent e, @Nonnull Project project, @Nonnull JiraRestApi jiraRestApi) {
         String issueKey = e.getData(JiraDataKeys.ISSUE_KEY);
         if (nonNull(issueKey)) {
             boolean hasPermission = jiraRestApi.userHasPermissionOnIssue(issueKey, BROWSE_PROJECTS, LINK_ISSUES);

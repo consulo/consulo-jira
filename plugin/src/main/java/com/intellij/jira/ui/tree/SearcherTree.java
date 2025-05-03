@@ -8,8 +8,8 @@ import consulo.ui.ex.SimpleTextAttributes;
 import consulo.ui.ex.awt.event.DoubleClickListener;
 import consulo.ui.ex.awt.tree.ColoredTreeCellRenderer;
 import consulo.ui.ex.awt.tree.Tree;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import jakarta.annotation.Nonnull;
+import jakarta.annotation.Nullable;
 
 import javax.swing.*;
 import javax.swing.tree.TreePath;
@@ -69,7 +69,7 @@ public class SearcherTree extends Tree {
     private class MyColoredTreeCellRenderer extends ColoredTreeCellRenderer {
 
         @Override
-        public void customizeCellRenderer(@NotNull JTree tree, Object value, boolean selected, boolean expanded, boolean leaf, int row, boolean hasFocus) {
+        public void customizeCellRenderer(@Nonnull JTree tree, Object value, boolean selected, boolean expanded, boolean leaf, int row, boolean hasFocus) {
             if (value == null) {
                 return;
             }
@@ -93,7 +93,7 @@ public class SearcherTree extends Tree {
     private class MyDoubleClickListener extends DoubleClickListener {
 
         @Override
-        protected boolean onDoubleClick(@NotNull MouseEvent e) {
+        protected boolean onDoubleClick(@Nonnull MouseEvent e) {
             TreePath clickPath = getClosestPathForLocation(e.getX(), e.getY());
             if (clickPath == null) {
                 return false;

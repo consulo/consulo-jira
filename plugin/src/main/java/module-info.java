@@ -11,7 +11,10 @@ module com.intellij.jira {
     requires com.google.gson;
     requires org.slf4j;
     requires com.google.common;
-    
+
+    requires xmlrpc.common;
+    requires xmlrpc.client;
+
     // TODO remove in future
     requires java.desktop;
     requires forms.rt;
@@ -20,4 +23,5 @@ module com.intellij.jira {
 
     opens com.intellij.jira.actions to consulo.component.impl;
     opens com.intellij.jira.server to consulo.util.xml.serializer;
+    opens com.intellij.jira.ui.table.column to consulo.util.xml.serializer;
 }

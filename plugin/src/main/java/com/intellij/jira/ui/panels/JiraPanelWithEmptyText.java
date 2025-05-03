@@ -1,12 +1,13 @@
 package com.intellij.jira.ui.panels;
 
 import consulo.ui.ex.awt.JBPanelWithEmptyText;
-import org.jetbrains.annotations.NotNull;
+import jakarta.annotation.Nonnull;
 
 public class JiraPanelWithEmptyText extends JBPanelWithEmptyText {
 
-    public JiraPanelWithEmptyText(@NotNull String emptyText) {
+    public JiraPanelWithEmptyText(@Nonnull String emptyText) {
         super();
+        getEmptyText().attachTo(this);
         getEmptyText().setText(emptyText);
     }
 }

@@ -1,7 +1,7 @@
 package com.intellij.jira.ui.highlighters;
 
 import com.intellij.jira.ui.JiraIssueUiProperties;
-import org.jetbrains.annotations.NotNull;
+import jakarta.annotation.Nonnull;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -12,18 +12,18 @@ public class JiraIssueHighlighterProperty extends JiraIssueUiProperties.JiraIssu
     private static final Map<String, JiraIssueHighlighterProperty> ourProperties = new HashMap<>();
     private final String myId;
 
-    public JiraIssueHighlighterProperty(@NotNull String name) {
+    public JiraIssueHighlighterProperty(@Nonnull String name) {
         super("Highlighter." + name);
         this.myId = name;
     }
 
-    @NotNull
+    @Nonnull
     public String getId() {
         return myId;
     }
 
-    @NotNull
-    public static JiraIssueHighlighterProperty get(@NotNull String id) {
+    @Nonnull
+    public static JiraIssueHighlighterProperty get(@Nonnull String id) {
         JiraIssueHighlighterProperty property = ourProperties.get(id);
         if (Objects.isNull(property)) {
             property = new JiraIssueHighlighterProperty(id);

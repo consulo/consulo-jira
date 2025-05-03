@@ -3,7 +3,7 @@ package com.intellij.jira.actions;
 import consulo.application.AllIcons;
 import consulo.ui.ex.action.AnAction;
 import consulo.ui.ex.action.AnActionEvent;
-import org.jetbrains.annotations.NotNull;
+import jakarta.annotation.Nonnull;
 
 public class OpenIssueTaskAction extends AnAction {
     public static String ID = "Jira.Issue.OpenTask";
@@ -13,7 +13,7 @@ public class OpenIssueTaskAction extends AnAction {
     }
 
     @Override
-    public void actionPerformed(@NotNull AnActionEvent e) {
+    public void actionPerformed(@Nonnull AnActionEvent e) {
         // TODO call GotoTaskAction
 //        var project = e.getData(Project.KEY);
 //

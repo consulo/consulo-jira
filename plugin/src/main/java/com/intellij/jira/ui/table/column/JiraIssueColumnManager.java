@@ -5,7 +5,7 @@ import consulo.annotation.component.ServiceAPI;
 import consulo.annotation.component.ServiceImpl;
 import consulo.application.Application;
 import jakarta.inject.Singleton;
-import org.jetbrains.annotations.NotNull;
+import jakarta.annotation.Nonnull;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -32,7 +32,7 @@ public class JiraIssueColumnManager {
         });
     }
 
-    @NotNull
+    @Nonnull
     public static JiraIssueColumnManager getInstance() {
         return Application.get().getInstance(JiraIssueColumnManager.class);
     }

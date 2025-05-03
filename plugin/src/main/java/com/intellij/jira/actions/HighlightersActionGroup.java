@@ -6,8 +6,8 @@ import com.intellij.jira.ui.highlighters.JiraIssueHighlighterFactory;
 import com.intellij.jira.ui.highlighters.JiraIssueHighlighterProperty;
 import consulo.component.extension.ExtensionPointName;
 import consulo.ui.ex.action.*;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import jakarta.annotation.Nonnull;
+import jakarta.annotation.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,10 +15,11 @@ import java.util.List;
 public class HighlightersActionGroup extends ActionGroup {
 
     public static final ExtensionPointName<JiraIssueHighlighterFactory> JIRA_ISSUE_HIGHLIGHTER_FACTORY_EP =
-            ExtensionPointName.create(JiraIssueHighlighterFactory.class);
+        ExtensionPointName.create(JiraIssueHighlighterFactory.class);
 
     @Override
-    public AnAction @NotNull [] getChildren(@Nullable AnActionEvent e) {
+    @Nonnull
+    public AnAction[] getChildren(@Nullable AnActionEvent e) {
         List<AnAction> actions = new ArrayList<>();
 
         if (e != null) {
@@ -42,14 +43,16 @@ public class HighlightersActionGroup extends ActionGroup {
         }
 
         @Override
-        public boolean isSelected(@NotNull AnActionEvent e) {
+        public boolean isSelected(@Nonnull AnActionEvent e) {
             JiraIssueUiProperties properties = e.getData(JiraUiDataKeys.JIRA_UI_PROPERTIES);
-            if (properties == null || !properties.exists(getProperty())) return false;
+            if (properties == null || !properties.exists(getProperty())) {
+                return false;
+            }
             return properties.get(getProperty());
         }
 
         @Override
-        public void setSelected(@NotNull AnActionEvent e, boolean state) {
+        public void setSelected(@Nonnull AnActionEvent e, boolean state) {
             JiraIssueUiProperties properties = e.getData(JiraUiDataKeys.JIRA_UI_PROPERTIES);
             if (properties != null && properties.exists(getProperty())) {
                 properties.set(getProperty(), state);
@@ -57,7 +60,7 @@ public class HighlightersActionGroup extends ActionGroup {
         }
 
         @Override
-        public void update(@NotNull AnActionEvent e) {
+        public void update(@Nonnull AnActionEvent e) {
             JiraIssueUiProperties properties = e.getData(JiraUiDataKeys.JIRA_UI_PROPERTIES);
             e.getPresentation().setEnabledAndVisible(properties != null && properties.exists(getProperty()));
 

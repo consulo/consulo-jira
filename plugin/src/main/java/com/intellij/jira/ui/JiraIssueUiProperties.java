@@ -2,34 +2,36 @@ package com.intellij.jira.ui;
 
 import consulo.jira.impl.ui.ValueKey;
 import consulo.ui.annotation.RequiredUIAccess;
+import jakarta.annotation.Nonnull;
 import org.jetbrains.annotations.NonNls;
-import org.jetbrains.annotations.NotNull;
 
 import java.util.EventListener;
 import java.util.Objects;
 
 public interface JiraIssueUiProperties {
 
-    @NotNull <T> T get(@NotNull JiraIssueUiProperties.JiraIssueUiProperty<T> property);
+    @Nonnull
+    <T> T get(@Nonnull JiraIssueUiProperties.JiraIssueUiProperty<T> property);
 
-    <T> void set(@NotNull JiraIssueUiProperties.JiraIssueUiProperty<T> property, @NotNull T value);
+    <T> void set(@Nonnull JiraIssueUiProperties.JiraIssueUiProperty<T> property, @Nonnull T value);
 
-    <T> boolean exists(@NotNull JiraIssueUiProperties.JiraIssueUiProperty<T> property);
-
-    @RequiredUIAccess
-    void addChangeListener(@NotNull JiraIssueUiProperties.PropertyChangeListener listener);
+    <T> boolean exists(@Nonnull JiraIssueUiProperties.JiraIssueUiProperty<T> property);
 
     @RequiredUIAccess
-    void removeChangeListener(@NotNull JiraIssueUiProperties.PropertyChangeListener listener);
+    void addChangeListener(@Nonnull JiraIssueUiProperties.PropertyChangeListener listener);
+
+    @RequiredUIAccess
+    void removeChangeListener(@Nonnull JiraIssueUiProperties.PropertyChangeListener listener);
 
     class JiraIssueUiProperty<T> implements ValueKey<T> {
-        @NotNull private final String myName;
+        @Nonnull
+        private final String myName;
 
-        public JiraIssueUiProperty(@NonNls @NotNull String name) {
+        public JiraIssueUiProperty(@NonNls @Nonnull String name) {
             myName = name;
         }
 
-        @NotNull
+        @Nonnull
         @Override
         public String getName() {
             return myName;
@@ -55,7 +57,7 @@ public interface JiraIssueUiProperties {
     }
 
     interface PropertyChangeListener extends EventListener {
-        <T> void onChanged(@NotNull JiraIssueUiProperties.JiraIssueUiProperty<T> property);
+        <T> void onChanged(@Nonnull JiraIssueUiProperties.JiraIssueUiProperty<T> property);
     }
 
 }

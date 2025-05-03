@@ -20,8 +20,8 @@ import com.intellij.tasks.jira.JiraUtil;
 import consulo.project.Project;
 import consulo.ui.ex.awt.*;
 import consulo.util.collection.ContainerUtil;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import jakarta.annotation.Nonnull;
+import jakarta.annotation.Nullable;
 
 import javax.swing.*;
 import java.util.HashMap;
@@ -46,7 +46,7 @@ public class CreateIssueEditor implements Editor {
     private FieldsEditor myFieldsEditor;
     private BorderLayoutPanel myFieldsPanel;
 
-    public CreateIssueEditor(@NotNull Project project, JiraRestApi jiraRestApi) {
+    public CreateIssueEditor(@Nonnull Project project, JiraRestApi jiraRestApi) {
         myProject = project;
         myCreateIssueMetaProvider = new CreateIssueMetaProvider(jiraRestApi);
 

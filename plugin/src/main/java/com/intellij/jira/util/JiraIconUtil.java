@@ -1,7 +1,7 @@
 package com.intellij.jira.util;
 
 import com.intellij.tasks.jira.CachedIconLoader;
-import org.jetbrains.annotations.Nullable;
+import jakarta.annotation.Nullable;
 
 @Deprecated
 public class JiraIconUtil {

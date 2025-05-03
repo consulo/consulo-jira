@@ -8,8 +8,8 @@ import consulo.ui.ex.awt.DialogWrapper;
 import consulo.ui.ex.awt.FormBuilder;
 import consulo.ui.ex.awt.JBLabel;
 import consulo.ui.ex.awt.ValidationInfo;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import jakarta.annotation.Nonnull;
+import jakarta.annotation.Nullable;
 
 import javax.swing.*;
 
@@ -50,7 +50,7 @@ public class DeleteWorklogDialog extends DialogWrapper {
                 .getPanel();
     }
 
-    @NotNull
+    @Nonnull
     @Override
     protected Action[] createActions() {
         return new Action[]{new DeleteWorklogExecuteAction(), myCancelAction};

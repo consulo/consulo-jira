@@ -3,7 +3,7 @@ package com.intellij.jira.ui.dialog;
 import com.intellij.jira.rest.model.JiraIssueComment;
 import com.intellij.jira.tasks.AddCommentTask;
 import consulo.project.Project;
-import org.jetbrains.annotations.NotNull;
+import jakarta.annotation.Nonnull;
 
 import javax.swing.*;
 import java.util.List;
@@ -13,12 +13,12 @@ import static java.util.Objects.nonNull;
 
 public class AddCommentDialog extends EditCommentDialog {
 
-    public AddCommentDialog(@NotNull Project project, @NotNull String issueKey, List<String> projectRoles) {
+    public AddCommentDialog(@Nonnull Project project, @Nonnull String issueKey, List<String> projectRoles) {
         super(project, issueKey, projectRoles, new JiraIssueComment());
         setTitle(String.format("Add a comment to %s", issueKey));
     }
 
-    @NotNull
+    @Nonnull
     @Override
     protected Action[] createActions() {
         return new Action[]{new AddCommentExecuteAction(), myCancelAction};

@@ -6,9 +6,9 @@ import consulo.application.progress.ProgressIndicator;
 import consulo.disposer.Disposable;
 import consulo.disposer.Disposer;
 import consulo.logging.Logger;
+import jakarta.annotation.Nonnull;
 import org.jetbrains.annotations.NonNls;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import jakarta.annotation.Nullable;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -32,17 +32,17 @@ import java.util.function.Consumer;
 public abstract class SingleTaskController<Request, Result> implements Disposable {
     protected static final Logger LOG = Logger.getInstance(SingleTaskController.class);
 
-    private final @NotNull
-    @NonNls String myName;
-    private final @NotNull Consumer<? super Result> myResultHandler;
-    private final @NotNull Object LOCK = new Object();
+    @Nonnull
+    private final String myName;
+    private final @Nonnull Consumer<? super Result> myResultHandler;
+    private final @Nonnull Object LOCK = new Object();
 
-    private @NotNull List<Request> myAwaitingRequests;
+    private @Nonnull List<Request> myAwaitingRequests;
     private @Nullable SingleTask myRunningTask;
 
     private boolean myIsClosed = false;
 
-    public SingleTaskController(@NotNull @NonNls String name, @NotNull Disposable parent, @NotNull Consumer<? super Result> handler) {
+    public SingleTaskController(@Nonnull @NonNls String name, @Nonnull Disposable parent, @Nonnull Consumer<? super Result> handler) {
         myName = name;
         myResultHandler = handler;
         myAwaitingRequests = new LinkedList<>();
@@ -56,11 +56,11 @@ public abstract class SingleTaskController<Request, Result> implements Disposabl
      * If there is no active task, starts a new one. <br/>
      * Otherwise just remembers requests in the queue. Later they can be retrieved by {@link #popRequests()}.
      */
-    public final void request(Request @NotNull ... requests) {
+    public final void request(@Nonnull Request ... requests) {
         request(Arrays.asList(requests));
     }
 
-    public void request(@NotNull List<Request> requestList) {
+    public void request(@Nonnull List<Request> requestList) {
         synchronized (LOCK) {
             if (myIsClosed) return;
             myAwaitingRequests.addAll(requestList);
@@ -75,19 +75,19 @@ public abstract class SingleTaskController<Request, Result> implements Disposabl
         }
     }
 
-    protected boolean cancelRunningTasks(@NotNull List<Request> requests) {
+    protected boolean cancelRunningTasks(@Nonnull List<Request> requests) {
         return false;
     }
 
-    private void debug(@NotNull String message) {
+    private void debug(@Nonnull String message) {
         LOG.debug(formMessage(message));
     }
 
-    private @NotNull String formMessage(@NotNull String message) {
+    private @Nonnull String formMessage(@Nonnull String message) {
         return "[" + myName + "] " + message;
     }
 
-    private void cancelTask(@NotNull SingleTask t) {
+    private void cancelTask(@Nonnull SingleTask t) {
         if (t.isRunning()) {
             t.cancel();
             debug("Canceled task " + myRunningTask);
@@ -98,13 +98,13 @@ public abstract class SingleTaskController<Request, Result> implements Disposabl
      * Starts new task on a background thread. <br/>
      * <b>NB:</b> Don't invoke StateController methods inside this method, otherwise a deadlock will happen.
      */
-    protected abstract @NotNull SingleTask startNewBackgroundTask();
+    protected abstract @Nonnull SingleTask startNewBackgroundTask();
 
     /**
      * Returns all awaiting requests and clears the queue. <br/>
      * I.e. the second call to this method will return an empty list (unless new requests came via {@link #request(Object[])}).
      */
-    public final @NotNull List<Request> popRequests() {
+    public final @Nonnull List<Request> popRequests() {
         synchronized (LOCK) {
             List<Request> requests = myAwaitingRequests;
             myAwaitingRequests = new LinkedList<>();
@@ -113,7 +113,7 @@ public abstract class SingleTaskController<Request, Result> implements Disposabl
         }
     }
 
-    public final @NotNull List<Request> peekRequests() {
+    public final @Nonnull List<Request> peekRequests() {
         synchronized (LOCK) {
             List<Request> requests = new ArrayList<>(myAwaitingRequests);
             debug("Peeked requests: " + requests);
@@ -121,7 +121,7 @@ public abstract class SingleTaskController<Request, Result> implements Disposabl
         }
     }
 
-    public final void removeRequests(@NotNull List<Request> requests) {
+    public final void removeRequests(@Nonnull List<Request> requests) {
         synchronized (LOCK) {
             myAwaitingRequests.removeAll(requests);
             debug("Removed requests: " + requests);
@@ -221,7 +221,7 @@ public abstract class SingleTaskController<Request, Result> implements Disposabl
     }
 
     public interface SingleTask {
-        void waitFor(long timeout, @NotNull TimeUnit unit) throws InterruptedException, ExecutionException, TimeoutException;
+        void waitFor(long timeout, @Nonnull TimeUnit unit) throws InterruptedException, ExecutionException, TimeoutException;
 
         void cancel();
 
@@ -230,15 +230,15 @@ public abstract class SingleTaskController<Request, Result> implements Disposabl
 
     public static class SingleTaskImpl implements SingleTask {
         // TODO  private final @NotNull Future<?> myFuture;
-        private final @NotNull ProgressIndicator myIndicator;
+        private final @Nonnull ProgressIndicator myIndicator;
 
-        public SingleTaskImpl(/*@NotNull Future<?> future, */@NotNull ProgressIndicator indicator) {
+        public SingleTaskImpl(/*@NotNull Future<?> future, */@Nonnull ProgressIndicator indicator) {
             // TODO  myFuture = future;
             myIndicator = indicator;
         }
 
         @Override
-        public void waitFor(long timeout, @NotNull TimeUnit unit) throws InterruptedException, ExecutionException, TimeoutException {
+        public void waitFor(long timeout, @Nonnull TimeUnit unit) throws InterruptedException, ExecutionException, TimeoutException {
             // TODO myFuture.get(timeout, unit);
             cancel();
         }

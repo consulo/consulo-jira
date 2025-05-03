@@ -12,7 +12,6 @@ import consulo.ui.ex.toolWindow.ToolWindow;
 import consulo.ui.ex.toolWindow.ToolWindowAnchor;
 import consulo.ui.image.Image;
 import jakarta.annotation.Nonnull;
-import org.jetbrains.annotations.NotNull;
 
 @ExtensionImpl
 public class JiraToolWindowFactory implements ToolWindowFactory, DumbAware {
@@ -27,7 +26,7 @@ public class JiraToolWindowFactory implements ToolWindowFactory, DumbAware {
 
     @RequiredUIAccess
     @Override
-    public void createToolWindowContent(@NotNull Project project, @NotNull ToolWindow toolWindow) {
+    public void createToolWindowContent(@Nonnull Project project, @Nonnull ToolWindow toolWindow) {
         JiraTabsManager.getInstance(project).openIssuesTab();
     }
 

@@ -7,7 +7,7 @@ import com.intellij.jira.listener.SearcherListener;
 import com.intellij.jira.rest.model.jql.JQLSearcher;
 import com.intellij.jira.ui.panels.JiraIssuesPanel;
 import com.intellij.jira.ui.table.JiraIssueTable;
-import org.jetbrains.annotations.NotNull;
+import jakarta.annotation.Nonnull;
 
 import javax.swing.JComponent;
 
@@ -27,19 +27,19 @@ public class DefaultIssuesUi extends AbstractIssuesUi {
                 .subscribe(JQLSearcherManager.JQL_SEARCHERS_CHANGE, new MySearcherListener());
     }
 
-    @NotNull
+    @Nonnull
     @Override
     public JComponent getMainComponent() {
         return myIssuesPanel;
     }
 
-    @NotNull
+    @Nonnull
     @Override
     public JiraIssueTable getTable() {
         return myIssuesPanel.getJiraIssueTable();
     }
 
-    @NotNull
+    @Nonnull
     @Override
     public JQLSearcher getSearcher() {
         return JQLSearcherManager.getInstance().getSelectedSearcher(myIssuesData.getProject());

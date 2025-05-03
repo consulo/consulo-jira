@@ -2,30 +2,37 @@ package com.intellij.jira.jql;
 
 import com.intellij.jira.listener.SearcherListener;
 import com.intellij.jira.rest.model.jql.JQLSearcher;
+import consulo.annotation.component.ComponentScope;
+import consulo.annotation.component.ServiceAPI;
+import consulo.annotation.component.ServiceImpl;
 import consulo.application.ApplicationManager;
 import consulo.project.Project;
-import org.jetbrains.annotations.Nullable;
+import jakarta.inject.Singleton;
+import jakarta.annotation.Nullable;
 
 import java.util.List;
 
 import static com.intellij.jira.jql.JQLSearcherApplicationManager.DEFAULT_JQL;
 import static java.util.Objects.isNull;
 
+@ServiceAPI(ComponentScope.APPLICATION)
+@ServiceImpl
+@Singleton
 public class JQLSearcherManager {
 
     public static final Class<SearcherListener> JQL_SEARCHERS_CHANGE = SearcherListener.class;
 
-    public static JQLSearcherManager getInstance(){
+    public static JQLSearcherManager getInstance() {
         return ApplicationManager.getApplication().getInstance(JQLSearcherManager.class);
     }
 
-    public JQLSearcher getSelectedSearcher(Project project){
+    public JQLSearcher getSelectedSearcher(Project project) {
         Searchers searchers = getSearchers(project);
         JQLSearcher selected = searchers.getSelected();
         return selected != null ? selected : DEFAULT_JQL;
     }
 
-    public void add(Project project, JQLSearcher searcher){
+    public void add(Project project, JQLSearcher searcher) {
         Searchers searchers = getSearchers(project);
         searchers.add(searcher, JQLSearcher::isShared);
 
@@ -45,9 +52,9 @@ public class JQLSearcherManager {
         ApplicationManager.getApplication().getMessageBus().syncPublisher(JQL_SEARCHERS_CHANGE).onChange(searcher);
     }
 
-    public void update(Project project, String searcherId, JQLSearcher updatedSearcher){
+    public void update(Project project, String searcherId, JQLSearcher updatedSearcher) {
         JQLSearcher oldSearcher = findById(project, searcherId);
-        if(isNull(oldSearcher)){
+        if (isNull(oldSearcher)) {
             return;
         }
 
@@ -63,7 +70,7 @@ public class JQLSearcherManager {
 
     public void remove(Project project, String searcherId, JQLSearcher searcher) {
         JQLSearcher searcherToRemove = findById(project, searcherId);
-        if(isNull(searcherToRemove)){
+        if (isNull(searcherToRemove)) {
             return;
         }
 
@@ -98,36 +105,36 @@ public class JQLSearcherManager {
     }
 
     @Nullable
-    public JQLSearcher findByAlias(Project project, String alias){
+    public JQLSearcher findByAlias(Project project, String alias) {
         return getSearchers(project).getAll().stream()
-                .filter(searcher -> searcher.getAlias().equalsIgnoreCase(alias))
-                .findFirst().orElse(null);
+            .filter(searcher -> searcher.getAlias().equalsIgnoreCase(alias))
+            .findFirst().orElse(null);
     }
 
     @Nullable
-    public JQLSearcher findById(Project project, String id){
+    public JQLSearcher findById(Project project, String id) {
         return getSearchers(project).getAll().stream()
-                .filter(searcher -> searcher.getId().equals(id))
-                .findFirst().orElse(null);
+            .filter(searcher -> searcher.getId().equals(id))
+            .findFirst().orElse(null);
     }
 
-    private void updateProjectSearchers(Project project, Searchers searchers){
+    private void updateProjectSearchers(Project project, Searchers searchers) {
         getJqlSearcherProjectManager(project).setSearchers(searchers.getSecondList(), searchers.getSelectedIndex());
     }
 
-    private void updateApplicationSearchers(Searchers searchers){
+    private void updateApplicationSearchers(Searchers searchers) {
         getJqlSearcherApplicationManager().setSearchers(searchers.getFirstList());
     }
 
-    private JQLSearcherApplicationManager getJqlSearcherApplicationManager(){
+    private JQLSearcherApplicationManager getJqlSearcherApplicationManager() {
         return JQLSearcherApplicationManager.getInstance();
     }
 
-    private JQLSearcherProjectManager getJqlSearcherProjectManager(Project project){
+    private JQLSearcherProjectManager getJqlSearcherProjectManager(Project project) {
         return JQLSearcherProjectManager.getInstance(project);
     }
 
-    public Searchers getSearchers(Project project){
+    public Searchers getSearchers(Project project) {
         JQLSearcherProjectManager searcherProjectManager = getJqlSearcherProjectManager(project);
         List<JQLSearcher> globalSearchers = getJqlSearcherApplicationManager().getSearchers();
         List<JQLSearcher> projectSearchers = searcherProjectManager.getSearchers();

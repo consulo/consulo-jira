@@ -7,7 +7,7 @@ import com.intellij.jira.server.JiraRestApi;
 import com.intellij.jira.util.result.Result;
 import consulo.application.progress.ProgressIndicator;
 import consulo.project.Project;
-import org.jetbrains.annotations.NotNull;
+import jakarta.annotation.Nonnull;
 
 import java.util.List;
 
@@ -16,14 +16,14 @@ public class AddWorklogTask extends AbstractBackgroundableTask {
     private List<TransitionFieldHelper.FieldEditorInfo> worklogFields;
     private String remainingEstimate;
 
-    public AddWorklogTask(@NotNull Project project, String issueKey, List<TransitionFieldHelper.FieldEditorInfo> worklogFields, JsonElement remainingEstimateValue) {
+    public AddWorklogTask(@Nonnull Project project, String issueKey, List<TransitionFieldHelper.FieldEditorInfo> worklogFields, JsonElement remainingEstimateValue) {
         super(project, "Adding Work Log", issueKey);
         this.worklogFields = worklogFields;
         this.remainingEstimate = remainingEstimateValue.getAsString();
     }
 
     @Override
-    public void run(@NotNull ProgressIndicator indicator) {
+    public void run(@Nonnull ProgressIndicator indicator) {
         JiraRestApi jiraRestApi = getJiraRestApi();
 
         Result result = jiraRestApi.addIssueWorklog(issueIdOrKey, worklogFields, remainingEstimate);

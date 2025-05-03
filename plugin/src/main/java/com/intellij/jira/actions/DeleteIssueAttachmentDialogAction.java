@@ -8,7 +8,7 @@ import com.intellij.jira.ui.dialog.DeleteIssueAttachmentDialog;
 import consulo.application.AllIcons;
 import consulo.project.Project;
 import consulo.ui.ex.action.AnActionEvent;
-import org.jetbrains.annotations.NotNull;
+import jakarta.annotation.Nonnull;
 
 import static com.intellij.jira.rest.model.JiraPermissionType.*;
 import static java.util.Objects.nonNull;
@@ -22,7 +22,7 @@ public class DeleteIssueAttachmentDialogAction extends JiraIssueDialogAction {
     }
 
     @Override
-    public void onClick(@NotNull AnActionEvent e, @NotNull Project project, @NotNull JiraRestApi jiraRestApi) {
+    public void onClick(@Nonnull AnActionEvent e, @Nonnull Project project, @Nonnull JiraRestApi jiraRestApi) {
         String issueKey = e.getRequiredData(JiraDataKeys.ISSUE_KEY);
         boolean hasPermission = jiraRestApi.userHasPermissionOnIssue(issueKey, BROWSE_PROJECTS, DELETE_ALL_ATTACHMENTS);
         if(!hasPermission){

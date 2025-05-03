@@ -8,7 +8,7 @@ import com.intellij.jira.listener.SearcherListener;
 import com.intellij.jira.rest.model.jql.JQLSearcher;
 import com.intellij.jira.ui.panels.JiraFilteredIssuesPanel;
 import com.intellij.jira.ui.table.JiraIssueTable;
-import org.jetbrains.annotations.NotNull;
+import jakarta.annotation.Nonnull;
 
 import javax.swing.JComponent;
 
@@ -29,25 +29,25 @@ public class FilteredIssuesUi extends AbstractIssuesUi {
 
     }
 
-    @NotNull
+    @Nonnull
     @Override
     public String getId() {
         return mySearcher.getAlias();
     }
 
-    @NotNull
+    @Nonnull
     @Override
     public JComponent getMainComponent() {
         return myFilteredIssuesPanel;
     }
 
-    @NotNull
+    @Nonnull
     @Override
     public JiraIssueTable getTable() {
         return myFilteredIssuesPanel.getJiraIssueTable();
     }
 
-    @NotNull
+    @Nonnull
     @Override
     public JQLSearcher getSearcher() {
         return mySearcher;

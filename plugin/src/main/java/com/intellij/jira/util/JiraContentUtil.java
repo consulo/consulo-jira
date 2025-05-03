@@ -6,8 +6,8 @@ import consulo.ui.ex.content.Content;
 import consulo.ui.ex.content.ContentManager;
 import consulo.ui.ex.content.TabbedContent;
 import consulo.util.collection.ContainerUtil;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import jakarta.annotation.Nonnull;
+import jakarta.annotation.Nullable;
 
 import javax.swing.*;
 import java.awt.*;
@@ -19,7 +19,7 @@ public final class JiraContentUtil {
 
     private JiraContentUtil() { }
 
-    public static Content findTabbedContent(@NotNull ContentManager manager, @NotNull String name) {
+    public static Content findTabbedContent(@Nonnull ContentManager manager, @Nonnull String name) {
         for (Content content : manager.getContents()) {
             if (content instanceof TabbedContent) {
                 var tab = ((TabbedContent) content).getTabs().stream()
@@ -33,7 +33,7 @@ public final class JiraContentUtil {
         return null;
     }
 
-    public static void closeTab(@NotNull ContentManager manager, @NotNull String name) {
+    public static void closeTab(@Nonnull ContentManager manager, @Nonnull String name) {
         for (Content content : manager.getContents()) {
             if (content instanceof TabbedContent) {
                 var tab = ((TabbedContent) content).getTabs().stream()
@@ -51,18 +51,18 @@ public final class JiraContentUtil {
     }
 
     @Nullable
-    public static JiraUi getIssuesUi(@NotNull JComponent c) {
+    public static JiraUi getIssuesUi(@Nonnull JComponent c) {
         return ContainerUtil.getFirstItem(getIssuesUis(c));
     }
 
-    public static List<JiraUi> getIssuesUis(@NotNull JComponent c) {
+    public static List<JiraUi> getIssuesUis(@Nonnull JComponent c) {
         Set<JiraTabPanel> panels = new HashSet<>();
         collectIssuesPanelInstances(c, panels);
 
         return ContainerUtil.map(panels, JiraTabPanel::getUi);
     }
 
-    public static Set<JiraUi> getAllJiraUis(@NotNull ContentManager manager) {
+    public static Set<JiraUi> getAllJiraUis(@Nonnull ContentManager manager) {
         Set<JiraUi> uis = new HashSet<>();
         for (Content content : manager.getContents()) {
             if (content instanceof TabbedContent) {
@@ -75,7 +75,7 @@ public final class JiraContentUtil {
         return uis;
     }
 
-    private static void collectIssuesPanelInstances(@NotNull JComponent component, @NotNull Set<JiraTabPanel> result) {
+    private static void collectIssuesPanelInstances(@Nonnull JComponent component, @Nonnull Set<JiraTabPanel> result) {
         if (component instanceof JiraTabPanel) {
             result.add((JiraTabPanel)component);
             return;

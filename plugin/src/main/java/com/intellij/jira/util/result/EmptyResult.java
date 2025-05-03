@@ -1,7 +1,7 @@
 package com.intellij.jira.util.result;
 
 import consulo.util.lang.StringUtil;
-import org.jetbrains.annotations.Nullable;
+import jakarta.annotation.Nullable;
 
 public class EmptyResult implements Result {
 

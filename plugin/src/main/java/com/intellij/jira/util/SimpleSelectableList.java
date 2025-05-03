@@ -1,6 +1,6 @@
 package com.intellij.jira.util;
 
-import org.jetbrains.annotations.Nullable;
+import jakarta.annotation.Nullable;
 
 import java.util.ArrayList;
 import java.util.Collection;

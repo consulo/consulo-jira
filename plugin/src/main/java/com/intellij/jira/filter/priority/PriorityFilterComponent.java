@@ -5,7 +5,7 @@ import consulo.ui.ex.action.ActionGroup;
 import consulo.ui.ex.action.AnActionEvent;
 import consulo.ui.ex.action.DefaultActionGroup;
 import consulo.ui.ex.action.DumbAwareAction;
-import org.jetbrains.annotations.NotNull;
+import jakarta.annotation.Nonnull;
 
 import java.util.List;
 import java.util.Set;
@@ -13,12 +13,12 @@ import java.util.stream.Collectors;
 
 public class PriorityFilterComponent extends IssueFilterComponent<PriorityFilter, PriorityFilterModel> {
 
-    public PriorityFilterComponent(@NotNull PriorityFilterModel filterModel) {
+    public PriorityFilterComponent(@Nonnull PriorityFilterModel filterModel) {
         super("Priority", filterModel);
     }
 
     @Override
-    protected String getText(@NotNull PriorityFilter filter) {
+    protected String getText(@Nonnull PriorityFilter filter) {
         return filter.getDisplayText();
     }
 
@@ -34,15 +34,16 @@ public class PriorityFilterComponent extends IssueFilterComponent<PriorityFilter
     }
 
     protected class IssuePriorityAction extends DumbAwareAction {
-        @NotNull protected final String myType;
+        @Nonnull
+        protected final String myType;
 
-        public IssuePriorityAction(@NotNull String value) {
+        public IssuePriorityAction(@Nonnull String value) {
             getTemplatePresentation().setText(value);
             myType = value;
         }
 
         @Override
-        public void actionPerformed(@NotNull AnActionEvent e) {
+        public void actionPerformed(@Nonnull AnActionEvent e) {
             myFilterModel.setFilter(new PriorityFilterImpl(List.of(myType)));
         }
     }

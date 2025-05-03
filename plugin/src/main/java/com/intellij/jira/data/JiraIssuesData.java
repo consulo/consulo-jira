@@ -4,8 +4,8 @@ import com.intellij.jira.rest.model.JiraIssue;
 import consulo.disposer.Disposable;
 import consulo.disposer.Disposer;
 import consulo.project.Project;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import jakarta.annotation.Nonnull;
+import jakarta.annotation.Nullable;
 
 import java.util.List;
 
@@ -14,7 +14,7 @@ public class JiraIssuesData implements Disposable {
     private final Project myProject;
     private final IssuesGetter myIssuesGetter;
 
-    public JiraIssuesData(@NotNull Project project, @NotNull Disposable parent) {
+    public JiraIssuesData(@Nonnull Project project, @Nonnull Disposable parent) {
         myProject = project;
         myIssuesGetter = new IssuesGetter(project);
 

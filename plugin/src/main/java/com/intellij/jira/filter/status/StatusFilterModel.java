@@ -3,8 +3,8 @@ package com.intellij.jira.filter.status;
 import com.intellij.jira.data.Issues;
 import com.intellij.jira.filter.FilterModel;
 import com.intellij.jira.filter.IssueFilterCollection;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import jakarta.annotation.Nonnull;
+import jakarta.annotation.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,12 +30,12 @@ public class StatusFilterModel extends FilterModel<StatusFilter> {
     }
 
     @Override
-    protected @Nullable StatusFilter createFilter(@NotNull List<String> values) {
+    protected @Nullable StatusFilter createFilter(@Nonnull List<String> values) {
         return new StatusFilterImpl(values);
     }
 
     @Override
-    protected @NotNull List<String> getFilterValues(@NotNull StatusFilter filter) {
+    protected @Nonnull List<String> getFilterValues(@Nonnull StatusFilter filter) {
         return new ArrayList<>(filter.getIssueStatus());
     }
 

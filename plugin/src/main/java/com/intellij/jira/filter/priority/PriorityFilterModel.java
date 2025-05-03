@@ -4,8 +4,8 @@ package com.intellij.jira.filter.priority;
 import com.intellij.jira.data.Issues;
 import com.intellij.jira.filter.FilterModel;
 import com.intellij.jira.filter.IssueFilterCollection;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import jakarta.annotation.Nonnull;
+import jakarta.annotation.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,12 +32,12 @@ public class PriorityFilterModel extends FilterModel<PriorityFilter> {
     }
 
     @Override
-    protected @Nullable PriorityFilter createFilter(@NotNull List<String> values) {
+    protected @Nullable PriorityFilter createFilter(@Nonnull List<String> values) {
         return new PriorityFilterImpl(values);
     }
 
     @Override
-    protected @NotNull List<String> getFilterValues(@NotNull PriorityFilter filter) {
+    protected @Nonnull List<String> getFilterValues(@Nonnull PriorityFilter filter) {
         return new ArrayList<>(filter.getPriorities());
     }
 

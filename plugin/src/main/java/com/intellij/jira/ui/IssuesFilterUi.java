@@ -3,7 +3,7 @@ package com.intellij.jira.ui;
 import com.intellij.jira.data.Issues;
 import com.intellij.jira.filter.IssueFilterCollection;
 import consulo.ui.ex.action.ActionGroup;
-import org.jetbrains.annotations.NotNull;
+import jakarta.annotation.Nonnull;
 
 import java.util.EventListener;
 
@@ -11,7 +11,7 @@ public interface IssuesFilterUi {
 
     IssueFilterCollection getFilters();
 
-    @NotNull
+    @Nonnull
     ActionGroup createActionGroup();
 
 
@@ -20,7 +20,7 @@ public interface IssuesFilterUi {
     /**
      * Adds a listener for filters change.
      */
-    void addFilterListener(@NotNull IssuesFilterUi.IssueFilterListener listener);
+    void addFilterListener(@Nonnull IssuesFilterUi.IssueFilterListener listener);
 
     interface IssueFilterListener extends EventListener {
         void onFiltersChanged();

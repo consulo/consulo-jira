@@ -6,7 +6,7 @@ import com.intellij.jira.ui.tree.SearcherTreeNode;
 import consulo.platform.base.icon.PlatformIconGroup;
 import consulo.project.Project;
 import consulo.ui.ex.action.AnActionEvent;
-import org.jetbrains.annotations.NotNull;
+import jakarta.annotation.Nonnull;
 
 public class MakeSearcherGlobalAction extends JiraIssueSearcherAction {
 
@@ -17,7 +17,7 @@ public class MakeSearcherGlobalAction extends JiraIssueSearcherAction {
     }
 
     @Override
-    public void actionPerformed(@NotNull AnActionEvent e) {
+    public void actionPerformed(@Nonnull AnActionEvent e) {
         JQLSearcher searcher = getSearcher(e);
         searcher.setShared(true);
 

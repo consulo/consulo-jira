@@ -4,7 +4,7 @@ import com.intellij.jira.ui.dialog.ConfigureJiraServersDialog;
 import consulo.application.AllIcons;
 import consulo.project.Project;
 import consulo.ui.ex.action.AnActionEvent;
-import org.jetbrains.annotations.NotNull;
+import jakarta.annotation.Nonnull;
 
 import static java.util.Objects.isNull;
 
@@ -17,7 +17,7 @@ public class ConfigureJiraServersAction extends JiraIssueAction {
     }
 
     @Override
-    public void actionPerformed(@NotNull AnActionEvent e) {
+    public void actionPerformed(@Nonnull AnActionEvent e) {
         Project project = e.getData(Project.KEY);
         if(isNull(project)){
             return;

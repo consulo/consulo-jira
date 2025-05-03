@@ -10,7 +10,7 @@ import consulo.disposer.Disposer;
 import consulo.ui.ex.SimpleTextAttributes;
 import consulo.ui.ex.awt.JBUI;
 import consulo.ui.ex.awt.table.TableView;
-import org.jetbrains.annotations.NotNull;
+import jakarta.annotation.Nonnull;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
@@ -30,7 +30,7 @@ public class JiraIssueTable extends TableView<JiraIssue> implements Disposable {
     private final Collection<JiraIssueHighlighter> myHighlighters = new LinkedHashSet<>();
     private final BaseStyleProvider myBaseStyleProvider;
 
-    public JiraIssueTable(@NotNull JiraIssuesData issuesData, @NotNull Disposable parent) {
+    public JiraIssueTable(@Nonnull JiraIssuesData issuesData, @Nonnull Disposable parent) {
         super(new JiraIssueListTableModel());
 
         Disposer.register(parent, this);
@@ -76,7 +76,7 @@ public class JiraIssueTable extends TableView<JiraIssue> implements Disposable {
         myHighlighters.remove(highlighter);
     }
 
-    public SimpleTextAttributes applyHighlighter(@NotNull Component component, boolean selected, boolean hasFocus, int row, int column) {
+    public SimpleTextAttributes applyHighlighter(@Nonnull Component component, boolean selected, boolean hasFocus, int row, int column) {
         Collection<JiraIssueHighlighter.JiraIssueStyle> styles = new ArrayList<>();
 
         JiraIssue issue = getRow(row);
@@ -129,7 +129,7 @@ public class JiraIssueTable extends TableView<JiraIssue> implements Disposable {
     private class OnIssueChanged implements IssueChangeListener {
 
         @Override
-        public void onChange(@NotNull JiraIssue issue) {
+        public void onChange(@Nonnull JiraIssue issue) {
             JiraIssueListTableModel model = getModel();
             int postItem = model.indexOf(issue);
             if (postItem < 0) {

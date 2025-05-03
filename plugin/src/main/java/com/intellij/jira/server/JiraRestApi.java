@@ -19,8 +19,8 @@ import com.intellij.jira.rest.model.metadata.JiraIssueCreateMetadata;
 import com.intellij.jira.util.result.BodyResult;
 import com.intellij.jira.util.result.EmptyResult;
 import com.intellij.jira.util.result.Result;
+import jakarta.annotation.Nullable;
 import org.apache.commons.httpclient.NameValuePair;
-import org.jetbrains.annotations.Nullable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

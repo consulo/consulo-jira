@@ -5,8 +5,8 @@ import com.google.common.cache.CacheBuilder;
 import com.intellij.jira.rest.model.JiraIssue;
 import com.intellij.jira.server.JiraServerManager;
 import consulo.project.Project;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import jakarta.annotation.Nonnull;
+import jakarta.annotation.Nullable;
 
 import java.util.List;
 import java.util.Objects;
@@ -17,7 +17,7 @@ public class IssuesGetter implements Getter<JiraIssue> {
     private final Project myProject;
     private final Cache<String, JiraIssue> myCache;
 
-    public IssuesGetter(@NotNull Project project) {
+    public IssuesGetter(@Nonnull Project project) {
         myProject = project;
         myCache = CacheBuilder.newBuilder().maximumSize(500).expireAfterWrite(1, TimeUnit.MINUTES).build();
     }
@@ -42,7 +42,7 @@ public class IssuesGetter implements Getter<JiraIssue> {
         return issues;
     }
 
-    @NotNull
+    @Nonnull
     private JiraServerManager getJiraServerManager() {
         return JiraServerManager.getInstance();
     }

@@ -5,7 +5,7 @@ import consulo.ui.ex.action.ActionGroup;
 import consulo.ui.ex.action.AnActionEvent;
 import consulo.ui.ex.action.DefaultActionGroup;
 import consulo.ui.ex.action.DumbAwareAction;
-import org.jetbrains.annotations.NotNull;
+import jakarta.annotation.Nonnull;
 
 import java.util.List;
 import java.util.Set;
@@ -14,12 +14,12 @@ import java.util.stream.Collectors;
 public class StatusFilterComponent extends IssueFilterComponent<StatusFilter, StatusFilterModel> {
 
 
-    public StatusFilterComponent(@NotNull StatusFilterModel filterModel) {
+    public StatusFilterComponent(@Nonnull StatusFilterModel filterModel) {
         super("Status", filterModel);
     }
 
     @Override
-    protected String getText(@NotNull StatusFilter issueStatusFilter) {
+    protected String getText(@Nonnull StatusFilter issueStatusFilter) {
         return issueStatusFilter.getDisplayText();
     }
 
@@ -37,17 +37,18 @@ public class StatusFilterComponent extends IssueFilterComponent<StatusFilter, St
     }
 
     protected class IssueStatusAction extends DumbAwareAction {
-        @NotNull protected final String myStatus;
+        @Nonnull
+        protected final String myStatus;
 
 
-        public IssueStatusAction(@NotNull String value) {
+        public IssueStatusAction(@Nonnull String value) {
             getTemplatePresentation().setText(value);
             myStatus = value;
 
         }
 
         @Override
-        public void actionPerformed(@NotNull AnActionEvent e) {
+        public void actionPerformed(@Nonnull AnActionEvent e) {
             myFilterModel.setFilter(new StatusFilterImpl(List.of(myStatus)));
         }
     }

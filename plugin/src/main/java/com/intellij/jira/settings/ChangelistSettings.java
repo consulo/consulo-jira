@@ -1,16 +1,23 @@
 package com.intellij.jira.settings;
 
+import consulo.annotation.component.ComponentScope;
+import consulo.annotation.component.ServiceAPI;
+import consulo.annotation.component.ServiceImpl;
 import consulo.application.ApplicationManager;
 import consulo.component.persist.PersistentStateComponent;
 import consulo.component.persist.State;
 import consulo.component.persist.Storage;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import jakarta.annotation.Nonnull;
+import jakarta.annotation.Nullable;
+import jakarta.inject.Singleton;
 
 @State(
         name = "ChangelistSettings",
         storages = @Storage("changelist.xml")
 )
+@ServiceAPI(ComponentScope.APPLICATION)
+@ServiceImpl
+@Singleton
 public class ChangelistSettings implements PersistentStateComponent<ChangelistState> {
 
     private ChangelistState myState = ChangelistState.getDefault();
@@ -26,7 +33,7 @@ public class ChangelistSettings implements PersistentStateComponent<ChangelistSt
     }
 
     @Override
-    public void loadState(@NotNull ChangelistState state) {
+    public void loadState(@Nonnull ChangelistState state) {
         this.myState = state;
     }
 

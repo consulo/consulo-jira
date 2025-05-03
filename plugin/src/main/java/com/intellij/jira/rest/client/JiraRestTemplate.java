@@ -9,17 +9,14 @@ import consulo.task.TaskBundle;
 import consulo.task.TaskSettings;
 import consulo.task.util.gson.TaskGsonUtil;
 import consulo.util.io.StreamUtil;
-import consulo.util.lang.Comparing;
 import consulo.util.lang.StringUtil;
+import jakarta.annotation.Nonnull;
+import jakarta.annotation.Nullable;
 import org.apache.commons.httpclient.*;
 import org.apache.commons.httpclient.auth.AuthScope;
 import org.apache.commons.httpclient.cookie.CookiePolicy;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.Reader;
 import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -92,11 +89,11 @@ public class JiraRestTemplate {
 
 
 
-    private static boolean isAtlassianNetSubDomain(@NotNull String url) {
+    private static boolean isAtlassianNetSubDomain(@Nonnull String url) {
         return hostEndsWith(url, ".atlassian.net");
     }
 
-    private static boolean hostEndsWith(@NotNull String url, @NotNull String suffix) {
+    private static boolean hostEndsWith(@Nonnull String url, @Nonnull String suffix) {
         try {
             final URL parsed = new URL(url);
             return parsed.getHost().endsWith(suffix);
@@ -107,8 +104,8 @@ public class JiraRestTemplate {
     }
 
 
-    @NotNull
-    public String executeMethod(@NotNull HttpMethod method) throws Exception {
+    @Nonnull
+    public String executeMethod(@Nonnull HttpMethod method) throws Exception {
         LOG.debug("URI: " + method.getURI());
 
         HttpClient client = getHttpClient();
@@ -181,7 +178,7 @@ public class JiraRestTemplate {
         return myInCloud;
     }
 
-    private static boolean containsCookie(@NotNull HttpClient client, @NotNull String cookieName) {
+    private static boolean containsCookie(@Nonnull HttpClient client, @Nonnull String cookieName) {
         for (Cookie cookie : client.getState().getCookies()) {
             if (cookie.getName().equals(cookieName) && !cookie.isExpired()) {
                 return true;
@@ -308,7 +305,7 @@ public class JiraRestTemplate {
         return url;
     }
 
-    @NotNull
+    @Nonnull
     protected String getDefaultScheme() {
         return "http";
     }
