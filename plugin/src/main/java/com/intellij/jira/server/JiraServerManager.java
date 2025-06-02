@@ -1,15 +1,19 @@
 package com.intellij.jira.server;
 
 import com.intellij.jira.rest.client.JiraRestTemplate;
+import com.intellij.jira.server.auth.AuthType;
 import com.intellij.jira.util.SimpleSelectableList;
+import com.intellij.tasks.jira.JiraRepository;
 import consulo.annotation.component.ComponentScope;
 import consulo.annotation.component.ServiceAPI;
 import consulo.annotation.component.ServiceImpl;
 import consulo.application.ApplicationManager;
 import consulo.project.Project;
+import consulo.task.TaskManager;
+import consulo.task.TaskRepository;
 import jakarta.annotation.Nonnull;
-import jakarta.inject.Singleton;
 import jakarta.annotation.Nullable;
+import jakarta.inject.Singleton;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -38,9 +42,19 @@ public class JiraServerManager {
 
     @Nullable
     public JiraServer getCurrentJiraServer(@Nonnull Project project) {
-        SimpleSelectableList<JiraServer> allServers = getAllServers(project);
-        if (allServers.hasSelectedItem()) {
-            return allServers.getSelectedItem();
+        TaskRepository[] allRepositories = TaskManager.getManager(project).getAllRepositories();
+
+        for (TaskRepository repository : allRepositories) {
+            if (repository instanceof JiraRepository jiraRepository) {
+                boolean token = jiraRepository.isUseBearerTokenAuthentication();
+
+                JiraServer server = new JiraServer();
+                server.setType(token ? AuthType.API_TOKEN : AuthType.USER_PASS);
+                server.setUrl(jiraRepository.getUrl());
+                server.setUsername(jiraRepository.getUsername());
+                server.setPassword(jiraRepository.getPassword());
+                return server;
+            }
         }
 
         return null;
@@ -84,6 +98,7 @@ public class JiraServerManager {
         return new JiraRestApi(new JiraRestTemplate(jiraServer));
     }
 
+    @Deprecated
     public SimpleSelectableList<JiraServer> getAllServers(@Nonnull Project project) {
         SimpleSelectableList<JiraServer> allServers = SimpleSelectableList.of(getGlobalServers());
 

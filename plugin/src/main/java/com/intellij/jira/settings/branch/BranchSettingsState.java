@@ -3,11 +3,12 @@ package com.intellij.jira.settings.branch;
 import com.intellij.jira.util.Separator;
 import consulo.util.xml.serializer.annotation.OptionTag;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class BranchSettingsState {
 
-    private List<String> myBranchTypes;
+    private List<String> myBranchTypes = new ArrayList<>();
     private NameConfig myNameConfig = NameConfig.DEFAULT;
 
     public BranchSettingsState() { }

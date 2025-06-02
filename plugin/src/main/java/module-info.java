@@ -24,4 +24,6 @@ module com.intellij.jira {
     opens com.intellij.jira.actions to consulo.component.impl;
     opens com.intellij.jira.server to consulo.util.xml.serializer;
     opens com.intellij.jira.ui.table.column to consulo.util.xml.serializer;
+    opens com.intellij.jira.settings to consulo.util.xml.serializer;
+    opens com.intellij.jira.settings.branch to consulo.util.xml.serializer;
 }

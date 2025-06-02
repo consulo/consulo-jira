@@ -6,7 +6,7 @@ import consulo.ui.ex.awt.JBUI;
 public class JiraTabbedPane extends JBTabbedPane {
 
     public JiraTabbedPane(int tabPlacement) {
-        super(tabPlacement);
+        super(TOP);
         setTabComponentInsets(JBUI.insets(0));
     }
 

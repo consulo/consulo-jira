@@ -25,7 +25,7 @@ public class JiraRepositoryType extends BaseRepositoryType<JiraRepository> {
   @Override
   @Nonnull
   public String getId() {
-    return "Jira";
+    return "JIRA";
   }
 
   @Nonnull

@@ -12,6 +12,7 @@ import java.util.Objects;
 import static consulo.util.lang.StringUtil.trim;
 
 @Tag("JiraServer")
+@Deprecated
 public class JiraServer {
 
     private static final AuthType DEFAULT_AUTH_TYPE = AuthType.USER_PASS;
