@@ -74,6 +74,7 @@ public class JiraRestTemplate {
     }
 
     @Override
+    @SuppressWarnings("EqualsHashCode")
     public boolean equals(Object o) {
         if (!super.equals(o)) return false;
         if (!(o instanceof JiraRepository repository)) return false;

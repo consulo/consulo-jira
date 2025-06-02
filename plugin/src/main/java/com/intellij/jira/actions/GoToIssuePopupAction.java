@@ -32,7 +32,7 @@ public class GoToIssuePopupAction extends JiraIssueAction {
         JiraIssuesPanel issuesPanel = e.getRequiredData(JiraUiDataKeys.ISSUES_PANEL);
 
         List<String> issueKeys = issuesPanel.getJiraIssueTable().getModel().getItems().stream().map(JiraIssue::getKey).collect(toList());
-        GoToIssuePopup popup = new GoToIssuePopup(project, issueKeys, key -> issuesPanel.goToIssue(key));
+        GoToIssuePopup popup = new GoToIssuePopup(project, issueKeys, issuesPanel::goToIssue);
         popup.show(issuesPanel.getJiraIssueTable());
     }
 

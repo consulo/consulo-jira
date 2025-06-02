@@ -90,6 +90,7 @@ public final class JiraRepository extends BaseRepositoryImpl {
     }
 
     @Override
+    @SuppressWarnings("EqualsHashCode")
     public boolean equals(Object o) {
         if (!super.equals(o)) {
             return false;

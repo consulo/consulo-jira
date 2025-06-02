@@ -14,18 +14,14 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.util.Collection;
-import java.util.concurrent.Future;
-import java.util.function.Function;
+import java.util.function.Consumer;
 
 public class GoToIssuePopup {
 
     private TextFieldWithAutoCompletion textField;
     private JBPopup popup;
-    private Function<String, Future> onSelectedIssueKey;
 
-
-    public GoToIssuePopup(@Nonnull Project project, Collection<String> values, Function<String, Future> onSelectedIssueKey) {
-        this.onSelectedIssueKey = onSelectedIssueKey;
+    public GoToIssuePopup(@Nonnull Project project, Collection<String> values, Consumer<String> onSelectedIssueKey) {
         TextFieldWithAutoCompletion.StringsCompletionProvider provider = new TextFieldWithAutoCompletion.StringsCompletionProvider(values, null);
 
         textField = new TextFieldWithAutoCompletion<>(project, provider, true, ""){
@@ -33,7 +29,7 @@ public class GoToIssuePopup {
             @Override
             protected boolean processKeyBinding(KeyStroke ks, KeyEvent e, int condition, boolean pressed) {
                 if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-                    onSelectedIssueKey.apply(textField.getText());
+                    onSelectedIssueKey.accept(textField.getText());
                     closePopup();
                     return true;
                 }
