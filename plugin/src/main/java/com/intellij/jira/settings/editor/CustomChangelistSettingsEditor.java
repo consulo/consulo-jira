@@ -4,7 +4,6 @@ import com.intellij.jira.settings.ChangelistSettings;
 import com.intellij.jira.settings.ChangelistState;
 import com.intellij.jira.util.Separator;
 import consulo.application.dumb.DumbAware;
-import consulo.dataContext.DataManager;
 import consulo.ui.ex.action.AnAction;
 import consulo.ui.ex.action.AnActionEvent;
 import consulo.ui.ex.action.DefaultActionGroup;
@@ -70,14 +69,14 @@ public class CustomChangelistSettingsEditor extends ChangelistSettingsEditor {
 
         ToolbarDecorator toolbarDecorator = ToolbarDecorator.createDecorator(myFieldNamesList).disableUpDownActions();
         toolbarDecorator.setPreferredSize(JBUI.size(300, -1));
-        toolbarDecorator.setAddAction(anActionButton -> {
+        toolbarDecorator.setAddAction((b, e) -> {
             DefaultActionGroup group = new DefaultActionGroup();
             group.add(new AddFieldAction("issueKey"));
             group.add(new AddFieldAction("projectKey"));
 
             JBPopupFactory.getInstance()
-                    .createActionGroupPopup("Add Field", group, DataManager.getInstance().getDataContext(anActionButton.getContextComponent()), JBPopupFactory.ActionSelectionAid.SPEEDSEARCH, true)
-                    .show(anActionButton.getPreferredPopupPoint());
+                    .createActionGroupPopup("Add Field", group, e.getDataContext(), JBPopupFactory.ActionSelectionAid.SPEEDSEARCH, true)
+                    .showUnderneathOf(e.getRequiredData(UIExAWTDataKey.CONTEXT_COMPONENT));
 
         });
 

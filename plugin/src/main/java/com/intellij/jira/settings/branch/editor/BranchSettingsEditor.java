@@ -6,7 +6,6 @@ import com.intellij.jira.ui.editors.Editor;
 import com.intellij.jira.util.JiraIssueField;
 import com.intellij.jira.util.Separator;
 import consulo.application.dumb.DumbAware;
-import consulo.dataContext.DataManager;
 import consulo.project.Project;
 import consulo.ui.ex.action.AnAction;
 import consulo.ui.ex.action.AnActionEvent;
@@ -87,15 +86,15 @@ public class BranchSettingsEditor implements Editor {
         myBranchNameToolbarPanel = ToolbarDecorator.createDecorator(myBranchNameList)
             .disableUpDownActions()
             .setPreferredSize(JBUI.size(TOOLBAR_WIDTH, TOOLBAR_HEIGHT))
-            .setAddAction(anActionButton -> {
+            .setAddAction((b, e) -> {
                 DefaultActionGroup group = new DefaultActionGroup();
                 group.add(new AddFieldAction(JiraIssueField.KEY));
                 group.add(new AddFieldAction(JiraIssueField.SUMMARY));
                 group.add(new AddFieldAction(JiraIssueField.PROJECT_KEY));
 
                 JBPopupFactory.getInstance()
-                        .createActionGroupPopup("Add Field", group, DataManager.getInstance().getDataContext(anActionButton.getContextComponent()), JBPopupFactory.ActionSelectionAid.SPEEDSEARCH, true)
-                        .show(anActionButton.getPreferredPopupPoint());})
+                        .createActionGroupPopup("Add Field", group, e.getDataContext(), JBPopupFactory.ActionSelectionAid.SPEEDSEARCH, true)
+                        .showUnderneathOf(e.getRequiredData(UIExAWTDataKey.CONTEXT_COMPONENT));})
             .setRemoveAction(anActionButton -> {
                 String fieldNameToRemove = myBranchNameList.getSelectedValue();
                 ((CollectionListModel<String>) myBranchNameList.getModel()).remove(fieldNameToRemove);

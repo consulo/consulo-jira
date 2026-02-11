@@ -149,7 +149,6 @@ public class JiraIssuesPanel extends JiraPanel implements DataProvider, Disposab
         ActionToolbar rightCornerToolbar = ActionManager.getInstance().createActionToolbar(JiraIssueActionPlaces.JIRA_ISSUES_TOOLBAR_PLACE,
                 rightCornerGroup, true);
         rightCornerToolbar.setTargetComponent(this);
-        rightCornerToolbar.setReservePlaceAutoPopupIcon(false);
         rightCornerToolbar.setLayoutPolicy(ActionToolbar.NOWRAP_LAYOUT_POLICY);
 
         JPanel panel = new JPanel(new MigLayout("ins 0, fill", "[left]push[pref:pref, right]", "center"));
