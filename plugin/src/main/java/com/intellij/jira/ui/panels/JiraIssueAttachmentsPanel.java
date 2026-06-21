@@ -10,6 +10,7 @@ import com.intellij.jira.rest.model.JiraIssueAttachment;
 import com.intellij.jira.ui.model.JiraIssueAttachmentListModel;
 import com.intellij.jira.ui.renders.JiraIssueAttachmentListCellRenderer;
 import consulo.application.ApplicationManager;
+import consulo.dataContext.DataSink;
 import consulo.ui.ex.action.ActionGroup;
 import consulo.ui.ex.awt.JBList;
 import consulo.ui.ex.awt.ScrollPaneFactory;
@@ -48,13 +49,12 @@ public class JiraIssueAttachmentsPanel extends AbstractJiraToolWindowPanel {
     }
 
     @Override
-    public @Nullable Object getData(@Nonnull Key dataId) {
-        if (JiraDataKeys.ISSUE_ATTACHMENT.is(dataId)
-                && Objects.nonNull(issueAttachmentList.getSelectedValue())) {
-            return  issueAttachment;
-        }
-
-        return super.getData(dataId);
+    public void uiDataSnapshot(DataSink sink) {
+        sink.lazy(JiraDataKeys.ISSUE_ATTACHMENT, () -> {
+            JiraIssueAttachment selectedValue = issueAttachmentList.getSelectedValue();
+            return selectedValue != null ? issueAttachment : null;
+        });
+        super.uiDataSnapshot(sink);
     }
 
     private void initContent(List<JiraIssueAttachment> issueAttachments) {

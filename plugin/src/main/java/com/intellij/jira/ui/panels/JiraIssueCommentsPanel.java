@@ -11,6 +11,7 @@ import com.intellij.jira.rest.model.JiraIssueComment;
 import com.intellij.jira.ui.model.JiraIssueCommentListModel;
 import com.intellij.jira.ui.renders.JiraIssueCommentListCellRenderer;
 import consulo.application.ApplicationManager;
+import consulo.dataContext.DataSink;
 import consulo.ui.ex.action.ActionGroup;
 import consulo.ui.ex.awt.JBList;
 import consulo.ui.ex.awt.JBUI;
@@ -49,12 +50,13 @@ class JiraIssueCommentsPanel extends AbstractJiraToolWindowPanel {
     }
 
     @Override
-    public @Nullable Object getData(@Nonnull Key dataId) {
-        if (JiraDataKeys.ISSUE_COMMENT.is(dataId) && Objects.nonNull(issueCommentList.getSelectedValue())) {
-            return comment;
-        }
+    public void uiDataSnapshot(DataSink sink) {
+        sink.lazy(JiraDataKeys.ISSUE_COMMENT, () -> {
+            JiraIssueComment value = issueCommentList.getSelectedValue();
+            return value != null ? comment : null;
+        });
 
-        return super.getData(dataId);
+        super.uiDataSnapshot(sink);
     }
 
     private void initContent(JiraIssueCommentsWrapper comments){

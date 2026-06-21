@@ -2,6 +2,7 @@ package com.intellij.jira.ui.panels;
 
 import com.intellij.jira.JiraDataKeys;
 import com.intellij.jira.rest.model.JiraIssue;
+import consulo.dataContext.DataSink;
 import consulo.ui.ex.action.ActionGroup;
 import consulo.ui.ex.action.ActionManager;
 import consulo.ui.ex.action.ActionToolbar;
@@ -43,14 +44,11 @@ public abstract class AbstractJiraToolWindowPanel extends SimpleToolWindowPanel 
     }
 
     @Override
-    public @Nullable Object getData(@Nonnull @NonNls Key dataId) {
-        if (JiraDataKeys.ISSUE_KEY == dataId) {
-            return issueKey;
-        } else if (JiraDataKeys.PROJECT_KEY == dataId) {
-            return projectKey;
-        }
+    public void uiDataSnapshot(DataSink sink) {
+        super.uiDataSnapshot(sink);
 
-        return super.getData(dataId);
+        sink.set(JiraDataKeys.ISSUE_KEY, issueKey);
+        sink.set(JiraDataKeys.PROJECT_KEY, projectKey);
     }
 
     public void initToolbar(){

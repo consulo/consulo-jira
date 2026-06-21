@@ -10,6 +10,7 @@ import com.intellij.jira.listener.IssueChangeListener;
 import com.intellij.jira.rest.model.JiraIssue;
 import com.intellij.jira.util.JiraPanelUtil;
 import consulo.component.messagebus.MessageBusConnection;
+import consulo.dataContext.DataSink;
 import consulo.ui.ex.JBColor;
 import consulo.ui.ex.action.ActionGroup;
 import consulo.util.dataholder.Key;
@@ -44,12 +45,10 @@ public class JiraIssueStatusPanel extends AbstractJiraToolWindowPanel {
     }
 
     @Override
-    public @Nullable Object getData(@Nonnull @NonNls Key dataId) {
-        if (JiraDataKeys.ISSUE.is(dataId)) {
-            return myIssue;
-        }
+    public void uiDataSnapshot(DataSink sink) {
+        sink.set(JiraDataKeys.ISSUE, myIssue);
 
-        return super.getData(dataId);
+        super.uiDataSnapshot(sink);
     }
 
     private void init() {

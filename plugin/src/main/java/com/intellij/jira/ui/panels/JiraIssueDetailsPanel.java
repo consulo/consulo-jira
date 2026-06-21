@@ -4,6 +4,7 @@ import com.intellij.jira.data.JiraIssuesData;
 import com.intellij.jira.rest.model.JiraIssue;
 import com.intellij.jira.ui.JiraTabbedPane;
 import com.intellij.jira.util.JiraPanelUtil;
+import consulo.dataContext.DataSink;
 import consulo.disposer.Disposable;
 import consulo.disposer.Disposer;
 import consulo.project.Project;
@@ -93,15 +94,11 @@ public class JiraIssueDetailsPanel extends SimpleToolWindowPanel implements Disp
     }
 
     @Override
-    public @Nullable Object getData(@Nonnull @NonNls Key dataId) {
+    public void uiDataSnapshot(DataSink sink) {
         if (myJiraIssuePreviewPanel != null) {
-            var data = myJiraIssuePreviewPanel.getData(dataId);
-            if (data != null) {
-                return data;
-            }
+            myJiraIssuePreviewPanel.uiDataSnapshot(sink);
         }
-
-        return super.getData(dataId);
+        super.uiDataSnapshot(sink);
     }
 
     @Override

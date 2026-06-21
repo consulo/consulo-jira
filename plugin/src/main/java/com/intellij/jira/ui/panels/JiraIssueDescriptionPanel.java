@@ -12,17 +12,15 @@ import com.intellij.jira.ui.JiraTextPane;
 import com.intellij.jira.util.JiraBorders;
 import com.intellij.jira.util.JiraLabelUtil;
 import com.intellij.jira.util.JiraPanelUtil;
+import consulo.dataContext.DataSink;
 import consulo.ui.ex.JBColor;
 import consulo.ui.ex.action.ActionGroup;
 import consulo.ui.ex.awt.JBLabel;
 import consulo.ui.ex.awt.JBUI;
 import consulo.ui.ex.awt.ScrollPaneFactory;
 import consulo.ui.ex.awt.UIUtil;
-import consulo.util.dataholder.Key;
 import consulo.util.lang.StringUtil;
 import jakarta.annotation.Nonnull;
-import org.jetbrains.annotations.NonNls;
-import jakarta.annotation.Nullable;
 
 import javax.swing.*;
 
@@ -58,12 +56,10 @@ public class JiraIssueDescriptionPanel extends AbstractJiraToolWindowPanel {
     }
 
     @Override
-    public @Nullable Object getData(@Nonnull @NonNls Key dataId) {
-        if (JiraDataKeys.ISSUE.is(dataId)) {
-            return myIssue;
-        }
+    public void uiDataSnapshot(DataSink sink) {
+        sink.set(JiraDataKeys.ISSUE, myIssue);
 
-        return super.getData(dataId);
+        super.uiDataSnapshot(sink);
     }
 
     private void init() {

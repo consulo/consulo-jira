@@ -9,6 +9,7 @@ import com.intellij.jira.rest.model.JiraIssueLink;
 import com.intellij.jira.ui.model.JiraIssueLinkListModel;
 import com.intellij.jira.ui.renders.JiraIssueLinkListCellRenderer;
 import consulo.application.ApplicationManager;
+import consulo.dataContext.DataSink;
 import consulo.ui.ex.action.ActionGroup;
 import consulo.ui.ex.awt.JBList;
 import consulo.ui.ex.awt.ScrollPaneFactory;
@@ -46,13 +47,12 @@ class JiraIssueLinksPanel extends AbstractJiraToolWindowPanel {
     }
 
     @Override
-    public @Nullable Object getData(@Nonnull Key dataId) {
-        if (JiraDataKeys.ISSUE_LINK.is(dataId)
-            && Objects.nonNull(issueLinkList.getSelectedValue())) {
-            return issueLink;
-        }
-
-        return super.getData(dataId);
+    public void uiDataSnapshot(DataSink sink) {
+        sink.lazy(JiraDataKeys.ISSUE_LINK, () -> {
+            JiraIssueLink link = issueLinkList.getSelectedValue();
+            return link != null ? issueLink : null;
+        });
+        super.uiDataSnapshot(sink);
     }
 
     private void initContent(List<JiraIssueLink> issueLinks) {

@@ -6,17 +6,15 @@ import com.intellij.jira.rest.model.JiraIssue;
 import com.intellij.jira.ui.JiraTextPane;
 import com.intellij.jira.util.JiraLabelUtil;
 import com.intellij.jira.util.JiraPanelUtil;
+import consulo.dataContext.DataSink;
 import consulo.project.Project;
 import consulo.ui.ex.JBColor;
 import consulo.ui.ex.action.ActionGroup;
 import consulo.ui.ex.awt.JBLabel;
 import consulo.ui.ex.awt.ScrollPaneFactory;
 import consulo.ui.ex.awt.UIUtil;
-import consulo.util.dataholder.Key;
 import consulo.util.lang.StringUtil;
 import jakarta.annotation.Nonnull;
-import jakarta.annotation.Nullable;
-import org.jetbrains.annotations.NonNls;
 
 import javax.swing.*;
 
@@ -57,12 +55,9 @@ class JiraIssuePreviewPanel extends AbstractJiraToolWindowPanel {
     }
 
     @Override
-    public @Nullable Object getData(@Nonnull @NonNls Key dataId) {
-        if (JiraDataKeys.ISSUE.is(dataId)) {
-            return issue;
-        }
-
-        return super.getData(dataId);
+    public void uiDataSnapshot(DataSink sink) {
+        sink.set(JiraDataKeys.ISSUE, issue);
+        super.uiDataSnapshot(sink);
     }
 
     private void initContent() {
@@ -76,10 +71,10 @@ class JiraIssuePreviewPanel extends AbstractJiraToolWindowPanel {
         JBLabel statusLabel = JiraLabelUtil.createStatusLabel(issue.getStatus());
 
         JPanel keyAndStatusPanel = JiraPanelUtil.createWhiteLeftFlowPanel(projectKeyLabel,
-                                                                            separatorLabel,
-                                                                            issueKeyLabel,
-                                                                            JiraLabelUtil.space(),
-                                                                            statusLabel);
+            separatorLabel,
+            issueKeyLabel,
+            JiraLabelUtil.space(),
+            statusLabel);
 
         issueDetails.add(keyAndStatusPanel);
 
@@ -126,13 +121,13 @@ class JiraIssuePreviewPanel extends AbstractJiraToolWindowPanel {
         issueDetails.add(versionsPanel);
 
         // Components
-        if(issue.hasComponents()){
+        if (issue.hasComponents()) {
             JPanel componentsPanel = JiraPanelUtil.createComponentsPanel(issue);
             issueDetails.add(componentsPanel);
         }
 
         // Labels
-        if(issue.hasLabels()){
+        if (issue.hasLabels()) {
             JPanel labelsPanel = JiraPanelUtil.createLabelsPanel(issue);
             issueDetails.add(labelsPanel);
         }

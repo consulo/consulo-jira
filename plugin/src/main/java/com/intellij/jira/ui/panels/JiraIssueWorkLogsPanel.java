@@ -11,6 +11,7 @@ import com.intellij.jira.rest.model.JiraIssueWorklog;
 import com.intellij.jira.ui.model.JiraIssueWorklogListModel;
 import com.intellij.jira.ui.renders.JiraIssueWorklogListCellRender;
 import consulo.application.ApplicationManager;
+import consulo.dataContext.DataSink;
 import consulo.ui.ex.action.ActionGroup;
 import consulo.ui.ex.awt.JBList;
 import consulo.ui.ex.awt.ScrollPaneFactory;
@@ -52,15 +53,13 @@ class JiraIssueWorkLogsPanel extends AbstractJiraToolWindowPanel {
     }
 
     @Override
-    public @Nullable Object getData(@Nonnull Key dataId) {
-        if (JiraDataKeys.ISSUE_WORKLOG.is(dataId)
-                && Objects.nonNull(issueWorklogList.getSelectedValue())) {
-            return worklog;
-        } else if (JiraDataKeys.ISSUE_TIME_TRACKING.is(dataId)) {
-            return timeTracking;
-        }
-
-        return super.getData(dataId);
+    public void uiDataSnapshot(DataSink sink) {
+        sink.set(JiraDataKeys.ISSUE_TIME_TRACKING, timeTracking);
+        sink.lazy(JiraDataKeys.ISSUE_WORKLOG, () -> {
+            JiraIssueWorklog value = issueWorklogList.getSelectedValue();
+            return value != null ? worklog : null;
+        });
+        super.uiDataSnapshot(sink);
     }
 
     private void initContent(List<JiraIssueWorklog> worklogs){
