@@ -11,6 +11,7 @@ import consulo.application.ApplicationManager;
 import consulo.project.Project;
 import consulo.ui.ex.action.ActionGroup;
 import consulo.ui.ex.action.AnActionEvent;
+import consulo.ui.ex.action.AnActionWithSyncUpdate;
 import consulo.ui.ex.popup.ListPopup;
 
 import java.util.List;
@@ -18,7 +19,7 @@ import java.util.List;
 import static java.util.Objects.isNull;
 import static java.util.Objects.nonNull;
 
-public class JiraIssuePrioritiesPopupAction extends JiraIssueAction {
+public class JiraIssuePrioritiesPopupAction extends JiraIssueAction implements AnActionWithSyncUpdate {
     private static final ActionProperties properties = ActionProperties.of("Change priority", AllIcons.Ide.UpDown);
 
     public JiraIssuePrioritiesPopupAction() {

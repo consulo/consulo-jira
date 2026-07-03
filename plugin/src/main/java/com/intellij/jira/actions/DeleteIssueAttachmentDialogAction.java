@@ -8,12 +8,13 @@ import com.intellij.jira.ui.dialog.DeleteIssueAttachmentDialog;
 import consulo.application.AllIcons;
 import consulo.project.Project;
 import consulo.ui.ex.action.AnActionEvent;
+import consulo.ui.ex.action.AnActionWithSyncUpdate;
 import jakarta.annotation.Nonnull;
 
 import static com.intellij.jira.rest.model.JiraPermissionType.*;
 import static java.util.Objects.nonNull;
 
-public class DeleteIssueAttachmentDialogAction extends JiraIssueDialogAction {
+public class DeleteIssueAttachmentDialogAction extends JiraIssueDialogAction implements AnActionWithSyncUpdate {
 
     private static final ActionProperties properties = ActionProperties.of("Delete Attachment",  AllIcons.General.Remove);
 

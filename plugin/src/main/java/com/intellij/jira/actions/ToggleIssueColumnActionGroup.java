@@ -15,7 +15,7 @@ import static com.intellij.jira.ui.table.column.JiraIssueColumnUtils.*;
 import static java.util.Objects.isNull;
 
 
-public class ToggleIssueColumnActionGroup extends DefaultActionGroup {
+public class ToggleIssueColumnActionGroup extends DefaultActionGroup implements AnActionWithSyncUpdate {
 
     public ToggleIssueColumnActionGroup() {
         super();

@@ -9,6 +9,7 @@ import com.intellij.jira.ui.dialog.IssueTransitionDialog;
 import consulo.platform.base.icon.PlatformIconGroup;
 import consulo.project.Project;
 import consulo.ui.ex.action.AnActionEvent;
+import consulo.ui.ex.action.AnActionWithSyncUpdate;
 import jakarta.annotation.Nonnull;
 
 import java.util.List;
@@ -17,7 +18,7 @@ import static com.intellij.jira.rest.model.JiraPermissionType.BROWSE_PROJECTS;
 import static com.intellij.jira.rest.model.JiraPermissionType.TRANSITION_ISSUES;
 import static java.util.Objects.nonNull;
 
-public class TransitIssueDialogAction extends JiraIssueDialogAction {
+public class TransitIssueDialogAction extends JiraIssueDialogAction implements AnActionWithSyncUpdate {
     private static final ActionProperties properties = ActionProperties.of("Transit", PlatformIconGroup.actionsForward());
 
     public TransitIssueDialogAction() {

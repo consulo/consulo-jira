@@ -9,13 +9,14 @@ import consulo.application.AllIcons;
 import consulo.application.ApplicationManager;
 import consulo.project.Project;
 import consulo.ui.ex.action.AnActionEvent;
+import consulo.ui.ex.action.AnActionWithSyncUpdate;
 
 import java.util.List;
 
 import static java.util.Objects.isNull;
 import static java.util.stream.Collectors.toList;
 
-public class GoToIssuePopupAction extends JiraIssueAction {
+public class GoToIssuePopupAction extends JiraIssueAction implements AnActionWithSyncUpdate {
     private static final ActionProperties properties = ActionProperties.of("Go to",  AllIcons.Actions.Find, "control shift G");
 
     public GoToIssuePopupAction() {

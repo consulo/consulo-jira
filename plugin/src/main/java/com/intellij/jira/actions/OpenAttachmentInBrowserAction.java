@@ -5,12 +5,13 @@ import com.intellij.jira.rest.model.JiraIssueAttachment;
 import consulo.platform.base.icon.PlatformIconGroup;
 import consulo.ui.ex.action.AnAction;
 import consulo.ui.ex.action.AnActionEvent;
+import consulo.ui.ex.action.AnActionWithSyncUpdate;
 import consulo.webBrowser.BrowserUtil;
 import jakarta.annotation.Nonnull;
 
 import static java.util.Objects.nonNull;
 
-public class OpenAttachmentInBrowserAction extends AnAction {
+public class OpenAttachmentInBrowserAction extends AnAction implements AnActionWithSyncUpdate {
 
     public OpenAttachmentInBrowserAction() {
         super("Open in Browser", "", PlatformIconGroup.nodesPpweb());

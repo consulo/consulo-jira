@@ -8,6 +8,7 @@ import com.intellij.jira.ui.dialog.EditCommentDialog;
 import consulo.application.AllIcons;
 import consulo.project.Project;
 import consulo.ui.ex.action.AnActionEvent;
+import consulo.ui.ex.action.AnActionWithSyncUpdate;
 import jakarta.annotation.Nonnull;
 
 import java.util.List;
@@ -16,7 +17,7 @@ import java.util.Objects;
 import static com.intellij.jira.rest.model.JiraPermissionType.*;
 import static java.util.Objects.nonNull;
 
-public class EditCommentDialogAction extends JiraIssueDialogAction {
+public class EditCommentDialogAction extends JiraIssueDialogAction implements AnActionWithSyncUpdate {
     private static final ActionProperties properties = ActionProperties.of("Edit comment", AllIcons.Actions.Edit);
 
     public EditCommentDialogAction() {

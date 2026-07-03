@@ -8,13 +8,14 @@ import com.intellij.jira.ui.dialog.DeleteIssueLinkDialog;
 import consulo.application.AllIcons;
 import consulo.project.Project;
 import consulo.ui.ex.action.AnActionEvent;
+import consulo.ui.ex.action.AnActionWithSyncUpdate;
 import jakarta.annotation.Nonnull;
 
 import static com.intellij.jira.rest.model.JiraPermissionType.BROWSE_PROJECTS;
 import static com.intellij.jira.rest.model.JiraPermissionType.LINK_ISSUES;
 import static java.util.Objects.nonNull;
 
-public class DeleteIssueLinkDialogAction extends JiraIssueDialogAction {
+public class DeleteIssueLinkDialogAction extends JiraIssueDialogAction implements AnActionWithSyncUpdate {
     private static final ActionProperties properties = ActionProperties.of("Delete link",  AllIcons.General.Remove);
 
     public DeleteIssueLinkDialogAction() {

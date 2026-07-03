@@ -10,6 +10,7 @@ import consulo.platform.base.icon.PlatformIconGroup;
 import consulo.project.Project;
 import consulo.ui.ex.action.ActionGroup;
 import consulo.ui.ex.action.AnActionEvent;
+import consulo.ui.ex.action.AnActionWithSyncUpdate;
 import consulo.ui.ex.popup.ListPopup;
 import jakarta.annotation.Nonnull;
 
@@ -19,7 +20,7 @@ import static com.intellij.jira.rest.model.JiraPermissionType.BROWSE_PROJECTS;
 import static com.intellij.jira.rest.model.JiraPermissionType.EDIT_ISSUES;
 import static java.util.Objects.nonNull;
 
-public class JiraIssueAssigneePopupAction extends JiraIssuePopupAction {
+public class JiraIssueAssigneePopupAction extends JiraIssuePopupAction implements AnActionWithSyncUpdate {
     private static final ActionProperties properties = ActionProperties.of("Assign", PlatformIconGroup.actionsLoginavatar());
 
     public JiraIssueAssigneePopupAction() {

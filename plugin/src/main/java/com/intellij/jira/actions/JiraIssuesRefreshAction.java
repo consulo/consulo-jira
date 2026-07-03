@@ -10,12 +10,13 @@ import consulo.platform.base.icon.PlatformIconGroup;
 import consulo.project.Project;
 import consulo.ui.ex.action.AnAction;
 import consulo.ui.ex.action.AnActionEvent;
+import consulo.ui.ex.action.AnActionWithSyncUpdate;
 
 import static java.util.Objects.isNull;
 import static java.util.Objects.nonNull;
 
 @ActionImpl(id = "Jira.Issue.Refresh")
-public class JiraIssuesRefreshAction extends AnAction {
+public class JiraIssuesRefreshAction extends AnAction implements AnActionWithSyncUpdate {
     public JiraIssuesRefreshAction() {
         super(
             LocalizeValue.localizeTODO("Refresh Issues"),

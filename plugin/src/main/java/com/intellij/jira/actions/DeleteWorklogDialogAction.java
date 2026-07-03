@@ -9,12 +9,13 @@ import com.intellij.jira.ui.dialog.DeleteWorklogDialog;
 import consulo.application.AllIcons;
 import consulo.project.Project;
 import consulo.ui.ex.action.AnActionEvent;
+import consulo.ui.ex.action.AnActionWithSyncUpdate;
 import jakarta.annotation.Nonnull;
 
 import static com.intellij.jira.rest.model.JiraPermissionType.*;
 import static java.util.Objects.nonNull;
 
-public class DeleteWorklogDialogAction extends JiraIssueDialogAction {
+public class DeleteWorklogDialogAction extends JiraIssueDialogAction implements AnActionWithSyncUpdate {
 
     private static final ActionProperties properties = ActionProperties.of("Delete Work Log",  AllIcons.General.Remove);
 

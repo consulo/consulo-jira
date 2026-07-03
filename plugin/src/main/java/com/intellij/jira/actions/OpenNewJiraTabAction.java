@@ -6,13 +6,14 @@ import com.intellij.jira.rest.model.JiraIssue;
 import consulo.platform.base.icon.PlatformIconGroup;
 import consulo.project.Project;
 import consulo.ui.ex.action.AnActionEvent;
+import consulo.ui.ex.action.AnActionWithSyncUpdate;
 import jakarta.annotation.Nonnull;
 
 import java.util.Objects;
 
 import static java.util.Objects.nonNull;
 
-public class OpenNewJiraTabAction extends JiraIssueAction {
+public class OpenNewJiraTabAction extends JiraIssueAction implements AnActionWithSyncUpdate {
 
     private static final ActionProperties properties = ActionProperties.of("Open Issue in Tab", PlatformIconGroup.generalOpennewtab());
 
