@@ -249,7 +249,7 @@ public class JiraRestTemplate {
 
     protected void configureHttpClient(HttpClient client) {
         client.getParams().setConnectionManagerTimeout(3000);
-        client.getParams().setSoTimeout(TaskSettings.getInstance().CONNECTION_TIMEOUT);
+        client.getParams().setSoTimeout(TaskSettings.getInstance().getConnectionTimeout());
 
         if (isUseHttpAuthentication()) {
             client.getParams().setCredentialCharset("UTF-8");
