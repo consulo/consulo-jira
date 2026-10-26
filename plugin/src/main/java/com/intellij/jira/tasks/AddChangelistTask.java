@@ -4,7 +4,6 @@ import com.intellij.jira.components.JiraNotificationManager;
 import consulo.application.progress.ProgressIndicator;
 import consulo.application.progress.Task;
 import consulo.project.Project;
-import consulo.project.ui.notification.Notifications;
 import consulo.versionControlSystem.change.ChangeListManager;
 import consulo.versionControlSystem.change.LocalChangeList;
 import jakarta.annotation.Nonnull;
@@ -31,7 +30,6 @@ public class AddChangelistTask extends Task.Backgroundable {
 
     @Override
     public void onSuccess() {
-        Notifications.Bus.notify(JiraNotificationManager.getInstance().createSilentNotification("Created '" + changelistName + "' Changelist", ""));
+        JiraNotificationManager.getInstance().createSilentNotification("Created '" + changelistName + "' Changelist", "").notify((Project) getProject());
     }
-
 }

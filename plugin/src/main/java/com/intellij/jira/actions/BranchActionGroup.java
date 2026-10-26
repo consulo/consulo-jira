@@ -12,7 +12,6 @@ import consulo.application.ApplicationManager;
 import consulo.jira.vcs.BranchCreator;
 import consulo.platform.base.icon.PlatformIconGroup;
 import consulo.project.Project;
-import consulo.project.ui.notification.Notifications;
 import consulo.ui.annotation.RequiredUIAccess;
 import consulo.ui.ex.action.AnAction;
 import consulo.ui.ex.action.AnActionEvent;
@@ -101,7 +100,7 @@ public class BranchActionGroup extends DefaultActionGroup {
                 .findFirstSafe(branchCreator -> branchCreator.createBranch(myBranchName, e.getDataContext()));
 
             if (creator == null) {
-                Notifications.Bus.notify(JiraNotificationManager.getInstance().createNotificationError("Branch creation failed", "Repository not found"));
+                JiraNotificationManager.getInstance().createNotificationError("Branch creation failed", "Repository not found").notify(project);
             }
         }
     }

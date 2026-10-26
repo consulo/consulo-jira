@@ -10,7 +10,6 @@ import com.intellij.jira.util.result.Result;
 import consulo.application.ApplicationManager;
 import consulo.application.progress.Task;
 import consulo.project.Project;
-import consulo.project.ui.notification.Notifications;
 import jakarta.annotation.Nonnull;
 
 import static java.util.Objects.isNull;
@@ -40,7 +39,7 @@ public abstract class AbstractBackgroundableTask extends Task.Backgroundable {
     @Override
     public void onThrowable(@Nonnull Throwable error) {
         String content = nonNull(error.getCause()) ? error.getCause().getMessage() : "";
-        Notifications.Bus.notify(JiraNotificationManager.getInstance().createNotificationError(error.getMessage(), content));
+        JiraNotificationManager.getInstance().createNotificationError(error.getMessage(), content).notify((Project) getProject());
     }
 
     @Override
@@ -54,7 +53,7 @@ public abstract class AbstractBackgroundableTask extends Task.Backgroundable {
     }
 
     public void showNotification(String title, String content){
-        Notifications.Bus.notify(JiraNotificationManager.getInstance().createNotification(title, content));
+        JiraNotificationManager.getInstance().createNotification(title, content).notify((Project) getProject());
     }
 
 }

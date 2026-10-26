@@ -7,7 +7,6 @@ import com.intellij.jira.settings.ChangelistSettings;
 import com.intellij.jira.settings.ChangelistState;
 import com.intellij.jira.util.ChangelistUtil;
 import consulo.project.Project;
-import consulo.project.ui.notification.Notifications;
 import consulo.ui.ex.action.AnAction;
 import consulo.ui.ex.action.AnActionEvent;
 import consulo.versionControlSystem.change.ChangeListManager;
@@ -42,7 +41,7 @@ public class AddIssueChangeListAction extends AnAction {
             changeListManager.setDefaultChangeList(localChangeList);
         }
 
-        Notifications.Bus.notify(JiraNotificationManager.getInstance().createNotification("Created " + localChangeList.getName() + " Changelist", ""));
+        JiraNotificationManager.getInstance().createNotification("Created " + localChangeList.getName() + " Changelist", "").notify(project);
     }
 
 }
