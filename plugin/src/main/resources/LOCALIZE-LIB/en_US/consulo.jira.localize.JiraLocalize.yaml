@@ -1,0 +1,28 @@
+jira.name:
+    text: Jira
+field.status:
+    text: Status
+field.type:
+    text: Type
+field.priority:
+    text: Priority
+field.assignee:
+    text: Assignee
+field.reporter:
+    text: Reporter
+field.resolution:
+    text: Resolution
+field.labels:
+    text: Labels
+field.components:
+    text: Components
+field.fix.versions:
+    text: Fix versions
+field.due.date:
+    text: Due date
+field.unassigned:
+    text: Unassigned
+editor.project.key:
+    text: 'Project key:'
+editor.jql:
+    text: 'JQL filter:'

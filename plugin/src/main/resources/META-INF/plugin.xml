@@ -5,15 +5,7 @@
 
     <description>
         <![CDATA[
-
-            This plugin provides the followings functionalities:
-            <ul>
-                <li>Fetch issues from server with customizable searchers</li>
-                <li>View issue details</li>
-                <li>Run actions on issue, like create or transit an issue, assign it, change his priority,...</li>
-                <li>Go to specific issue on list</li>
-            </ul>
-
+            Jira issue tracker for the Tasks tool window: issues, transitions, comments, work log, attachments and links.
         ]]>
     </description>
 
@@ -22,41 +14,4 @@
     <tags>
         <tag>issue.managment</tag>
     </tags>
-
-    <actions>
-        <action class="com.intellij.jira.actions.AddSearcherAction" id="Jira.Issue.Jql.Add"/>
-        <action class="com.intellij.jira.actions.EditSearcherAction" id="Jira.Issue.Jql.Edit"/>
-        <action class="com.intellij.jira.actions.GoToIssuePopupAction" id="Jira.Issue.GoTo"/>
-        <action class="com.intellij.jira.actions.ConfigureJiraServersAction" id="Jira.Issue.Server.Configure"/>
-
-        <action class="com.intellij.jira.actions.OpenNewIssuesTabAction" id="Jira.Issues.New.Tab"/>
-
-        <action class="com.intellij.jira.actions.OpenIssueTaskAction" id="Jira.Issue.OpenTask"/>
-
-        <group class="com.intellij.jira.actions.HighlightersActionGroup" id="Jira.Issue.HighlightersActionGroup"/>
-        <action class="com.intellij.jira.actions.ToggleIssueColumnActionGroup" id="Jira.Issue.ToggleColumns"/>
-        <action class="com.intellij.jira.actions.CreateIssueButtonAction" id="Jira.Issue.Add"/>
-
-        <group id="Jira.Issues.PresentationSettings" class="com.intellij.jira.actions.JiraIssueToolbarPopupActionGroup" popup="true">
-            <reference id="Jira.Issue.HighlightersActionGroup"/>
-            <reference id="Jira.Issue.ToggleColumns"/>
-        </group>
-
-        <group id="Jira.Issues.Base.Toolbar">
-            <reference id="Jira.Issue.Refresh"/>
-            <reference id="Jira.Issues.PresentationSettings"/>
-            <reference id="Jira.Issue.GoTo"/>
-        </group>
-
-        <group id="Jira.Issues.Toolbar.Left">
-            <reference id="Jira.Issues.Base.Toolbar"/>
-            <separator/>
-            <reference id="Jira.Issue.Server.Configure"/>
-        </group>
-
-        <group id="Jira.Issues.Toolbar.Right">
-            <reference id="Jira.Issue.Add"/>
-        </group>
-
-    </actions>
 </consulo-plugin>
