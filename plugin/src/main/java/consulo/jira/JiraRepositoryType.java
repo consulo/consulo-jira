@@ -56,6 +56,11 @@ public class JiraRepositoryType extends TaskRepositoryType<JiraRepositoryOptions
     }
 
     @Override
+    public Image getToolWindowIcon() {
+        return JiraIconGroup.toolwindowjira();
+    }
+
+    @Override
     public String getAccountTypeId() {
         return JiraAccountType.ID;
     }
