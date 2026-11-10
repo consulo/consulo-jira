@@ -22,25 +22,25 @@ import com.google.gson.JsonNull;
 import com.google.gson.JsonParser;
 import consulo.accountManagement.AccountConnection;
 import consulo.accountManagement.AccountRequestDecorator;
+import consulo.http.HttpMethod;
+import consulo.http.HttpRequestBuilder;
 import consulo.http.client.HttpApiHelper;
 import consulo.logging.Logger;
 import consulo.util.lang.StringUtil;
 import org.jspecify.annotations.Nullable;
 
 import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.UncheckedIOException;
 import java.net.URLEncoder;
-import java.net.http.HttpRequest;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.ArrayList;
 import java.util.LinkedHashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
@@ -85,32 +85,28 @@ public final class JiraClient {
     }
 
     public CompletableFuture<JsonElement> get(String path) {
-        return send("GET", path, null);
+        return send(HttpMethod.GET, path, null);
     }
 
     public CompletableFuture<JsonElement> post(String path, Object body) {
-        return send("POST", path, body);
+        return send(HttpMethod.POST, path, body);
     }
 
     public CompletableFuture<JsonElement> put(String path, Object body) {
-        return send("PUT", path, body);
+        return send(HttpMethod.PUT, path, body);
     }
 
     public CompletableFuture<JsonElement> delete(String path) {
-        return send("DELETE", path, null);
+        return send(HttpMethod.DELETE, path, null);
     }
 
-    public CompletableFuture<JsonElement> send(String method, String path, @Nullable Object body) {
-        HttpRequest.BodyPublisher publisher = body == null
-            ? HttpRequest.BodyPublishers.noBody()
-            : HttpRequest.BodyPublishers.ofString(GSON.toJson(body), StandardCharsets.UTF_8);
-
-        return request(path).thenCompose(builder -> {
-            builder.method(method, publisher);
+    public CompletableFuture<JsonElement> send(HttpMethod method, String path, @Nullable Object body) {
+        return request(path, method).thenCompose(builder -> {
             if (body != null) {
+                builder.body(GSON.toJson(body).getBytes(StandardCharsets.UTF_8));
                 builder.header("Content-Type", "application/json");
             }
-            return HTTP.sendAndReadBody(builder.build(), JiraClient::readJson);
+            return HTTP.sendAndReadBody(builder, JiraClient::readJson);
         });
     }
 
@@ -129,20 +125,20 @@ public final class JiraClient {
             + "Content-Type: application/octet-stream\r\n\r\n";
         String tail = "\r\n--" + boundary + "--\r\n";
 
-        List<byte[]> parts = new ArrayList<>();
-        parts.add(head.getBytes(StandardCharsets.UTF_8));
-        parts.add(content);
-        parts.add(tail.getBytes(StandardCharsets.UTF_8));
+        ByteArrayOutputStream multipart = new ByteArrayOutputStream();
+        multipart.writeBytes(head.getBytes(StandardCharsets.UTF_8));
+        multipart.writeBytes(content);
+        multipart.writeBytes(tail.getBytes(StandardCharsets.UTF_8));
 
-        return request(path).thenCompose(builder -> {
-            builder.POST(HttpRequest.BodyPublishers.ofByteArrays(parts));
+        return request(path, HttpMethod.POST).thenCompose(builder -> {
+            builder.body(multipart.toByteArray());
             builder.header("Content-Type", "multipart/form-data; boundary=" + boundary);
             builder.header("X-Atlassian-Token", "no-check");
-            return HTTP.sendAndReadBody(builder.build(), JiraClient::readJson);
+            return HTTP.sendAndReadBody(builder, JiraClient::readJson);
         });
     }
 
-    private CompletableFuture<HttpRequest.Builder> request(String path) {
+    private CompletableFuture<HttpRequestBuilder> request(String path, HttpMethod method) {
         Map<String, String> headers = new LinkedHashMap<>();
         Map<String, String> parameters = new LinkedHashMap<>();
         myConnection.decorate(new AccountRequestDecorator() {
@@ -162,7 +158,7 @@ public final class JiraClient {
             url.append(url.indexOf("?") < 0 ? '?' : '&').append(encode(parameter.getKey())).append('=').append(encode(parameter.getValue()));
         }
 
-        return HTTP.request(url.toString()).thenApply(builder -> {
+        return HTTP.request(url.toString(), method).thenApply(builder -> {
             builder.header("Accept", "application/json");
             headers.forEach(builder::header);
             return builder;
